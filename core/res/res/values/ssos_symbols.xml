@@ -16,79 +16,76 @@
 -->
 <resources>
 
-    <!-- Rotation sensor -->
-    <java-symbol type="bool" name="config_useSystemClockforRotationSensor" />
+     <!-- Rotation sensor -->
+     <java-symbol type="bool" name="config_useSystemClockforRotationSensor" />
 
-    <!-- Whether device supports an alt. ambient display -->
-    <java-symbol type="bool" name="config_alt_ambient_display"/>
+     <!-- Whether device supports an alt. ambient display -->
+     <java-symbol type="bool" name="config_alt_ambient_display"/>
 
-    <!-- Whether to cleanup fingerprints upon connection to the daemon and when user switches -->
-    <java-symbol type="bool" name="config_cleanupUnusedFingerprints" />
+     <!-- Whether to cleanup fingerprints upon connection to the daemon and when user switches -->
+     <java-symbol type="bool" name="config_cleanupUnusedFingerprints" />
 
-    <!-- Device keyhandlers -->
-    <java-symbol type="array" name="config_deviceKeyHandlerLibs" />
-    <java-symbol type="array" name="config_deviceKeyHandlerClasses" />
+     <!-- Device keyhandlers -->
+     <java-symbol type="array" name="config_deviceKeyHandlerLibs" />
+     <java-symbol type="array" name="config_deviceKeyHandlerClasses" />
 
-    <!-- Whether device has a physical display cutout -->
-    <java-symbol type="bool" name="config_physicalDisplayCutout" />
+     <!-- Whether device has a physical display cutout -->
+     <java-symbol type="bool" name="config_physicalDisplayCutout" />
 
-    <!-- Whether device has a big physical display cutout -->
-    <java-symbol type="bool" name="config_physicalDisplayCutoutCentered" />
+     <!-- Whether device has a big physical display cutout -->
+     <java-symbol type="bool" name="config_physicalDisplayCutoutCentered" />
 
-    <!-- In-display Fingerprint -->
-    <java-symbol type="bool" name="config_supportsInDisplayFingerprint" />
+     <!-- In-display Fingerprint -->
+     <java-symbol type="bool" name="config_supportsInDisplayFingerprint" />
 
-    <!-- Screen off delay -->
-    <java-symbol type="integer" name="config_screen_off_delay" />
+     <!-- Screen off delay -->
+     <java-symbol type="integer" name="config_screen_off_delay" />
 
-    <!-- Package Manager -->
-    <java-symbol type="array" name="config_disabledComponents" />
+     <!-- Package Manager -->
+     <java-symbol type="array" name="config_disabledComponents" />
 
-    <!-- System update service -->
-    <java-symbol type="array" name="config_forceEnabledComponents" />
+     <!-- App error dialog -->
+     <java-symbol type="id" name="aerr_copy" />
+     <java-symbol type="string" name="url_copy_success" />
+     <java-symbol type="string" name="url_copy_failed" />
 
-    <!-- App error dialog -->
-    <java-symbol type="id" name="aerr_copy" />
-    <java-symbol type="string" name="url_copy_success" />
-    <java-symbol type="string" name="url_copy_failed" />
+     <!-- Light / Regular style fonts -->
+     <java-symbol type="string" name="config_lightFontFamily" />
+     <java-symbol type="string" name="config_regularFontFamily" />
 
-    <!-- Light / Regular style fonts -->
-    <java-symbol type="string" name="config_lightFontFamily" />
-    <java-symbol type="string" name="config_regularFontFamily" />
+     <!-- Device has OnePlus haptic motor -->
+     <java-symbol type="bool" name="config_hasOnePlusHapticMotor" />
 
-    <!-- Device has OnePlus haptic motor -->
-    <java-symbol type="bool" name="config_hasOnePlusHapticMotor" />
+     <!-- Whether device has dash charging support -->
+     <java-symbol type="bool" name="config_hasDashCharger" />
 
-    <!-- Whether device has dash charging support -->
-    <java-symbol type="bool" name="config_hasDashCharger" />
+     <java-symbol type="array" name="config_customPermissionsList" />
 
-    <java-symbol type="array" name="config_customPermissionsList" />
+     <java-symbol type="bool" name="config_useDefaultBatchingForAccel" />
 
-    <java-symbol type="bool" name="config_useDefaultBatchingForAccel" />
+     <!-- Vendor platform signatures -->
+     <java-symbol type="array" name="config_vendorPlatformSignatures" />
 
-    <!-- Vendor platform signatures -->
-    <java-symbol type="array" name="config_vendorPlatformSignatures" />
+     <!-- FOD icon dimming -->
+     <java-symbol type="bool" name="config_targetUsesInKernelDimming" />
 
-    <!-- FOD icon dimming -->
-    <java-symbol type="bool" name="config_targetUsesInKernelDimming" />
+     <!-- Max visible notification icons -->
+     <java-symbol type="integer" name="config_maxVisibleNotificationIcons" />
+     <java-symbol type="integer" name="config_maxVisibleNotificationIconsOnLock" />
 
-    <!-- Max visible notification icons -->
-    <java-symbol type="integer" name="config_maxVisibleNotificationIcons" />
-    <java-symbol type="integer" name="config_maxVisibleNotificationIconsOnLock" />
+     <!-- Enable face auth when swiping security view -->
+     <java-symbol type="bool" name="config_faceAuthOnSecurityView" />
 
-    <!-- Enable face auth when swiping security view -->
-    <java-symbol type="bool" name="config_faceAuthOnSecurityView" />
+     <!-- Alert Slider -->
+     <java-symbol type="string" name="alert_slider_state_path" />
+     <java-symbol type="string" name="alert_slider_uevent_match_path" />
+     <java-symbol type="bool" name="config_hasAlertSlider" />
+     <java-symbol type="integer" name="config_alertSliderLocation" />
 
-    <!-- Alert Slider -->
-    <java-symbol type="string" name="alert_slider_state_path" />
-    <java-symbol type="string" name="alert_slider_uevent_match_path" />
-    <java-symbol type="bool" name="config_hasAlertSlider" />
-    <java-symbol type="integer" name="config_alertSliderLocation" />
+     <java-symbol type="bool" name="config_has_Soli" />
 
-    <java-symbol type="bool" name="config_has_Soli" />
-
-    <!-- Hide FOD while Going to sleep from lockscreen to avoid HBM flicker -->
-    <java-symbol type="bool" name="config_inDisplayFingerprintFlickersGoingToSleep" />
+     <!-- Hide FOD while Going to sleep from lockscreen to avoid HBM flicker -->
+     <java-symbol type="bool" name="config_inDisplayFingerprintFlickersGoingToSleep" />
 
      <!-- AOKP custom system animations -->
      <java-symbol type="string" name="action_null"/>
@@ -168,5 +165,10 @@
      <java-symbol type="style" name="Animation.Toast.Translucent" />
      <java-symbol type="style" name="Animation.Toast.SlideRightLeft" />
      <java-symbol type="style" name="Animation.Toast.SlideLeftRight" />
+
+     <!-- Package Manager -->
+     <java-symbol type="array" name="config_deviceDisabledComponents" />
+     <java-symbol type="array" name="config_globallyDisabledComponents" />
+     <java-symbol type="array" name="config_forceEnabledComponents" />
 
 </resources>
