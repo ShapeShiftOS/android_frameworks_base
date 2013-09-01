@@ -15,4 +15,8 @@
     <string name="config_oemFastChargerStatusPath" translatable="false"></string>
     <!-- Expected value from fast charging status file  -->
     <string name="config_oemFastChargerStatusValue" translatable="false">1</string>
+
+    <!-- The list of components which should be automatically disabled. -->
+    <string-array name="config_disabledComponents" translatable="false">
+    </string-array>
 </resources>
