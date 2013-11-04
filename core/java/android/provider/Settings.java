@@ -9532,6 +9532,15 @@ public final class Settings {
         public static final String ADVANCED_REBOOT_ONKEYGUARD = "advanced_reboot_onkeyguard";
 
         /**
+         * Boolean value whether to link ringtone and notification volume
+         * @hide
+         */
+        public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
+        /** @hide */
+        private static final Validator VOLUME_LINK_NOTIFICATION_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
@@ -9676,7 +9685,8 @@ public final class Settings {
             AWARE_LOCK_ENABLED,
             TORCH_POWER_BUTTON_GESTURE,
             AWARE_TAP_PAUSE_GESTURE_COUNT,
-            AWARE_TAP_PAUSE_TOUCH_COUNT
+            AWARE_TAP_PAUSE_TOUCH_COUNT,
+            VOLUME_LINK_NOTIFICATION
         };
 
         /**
@@ -9875,6 +9885,7 @@ public final class Settings {
             VALIDATORS.put(AWARE_TAP_PAUSE_GESTURE_COUNT, NON_NEGATIVE_INTEGER_VALIDATOR);
             VALIDATORS.put(AWARE_TAP_PAUSE_TOUCH_COUNT, NON_NEGATIVE_INTEGER_VALIDATOR);
             VALIDATORS.put(TAP_GESTURE, TAP_GESTURE_VALIDATOR);
+            VALIDATORS.put(VOLUME_LINK_NOTIFICATION, VOLUME_LINK_NOTIFICATION_VALIDATOR);
         }
 
         /**
