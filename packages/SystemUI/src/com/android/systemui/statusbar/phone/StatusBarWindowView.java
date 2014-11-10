@@ -25,6 +25,7 @@ import android.animation.TimeAnimator;
 import android.animation.ValueAnimator;
 import android.app.StatusBarManager;
 import android.content.Context;
+import android.content.ContentResolver;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -955,5 +956,13 @@ public class StatusBarWindowView extends FrameLayout {
             mDragDownHelper.updateDoubleTapToSleep(doubleTapToSleepEnabled);
         }
     }
-}
 
+    public void setStatusBarWindowViewOptions() {
+        ContentResolver resolver = mContext.getContentResolver();
+        int isQsQuickPulldown = Settings.System.getIntForUser(resolver,
+                Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN, 0, UserHandle.USER_CURRENT);
+        if (mNotificationPanel != null) {
+            mNotificationPanel.setQsQuickPulldown(isQsQuickPulldown);
+        }
+    }
+}
