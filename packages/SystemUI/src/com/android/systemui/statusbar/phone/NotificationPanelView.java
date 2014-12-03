@@ -26,6 +26,12 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.app.Fragment;
+import android.content.ContentResolver;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.app.StatusBarManager;
 import android.content.Context;
 import android.content.Intent;
@@ -377,6 +383,9 @@ public class NotificationPanelView extends PanelView implements
     private ArrayList<Runnable> mVerticalTranslationListener = new ArrayList<>();
     private HeadsUpAppearanceController mHeadsUpAppearanceController;
 
+    private SettingsObserver mSettingsObserver;
+    private Handler mHandler = new Handler();
+
     private int mPanelAlpha;
     private int mCurrentPanelAlpha;
     private final Paint mAlphaPaint = new Paint();
@@ -440,6 +449,7 @@ public class NotificationPanelView extends PanelView implements
     private Runnable mExpandAfterLayoutRunnable;
 
     private int mOneFingerQuickSettingsIntercept;
+    private int mQsSmartPullDown;
 
     /**
      * If face auth with bypass is running for the first time after you turn on the screen.
@@ -512,8 +522,9 @@ public class NotificationPanelView extends PanelView implements
                 return true;
             }
         });
+        mSettingsObserver = new SettingsObserver(mHandler);
+        mLockPatternUtils = new LockPatternUtils(mContext);
     }
-
     /**
      * Returns if there's a custom clock being presented.
      */
@@ -576,6 +587,7 @@ public class NotificationPanelView extends PanelView implements
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        mSettingsObserver.observe();     
         FragmentHostManager.get(this).addTagListener(QS.TAG, mFragmentListener);
         Dependency.get(StatusBarStateController.class).addCallback(this);
         Dependency.get(ZenModeController.class).addCallback(this);
@@ -589,6 +601,7 @@ public class NotificationPanelView extends PanelView implements
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        mSettingsObserver.unobserve();
         FragmentHostManager.get(this).removeTagListener(QS.TAG, mFragmentListener);
         Dependency.get(StatusBarStateController.class).removeCallback(this);
         Dependency.get(ZenModeController.class).removeCallback(this);
@@ -1407,6 +1420,12 @@ public class NotificationPanelView extends PanelView implements
                 break;
         }
         showQsOverride &= mBarState == StatusBarState.SHADE;
+
+        if (mQsSmartPullDown == 1 && !hasActiveClearableNotifications()
+                || mQsSmartPullDown == 2 && !mStatusBar.hasActiveOngoingNotifications()
+                || mQsSmartPullDown == 3 && !mStatusBar.hasActiveVisibleNotifications()) {
+                showQsOverride = true;
+        }
 
         return twoFingerDrag || showQsOverride || stylusButtonClickDrag || mouseButtonClickDrag;
     }
@@ -3277,6 +3296,42 @@ public class NotificationPanelView extends PanelView implements
             return false;
         }
         return !isFullWidth() || !mShowIconsWhenExpanded;
+    }
+
+    class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_SMART_PULLDOWN),
+                    false, this, UserHandle.USER_ALL);
+            update();
+        }
+
+        void unobserve() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            update();
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            update();
+        }
+
+        public void update() {
+            ContentResolver resolver = mContext.getContentResolver();
+            mQsSmartPullDown = Settings.System.getIntForUser(resolver,
+                    Settings.System.QS_SMART_PULLDOWN, 0,
+                    UserHandle.USER_CURRENT);
+        }
     }
 
     private final FragmentListener mFragmentListener = new FragmentListener() {
