@@ -35,6 +35,7 @@ import com.android.systemui.qs.tiles.ColorInversionTile;
 import com.android.systemui.qs.tiles.DataSaverTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
+import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
 import com.android.systemui.qs.tiles.LocationTile;
 import com.android.systemui.qs.tiles.NfcTile;
@@ -77,6 +78,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<NfcTile> mNfcTileProvider;
     private final Provider<GarbageMonitor.MemoryTile> mMemoryTileProvider;
     private final Provider<UiModeNightTile> mUiModeNightTileProvider;
+    private final Provider<HeadsUpTile> mHeadsUpTileProvider;
     private final Provider<ScreenRecordTile> mScreenRecordTileProvider;
 
     private final Lazy<QSHost> mQsHostLazy;
@@ -102,6 +104,7 @@ public class QSFactoryImpl implements QSFactory {
             Provider<NfcTile> nfcTileProvider,
             Provider<GarbageMonitor.MemoryTile> memoryTileProvider,
             Provider<UiModeNightTile> uiModeNightTileProvider,
+            Provider<HeadsUpTile> headsUpTileProvider,
             Provider<ScreenRecordTile> screenRecordTileProvider) {
         mQsHostLazy = qsHostLazy;
         mWifiTileProvider = wifiTileProvider;
@@ -123,6 +126,7 @@ public class QSFactoryImpl implements QSFactory {
         mNfcTileProvider = nfcTileProvider;
         mMemoryTileProvider = memoryTileProvider;
         mUiModeNightTileProvider = uiModeNightTileProvider;
+        mHeadsUpTileProvider = headsUpTileProvider;
         mScreenRecordTileProvider = screenRecordTileProvider;
     }
 
@@ -173,6 +177,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mNfcTileProvider.get();
             case "dark":
                 return mUiModeNightTileProvider.get();
+            case "heads_up":
+                return mHeadsUpTileProvider.get();
             case "screenrecord":
                 return mScreenRecordTileProvider.get();
         }
