@@ -4638,6 +4638,12 @@ public final class Settings {
         private static Validator LOCKSCREEN_TIMEOUT_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
+         * Whether to show low battery notification
+         * @hide
+         */
+        public static final String BATTERY_LOW_NOTIFICATION = "battery_low_notification";
+
+        /**
          * Double tap on lockscreen to sleep
          * @hide
          */
