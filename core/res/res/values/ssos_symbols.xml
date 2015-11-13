@@ -139,4 +139,6 @@
      <!-- Aerr -->
      <java-symbol type="id" name="aerr_disable" />
 
+    <!-- Vendor mismatch fingerprint warning -->
+    <java-symbol type="string" name="system_error_vendorprint" />
 </resources>
