@@ -217,4 +217,7 @@
     <java-symbol type="string" name="app_clipboard_access_denied" />
     <java-symbol type="string" name="app_clipboard_access_granted" />
 
+    <!-- Whether device has dash charging support -->
+    <java-symbol type="bool" name="config_hasDashCharger" />
+
 </resources>
