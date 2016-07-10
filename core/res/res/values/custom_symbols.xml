@@ -104,4 +104,7 @@
     <!-- Whether device supports internal audio recording -->
     <java-symbol type="bool" name="config_hasInternalAudioRecordingSupport" />
 
+  <!-- Whether device has DASH support. -->
+  <java-symbol type="bool" name="config_hasDashCharger" />
+
 </resources>
