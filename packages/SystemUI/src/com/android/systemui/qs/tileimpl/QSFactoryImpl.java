@@ -46,6 +46,7 @@ import com.android.systemui.qs.tiles.NightDisplayTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.ScreenRecordTile;
 import com.android.systemui.qs.tiles.UiModeNightTile;
+import com.android.systemui.qs.tiles.SoundTile;
 import com.android.systemui.qs.tiles.UserTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
@@ -86,6 +87,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<DataSwitchTile> mDataSwitchTileProvider;
     private final Provider<CaffeineTile> mCaffeineTileProvider;
     private final Provider<CompassTile> mCompassTileProvider;
+    private final Provider<SoundTile> mSoundTileProvider;
 
     private final Lazy<QSHost> mQsHostLazy;
 
@@ -114,7 +116,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<ScreenRecordTile> screenRecordTileProvider,
             Provider<DataSwitchTile> dataSwitchTileProvider,
             Provider<CaffeineTile> caffeineTileProvider,
-            Provider<CompassTile> compassTileProvider) {
+            Provider<CompassTile> compassTileProvider,
+            Provider<SoundTile> soundTileProvider) {
         mQsHostLazy = qsHostLazy;
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
@@ -140,6 +143,7 @@ public class QSFactoryImpl implements QSFactory {
         mDataSwitchTileProvider = dataSwitchTileProvider;
         mCaffeineTileProvider = caffeineTileProvider;
         mCompassTileProvider = compassTileProvider;
+        mSoundTileProvider = soundTileProvider;
     }
 
     public QSTile createTile(String tileSpec) {
@@ -199,6 +203,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mCaffeineTileProvider.get();
             case "compass":
                 return mCompassTileProvider.get();
+            case "sound":
+                return mSoundTileProvider.get();
         }
 
         // Custom tiles
