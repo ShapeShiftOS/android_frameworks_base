@@ -106,11 +106,17 @@ public class NumPadKey extends ViewGroup {
 
         updateText();
         a = context.obtainStyledAttributes(attrs, android.R.styleable.View);
-        if (!a.hasValueOrEmpty(android.R.styleable.View_background)) {
+        if ((!a.hasValueOrEmpty(android.R.styleable.View_background)) 
+                && isBackgroundRippleEnabled()) {
             setBackground(mContext.getDrawable(R.drawable.ripple_drawable));
         }
         a.recycle();
         setContentDescription(mDigitText.getText().toString());
+    }
+
+    private boolean isBackgroundRippleEnabled() {
+        return (Settings.System.getInt(getContext().getContentResolver(),
+                Settings.System.LOCKSCREEN_PIN_RIPPLE, 1) == 1);
     }
 
     public void setDigit(int digit) {

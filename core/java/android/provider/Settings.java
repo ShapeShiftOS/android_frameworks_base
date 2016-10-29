@@ -4735,6 +4735,11 @@ public final class Settings {
         private static final Validator BRIGHTNESS_SLIDER_QS_UNEXPANDED_VALIDATOR = new
                 SettingsValidators.InclusiveIntegerRangeValidator(0, 1);
 
+        /**
+         * Whether to disable ripple on lockscreen pin entry
+         * @hide
+         */
+        public static final String LOCKSCREEN_PIN_RIPPLE = "lockscreen_pin_ripple";
 
         /**
          * Show data usage in QS header
