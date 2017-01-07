@@ -126,6 +126,9 @@
          timing(the duration which the vibrator is expected to vibrate for). -->
     <bool name="config_hasOnePlusHapticMotor">false</bool>
 
+    <!-- Whether to show emergency button in power menu -->
+    <bool name="config_showEmergencyButtonInPowerMenu">false</bool>
+
     <!-- NightLight FOD -->
     <bool name="disable_fod_night_light">false</bool>
 </resources>
