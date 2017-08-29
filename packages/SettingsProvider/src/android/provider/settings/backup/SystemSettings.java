@@ -107,5 +107,6 @@ public class SystemSettings {
         Settings.System.NOTIFICATION_HEADERS,
         Settings.System.CENTER_NOTIFICATION_HEADERS,
         Settings.System.LOCK_FP_ICON,
+        Settings.System.DOUBLE_TAP_SLEEP_GESTURE,
     };
 }
