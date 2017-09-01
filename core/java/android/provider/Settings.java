@@ -5672,6 +5672,12 @@ public final class Settings {
         private static final Validator SCREENSHOT_TYPE_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
+         * Change volume up and down handlign based on rotation
+         * @hide
+         */
+        public static final String SWAP_VOLUME_BUTTONS = "swap_volume_buttons";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5984,6 +5990,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NAVIGATION_BAR_ARROW_KEYS);
             PRIVATE_SETTINGS.add(SWITCH_STYLE);
             PRIVATE_SETTINGS.add(SCREENSHOT_TYPE);
+            PRIVATE_SETTINGS.add(SWAP_VOLUME_BUTTONS);
         }
 
         /**

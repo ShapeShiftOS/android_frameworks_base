@@ -337,6 +337,7 @@ public class NotificationPanelView extends PanelView implements
     private boolean mAffordanceHasPreview;
     private FalsingManager mFalsingManager;
     private String mLastCameraLaunchSource = KeyguardBottomAreaView.CAMERA_LAUNCH_SOURCE_AFFORDANCE;
+    private NotificationLightsView mPulseLightsView;
     private LockPatternUtils mLockPatternUtils;
 
     private boolean mStatusBarLockedOnSecureKeyguard;
