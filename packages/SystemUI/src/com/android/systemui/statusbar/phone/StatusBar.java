@@ -1388,7 +1388,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         // Private API call to make the shadows look better for Recents
         ThreadedRenderer.overrideProperty("ambientRatio", String.valueOf(1.5f));
-
     }
 
     @NonNull
@@ -2411,6 +2410,14 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     @Override
     public void toggleCameraFlash() {
+        if (!isScreenFullyOff() && mDeviceInteractive && !isPulsing() && !mDozing) {
+            toggleFlashlight();
+            return;
+        }
+        mDozeServiceHost.toggleFlashlightProximityCheck();
+    }
+
+    public void toggleFlashlight() {
         if (DEBUG) {
             Log.d(TAG, "Toggling camera flashlight");
         }
@@ -3086,10 +3093,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         pw.println("SharedPreferences:");
         for (Map.Entry<String, ?> entry : Prefs.getAll(mContext).entrySet()) {
             pw.print("  "); pw.print(entry.getKey()); pw.print("="); pw.println(entry.getValue());
-        }
-
-        if (mFlashlightController != null) {
-            mFlashlightController.dump(fd, pw, args);
         }
     }
 
