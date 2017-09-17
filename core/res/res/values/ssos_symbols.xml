@@ -165,6 +165,7 @@
     <java-symbol type="integer" name="config_deviceHardwareKeys" />
 
     <!-- Battery LED -->
+    <java-symbol type="bool" name="config_hasNotificationLed" />
     <java-symbol type="bool" name="config_multiColorBatteryLed" />
     <java-symbol type="bool" name="config_ledCanPulse" />
 
