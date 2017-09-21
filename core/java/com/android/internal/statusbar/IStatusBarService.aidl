@@ -160,4 +160,12 @@ interface IStatusBarService
     void startAssist(in Bundle args);
 
     void screenPinningStateChanged(boolean enabled);
+
+    /**
+     * DUI
+     */
+    void toggleRecentApps();
+    void toggleSplitScreen();
+    void preloadRecentApps();
+    void cancelPreloadRecentApps();
 }
