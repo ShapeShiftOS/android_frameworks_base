@@ -115,5 +115,6 @@ public class SystemSettings {
         Settings.System.USE_OLD_MOBILETYPE,
         Settings.System.BUTTON_BRIGHTNESS,
         Settings.System.BUTTON_BACKLIGHT_TIMEOUT,
+        Settings.System.ANBI_ENABLED_OPTION,
     };
 }
