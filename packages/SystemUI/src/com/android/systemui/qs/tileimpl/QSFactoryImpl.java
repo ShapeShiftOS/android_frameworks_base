@@ -42,6 +42,7 @@ import com.android.systemui.qs.tiles.FlashlightTile;
 import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
 import com.android.systemui.qs.tiles.LocationTile;
+import com.android.systemui.qs.tiles.MusicTile;
 import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.NightDisplayTile;
 import com.android.systemui.qs.tiles.PowerShareTile;
@@ -97,6 +98,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<UsbTetherTile> mUsbTetherTileProvider;
     private final Provider<AODTile> mAODTileProvider;
     private final Provider<PowerShareTile> mPowerShareTileProvider;
+    private final Provider<MusicTile> mMusicTileProvider;
     private final Provider<SoundSearchTile> mSoundSearchTileProvider;
 
     private final Lazy<QSHost> mQsHostLazy;
@@ -132,7 +134,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<UsbTetherTile> usbTetherTileProvider,
             Provider<AODTile> aodTileProvider,
             Provider<PowerShareTile> powerShareTileProvider,
-            Provider<SoundSearchTile> soundSearchTileProvider) {
+            Provider<SoundSearchTile> soundSearchTileProvider,
+            Provider<MusicTile> musicTileProvider) {
         mQsHostLazy = qsHostLazy;
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
@@ -163,6 +166,7 @@ public class QSFactoryImpl implements QSFactory {
         mUsbTetherTileProvider = usbTetherTileProvider;
         mAODTileProvider = aodTileProvider;
         mPowerShareTileProvider = powerShareTileProvider;
+        mMusicTileProvider = musicTileProvider;
         mSoundSearchTileProvider = soundSearchTileProvider;
     }
 
@@ -235,6 +239,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mPowerShareTileProvider.get();
             case "soundsearch":
                 return mSoundSearchTileProvider.get();
+            case "music":
+                return mMusicTileProvider.get();
         }
 
         // Custom tiles
