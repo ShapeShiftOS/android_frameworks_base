@@ -74,6 +74,7 @@ android_library {
         "airbnb-lottie",
     ],
     manifest: "AndroidManifest.xml",
+    additional_manifests: ["ShapeShiftManifest.xml"],
 
     kotlincflags: ["-Xjvm-default=enable"],
 
