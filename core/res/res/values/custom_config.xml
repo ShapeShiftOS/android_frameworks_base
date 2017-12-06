@@ -66,6 +66,11 @@
     <!-- Whether to send camera status intent -->
     <bool name="config_sendCameraStatusIntent">false</bool>
 
+    <!-- The list of vendor package signatures that should also be considered
+         platform signatures, specifically for use on devices with a vendor partition. -->
+    <string-array name="config_vendorPlatformSignatures">
+    </string-array>
+
     <!-- The list of components which should be automatically disabled for a specific device.
          Note: this MUST not be used to randomly disable components, ask for approval first! -->
     <string-array name="config_deviceDisabledComponents" translatable="false">
