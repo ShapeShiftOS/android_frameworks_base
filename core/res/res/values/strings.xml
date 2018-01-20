@@ -529,7 +529,7 @@
     <string name="global_action_logout">End session</string>
 
     <!-- label for screenshot item in power menu -->
-    <string name="global_action_screenshot">Screenshot</string>
+    <string name="global_action_screenshot">Screenshot/Rec</string>
 
     <!-- Take bug report menu title [CHAR LIMIT=30] -->
     <string name="bugreport_title">Bug report</string>

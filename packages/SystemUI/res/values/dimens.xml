@@ -1194,4 +1194,7 @@
 
     <dimen name="qs_tiles_extra_margin_top">2dp</dimen>
 
+    <!-- Largest size an avatar might need to be drawn in the power menu user picker -->
+    <dimen name="global_actions_avatar_size">24dp</dimen>
+
 </resources>
