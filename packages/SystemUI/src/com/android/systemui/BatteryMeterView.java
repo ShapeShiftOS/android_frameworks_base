@@ -418,7 +418,13 @@ public class BatteryMeterView extends LinearLayout implements
     }
 
     private void setPercentTextAtCurrentLevel() {
-        batteryPercentViewSetText(
+        if (mBatteryPercentView == null) return;
+        // Use the high voltage symbol ⚡ (u26A1 unicode) but prevent the system
+        // to load its emoji colored variant with the uFE0E flag
+        // only use it when there is no batt icon showing
+        String indication = mCharging && (mBatteryStyle == BATTERY_STYLE_TEXT)
+                ? "\u26A1\uFE0E " : "";
+        batteryPercentViewSetText(indication +
                 NumberFormat.getPercentInstance().format(mLevel / 100f));
         setContentDescription(
                 getContext().getString(mCharging ? R.string.accessibility_battery_level_charging
