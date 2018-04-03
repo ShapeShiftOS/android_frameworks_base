@@ -4647,6 +4647,12 @@ public final class Settings {
         public static final String NEW_SCREENSHOTUI = "new_screenshotui";
 
         /**
+         * Bottom brightness slider
+         * @hide
+         */
+        public static final String QS_BOTTOM_BRIGHTNESS = "qs_bottom_brightness";
+
+        /**
          * Show data usage in QS header
          * @hide
          */
