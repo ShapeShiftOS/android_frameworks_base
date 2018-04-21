@@ -24,6 +24,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ParceledListSlice;
 import android.content.res.Resources;
+import android.content.ContentResolver;
 import android.database.ContentObserver;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -403,6 +404,8 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
     // the float brightness value and vice versa.
     @Nullable
     private final BrightnessSynchronizer mBrightnessSynchronizer;
+
+    private ContentResolver mContentResolver;
 
     /**
      * Creates the display power controller.
