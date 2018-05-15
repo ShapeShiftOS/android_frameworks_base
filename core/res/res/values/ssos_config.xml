@@ -89,4 +89,7 @@
     <!-- Enable face auth when swiping security view -->
     <bool name="config_faceAuthOnSecurityView">false</bool>
 
+    <!-- Whether device has an alert slider. -->
+    <bool name="config_hasAlertSlider">false</bool>
+
 </resources>
