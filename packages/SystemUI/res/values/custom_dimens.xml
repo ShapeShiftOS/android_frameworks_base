@@ -38,4 +38,7 @@
     <dimen name="config_customCutoutBottomWidth">0.0px</dimen>
     <dimen name="config_customCutoutBottomHeight">0.0px</dimen>
 
+    <!-- Sets a custom extra padding for the QS icons and statusbar date -->
+    <dimen name="qs_items_padding">0dp</dimen>
+
 </resources>
