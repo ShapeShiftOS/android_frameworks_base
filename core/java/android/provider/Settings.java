@@ -5643,6 +5643,15 @@ public final class Settings {
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 2);
 
         /**
+         * Whether to use partial screenshot when using volume keys
+         * @hide
+         */
+        public static final String SCREENSHOT_TYPE = "screenshot_type";
+
+        /** @hide */
+        private static final Validator SCREENSHOT_TYPE_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5769,6 +5778,7 @@ public final class Settings {
             NAVIGATION_HANDLE_HEIGHT,
             NAVIGATION_BAR_ARROW_KEYS,
             SWITCH_STYLE,
+            SCREENSHOT_TYPE,
         };
 
         /**
@@ -5953,6 +5963,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(FOD_GESTURE);
             PRIVATE_SETTINGS.add(NAVIGATION_BAR_ARROW_KEYS);
             PRIVATE_SETTINGS.add(SWITCH_STYLE);
+            PRIVATE_SETTINGS.add(SCREENSHOT_TYPE);
         }
 
         /**
@@ -6117,6 +6128,7 @@ public final class Settings {
             VALIDATORS.put(FOD_GESTURE, FOD_GESTURE_VALIDATOR);
             VALIDATORS.put(NAVIGATION_BAR_ARROW_KEYS, NAVIGATION_BAR_ARROW_KEYS_VALIDATOR);
             VALIDATORS.put(SWITCH_STYLE, SWITCH_STYLE_VALIDATOR);
+            VALIDATORS.put(SCREENSHOT_TYPE, SCREENSHOT_TYPE_VALIDATOR);
         }
 
         /**
