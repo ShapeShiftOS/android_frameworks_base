@@ -27,6 +27,8 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.input.InputManager;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.BatteryManager;
@@ -185,6 +187,12 @@ public class Utils {
         newColor[2] = empty[2] + ((full[2]-empty[2])*blendFactor);
         int newAlpha = (int) (emptyAlpha + ((fullAlpha-emptyAlpha)*blendFactor));
         return Color.HSVToColor(newAlpha, newColor);
+    }
+
+    public static boolean deviceHasCompass(Context ctx) {
+        SensorManager sm = (SensorManager) ctx.getSystemService(Context.SENSOR_SERVICE);
+        return sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null
+                && sm.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
     }
 
     // Method to turn off the screen
