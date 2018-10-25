@@ -213,8 +213,7 @@ public class BatteryMeterView extends LinearLayout implements
      * 0 - No preference
      * 1 - Force on
      * 2 - Force off
-     * 3 - Show estimated time
-     * @param mode desired mode (none, on, off, estimated)
+     * @param mode desired mode (none, on, off)
      */
     public void setPercentShowMode(@BatteryPercentMode int mode) {
         mShowPercentMode = mode;
@@ -378,13 +377,8 @@ public class BatteryMeterView extends LinearLayout implements
             return;
         }
 
-        final boolean systemSetting = 0 != Settings.System
-                .getIntForUser(getContext().getContentResolver(),
-                SHOW_BATTERY_PERCENT, 0, mUser);
-
         if (mBatteryPercentView != null) {
-            if (systemSetting && mShowPercentAvailable &&
-                    mShowPercentMode == MODE_ESTIMATE && !mCharging) {
+            if (mShowPercentMode == MODE_ESTIMATE && !mCharging) {
                 mBatteryController.getEstimatedTimeRemainingString((String estimate) -> {
                     if (estimate != null) {
                         if (mBatteryPercentView != null) {
@@ -471,13 +465,6 @@ public class BatteryMeterView extends LinearLayout implements
     @Override
     public void onDensityOrFontScaleChanged() {
         scaleBatteryMeterViews();
-    }
-
-    @Override
-    public void onOverlayChanged() {
-        mShowPercentAvailable = getContext().getResources().getBoolean(
-                com.android.internal.R.bool.config_battery_percentage_setting_available);
-        updateShowPercent();
     }
 
     /**
