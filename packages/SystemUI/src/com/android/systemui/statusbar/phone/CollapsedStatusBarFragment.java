@@ -80,6 +80,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private boolean mShowClock = true;
     private final Handler mHandler = new Handler();
 
+    // ShapeShiftOS additions
+    private View mBatteryBars[] = new View[2];
+
     private class SettingsObserver extends ContentObserver {
        SettingsObserver(Handler handler) {
            super(handler);
@@ -143,6 +146,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mClockView = mStatusBar.findViewById(R.id.clock);
         mCenterClockLayout = (LinearLayout) mStatusBar.findViewById(R.id.center_clock_layout);
         mRightClock = mStatusBar.findViewById(R.id.right_clock);
+        mBatteryBars[0] = mStatusBar.findViewById(R.id.battery_bar);
+        mBatteryBars[1] = mStatusBar.findViewById(R.id.battery_bar_1);
         showSystemIconArea(false);
         initEmergencyCryptkeeperText();
         animateHide(mClockView, false, false);
@@ -286,6 +291,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             animateHide(mRightClock, animate, true);
         }
         animateHide(mSystemIconArea, animate, true);
+        for (View batteryBar: mBatteryBars) {
+            animateHide(batteryBar, animate, true);
+        }
     }
 
     public void showSystemIconArea(boolean animate) {
@@ -294,6 +302,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             animateShow(mRightClock, animate);
         }
         animateShow(mSystemIconArea, animate);
+        for (View batteryBar: mBatteryBars) {
+            animateShow(batteryBar, animate);
+        }
     }
 
 /*    public void hideClock(boolean animate) {
