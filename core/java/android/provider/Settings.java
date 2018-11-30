@@ -5099,6 +5099,16 @@ public final class Settings {
         public static final String QS_SMART_PULLDOWN = "qs_smart_pulldown";
 
         /**
+         * Settings dashboard icon style
+         * @hide
+         */
+        public static final String THEMING_SETTINGS_DASHBOARD_ICONS =
+                "theming_settings_dashboard_icons";
+
+        /** @hide */
+        private static final Validator THEMING_SETTINGS_DASHBOARD_ICONS_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5196,7 +5206,8 @@ public final class Settings {
             NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD,
             NETWORK_TRAFFIC_REFRESH_INTERVAL,
             NETWORK_TRAFFIC_HIDEARROW,
-            NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE
+            NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE,
+            THEMING_SETTINGS_DASHBOARD_ICONS
         };
 
         /**
@@ -5356,6 +5367,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_REFRESH_INTERVAL);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_HIDEARROW);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE);
+            PRIVATE_SETTINGS.add(THEMING_SETTINGS_DASHBOARD_ICONS);
         }
 
         /**
@@ -5491,6 +5503,7 @@ public final class Settings {
             VALIDATORS.put(NETWORK_TRAFFIC_REFRESH_INTERVAL, NETWORK_TRAFFIC_REFRESH_INTERVAL_VALIDATOR);
             VALIDATORS.put(NETWORK_TRAFFIC_HIDEARROW, NETWORK_TRAFFIC_HIDEARROW_VALIDATOR);
             VALIDATORS.put(NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE, NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE_VALIDATOR);
+            VALIDATORS.put(THEMING_SETTINGS_DASHBOARD_ICONS, THEMING_SETTINGS_DASHBOARD_ICONS_VALIDATOR);
         }
 
         /**
