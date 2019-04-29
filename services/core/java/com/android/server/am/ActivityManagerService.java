@@ -415,6 +415,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiFunction;
 
+import com.android.internal.util.custom.cutout.CutoutFullscreenController;
+
 public class ActivityManagerService extends IActivityManager.Stub
         implements Watchdog.Monitor, BatteryStatsImpl.BatteryCallback {
 
@@ -1674,6 +1676,8 @@ public class ActivityManagerService extends IActivityManager.Stub
     private static String sTheRealBuildSerial = Build.UNKNOWN;
 
     private ParcelFileDescriptor[] mLifeMonitorFds;
+
+    private CutoutFullscreenController mCutoutFullscreenController;
 
     static final HostingRecord sNullHostingRecord = new HostingRecord(null);
 
@@ -7935,6 +7939,9 @@ public class ActivityManagerService extends IActivityManager.Stub
         mGamingModeController = new GamingModeController(mContext);
 
         mSystemSensorManager = new SystemSensorManager(mContext, mHandler.getLooper());
+
+        // Force full screen for devices with cutout
+        mCutoutFullscreenController = new CutoutFullscreenController(mContext);
     }
 
     void startPersistentApps(int matchFlags) {
@@ -17959,7 +17966,7 @@ public class ActivityManagerService extends IActivityManager.Stub
                 if (mGamingModeController.topAppChanged(mCurResumedPackage) && !mGamingModeController.isGamingModeActivated()) {
                     Settings.System.putInt(mContext.getContentResolver(),
                         Settings.System.GAMING_MODE_ACTIVE, 1);
-                } else if (!mGamingModeController.topAppChanged(mCurResumedPackage) && 
+                } else if (!mGamingModeController.topAppChanged(mCurResumedPackage) &&
                         mGamingModeController.isGamingModeActivated()) {
                     Settings.System.putInt(mContext.getContentResolver(),
                         Settings.System.GAMING_MODE_ACTIVE, 0);
@@ -20441,6 +20448,13 @@ public class ActivityManagerService extends IActivityManager.Stub
             return mOomAdjuster.mCachedAppOptimizer.enableFreezer(enable);
         } else {
             throw new SecurityException("Caller uid " + callerUid + " cannot set freezer state ");
+        }
+    }
+
+    @Override
+    public boolean shouldForceCutoutFullscreen(String packageName) {
+        synchronized (this) {
+            return mCutoutFullscreenController.shouldForceCutoutFullscreen(packageName);
         }
     }
 }
