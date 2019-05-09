@@ -86,6 +86,7 @@ import static android.view.WindowManager.LayoutParams.TYPE_VOICE_INTERACTION;
 import static android.view.WindowManager.LayoutParams.TYPE_VOICE_INTERACTION_STARTING;
 import static android.view.WindowManager.LayoutParams.TYPE_VOLUME_OVERLAY;
 import static android.view.WindowManager.LayoutParams.TYPE_WALLPAPER;
+import static android.view.WindowManager.TAKE_SCREENSHOT_FULLSCREEN;
 import static android.view.WindowManagerGlobal.ADD_OKAY;
 import static android.view.WindowManagerPolicyConstants.ACTION_HDMI_PLUGGED;
 import static android.view.WindowManagerPolicyConstants.EXTRA_HDMI_PLUGGED_STATE;
@@ -118,10 +119,12 @@ import android.app.ActivityThread;
 import android.app.LoadedApk;
 import android.app.ResourcesManager;
 import android.app.StatusBarManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.graphics.Insets;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
@@ -134,6 +137,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.util.ArraySet;
 import android.util.Pair;
 import android.util.PrintWriterPrinter;
@@ -246,6 +250,7 @@ public class DisplayPolicy {
     }
 
     private final SystemGesturesPointerEventListener mSystemGestures;
+    private SwipeToScreenshotListener mSwipeToScreenshot;
 
     private volatile int mLidState = LID_ABSENT;
     private volatile int mDockMode = Intent.EXTRA_DOCK_STATE_UNDOCKED;
@@ -368,10 +373,13 @@ public class DisplayPolicy {
     private boolean mWindowSleepTokenNeeded;
     private boolean mLastWindowSleepTokenNeeded;
     private boolean mAllowLockscreenWhenOn;
+    private boolean mThreeFingerGestureEnabled = false;
 
     private InputConsumer mInputConsumer = null;
 
     private PointerLocationView mPointerLocationView;
+
+    private SettingsObserver mSettingsObserver;
 
     /**
      * The area covered by system windows which belong to another display. Forwarded insets is set
@@ -427,6 +435,24 @@ public class DisplayPolicy {
         }
     }
 
+    private class SettingsObserver extends ContentObserver {
+        public SettingsObserver(Handler handler) {
+            super(handler);
+
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.SWIPE_TO_SCREENSHOT), false, this,
+                    UserHandle.USER_ALL);
+
+            updateSettings();
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            updateSettings();
+        }
+    }
+
     DisplayPolicy(WindowManagerService service, DisplayContent displayContent) {
         mService = service;
         mContext = displayContent.isDefaultDisplay ? service.mContext
@@ -457,6 +483,14 @@ public class DisplayPolicy {
             mScreenOnEarly = true;
             mScreenOnFully = true;
         }
+
+        mSwipeToScreenshot = new SwipeToScreenshotListener(
+                mContext, new SwipeToScreenshotListener.Callbacks() {
+            @Override
+            public void onSwipeThreeFinger() {
+                takeScreenshot(TAKE_SCREENSHOT_FULLSCREEN);
+            }
+        });
 
         final Looper looper = UiThread.getHandler().getLooper();
         mHandler = new PolicyHandler(looper);
@@ -607,6 +641,8 @@ public class DisplayPolicy {
         mRefreshRatePolicy = new RefreshRatePolicy(mService,
                 mDisplayContent.getDisplayInfo(),
                 mService.mHighRefreshRateBlacklist);
+
+        mSettingsObserver = new SettingsObserver(mHandler);
     }
 
     void systemReady() {
@@ -614,6 +650,15 @@ public class DisplayPolicy {
         if (mService.mPointerLocationEnabled) {
             setPointerLocationEnabled(true);
         }
+    }
+
+    public void updateSettings() {
+        ContentResolver resolver = mContext.getContentResolver();
+
+        // Three Finger Gesture
+        final boolean threeFingerGesture = Settings.System.getIntForUser(resolver,
+                Settings.System.SWIPE_TO_SCREENSHOT, 1, UserHandle.USER_CURRENT) == 1;
+        enableSwipeThreeFingerGesture(threeFingerGesture);
     }
 
     private int getDisplayId() {
@@ -3760,5 +3805,19 @@ public class DisplayPolicy {
         final WindowManager wm = mContext.getSystemService(WindowManager.class);
         wm.removeView(mPointerLocationView);
         mPointerLocationView = null;
+    }
+
+    private void enableSwipeThreeFingerGesture(boolean enable) {
+        if (enable == mThreeFingerGestureEnabled) {
+            return;
+        }
+
+        if (enable) {
+            mThreeFingerGestureEnabled = true;
+            mDisplayContent.registerPointerEventListener(mSwipeToScreenshot);
+        } else {
+            mThreeFingerGestureEnabled = false;
+            mDisplayContent.unregisterPointerEventListener(mSwipeToScreenshot);
+        }
     }
 }
