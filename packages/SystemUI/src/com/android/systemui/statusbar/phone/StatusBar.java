@@ -527,6 +527,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     private boolean mWallpaperSupported;
 
     private boolean mWallpaperSupportsAmbientMode;
+    private boolean mPocketJudgeAllowFP;
+
     private final BroadcastReceiver mWallpaperChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -4086,6 +4088,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_BLUR_INTENSITY),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.POCKET_JUDGE_ALLOW_FP),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -4112,6 +4117,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.QS_BLUR_ALPHA)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.QS_BLUR_INTENSITY))) {
                 updateBlurVisibility();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.POCKET_JUDGE_ALLOW_FP))) {
+                updatePocketJudgeFP();
             }
             update();
         }
@@ -4123,6 +4131,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             setPulseOnNewTracks();
             setHideArrowForBackGesture();
             setStatusBarWindowViewOptions();
+            updatePocketJudgeFP();
      }
    }
 
@@ -4134,6 +4143,12 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.PULSE_ON_NEW_TRACKS, 1,
                     UserHandle.USER_CURRENT) == 1);
         }
+    }
+
+    private void updatePocketJudgeFP() {
+        mPocketJudgeAllowFP = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.POCKET_JUDGE_ALLOW_FP, 0,
+                UserHandle.USER_CURRENT) == 1;
     }
 
     private void setHideArrowForBackGesture() {
