@@ -180,4 +180,6 @@ oneway interface IStatusBar
      * Havoc
      */
     void toggleCameraFlash();
+    void toggleCameraFlashState(boolean enable);
+
 }
