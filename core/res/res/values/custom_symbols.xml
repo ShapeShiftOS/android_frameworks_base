@@ -109,5 +109,6 @@
     <java-symbol type="string" name="config_SmartChargingSysfsNode" />
     <java-symbol type="string" name="config_SmartChargingSuspendValue" />
     <java-symbol type="string" name="config_SmartChargingResumeValue" />
+    <java-symbol type="integer" name="config_smartChargingBatteryResumeLevel" />
 
 </resources>
