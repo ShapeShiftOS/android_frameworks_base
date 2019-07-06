@@ -1408,7 +1408,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             case LONG_PRESS_POWER_HIDE_POCKET_LOCK:
                 mPowerKeyHandled = true;
                 performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, false, "Power - Long-Press - Hide Pocket Lock");
-                hidePocketLock(true);
+                hidePocketLock();
                 mPocketManager.setListeningExternal(false);
                 break;
         }
@@ -4995,9 +4995,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     private void handleDevicePocketStateChanged() {
         final boolean interactive = mPowerManager.isInteractive();
         if (mIsDeviceInPocket) {
-            showPocketLock(interactive);
+            showPocketLock();
         } else {
-            hidePocketLock(interactive);
+            hidePocketLock();
         }
     }
 
@@ -5008,7 +5008,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
      * @see this.mPocketCallback;
      * @author Carlo Savignano
      */
-    private void showPocketLock(boolean animate) {
+    private void showPocketLock() {
         if (!mSystemReady || !mSystemBooted || !mKeyguardDrawnOnce
                 || mPocketLock == null || mPocketLockShowing) {
             return;
@@ -5019,10 +5019,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
 
         if (DEBUG) {
-            Log.d(TAG, "showPocketLock, animate=" + animate);
+            Log.d(TAG, "showPocketLock");
         }
 
-        mPocketLock.show(animate);
+        mPocketLock.show();
         mPocketLockShowing = true;
 
         mPocketManager.setPocketLockVisible(true);
@@ -5035,17 +5035,17 @@ public class PhoneWindowManager implements WindowManagerPolicy {
      * @see this.mPocketCallback;
      * @author Carlo Savignano
      */
-    private void hidePocketLock(boolean animate) {
+    private void hidePocketLock() {
         if (!mSystemReady || !mSystemBooted || !mKeyguardDrawnOnce
                 || mPocketLock == null || !mPocketLockShowing) {
             return;
         }
 
         if (DEBUG) {
-            Log.d(TAG, "hidePocketLock, animate=" + animate);
+            Log.d(TAG, "hidePocketLock");
         }
 
-        mPocketLock.hide(animate);
+        mPocketLock.hide();
         mPocketLockShowing = false;
 
         mPocketManager.setPocketLockVisible(false);
