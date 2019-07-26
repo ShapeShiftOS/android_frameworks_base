@@ -5415,7 +5415,7 @@ public final class Settings {
         public static final String POCKET_JUDGE = "pocket_judge";
 
         /**
-         * Whether to show heads up only for dialer and sms apps
+         * Whether to show heads up only for dialer, clock and sms apps
          * @hide
          */
         public static final String LESS_BORING_HEADS_UP = "less_boring_heads_up";
