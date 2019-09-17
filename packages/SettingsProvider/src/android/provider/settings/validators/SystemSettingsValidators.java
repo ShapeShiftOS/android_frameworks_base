@@ -310,5 +310,16 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.INCREASING_RING_RAMP_UP_TIME, new InclusiveFloatRangeValidator(5, 60));
         VALIDATORS.put(System.FORCE_FULLSCREEN_CUTOUT_APPS, ANY_STRING_VALIDATOR);
         VALIDATORS.put(System.OMNI_CUSTOM_FP_ICON, ANY_STRING_VALIDATOR);
+        VALIDATORS.put(
+                System.COLOR_BUCKET_OVERLAY,
+                new Validator() {
+                    @Override
+                    public boolean validate(String value) {
+                        if (value == null && value.isEmpty()) {
+                            return false;
+                        }
+                        return true;
+                    }
+                });
     }
 }

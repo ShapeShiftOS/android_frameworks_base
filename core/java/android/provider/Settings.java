@@ -5874,6 +5874,13 @@ public final class Settings {
         public static final String QS_HEADER_BACKGROUND = "qs_header_background";
 
         /**
+         * Setting to hold the current set overlay for color bucket.
+         * overlay package name (String)
+         * @hide
+         */
+        public static final String COLOR_BUCKET_OVERLAY = "color_bucket_overlay";
+
+        /**
          * Whether the phone ringtone should be played in an increasing manner
          * 0 = 0ff, 1 = on
          */
@@ -6107,6 +6114,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(INCREASING_RING_RAMP_UP_TIME);
             PRIVATE_SETTINGS.add(FORCE_FULLSCREEN_CUTOUT_APPS);
             PRIVATE_SETTINGS.add(OMNI_CUSTOM_FP_ICON);
+            PRIVATE_SETTINGS.add(COLOR_BUCKET_OVERLAY);
         }
 
         /**

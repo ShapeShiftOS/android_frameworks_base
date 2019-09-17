@@ -123,5 +123,6 @@ public class SystemSettings {
         Settings.System.BATTERY_LIGHT_FULL_COLOR,
         Settings.System.BATTERY_LIGHT_REALLYFULL_COLOR,
         Settings.System.OMNI_CUSTOM_FP_ICON,
+        Settings.System.COLOR_BUCKET_OVERLAY,
     };
 }
