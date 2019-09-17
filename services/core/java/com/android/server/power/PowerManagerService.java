@@ -234,10 +234,6 @@ public final class PowerManagerService extends SystemService
 
     private static final float PROXIMITY_NEAR_THRESHOLD = 5.0f;
 
-    // Smart charging: sysfs node of charger
-    private static final String POWER_INTPUT_SUSPEND_NODE =
-            "/sys/class/power_supply/battery/input_suspend";
-
     private final Context mContext;
     private final ServiceThread mHandlerThread;
     private final PowerManagerHandler mHandler;
@@ -626,6 +622,9 @@ public final class PowerManagerService extends SystemService
     private boolean mPowerInputSuspended = false;
     private int mSmartChargingLevel;
     private int mSmartChargingLevelDefaultConfig;
+    private static String mPowerInputSuspendSysfsNode;
+    private static String mPowerInputSuspendValue;
+    private static String mPowerInputResumeValue;
 
     /**
      * All times are in milliseconds. These constants are kept synchronized with the system
@@ -813,6 +812,7 @@ public final class PowerManagerService extends SystemService
                 Process.THREAD_PRIORITY_DISPLAY, false /*allowIo*/);
         mHandlerThread.start();
         mHandler = new PowerManagerHandler(mHandlerThread.getLooper());
+
         mConstants = new Constants(mHandler);
         mAmbientDisplayConfiguration = mInjector.createAmbientDisplayConfiguration(context);
         mAttentionDetector = new AttentionDetector(this::onUserAttention, mLock);
@@ -1079,8 +1079,15 @@ public final class PowerManagerService extends SystemService
             mProximityWakeLock = mContext.getSystemService(PowerManager.class)
                     .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ProximityWakeLock");
         }
+        // Smart charging
         mSmartChargingLevelDefaultConfig = resources.getInteger(
                 com.android.internal.R.integer.config_smartChargingBatteryLevel);
+        mPowerInputSuspendSysfsNode = resources.getString(
+                com.android.internal.R.string.config_SmartChargingSysfsNode);
+        mPowerInputSuspendValue = resources.getString(
+                com.android.internal.R.string.config_SmartChargingSuspendValue);
+        mPowerInputResumeValue = resources.getString(
+                com.android.internal.R.string.config_SmartChargingResumeValue);
     }
 
     private void updateSettingsLocked() {
@@ -1933,20 +1940,20 @@ public final class PowerManagerService extends SystemService
         if (mPowerInputSuspended && (mBatteryLevel < mSmartChargingLevel) ||
             (mPowerInputSuspended && !mSmartChargingEnabled)) {
             try {
-                FileUtils.stringToFile(POWER_INTPUT_SUSPEND_NODE, "0");
+                FileUtils.stringToFile(mPowerInputSuspendSysfsNode, mPowerInputResumeValue);
                 mPowerInputSuspended = false;
             } catch (IOException e) {
-                Slog.e(TAG, "failed to write to " + POWER_INTPUT_SUSPEND_NODE);
+                Slog.e(TAG, "failed to write to " + mPowerInputSuspendSysfsNode);
             }
             return;
         }
 
         if (mSmartChargingEnabled && !mPowerInputSuspended && (mBatteryLevel >= mSmartChargingLevel)) {
             try {
-                FileUtils.stringToFile(POWER_INTPUT_SUSPEND_NODE, "1");
+                FileUtils.stringToFile(mPowerInputSuspendSysfsNode, mPowerInputSuspendValue);
                 mPowerInputSuspended = true;
             } catch (IOException e) {
-                    Slog.e(TAG, "failed to write to " + POWER_INTPUT_SUSPEND_NODE);
+                    Slog.e(TAG, "failed to write to " + mPowerInputSuspendSysfsNode);
             }
         }
     }
