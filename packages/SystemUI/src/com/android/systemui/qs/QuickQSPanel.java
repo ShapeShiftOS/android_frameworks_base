@@ -301,6 +301,10 @@ public class QuickQSPanel extends QSPanel {
         @Override
         protected int getColumnStart(int column) {
             return getPaddingStart() + column *  (mCellWidth + mCellMarginHorizontal);
+	}
+
+        @Override
+        public void updateSettings() {
         }
     }
 }
