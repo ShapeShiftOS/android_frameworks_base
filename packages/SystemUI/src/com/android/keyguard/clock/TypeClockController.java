@@ -209,6 +209,7 @@ public class TypeClockController implements ClockPlugin {
         if (mDarkController != null) {
             mDarkController.setDarkAmount(darkAmount);
         }
+        mClockPosition.setDarkAmount(darkAmount);
     }
 
     @Override
