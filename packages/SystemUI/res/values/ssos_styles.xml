@@ -7,6 +7,11 @@
         <item name="android:layout_centerVertical">true</item>
     </style>
 
+    <style name="TriStateUiText">
+        <item name="android:textSize">11.0sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
     <style name="TextAppearance.QSEdit.CustomHeaders"
         parent="@*android:style/TextAppearance.DeviceDefault.Body2">
         <item name="android:textSize">14sp</item>
