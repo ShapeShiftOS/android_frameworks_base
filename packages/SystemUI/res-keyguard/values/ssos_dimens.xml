@@ -23,5 +23,4 @@
 
     <!-- Custom clock -->
     <dimen name="custom_clock_left_padding">50dp</dimen>
-
 </resources>
