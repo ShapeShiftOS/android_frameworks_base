@@ -4907,6 +4907,14 @@ public final class Settings {
                 ANY_STRING_VALIDATOR;
 
         /**
+         * Unlock keystore with fingerprint after reboot
+         * @hide
+         */
+        public static final String FP_UNLOCK_KEYSTORE = "fp_unlock_keystore";
+
+
+
+        /**
          * Really full 100 battery charging color
          * @hide
          */
