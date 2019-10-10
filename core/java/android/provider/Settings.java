@@ -4561,6 +4561,24 @@ public final class Settings {
               new SettingsValidators.InclusiveIntegerRangeValidator(0, 10000);
 
         /**
+         * Whether to enable Ambient edge light
+         * @hide
+         */
+        public static final String PULSE_AMBIENT_LIGHT = "pulse_ambient_light";
+
+        /** @hide */
+        private static final Validator PULSE_AMBIENT_LIGHT_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
+         * What color to use for Ambient edge light
+         * @hide
+         */
+        public static final String PULSE_AMBIENT_LIGHT_COLOR = "pulse_ambient_light_color";
+
+        /** @hide */
+        private static final Validator PULSE_AMBIENT_LIGHT_COLOR_VALIDATOR = ANY_STRING_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -4629,6 +4647,8 @@ public final class Settings {
             DOUBLE_TAP_SLEEP_LOCKSCREEN,
             HEADS_UP_NOTIFICATION_SNOOZE,
             HEADS_UP_TIMEOUT,
+            PULSE_AMBIENT_LIGHT,
+            PULSE_AMBIENT_LIGHT_COLOR,
         };
 
         /**
@@ -4756,6 +4776,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_LOCKSCREEN);
             PRIVATE_SETTINGS.add(HEADS_UP_NOTIFICATION_SNOOZE);
             PRIVATE_SETTINGS.add(HEADS_UP_TIMEOUT);
+            PRIVATE_SETTINGS.add(PULSE_AMBIENT_LIGHT);
+            PRIVATE_SETTINGS.add(PULSE_AMBIENT_LIGHT_COLOR);
         }
 
         /**
@@ -4857,6 +4879,8 @@ public final class Settings {
             VALIDATORS.put(DOUBLE_TAP_SLEEP_LOCKSCREEN, DOUBLE_TAP_SLEEP_LOCKSCREEN_VALIDATOR);
             VALIDATORS.put(HEADS_UP_NOTIFICATION_SNOOZE,HEADS_UP_NOTIFICATION_SNOOZE_VALIDATOR);
             VALIDATORS.put(HEADS_UP_TIMEOUT,HEADS_UP_TIMEOUT_VALIDATOR);
+            VALIDATORS.put(PULSE_AMBIENT_LIGHT, PULSE_AMBIENT_LIGHT_VALIDATOR);
+            VALIDATORS.put(PULSE_AMBIENT_LIGHT_COLOR, PULSE_AMBIENT_LIGHT_COLOR_VALIDATOR);
         }
 
         /**
