@@ -5580,10 +5580,16 @@ public final class Settings {
         public static final String LOCKSCREEN_STATUS_BAR = "lockscreen_status_bar";
 
         /**
-         * Whether to show battery percent on ambient bottom
+         *
          * @hide
          */
         public static final String AMBIENT_BATTERY_PERCENT = "ambient_battery_percent";
+
+        /**
+         * Use doubletap as doze pulse triggers
+         * @hide
+         */
+        public static final String DOZE_TRIGGER_DOUBLETAP = "doze_trigger_doubletap";
 
         /**
          * Whether to avoid launching the app on touching heads-up
