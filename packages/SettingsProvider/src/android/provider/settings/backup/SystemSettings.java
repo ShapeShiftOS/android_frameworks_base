@@ -87,5 +87,8 @@ public class SystemSettings {
         Settings.System.DOZE_ON_CHARGE,
         Settings.System.LOCKSCREEN_MEDIA_METADATA,
         Settings.System.VOLUME_ROCKER_WAKE,
+        Settings.System.PULSE_AMBIENT_LIGHT,
+        Settings.System.AMBIENT_NOTIFICATION_LIGHT_ENABLED,
+        Settings.System.AMBIENT_NOTIFICATION_LIGHT,
     };
 }
