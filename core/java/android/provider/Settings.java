@@ -5452,6 +5452,12 @@ public final class Settings {
         public static final String AMBIENT_BATTERY_PERCENT = "ambient_battery_percent";
 
         /**
+         * Whether to avoid launching the app on touching heads-up
+         * @hide
+         */
+        public static final String DONT_TOUCH_HEADSUP = "dont_touch_headsup";
+
+        /**
          * Whether to show media player in QS
          * @hide
          */
@@ -5609,6 +5615,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(ACCENT_COLOR);
             PRIVATE_SETTINGS.add(SYSTEMUI_PLUGIN_VOLUME);
             PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_NEW_TINT);
+            PRIVATE_SETTINGS.add(DONT_TOUCH_HEADSUP);
         }
 
         /**
