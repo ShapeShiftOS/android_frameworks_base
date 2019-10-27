@@ -23,4 +23,7 @@
     <bool name="config_statusBarBurnInProtection">false</bool>
     <integer name="config_shift_interval">60</integer>
 
+    <!-- Width of the battery icon in the status bar when set to circle style. -->
+    <dimen name="status_bar_battery_icon_circle_width">14.5dp</dimen>
+
 </resources>
