@@ -4605,6 +4605,12 @@ public final class Settings {
         private static final Validator DOUBLE_TAP_SLEEP_GESTURE_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
+        /** Whether to pulse ambient on new music tracks
+         *
+         * @hide
+         */
+        public static final String PULSE_ON_NEW_TRACKS = "pulse_on_new_tracks";
+
         /**
          * Double tap on lockscreen to sleep
          * @hide
