@@ -519,6 +519,10 @@ public class StatusBar extends SystemUI implements DemoMode,
     private boolean mDozingRequested;
 
     protected NotificationMediaManager mMediaManager;
+
+    // LS visualizer on Ambient Display
+    private boolean mAmbientVisualizer;
+
     protected NotificationLockscreenUserManager mLockscreenUserManager;
     protected NotificationRemoteInputManager mRemoteInputManager;
     private boolean mWallpaperSupported;
@@ -3783,6 +3787,9 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
 
         mStatusBarStateController.setIsDozing(dozing);
+        if (mAmbientVisualizer && mDozing) {
+            mVisualizerView.setVisible(true);
+        }
     }
 
     private void updateKeyguardState() {
@@ -4113,6 +4120,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SHOW_MEDIA_HEADS_UP),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.Secure.AMBIENT_VISUALIZER_ENABLED),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -4142,6 +4152,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                 updateKeyguardStatusSettings();
             } else if (uri.equals(Settings.Secure.getUriFor(Settings.Secure.LOCKSCREEN_DATE_SELECTION))) {
                 updateKeyguardStatusSettings();
+            } else if (uri.equals(Settings.Secure.getUriFor(
+                    Settings.Secure.AMBIENT_VISUALIZER_ENABLED))) {
+                setAmbientVis();
             }
             update();
         }
@@ -4157,6 +4170,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             setOldMobileType();
             updateKeyguardStatusSettings();
             setMediaHeadsup();
+            setAmbientVis();
      }
    }
 
@@ -4180,6 +4194,12 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.PULSE_ON_NEW_TRACKS, 1,
                     UserHandle.USER_CURRENT) == 1);
         }
+    }
+
+    private void setAmbientVis() {
+        mAmbientVisualizer = Settings.Secure.getIntForUser(
+                mContext.getContentResolver(), Settings.Secure.AMBIENT_VISUALIZER_ENABLED, 0,
+                UserHandle.USER_CURRENT) == 1;
     }
 
     private void setUseLessBoringHeadsUp() {
