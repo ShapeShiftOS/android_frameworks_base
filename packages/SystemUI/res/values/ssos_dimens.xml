@@ -30,6 +30,9 @@
     <dimen name="horizontal_max_swift">3.0dp</dimen>
     <dimen name="vertical_max_swift">1.0dp</dimen>
 
+    <!-- Qs visibility -->
+    <dimen name="qs_tile_height_wo_label">64dp</dimen>
+
     <!-- OPA home dimens -->
     <dimen name="halo_inner_radius">10.0dip</dimen>
     <dimen name="halo_thickness">1.0dip</dimen>
