@@ -388,13 +388,15 @@ public class RecordingService extends Service {
 
     private void stopRecording() {
         setTapsVisible(false);
-        mMediaRecorder.stop();
-        mMediaRecorder.release();
-        mMediaRecorder = null;
-        mMediaProjection.stop();
-        mMediaProjection = null;
-        mInputSurface.release();
-        mVirtualDisplay.release();
+        try {
+            mMediaRecorder.stop();
+            mMediaRecorder.release();
+            mMediaRecorder = null;
+            mMediaProjection.stop();
+            mMediaProjection = null;
+            mInputSurface.release();
+            mVirtualDisplay.release();
+        } catch (Exception e) {}
         stopSelf();
     }
 
