@@ -51,6 +51,7 @@ LOCAL_REQUIRED_MODULES := \
 	FontSFProOverlay \
 	FontEvolveSans \
 	FontLinotte \
+	IconShapeHeartOverlay \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularLauncherOverlay \
 	IconPackCircularSettingsOverlay \
