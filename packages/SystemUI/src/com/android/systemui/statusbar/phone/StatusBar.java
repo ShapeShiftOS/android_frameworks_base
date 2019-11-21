@@ -4175,18 +4175,18 @@ public class StatusBar extends SystemUI implements DemoMode,
         } else if (mStatusBarView != null && mKeyguardStatusBar != null) {
             mStatusBarView.setBackgroundColor(Color.TRANSPARENT);
             mKeyguardStatusBar.setBackgroundColor(Color.TRANSPARENT);
-        }
+     }
+   }
+
+    private boolean hideNotch() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.HIDE_NOTCH, 0) != 0;
     }
 
     private void setQsRowsColumns() {
         if (mQSPanel != null) {
             mQSPanel.updateResources();
         }
-    }
-
-    private boolean hideNotch() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.HIDE_NOTCH, 0) != 0;
     }
 
     private void setStatusDoubleTapToSleep() {
