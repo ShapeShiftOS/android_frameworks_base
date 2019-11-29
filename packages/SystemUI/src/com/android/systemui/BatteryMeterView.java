@@ -38,6 +38,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArraySet;
@@ -110,9 +111,9 @@ public class BatteryMeterView extends LinearLayout implements
     private boolean mIgnoreTunerUpdates;
     private boolean mIsSubscribedForTunerUpdates;
     private boolean mCharging;
-
     private boolean mBatteryHidden;
     private int mBatteryStyle;
+    private boolean mShowBatteryEstimate;
 
     private DualToneHandler mDualToneHandler;
     private int mUser;
@@ -185,6 +186,7 @@ public class BatteryMeterView extends LinearLayout implements
 
         setClipChildren(false);
         setClipToPadding(false);
+        mSettingObserver.observe();
         Dependency.get(ConfigurationController.class).observe(viewAttachLifecycle(this), this);
     }
 
@@ -304,6 +306,18 @@ public class BatteryMeterView extends LinearLayout implements
             mBatteryHidden = icons.contains(mSlotBattery);
             setVisibility(mBatteryHidden ? View.GONE : View.VISIBLE);
         }
+        updateSettings();
+    }
+
+    private void updateSettings() {
+        updateQsBatteryEstimate();
+    }
+
+    private void updateQsBatteryEstimate() {
+        mShowBatteryEstimate = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.QS_SHOW_BATTERY_ESTIMATE, 1,
+                UserHandle.USER_CURRENT) == 1;
+        updatePercentView();
     }
 
     @Override
@@ -326,7 +340,9 @@ public class BatteryMeterView extends LinearLayout implements
                 false, mSettingObserver);
         updateBatteryStyle();
         subscribeForTunerUpdates();
+        updateSettings();
         mUserTracker.startTracking();
+        mSettingObserver.observe();
     }
 
     @Override
@@ -378,7 +394,7 @@ public class BatteryMeterView extends LinearLayout implements
         }
 
         if (mBatteryPercentView != null) {
-            if (mShowPercentMode == MODE_ESTIMATE && !mCharging) {
+            if (mShowPercentMode == MODE_ESTIMATE && !mCharging && mShowBatteryEstimate) {
                 mBatteryController.getEstimatedTimeRemainingString((String estimate) -> {
                     if (estimate != null) {
                         if (mBatteryPercentView != null) {
@@ -465,6 +481,7 @@ public class BatteryMeterView extends LinearLayout implements
     @Override
     public void onDensityOrFontScaleChanged() {
         scaleBatteryMeterViews();
+        updateSettings();
     }
 
     /**
@@ -534,6 +551,7 @@ public class BatteryMeterView extends LinearLayout implements
     @Override
     public void onDarkChanged(Rect area, float darkIntensity, int tint) {
         float intensity = DarkIconDispatcher.isInArea(area, this) ? darkIntensity : 0;
+        updateSettings();
         mNonAdaptedSingleToneColor = mDualToneHandler.getSingleColor(intensity);
         mNonAdaptedForegroundColor = mDualToneHandler.getFillColor(intensity);
         mNonAdaptedBackgroundColor = mDualToneHandler.getBackgroundColor(intensity);
@@ -569,9 +587,17 @@ public class BatteryMeterView extends LinearLayout implements
             super(handler);
         }
 
+        void observe() {
+            ContentResolver resolver = getContext().getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_SHOW_BATTERY_ESTIMATE),
+                    false, this, UserHandle.USER_ALL);
+        }
+
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             super.onChange(selfChange, uri);
+            updateSettings();
             switch (uri.getLastPathSegment()) {
                 case STATUS_BAR_BATTERY_STYLE:
                     updateBatteryStyle();
