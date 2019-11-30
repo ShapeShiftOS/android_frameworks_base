@@ -5031,6 +5031,15 @@ public final class Settings {
         public static final String SHOW_VOLTE_ICON = "volte_icon";
 
         /**
+         * VoLTE icon styles
+         * @hide
+         */
+        public static final String VOLTE_ICON_STYLE = "volte_icon_style";
+
+        /** @hide */
+        public static final Validator VOLTE_ICON_STYLE_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5103,6 +5112,7 @@ public final class Settings {
             PULSE_AMBIENT_LIGHT_COLOR,
             NAVIGATION_HANDLE_WIDTH,
             BACK_GESTURE_HEIGHT,
+<<<<<<< HEAD
             HIDE_SMART_REPLIES,
             BATTERY_LIGHT_ENABLED,
             BATTERY_LIGHT_ALLOW_ON_DND,
@@ -5121,7 +5131,8 @@ public final class Settings {
             GESTURE_PILL_TOGGLE,
             SWIPE_TO_SCREENSHOT,
             QS_PANEL_BG_USE_NEW_TINT,
-            NOTIFICATION_HEADERS
+            NOTIFICATION_HEADERS,
+            VOLTE_ICON_STYLE
         };
 
         /**
@@ -5274,6 +5285,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BRIGHTNESS_SLIDER_QS_UNEXPANDED);
             PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_NEW_TINT);
             PRIVATE_SETTINGS.add(POCKET_JUDGE);
+            PRIVATE_SETTINGS.add(VOLTE_ICON_STYLE);
         }
 
         /**
@@ -5403,6 +5415,7 @@ public final class Settings {
             VALIDATORS.put(QS_PANEL_BG_USE_NEW_TINT, QS_PANEL_BG_USE_NEW_TINT_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_HEADERS, NOTIFICATION_HEADERS_VALIDATOR);
             VALIDATORS.put(POCKET_JUDGE, POCKET_JUDGE_VALIDATOR);
+            VALIDATORS.put(VOLTE_ICON_STYLE, VOLTE_ICON_STYLE_VALIDATOR);
         }
 
         /**
