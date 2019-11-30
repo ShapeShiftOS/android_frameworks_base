@@ -109,5 +109,6 @@ public class SystemSettings {
         Settings.System.LOCK_FP_ICON,
         Settings.System.DOUBLE_TAP_SLEEP_GESTURE,
         Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN,
+        Settings.System.STATUS_BAR_BATTERY_STYLE,
     };
 }

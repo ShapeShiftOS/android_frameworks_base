@@ -244,5 +244,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.CALL_CONNECTED_TONE_ENABLED, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.DOUBLE_TAP_SLEEP_GESTURE, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.DOUBLE_TAP_SLEEP_LOCKSCREEN, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.STATUS_BAR_BATTERY_STYLE, new InclusiveIntegerRangeValidator(0, 2));
     }
 }
