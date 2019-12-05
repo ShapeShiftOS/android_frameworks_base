@@ -143,4 +143,7 @@
 
     <!-- FOD icon dimming -->
     <java-symbol type="bool" name="config_targetUsesInKernelDimming" />
+
+    <!-- Whether device has warp charging support -->
+    <java-symbol type="bool" name="config_hasWarpCharger" />
 </resources>
