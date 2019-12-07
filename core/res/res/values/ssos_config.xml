@@ -147,7 +147,7 @@
     <string name="config_alertSliderIntent"></string>
 
     <!-- Whether or not we should show vendor mismatch message -->
-    <bool name="config_show_vendor_mismatch_message">true</bool>
+    <bool name="config_show_vendor_mismatch_message">false</bool>
 
     <!-- Whether the device supports Smart Pixels -->
     <bool name="config_enableSmartPixels">false</bool>
