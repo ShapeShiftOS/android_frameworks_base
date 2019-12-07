@@ -5084,6 +5084,14 @@ public final class Settings {
                 ANY_INTEGER_VALIDATOR;
 
         /**
+         * Network traffic layout
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_LAYOUT = "network_traffic_layout";
+         /** @hide */
+        private static final Validator NETWORK_TRAFFIC_LAYOUT_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5179,6 +5187,7 @@ public final class Settings {
             NETWORK_TRAFFIC_STATE,
             NETWORK_TRAFFIC_LOCATION,
             NETWORK_TRAFFIC_TYPE,
+            NETWORK_TRAFFIC_LAYOUT,
             NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD,
             NETWORK_TRAFFIC_REFRESH_INTERVAL,
             NETWORK_TRAFFIC_HIDEARROW,
@@ -5339,6 +5348,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_STATE);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_LOCATION);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_TYPE);
+            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_LAYOUT);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_REFRESH_INTERVAL);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_HIDEARROW);
@@ -5476,6 +5486,7 @@ public final class Settings {
             VALIDATORS.put(NETWORK_TRAFFIC_STATE, NETWORK_TRAFFIC_STATE_VALIDATOR);
             VALIDATORS.put(NETWORK_TRAFFIC_LOCATION, NETWORK_TRAFFIC_LOCATION_VALIDATOR);
             VALIDATORS.put(NETWORK_TRAFFIC_TYPE, NETWORK_TRAFFIC_TYPE_VALIDATOR);
+            VALIDATORS.put(NETWORK_TRAFFIC_LAYOUT, NETWORK_TRAFFIC_LAYOUT_VALIDATOR);
             VALIDATORS.put(NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD, NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD_VALIDATOR);
             VALIDATORS.put(NETWORK_TRAFFIC_REFRESH_INTERVAL, NETWORK_TRAFFIC_REFRESH_INTERVAL_VALIDATOR);
             VALIDATORS.put(NETWORK_TRAFFIC_HIDEARROW, NETWORK_TRAFFIC_HIDEARROW_VALIDATOR);
