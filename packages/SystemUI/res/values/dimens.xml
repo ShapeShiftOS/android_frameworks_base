@@ -1176,6 +1176,6 @@
     <dimen name="volume_dialog_ringer_spacing">4dip</dimen>
     <dimen name="volume_dialog_ringer_height">38dip</dimen>
 
-    <dimen name="brightnessbar_additional_margin">40dp</dimen>
+    <dimen name="brightnessbar_additional_margin">44dp</dimen>
 
 </resources>
