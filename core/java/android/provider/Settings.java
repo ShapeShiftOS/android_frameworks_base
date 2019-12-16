@@ -5112,7 +5112,6 @@ public final class Settings {
             PULSE_AMBIENT_LIGHT_COLOR,
             NAVIGATION_HANDLE_WIDTH,
             BACK_GESTURE_HEIGHT,
-<<<<<<< HEAD
             HIDE_SMART_REPLIES,
             BATTERY_LIGHT_ENABLED,
             BATTERY_LIGHT_ALLOW_ON_DND,

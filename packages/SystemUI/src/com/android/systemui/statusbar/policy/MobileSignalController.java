@@ -471,6 +471,10 @@ public class MobileSignalController extends SignalController<
                 case 4:
                     resId = R.drawable.ic_miui_volte;
                     break;
+                // Asus Icon
+                case 5:
+                    resId = R.drawable.ic_volte8;
+                    break;
  	        //Vo
                 case 0:
                 default:
