@@ -93,4 +93,6 @@
     <color name="keyguard_affordance_background_preview">#171717</color>
     <color name="keyguard_affordance_background_preview_background">#242426</color>
 
+    <color name="qs_tile_background_color_disabled">#1f1f1f</color>
+
 </resources>
