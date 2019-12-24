@@ -22,7 +22,6 @@ LOCAL_REQUIRED_MODULES := \
 	DisplayCutoutEmulationTallOverlay \
 	FontGoogleSansOverlay \
 	FontCircularStdOverlay \
-	FontOnePlusSlateOverlay \
         FontBigNoodle \
         FontBikoHanken \
         FontComicNeue \
@@ -46,6 +45,7 @@ LOCAL_REQUIRED_MODULES := \
         FontRoutedGothicRobotoCondensed \
         FontSofiaSans \
         FontSofiaSansSemiCondensed \
+	FontSlateForOnePlusOverlay \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularLauncherOverlay \
 	IconPackCircularSettingsOverlay \
