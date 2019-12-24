@@ -19,6 +19,10 @@ LOCAL_MODULE := frameworks-base-overlays
 LOCAL_REQUIRED_MODULES := \
 	AccentColorDarkOrangeOverlay \
 	AccentColorMIUIOverlay \
+        AccentColorNextbitOverlay \
+	AccentColorOnePlusOverlay \
+	AccentColorParanoidOverlay \
+	AccentColorPepsiOverlay \
 	AccentColorTealOverlay \
 	AccentColorRedOverlay \
 	AccentColorQGreenOverlay \
@@ -32,12 +36,14 @@ LOCAL_REQUIRED_MODULES := \
 	AccentColorDiscordOverlay \
 	AccentColorGoldenShowerOverlay \
 	AccentColorJollibeeOverlay \
-        AccentColorNextbitOverlay \
-	AccentColorOnePlusOverlay \
-	AccentColorParanoidOverlay \
-	AccentColorPepsiOverlay \
         AccentColorRazerOverlay \
         AccentColorStarbucksOverlay \
+	AccentColorUbuntuOverlay \
+	AccentColorMatrixOverlay \
+	AccentColorSalmonOverlay \
+	AccentColorMetallicGoldOverlay \
+	AccentColorInfernoRedOverlay \
+	AccentColorDorsetGoldOverlay \
 	AccentColorXboxOverlay \
 	AccentColorXiaomiOverlay \
 	DisplayCutoutEmulationCornerOverlay \
