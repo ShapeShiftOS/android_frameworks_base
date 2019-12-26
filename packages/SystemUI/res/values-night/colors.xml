@@ -95,4 +95,7 @@
 
     <color name="qs_tile_background_color_disabled">#1f1f1f</color>
 
+    <color name="recents_dismiss_all_background_color">@color/volume_background_tint</color>
+    <color name="recents_dismiss_all_icon_color">@android:color/white</color>
+
 </resources>
