@@ -42,6 +42,10 @@ import vendor.lineage.livedisplay.V2_0.IDisplayModes;
 import vendor.lineage.livedisplay.V2_0.IPictureAdjustment;
 import vendor.lineage.livedisplay.V2_0.IReadingEnhancement;
 import vendor.lineage.livedisplay.V2_0.ISunlightEnhancement;
+import vendor.lineage.touch.V1_0.IGloveMode;
+import vendor.lineage.touch.V1_0.IKeyDisabler;
+import vendor.lineage.touch.V1_0.IStylusMode;
+import vendor.lineage.touch.V1_0.ITouchscreenGesture;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.IllegalArgumentException;
@@ -88,10 +92,28 @@ public final class LineageHardwareManager {
     public static final int FEATURE_DISPLAY_COLOR_CALIBRATION = 0x4;
 
     /**
+     * High touch sensitivity for touch panels
+     */
+    @VisibleForTesting
+    public static final int FEATURE_HIGH_TOUCH_SENSITIVITY = 0x10;
+
+    /**
+     * Hardware navigation key disablement
+     */
+    @VisibleForTesting
+    public static final int FEATURE_KEY_DISABLE = 0x20;
+
+    /**
      * Increased display readability in bright light
      */
     @VisibleForTesting
     public static final int FEATURE_SUNLIGHT_ENHANCEMENT = 0x100;
+
+    /**
+     * Touchscreen hovering
+     */
+    @VisibleForTesting
+    public static final int FEATURE_TOUCH_HOVERING = 0x800;
 
     /**
      * Auto contrast
@@ -123,11 +145,20 @@ public final class LineageHardwareManager {
     @VisibleForTesting
     public static final int FEATURE_PICTURE_ADJUSTMENT = 0x40000;
 
+    /**
+     * Touchscreen gesture
+     */
+    @VisibleForTesting
+    public static final int FEATURE_TOUCHSCREEN_GESTURES = 0x80000;
+
     private static final List<Integer> BOOLEAN_FEATURES = Arrays.asList(
         FEATURE_ADAPTIVE_BACKLIGHT,
         FEATURE_AUTO_CONTRAST,
         FEATURE_COLOR_ENHANCEMENT,
+        FEATURE_HIGH_TOUCH_SENSITIVITY,
+        FEATURE_KEY_DISABLE,
         FEATURE_SUNLIGHT_ENHANCEMENT,
+        FEATURE_TOUCH_HOVERING,
         FEATURE_READING_ENHANCEMENT
     );
 
@@ -248,6 +279,14 @@ public final class LineageHardwareManager {
                     return IReadingEnhancement.getService(true);
                 case FEATURE_SUNLIGHT_ENHANCEMENT:
                     return ISunlightEnhancement.getService(true);
+                case FEATURE_HIGH_TOUCH_SENSITIVITY:
+                    return IGloveMode.getService(true);
+                case FEATURE_KEY_DISABLE:
+                    return IKeyDisabler.getService(true);
+                case FEATURE_TOUCH_HOVERING:
+                    return IStylusMode.getService(true);
+                case FEATURE_TOUCHSCREEN_GESTURES:
+                    return ITouchscreenGesture.getService(true);
             }
         } catch (NoSuchElementException | RemoteException e) {
         }
@@ -301,9 +340,18 @@ public final class LineageHardwareManager {
                     case FEATURE_COLOR_ENHANCEMENT:
                         IColorEnhancement colorEnhancement = (IColorEnhancement) obj;
                         return colorEnhancement.isEnabled();
+                    case FEATURE_HIGH_TOUCH_SENSITIVITY:
+                        IGloveMode gloveMode = (IGloveMode) obj;
+                        return gloveMode.isEnabled();
+                    case FEATURE_KEY_DISABLE:
+                        IKeyDisabler keyDisabler = (IKeyDisabler) obj;
+                        return keyDisabler.isEnabled();
                     case FEATURE_SUNLIGHT_ENHANCEMENT:
                         ISunlightEnhancement sunlightEnhancement = (ISunlightEnhancement) obj;
                         return sunlightEnhancement.isEnabled();
+                    case FEATURE_TOUCH_HOVERING:
+                        IStylusMode stylusMode = (IStylusMode) obj;
+                        return stylusMode.isEnabled();
                     case FEATURE_READING_ENHANCEMENT:
                         IReadingEnhancement readingEnhancement = (IReadingEnhancement) obj;
                         return readingEnhancement.isEnabled();
@@ -344,9 +392,18 @@ public final class LineageHardwareManager {
                     case FEATURE_COLOR_ENHANCEMENT:
                         IColorEnhancement colorEnhancement = (IColorEnhancement) obj;
                         return colorEnhancement.setEnabled(enable);
+                    case FEATURE_HIGH_TOUCH_SENSITIVITY:
+                        IGloveMode gloveMode = (IGloveMode) obj;
+                        return gloveMode.setEnabled(enable);
+                    case FEATURE_KEY_DISABLE:
+                        IKeyDisabler keyDisabler = (IKeyDisabler) obj;
+                        return keyDisabler.setEnabled(enable);
                     case FEATURE_SUNLIGHT_ENHANCEMENT:
                         ISunlightEnhancement sunlightEnhancement = (ISunlightEnhancement) obj;
                         return sunlightEnhancement.setEnabled(enable);
+                    case FEATURE_TOUCH_HOVERING:
+                        IStylusMode stylusMode = (IStylusMode) obj;
+                        return stylusMode.setEnabled(enable);
                     case FEATURE_READING_ENHANCEMENT:
                         IReadingEnhancement readingEnhancement = (IReadingEnhancement) obj;
                         return readingEnhancement.setEnabled(enable);
@@ -745,7 +802,38 @@ public final class LineageHardwareManager {
     }
 
     /**
->>>>>>> 756d371b0234 (Introduce LiveDisplay from Lineage)
+     * @return a list of available touchscreen gestures on the devices
+     */
+    public TouchscreenGesture[] getTouchscreenGestures() {
+        try {
+            if (isSupportedHIDL(FEATURE_TOUCHSCREEN_GESTURES)) {
+                ITouchscreenGesture touchscreenGesture = (ITouchscreenGesture)
+                        mHIDLMap.get(FEATURE_TOUCHSCREEN_GESTURES);
+                return HIDLHelper.fromHIDLGestures(touchscreenGesture.getSupportedGestures());
+            }
+        } catch (RemoteException e) {
+        }
+        return null;
+    }
+
+    /**
+     * @return true if setting the activation status was successful
+     */
+    public boolean setTouchscreenGestureEnabled(
+            TouchscreenGesture gesture, boolean state) {
+        try {
+            if (isSupportedHIDL(FEATURE_TOUCHSCREEN_GESTURES)) {
+                ITouchscreenGesture touchscreenGesture = (ITouchscreenGesture)
+                        mHIDLMap.get(FEATURE_TOUCHSCREEN_GESTURES);
+                return touchscreenGesture.setGestureEnabled(
+                        HIDLHelper.toHIDLGesture(gesture), state);
+            }
+        } catch (RemoteException e) {
+        }
+        return false;
+    }
+
+    /**
      * @return true if service is valid
      */
     private boolean checkService() {
