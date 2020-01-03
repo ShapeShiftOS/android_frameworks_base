@@ -95,6 +95,12 @@ LOCAL_REQUIRED_MODULES := \
 	IconShapeTeardropOverlay \
 	PrimaryColorOceanOverlay \
 	PrimaryColorNatureOverlay \
+    PrimaryColorBlissBlackOverlay \
+    PrimaryColorDarkBlueOverlay \
+    PrimaryColorAlmostBlackOverlay \
+    PrimaryColorBlissOverlay \
+    PrimaryColorBlissClearOverlay \
+    PrimaryColorEyeSootherOverlay \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarMode2ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
