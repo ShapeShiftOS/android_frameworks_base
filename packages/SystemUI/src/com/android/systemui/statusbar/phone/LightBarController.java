@@ -25,6 +25,7 @@ import android.graphics.Rect;
 import android.view.View;
 
 import com.android.internal.colorextraction.ColorExtractor.GradientColors;
+import android.provider.Settings;
 import com.android.systemui.Dumpable;
 import com.android.systemui.R;
 import com.android.systemui.plugins.DarkIconDispatcher;
@@ -81,6 +82,7 @@ public class LightBarController implements BatteryController.BatteryStateChangeC
 
     private boolean mDirectReplying;
     private boolean mNavbarColorManagedByIme;
+    private Context mContext;
 
     @Inject
     public LightBarController(Context ctx, DarkIconDispatcher darkIconDispatcher,
@@ -89,6 +91,7 @@ public class LightBarController implements BatteryController.BatteryStateChangeC
         mStatusBarIconController = (SysuiDarkIconDispatcher) darkIconDispatcher;
         mBatteryController = batteryController;
         mBatteryController.addCallback(this);
+        mContext = ctx;
     }
 
     public void setNavigationBar(LightBarTransitionsController navigationBar) {
@@ -214,7 +217,7 @@ public class LightBarController implements BatteryController.BatteryStateChangeC
         // dark.
         if ((mFullscreenLight && mDockedLight) || (mFullscreenLight && !hasDockedStack)) {
             mStatusBarIconController.setIconsDarkArea(null);
-            mStatusBarIconController.getTransitionsController().setIconsDark(true, animateChange());
+            mStatusBarIconController.getTransitionsController().setIconsDark(hideNotch(), animateChange());
 
         }
 
@@ -233,8 +236,13 @@ public class LightBarController implements BatteryController.BatteryStateChangeC
             } else {
                 mStatusBarIconController.setIconsDarkArea(bounds);
             }
-            mStatusBarIconController.getTransitionsController().setIconsDark(true, animateChange());
+            mStatusBarIconController.getTransitionsController().setIconsDark(hideNotch(), animateChange());
         }
+    }
+
+    private boolean hideNotch() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.HIDE_NOTCH, 0) == 0;
     }
 
     private void updateNavigation() {
