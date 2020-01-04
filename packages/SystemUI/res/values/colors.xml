@@ -205,6 +205,7 @@
     <color name="GM2_yellow_500">#FFFBBC04</color>
     <color name="GM2_green_500">#FF34A853</color>
 
+    <color name="volume_dialog_background">@android:color/white</color>
     <color name="volume_background_tint">#f2f2f2</color>
 
     <color name="ringer_icon_normal">#5c5c5c</color>
