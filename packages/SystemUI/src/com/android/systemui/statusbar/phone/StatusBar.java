@@ -1128,7 +1128,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         int QSBlurAlpha = Math.round(255.0f * mStaticNotificationPanel.getExpandedFraction());
 
-        if (QSBlurAlpha > 0 && !blurperformed && mState != StatusBarState.KEYGUARD) {
+        if (QSBlurAlpha > 0 && !blurperformed && mState != StatusBarState.KEYGUARD && isQSBlurEnabled()) {
             Bitmap bittemp = ImageUtilities.blurImage(mContext, ImageUtilities.screenshotSurface(mContext));
             Drawable blurbackground = new BitmapDrawable(mContext.getResources(), bittemp);
             blurperformed = true;
@@ -1139,6 +1139,11 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
         mQSBlurView.setAlpha(QSBlurAlpha);
         mQSBlurView.getBackground().setAlpha(QSBlurAlpha);
+    }
+
+    private boolean isQSBlurEnabled() {
+        return Settings.System.getInt(mStaticContext.getContentResolver(),
+                Settings.System.QS_BLUR, 1) != 0;
     }
 
     public static void setDismissAllVisible(boolean visible) {
