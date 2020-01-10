@@ -226,4 +226,6 @@
     <color name="recents_dismiss_all_background_color">@android:color/white</color>
     <color name="recents_dismiss_all_icon_color">#8a000000</color>
 
+    <color name="qs_drag_handle_color">#66e5e5e5</color>
+
 </resources>

@@ -355,7 +355,7 @@
     <dimen name="qs_footer_icon_padding">14dp</dimen>
 
     <!-- The padding between the notifications and the quick settings container -->
-    <dimen name="qs_notification_padding">@dimen/notification_side_paddings</dimen>
+    <dimen name="qs_notification_padding">20dp</dimen>
 
     <!-- Height of the status bar header bar when expanded -->
     <dimen name="status_bar_header_height_expanded">124dp</dimen>
@@ -1191,5 +1191,7 @@
     <dimen name="dismiss_all_button_margin_top">30dp</dimen>
     <dimen name="dismiss_all_button_width">55dp</dimen>
     <dimen name="dismiss_all_fab_src_size">24dp</dimen>
+
+    <dimen name="qs_tiles_extra_margin_top">2dp</dimen>
 
 </resources>
