@@ -115,4 +115,7 @@
     <!-- Clipboard force notify packages -->
     <java-symbol type="array" name="config_notifyClipboardPackages" />
 
+  <!-- Device has OnePlus haptic motor -->
+  <java-symbol type="bool" name="config_hasOnePlusHapticMotor" />
+
 </resources>
