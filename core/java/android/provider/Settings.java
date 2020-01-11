@@ -9334,6 +9334,12 @@ public final class Settings {
         public static final String POWER_MENU_ACTIONS = "power_menu_actions";
 
         /**
+         * Whether to include options in power menu for rebooting into recovery or bootloader on keyguard
+         * @hide
+         */
+        public static final String ADVANCED_REBOOT_ONKEYGUARD = "advanced_reboot_onkeyguard";
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
