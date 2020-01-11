@@ -708,7 +708,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements ScrollAd
 
     private boolean isDismissAllButtonEnabled() {
         return Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.DISMISS_ALL_BUTTON, 0) != 0;
+                Settings.System.DISMISS_ALL_BUTTON, 1) != 0;
     }
 
     private static boolean isDismissAllButtonAnimationsEnabled() {
