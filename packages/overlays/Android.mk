@@ -94,6 +94,7 @@ LOCAL_REQUIRED_MODULES := \
 	IconShapeSquircleOverlay \
 	IconShapeTeardropOverlay \
 	PrimaryColorOceanOverlay \
+	PrimaryColorNatureOverlay \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarMode2ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
