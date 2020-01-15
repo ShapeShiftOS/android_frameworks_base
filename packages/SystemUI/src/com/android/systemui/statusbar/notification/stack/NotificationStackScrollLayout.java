@@ -694,6 +694,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements ScrollAd
             invalidate();
         }
         needsColorRefresh = true;
+        onUiModeChanged();
         reinflateViews();
     }
 
