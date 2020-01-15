@@ -1197,4 +1197,10 @@
     <!-- Largest size an avatar might need to be drawn in the power menu user picker -->
     <dimen name="global_actions_avatar_size">24dp</dimen>
 
+    <dimen name="screenshot_ui_width">100dp</dimen>
+    <dimen name="screenshot_ui_height">350dp</dimen>
+    <dimen name="screenshot_preview_height">160dp</dimen>
+    <dimen name="screenshot_ui_corner_radius">10dp</dimen>
+    <dimen name="screenshot_ui_imageview_corner_radius">7dp</dimen>
+
 </resources>

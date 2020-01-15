@@ -32,6 +32,7 @@ public class NotificationChannels extends SystemUI {
     public static String ALERTS      = "ALR";
     public static String SCREENSHOTS_LEGACY = "SCN";
     public static String SCREENSHOTS_HEADSUP = "SCN_HEADSUP";
+    public static String SCREENSHOTS_SILENT = "SCN_SILENT";
     public static String GENERAL     = "GEN";
     public static String STORAGE     = "DSK";
     public static String TVPIP       = "TPP";
@@ -81,6 +82,9 @@ public class NotificationChannels extends SystemUI {
                 createScreenshotChannel(
                         context.getString(R.string.notification_channel_screenshot),
                         nm.getNotificationChannel(SCREENSHOTS_LEGACY)),
+                createScreenshotSilentChannel(
+                        context.getString(R.string.notification_channel_screenshot),
+                        nm.getNotificationChannel(SCREENSHOTS_LEGACY)),
                 batteryChannel,
                 hint
         ));
@@ -109,8 +113,40 @@ public class NotificationChannels extends SystemUI {
      */
     @VisibleForTesting static NotificationChannel createScreenshotChannel(
             String name, NotificationChannel legacySS) {
+
         NotificationChannel screenshotChannel = new NotificationChannel(SCREENSHOTS_HEADSUP,
                 name, NotificationManager.IMPORTANCE_HIGH); // pop on screen
+
+        screenshotChannel.setSound(null, // silent
+                new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION).build());
+        screenshotChannel.setBlockableSystem(true);
+
+        if (legacySS != null) {
+            // Respect any user modified fields from the old channel.
+            int userlock = legacySS.getUserLockedFields();
+            if ((userlock & NotificationChannel.USER_LOCKED_IMPORTANCE) != 0) {
+                screenshotChannel.setImportance(legacySS.getImportance());
+            }
+            if ((userlock & NotificationChannel.USER_LOCKED_SOUND) != 0)  {
+                screenshotChannel.setSound(legacySS.getSound(), legacySS.getAudioAttributes());
+            }
+            if ((userlock & NotificationChannel.USER_LOCKED_VIBRATION) != 0)  {
+                screenshotChannel.setVibrationPattern(legacySS.getVibrationPattern());
+            }
+            if ((userlock & NotificationChannel.USER_LOCKED_LIGHTS) != 0)  {
+                screenshotChannel.setLightColor(legacySS.getLightColor());
+            }
+            // skip show_badge, irrelevant for system channel
+        }
+
+        return screenshotChannel;
+    }
+
+    static NotificationChannel createScreenshotSilentChannel(
+            String name, NotificationChannel legacySS) {
+
+        NotificationChannel screenshotChannel = new NotificationChannel(SCREENSHOTS_SILENT,
+                name, NotificationManager.IMPORTANCE_LOW); // pop on screen
 
         screenshotChannel.setSound(null, // silent
                 new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION).build());

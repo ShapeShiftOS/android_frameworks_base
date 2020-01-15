@@ -4641,6 +4641,12 @@ public final class Settings {
         public static final String FOD_ICON_WALLPAPER_COLOR = "fod_icon_wallpaper_color";
 
         /**
+         * Refreshed screenshot animation
+         * @hide
+         */
+        public static final String NEW_SCREENSHOTUI = "new_screenshotui";
+
+        /**
          * Whether the battery light should be enabled (if hardware supports it)
          * The value is boolean (1 or 0).
          * @hide

@@ -40,4 +40,9 @@
     <!-- Padding between status bar and bubbles when displayed in expanded state, smaller
          value in landscape since we have limited vertical space-->
     <dimen name="bubble_padding_top">4dp</dimen>
+
+    <dimen name="screenshot_ui_width">170dp</dimen>
+    <dimen name="screenshot_ui_height">200dp</dimen>
+    <dimen name="screenshot_preview_height">80dp</dimen>
+
 </resources>
