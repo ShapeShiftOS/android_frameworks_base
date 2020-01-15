@@ -111,6 +111,7 @@
     <bool name="config_hasInternalAudioRecordingSupport">true</bool>
 
     <!-- Smart charging battery percentage -->
+    <bool name="config_smartChargingAvailable">true</bool>
     <integer name="config_smartChargingBatteryLevel">80</integer>
     <string name="config_SmartChargingSysfsNode" translatable="false">/sys/class/power_supply/battery/charging_enabled</string>
     <string name="config_SmartChargingSuspendValue" translatable="false">0</string>
