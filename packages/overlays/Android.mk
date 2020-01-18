@@ -47,6 +47,7 @@ LOCAL_REQUIRED_MODULES := \
         FontSofiaSansSemiCondensed \
 	FontSlateForOnePlusOverlay \
         FontSamsungOneSourceOverlay \
+        FontFiraSansSourceOverlay \
 	FontSFProOverlay \
 	FontEvolveSans \
 	FontLinotte \
