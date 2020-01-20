@@ -16,10 +16,10 @@
  */
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.android.theme.color.pornhub"
+          package="com.android.theme.color.darkorange"
           android:versionCode="1"
           android:versionName="1.0">
     <overlay android:targetPackage="android" android:category="android.theme.customization.accent_color" android:priority="1"/>
 
-    <application android:label="@string/accent_color_pornhub" android:hasCode="false"/>
+    <application android:label="@string/accent_color_darkorange" android:hasCode="false"/>
 </manifest>

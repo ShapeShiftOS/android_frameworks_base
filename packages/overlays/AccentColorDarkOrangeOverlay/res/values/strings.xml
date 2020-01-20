@@ -18,5 +18,5 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Orange accent color name application label. [CHAR LIMIT=50] -->
-    <string name="accent_color_pornhub" translatable="false">Pornhub</string>
+    <string name="accent_color_darkorange" translatable="false">Dark Orange Overlay</string>
 </resources>
