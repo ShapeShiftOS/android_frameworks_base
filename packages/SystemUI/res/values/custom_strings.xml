@@ -20,6 +20,9 @@
 
     <string name="statusbar_items_title">Statusbar icons</string>
 
+    <!-- Spectrum Analog clock -->
+    <string name="clock_title_spectrum" translatable="false">Spectrum</string>
+
     <!-- Navbar editor -->
     <string name="preview">Preview</string>
     <string name="keycode">Keycode</string>
