@@ -4766,6 +4766,13 @@ public final class Settings {
         public static final Validator STATUSBAR_CLOCK_STYLE_VALIDATOR =
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 2);
 
+        /** @hide */
+        public static final String BACK_GESTURE_BLOCK_IME = "back_gesture_block_ime";
+
+        /** @hide */
+        private static final Validator BACK_GESTURE_BLOCK_IME_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
         /**
          * Whether to show seconds next to clock in status bar
          * 0 - hide (default)
@@ -5610,6 +5617,7 @@ public final class Settings {
             ACCENT_COLOR,
             NOTIFICATION_GUTS_KILL_APP_BUTTON,
             SHOW_MEDIA_HEADS_UP,
+            BACK_GESTURE_BLOCK_IME,
         };
 
         /**
@@ -5785,6 +5793,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(FORCE_FULLSCREEN_CUTOUT_APPS);
             PRIVATE_SETTINGS.add(ACCENT_COLOR);
             PRIVATE_SETTINGS.add(NOTIFICATION_GUTS_KILL_APP_BUTTON);
+            PRIVATE_SETTINGS.add(BACK_GESTURE_BLOCK_IME);
         }
 
         /**
@@ -5940,6 +5949,7 @@ public final class Settings {
             VALIDATORS.put(ACCENT_COLOR, ACCENT_COLOR_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_GUTS_KILL_APP_BUTTON, NOTIFICATION_GUTS_KILL_APP_BUTTON_VALIDATOR);
             VALIDATORS.put(SHOW_MEDIA_HEADS_UP, SHOW_MEDIA_HEADS_UP_VALIDATOR);
+            VALIDATORS.put(BACK_GESTURE_BLOCK_IME,BACK_GESTURE_BLOCK_IME_VALIDATOR);
         }
 
         /**
