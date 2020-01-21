@@ -4647,6 +4647,12 @@ public final class Settings {
         public static final String NEW_SCREENSHOTUI = "new_screenshotui";
 
         /**
+         * Show data usage in QS header
+         * @hide
+         */
+        public static final String QS_DATAUSAGE = "qs_datausage";
+
+        /**
          * Whether the battery light should be enabled (if hardware supports it)
          * The value is boolean (1 or 0).
          * @hide
