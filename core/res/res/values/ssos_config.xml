@@ -62,9 +62,6 @@
          timing(the duration which the vibrator is expected to vibrate for). -->
     <bool name="config_hasOnePlusHapticMotor">false</bool>
 
-    <!-- Whether device has dash charging support -->
-    <bool name="config_hasDashCharger">false</bool>
-
     <!-- Whether device has VOOC charging support -->
     <bool name="config_hasVoocCharger">false</bool>
 
