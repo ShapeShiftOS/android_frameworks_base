@@ -5118,6 +5118,14 @@ public final class Settings {
                new SettingsValidators.InclusiveIntegerRangeValidator(0, 11);
 
         /**
+         * QS blur alpha
+         * @hide
+         */
+        public static final String QS_BLUR_ALPHA = "qs_blur_alpha";
+        /** @hide */
+        private static final Validator QS_BLUR_ALPHA_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5217,7 +5225,8 @@ public final class Settings {
             NETWORK_TRAFFIC_HIDEARROW,
             NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE,
             THEMING_SETTINGS_DASHBOARD_ICONS,
-            FOD_ANIM
+            FOD_ANIM,
+            QS_BLUR_ALPHA
         };
 
         /**
@@ -5516,6 +5525,7 @@ public final class Settings {
             VALIDATORS.put(NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE, NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE_VALIDATOR);
             VALIDATORS.put(THEMING_SETTINGS_DASHBOARD_ICONS, THEMING_SETTINGS_DASHBOARD_ICONS_VALIDATOR);
             VALIDATORS.put(FOD_ANIM,FOD_ANIM_VALIDATOR);
+            VALIDATORS.put(QS_BLUR_ALPHA, QS_BLUR_ALPHA_VALIDATOR);
         }
 
         /**
