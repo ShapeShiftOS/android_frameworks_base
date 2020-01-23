@@ -4688,6 +4688,10 @@
                 android:excludeFromRecents="true"
                 android:process=":ui">
         </activity>
+        <activity android:name="com.android.internal.app.ExUIEasterEgg"
+                android:theme="@style/Theme.DeviceDefault.DayNight"
+                android:process=":ui">
+        </activity>
         <activity android:name="com.android.internal.app.PlatLogoActivity"
                 android:theme="@style/Theme.DeviceDefault.DayNight"
                 android:configChanges="orientation|keyboardHidden"

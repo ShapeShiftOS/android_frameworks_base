@@ -3835,5 +3835,10 @@
   <java-symbol type="drawable" name="android_logotype" />
   <java-symbol type="layout" name="platlogo_layout" />
 
+  <java-symbol type="layout" name="exui_easteregg" />
+  <java-symbol type="id" name="easter_egg_background" />
+  <java-symbol type="anim" name="zoomout_easteregg" />
+  <java-symbol type="anim" name="zoomin_easteregg" />
+
   <java-symbol type="bool" name="config_automotiveHideNavBarForKeyboard" />
 </resources>
