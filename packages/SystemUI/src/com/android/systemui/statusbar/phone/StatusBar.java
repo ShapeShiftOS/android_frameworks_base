@@ -1106,19 +1106,18 @@ public class StatusBar extends SystemUI implements DemoMode,
         int QSBlurAlpha = Math.round(255.0f *
                 mNotificationPanel.getExpandedFraction() * (float)((float) QSUserAlpha / 100.0));
 
-        if (QSBlurAlpha > 0 && !dataupdated && !mIsKeyguard) {
-            DataUsageView.updateUsage();
-            dataupdated = true;
-        }
+        int QSBlurIntensity = Settings.System.getInt(mContext.getContentResolver(),
+              Settings.System.QS_BLUR_INTENSITY, 30); // defaulting to 7.5f radius
+        boolean enoughBlurData = (QSBlurAlpha > 0 && QSBlurIntensity > 0);
 
-        if (QSBlurAlpha > 0 && !blurperformed && !mIsKeyguard && isQSBlurEnabled()) {
-            Bitmap bittemp = ImageUtilities.blurImage(mContext, ImageUtilities.screenshotSurface(mContext));
+        if (enoughBlurData && !blurperformed && !mIsKeyguard && isQSBlurEnabled()) {
+            Bitmap bittemp = ImageUtilities.blurImage(mContext,
+                                ImageUtilities.screenshotSurface(mContext), QSBlurIntensity);
             Drawable blurbackground = new BitmapDrawable(mContext.getResources(), bittemp);
             blurperformed = true;
             mQSBlurView.setBackgroundDrawable(blurbackground);
-        } else if (QSBlurAlpha == 0 || mState == StatusBarState.KEYGUARD) {
+        } else if (!enoughBlurData || mState == StatusBarState.KEYGUARD) {
             blurperformed = false;
-            dataupdated = false;
             mQSBlurView.setBackgroundColor(Color.TRANSPARENT);
         }
         mQSBlurView.setAlpha(QSBlurAlpha);
@@ -4078,6 +4077,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_BLUR_ALPHA),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_BLUR_INTENSITY),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -4101,7 +4103,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN))) {
                 setStatusBarWindowViewOptions();
-            } else if (uri.equals(Settings.System.getUriFor(Settings.System.QS_BLUR_ALPHA))) {
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.QS_BLUR_ALPHA)) ||
+                    uri.equals(Settings.System.getUriFor(Settings.System.QS_BLUR_INTENSITY))) {
                 updateBlurVisibility();
             }
             update();
