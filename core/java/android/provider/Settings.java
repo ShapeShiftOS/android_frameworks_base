@@ -4641,6 +4641,12 @@ public final class Settings {
         public static final String FOD_ICON_WALLPAPER_COLOR = "fod_icon_wallpaper_color";
 
         /**
+         * FOD recognizing animation
+         * @hide
+         */
+        public static final String FOD_RECOGNIZING_ANIMATION = "fod_recognizing_animation";
+
+        /**
          * Refreshed screenshot animation
          * @hide
          */
