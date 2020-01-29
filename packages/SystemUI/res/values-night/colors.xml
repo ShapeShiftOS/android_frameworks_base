@@ -99,6 +99,4 @@
     <color name="recents_dismiss_all_background_color">@color/GM2_grey_900</color>
     <color name="recents_dismiss_all_icon_color">@android:color/white</color>
 
-    <color name="qs_drag_handle_color">#66555555</color>
-
 </resources>
