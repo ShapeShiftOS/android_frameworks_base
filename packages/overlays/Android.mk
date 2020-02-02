@@ -34,6 +34,28 @@ LOCAL_REQUIRED_MODULES := \
 	FontGoogleSansOverlay \
 	FontCircularStdOverlay \
 	FontOnePlusSlateOverlay \
+    FontBigNoodle \
+    FontBikoHanken \
+    FontComicNeue \
+    FontExo2 \
+    FontFinlandica \
+    FontGoodlight \
+    FontGravity \
+    FontInter \
+    FontLeagueMonoNarrow \
+    FontLeonSans \
+    FontMescla \
+    FontMittelschrift \
+    FontOdibee \
+    FontPanamericana \
+    FontPissel \
+    FontPTSansMono \
+    FontReemKufi \
+    FontRoboto \
+    FontRouterGothicNarrow \
+    FontRoutedGothicRobotoCondensed \
+    FontSofiaSans \
+    FontSofiaSansSemiCondensed \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularLauncherOverlay \
 	IconPackCircularSettingsOverlay \
