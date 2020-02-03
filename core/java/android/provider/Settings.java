@@ -5205,6 +5205,11 @@ public final class Settings {
         public static final String NOTIFICATION_PULSE_DURATION = "ambient_notification_light_duration";
 
         /**
+         * @hide
+         */
+        public static final String AMBIENT_LIGHT_PULSE_FOR_ALL = "ambient_light_pulse_for_all";
+
+        /**
          * Wheter to play notification sound and vibration if screen is ON
          * 0 - never
          * 1 - always
