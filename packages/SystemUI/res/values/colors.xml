@@ -224,6 +224,7 @@
     <color name="qs_tile_background_color_disabled">@color/volume_background_tint</color>
 
     <color name="recents_dismiss_all_background_color">@android:color/white</color>
+    <color name="recents_dismiss_all_background_color_ripple">#a8a8a8</color>
     <color name="recents_dismiss_all_icon_color">#8a000000</color>
 
     <color name="qs_drag_handle_color">#66e5e5e5</color>
