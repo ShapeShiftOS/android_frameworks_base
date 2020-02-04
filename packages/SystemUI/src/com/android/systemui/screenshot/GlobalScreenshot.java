@@ -538,6 +538,7 @@ class GlobalScreenshot {
     private boolean mAnimate = false;
     private Handler Dismisshandler;
     private Runnable dismissRunnable;
+    private static TextView mScreenshotUISavingOverlay;
 
     /**
      * @param context everything needs a context :(
@@ -792,8 +793,10 @@ class GlobalScreenshot {
     }
 
     public static void setScreenshotIntent(PendingIntent ScreenshotIntent) {
-
         if (ScreenshotPreviewView != null && newScreenshotUI()) {
+            if (mScreenshotUISavingOverlay != null) {
+                mScreenshotUISavingOverlay.setVisibility(View.GONE);
+            }
             ScreenshotPreviewView.setOnClickListener(v -> {
                 try {
                     ScreenshotIntent.send();
@@ -863,6 +866,8 @@ class GlobalScreenshot {
             ScreenshotPreviewView = (ImageView) mFrameLayout.findViewById(R.id.screenshot);
             mCloseScreenshotUIButton = (TextView) mFrameLayout.findViewById(R.id.close_button);
             mScreenshotUIContainer = (LinearLayout) mFrameLayout.findViewById(R.id.head_container);
+            mScreenshotUISavingOverlay = (TextView) mFrameLayout.findViewById(R.id.screenshot_saving_overlay);
+            mScreenshotUISavingOverlay.setVisibility(View.VISIBLE);
             ScreenshotPreviewView.setImageBitmap(null);
 
             if(mAnimate) {
@@ -900,7 +905,7 @@ class GlobalScreenshot {
             }
             if (Dismisshandler != null) {
                 Dismisshandler.removeCallbacks(dismissRunnable);
-                Dismisshandler.postDelayed(dismissRunnable, 2500);
+                Dismisshandler.postDelayed(dismissRunnable, 3000);
             }
         }
     }

@@ -30,23 +30,32 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/screenshot_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:gravity="center"
             android:background="@drawable/screenshot_ui_bcg"
-            android:padding="4dp"
-            android:orientation="vertical" >
+            android:padding="4dp">
 
-        <com.android.systemui.screenshot.RoundedImageView
-            android:id="@+id/screenshot"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/screenshot_preview_height"
-            android:scaleType="centerCrop" />
+            <com.android.systemui.screenshot.RoundedImageView
+                android:id="@+id/screenshot"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/screenshot_preview_height"
+                android:scaleType="centerCrop" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/screenshot_saving_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/screenshot_saving_overlay"
+                android:text="@string/screenshotui_saving" />
+
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/buttons_container"

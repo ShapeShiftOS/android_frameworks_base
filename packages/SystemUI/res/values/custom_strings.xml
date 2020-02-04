@@ -112,6 +112,7 @@
     <string name="accessibility_quick_settings_sync_changed_on">Sync turned on</string>
 
     <string name="screenshotui_close">close</string>
+    <string name="screenshotui_saving">saving</string>
 
     <!-- QS Config -->
     <string name="qs_menu_item_columns">Columns</string>
