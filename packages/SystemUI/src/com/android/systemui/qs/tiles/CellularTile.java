@@ -132,6 +132,13 @@ public class CellularTile extends QSTileImpl<SignalState> {
     private void maybeShowDisableDialog() {
         if (Prefs.getBoolean(mContext, QS_HAS_TURNED_OFF_MOBILE_DATA, false)) {
             // Directly turn off mobile data if the user has seen the dialog before.
+            if (mKeyguard.isSecure() && mKeyguard.isShowing()) {
+                Dependency.get(ActivityStarter.class).postQSRunnableDismissingKeyguard(() -> {
+                    mHost.openPanels();
+                    mDataController.setMobileDataEnabled(false);
+                });
+                return;
+            }
             mDataController.setMobileDataEnabled(false);
             return;
         }
