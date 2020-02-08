@@ -5109,6 +5109,15 @@ public final class Settings {
         private static final Validator THEMING_SETTINGS_DASHBOARD_ICONS_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
+         * FOD recognizing animation picker
+         * @hide
+         */
+        public static final String FOD_ANIM = "fod_anim";
+        /** @hide */
+        private static final Validator FOD_ANIM_VALIDATOR =
+               new SettingsValidators.InclusiveIntegerRangeValidator(0, 6);
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5207,7 +5216,8 @@ public final class Settings {
             NETWORK_TRAFFIC_REFRESH_INTERVAL,
             NETWORK_TRAFFIC_HIDEARROW,
             NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE,
-            THEMING_SETTINGS_DASHBOARD_ICONS
+            THEMING_SETTINGS_DASHBOARD_ICONS,
+            FOD_ANIM
         };
 
         /**
@@ -5368,6 +5378,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_HIDEARROW);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE);
             PRIVATE_SETTINGS.add(THEMING_SETTINGS_DASHBOARD_ICONS);
+            PRIVATE_SETTINGS.add(FOD_ANIM);
         }
 
         /**
@@ -5504,6 +5515,7 @@ public final class Settings {
             VALIDATORS.put(NETWORK_TRAFFIC_HIDEARROW, NETWORK_TRAFFIC_HIDEARROW_VALIDATOR);
             VALIDATORS.put(NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE, NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE_VALIDATOR);
             VALIDATORS.put(THEMING_SETTINGS_DASHBOARD_ICONS, THEMING_SETTINGS_DASHBOARD_ICONS_VALIDATOR);
+            VALIDATORS.put(FOD_ANIM,FOD_ANIM_VALIDATOR);
         }
 
         /**
