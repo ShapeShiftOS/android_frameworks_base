@@ -702,6 +702,10 @@ class FODAnimation extends ImageView {
                 return R.drawable.fod_pureview_halo_ring_recognizing_anim;
             case 14:
                 return R.drawable.fod_pureview_dna_recognizing_anim;
+            case 15:
+                return R.drawable.fod_op_stripe_recognizing_anim;
+            case 16:
+                return R.drawable.fod_op_wave_recognizing_anim;
         }
         return R.drawable.fod_miui_normal_recognizing_anim;
     }
