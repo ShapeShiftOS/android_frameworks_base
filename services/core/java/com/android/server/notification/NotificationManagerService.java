@@ -6068,6 +6068,10 @@ public class NotificationManagerService extends SystemService {
         if (isInCall() || mScreenOn) {
             return false;
         }
+        // check current user
+        if (!isNotificationForCurrentUser(record)) {
+            return false;
+        }
 
         return true;
     }
