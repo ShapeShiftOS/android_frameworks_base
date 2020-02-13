@@ -722,7 +722,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener, T
 
         if (mIsKeyguard) {
             x = mPositionX;
-            y = mPositionY;
+            y = mPositionY - cutoutMaskedExtra;
         }
 
         mPressedParams.x = mParams.x = x;
