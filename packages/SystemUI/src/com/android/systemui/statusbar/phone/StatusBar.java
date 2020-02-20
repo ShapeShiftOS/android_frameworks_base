@@ -3985,6 +3985,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SCREEN_OFF_FOD),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_PANEL_BG_USE_NEW_TINT),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -3995,6 +3998,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                 mAODDimView.setEnabled(Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.SCREEN_OFF_FOD, 0, UserHandle.USER_CURRENT) != 0);
                 return;
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.QS_PANEL_BG_USE_NEW_TINT))) {
+                mQSPanel.getHost().reloadAllTiles();
             }
             update();
         }
