@@ -73,7 +73,7 @@ public class ImageUtilities {
 
 /* blur routine */
     public static Bitmap blurImage(Context context, Bitmap image, int intensity) {
-        float BITMAP_SCALE = 0.4f;
+        float BITMAP_SCALE = 0.15f;
         float BLUR_RADIUS = 25f;
 
         Canvas canvas;
@@ -99,7 +99,7 @@ public class ImageUtilities {
         tmpOut.copyTo(outputBitmap);
         canvas = new Canvas(outputBitmap);
         paint = new Paint(Color.BLACK);
-        tint = new LightingColorFilter(Color.parseColor("#ff444444"), Color.parseColor("#ff000000"));
+        tint = new LightingColorFilter(Color.parseColor("#ff777777"), Color.parseColor("#ff000000"));
         paint.setColorFilter(tint);
         canvas.drawBitmap(outputBitmap, new Matrix(), paint);
 
