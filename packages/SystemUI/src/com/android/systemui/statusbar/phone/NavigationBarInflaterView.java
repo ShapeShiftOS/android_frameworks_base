@@ -177,6 +177,9 @@ public class NavigationBarInflaterView extends FrameLayout
         if (NAV_BAR_VIEWS.equals(key)) {
             setNavigationBarLayout(newValue);
         }
+        if (QuickStepContract.isGesturalMode(mNavBarMode)) {
+            setNavigationBarLayout(newValue);
+        }
     }
 
     @Override
