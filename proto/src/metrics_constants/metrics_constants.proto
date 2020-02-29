@@ -7426,12 +7426,16 @@ message MetricsEvent {
     // CATEGORY: SETTINGS
     // OS: Q
     SETTINGS_AWARE_DISPLAY = 1750;
+
     // ---- End Q Constants, all Q constants go above this line ----
     // Add new aosp constants above this line.
     // END OF AOSP CONSTANTS
 
     // CustomSettings constant
-    CUSTOM_SETTINGS = 1999;
+    CUSTOM_SETTINGS = 1751;
 
+    TILE_LOCATION_DETAIL = 1752;
+    // Panel for Mobile Data
+    PANEL_MOBILE_DATA = 1753;
   }
 }
