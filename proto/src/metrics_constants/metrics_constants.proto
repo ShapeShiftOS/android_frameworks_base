@@ -7440,5 +7440,7 @@ message MetricsEvent {
     CUSTOM_SETTINGS = 1999;
     CUSTOM_QS = 2000;
 
+    // Panel for Mobile Data
+    PANEL_MOBILE_DATA = 2002;
   }
 }
