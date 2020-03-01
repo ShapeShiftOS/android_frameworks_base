@@ -624,6 +624,7 @@ public final class PowerManagerService extends SystemService
     private int mSmartChargingLevel;
     private int mSmartChargingResumeLevel;
     private int mSmartChargingLevelDefaultConfig;
+    private int mSmartChargingResumeLevelDefaultConfig;
     private static String mPowerInputSuspendSysfsNode;
     private static String mPowerInputSuspendValue;
     private static String mPowerInputResumeValue;
