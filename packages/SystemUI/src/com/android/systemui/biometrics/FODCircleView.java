@@ -90,6 +90,7 @@ public class FODCircleView extends ImageView {
 
     private FODAnimation mFODAnimation;
     private boolean mIsRecognizingAnimEnabled;
+    private boolean mShouldRemoveIconOnAOD;
 
     private IFingerprintInscreenCallback mFingerprintInscreenCallback =
             new IFingerprintInscreenCallback.Stub() {
@@ -115,9 +116,11 @@ public class FODCircleView extends ImageView {
             if (dreaming) {
                 mBurnInProtectionTimer = new Timer();
                 mBurnInProtectionTimer.schedule(new BurnInProtectionTask(), 0, 60 * 1000);
+                if (mShouldRemoveIconOnAOD) resetFODIcon(false);
             } else if (mBurnInProtectionTimer != null) {
                 mBurnInProtectionTimer.cancel();
             }
+            if (mShouldRemoveIconOnAOD && !dreaming) resetFODIcon(true);
         }
 
         @Override
@@ -201,6 +204,9 @@ public class FODCircleView extends ImageView {
                 FODCircleView.class.getSimpleName());
 
         mFODAnimation = new FODAnimation(context, mPositionX, mPositionY);
+
+        mShouldRemoveIconOnAOD = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SCREEN_OFF_FOD, 0) != 0;
     }
 
     @Override
@@ -340,11 +346,27 @@ public class FODCircleView extends ImageView {
                 Settings.System.FOD_ICON, 0);
     }
 
+    private void resetFODIcon(boolean show) {
+        if (show) {
+            setFODIcon();
+        } else {
+            this.setImageResource(0);
+        }
+    }
+
     private void setFODIcon() {
+
+        if (mIsDreaming && mShouldRemoveIconOnAOD) {
+            return;
+        }
+
         int fodicon = getFODIcon();
 
         mIsRecognizingAnimEnabled = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.FOD_RECOGNIZING_ANIMATION, 0) != 0;
+
+        mShouldRemoveIconOnAOD = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SCREEN_OFF_FOD, 0) != 0;
 
         if (fodicon == 0) {
             this.setImageResource(R.drawable.fod_icon_default_0);
