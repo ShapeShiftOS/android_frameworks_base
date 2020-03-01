@@ -25,27 +25,27 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.View;
 
-public class AODdimView extends View {
+public class AODDimView extends View {
 
     private static int ANIMATION_DURATION = 200;
     private boolean mIsEnabled;
 
-    public AODdimView(Context context) {
+    public AODDimView(Context context) {
         this(context, null);
         init();
     }
 
-    public AODdimView(Context context, AttributeSet attrs) {
+    public AODDimView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
         init();
     }
 
-    public AODdimView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AODDimView(Context context, AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr, 0);
         init();
     }
 
-    public AODdimView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public AODDimView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
     }
@@ -67,6 +67,7 @@ public class AODdimView extends View {
         if (!mIsEnabled) {
             return;
         }
+
         if (visible && animate) {
             AlphaAnimation AODDimAnimation = new AlphaAnimation(0.0f, 1.0f);
             AODDimAnimation.setDuration(ANIMATION_DURATION);
@@ -82,7 +83,7 @@ public class AODdimView extends View {
             AODDimAnimation.setDuration(ANIMATION_DURATION);
             AODDimAnimation.setFillAfter(false);
             this.startAnimation(AODDimAnimation);
-            AODDimAnimation.setAnimationListener(new Animation.AnimationListener(){
+            AODDimAnimation.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation arg0) {
                 }

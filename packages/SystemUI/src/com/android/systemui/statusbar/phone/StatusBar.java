@@ -125,10 +125,10 @@ import android.view.WindowManager;
 import android.view.WindowManagerGlobal;
 import android.view.accessibility.AccessibilityManager;
 import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
-import android.view.animation.AlphaAnimation;
 import android.widget.DateTimeView;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -206,7 +206,7 @@ import com.android.systemui.statusbar.NotificationShelf;
 import com.android.systemui.statusbar.NotificationViewHierarchyManager;
 import com.android.systemui.statusbar.PulseExpansionHandler;
 import com.android.systemui.statusbar.ScrimView;
-import com.android.systemui.statusbar.AODdimView;
+import com.android.systemui.statusbar.AODDimView;
 import com.android.systemui.statusbar.StatusBarState;
 import com.android.systemui.statusbar.SysuiStatusBarStateController;
 import com.android.systemui.statusbar.VibratorHelper;
@@ -483,7 +483,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     public ImageView mQSBlurView;
     private boolean blurperformed = false;
 
-    private AODdimView mAODDimView;
+    private AODDimView mAODDimView;
 
     // ensure quick settings is disabled until the current user makes it through the setup wizard
     @VisibleForTesting
@@ -4154,11 +4154,16 @@ public class StatusBar extends SystemUI implements DemoMode,
             setPulseOnNewTracks();
             setHideArrowForBackGesture();
             updatePocketJudgeFP();
+             updateAODDimView();
             setUseLessBoringHeadsUp();
              setOldMobileType();
      }
    }
 
+    private void updateAODDimView() {
+        mAODDimView.setEnabled(Settings.System.getIntForUser(mContext.getContentResolver(),
+            Settings.System.SCREEN_OFF_FOD, 0, UserHandle.USER_CURRENT) != 0);
+    }
 
    private void setOldMobileType() {
         USE_OLD_MOBILETYPE = Settings.System.getIntForUser(mContext.getContentResolver(),
