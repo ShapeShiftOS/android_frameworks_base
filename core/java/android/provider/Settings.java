@@ -4816,6 +4816,14 @@ public final class Settings {
          */
         public static final String SETTINGS_SPACER = "settings_spacer";
 
+        /** Width of the navigation handle.
+         *  @hide
+         */
+        public static final String NAVIGATION_HANDLE_WIDTH = "navigation_handle_width";
+
+        /** @hide */
+        private static final Validator NAVIGATION_HANDLE_WIDTH_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
         /**
          * Ability to show/hide settings dashboard suggestion cards
          * @hide
@@ -5060,6 +5068,7 @@ public final class Settings {
             HEADS_UP_TIMEOUT,
             PULSE_AMBIENT_LIGHT,
             PULSE_AMBIENT_LIGHT_COLOR,
+            NAVIGATION_HANDLE_WIDTH,
             BACK_GESTURE_HEIGHT,
             HIDE_SMART_REPLIES,
             BATTERY_LIGHT_ENABLED,
@@ -5199,6 +5208,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(EGG_MODE);
             PRIVATE_SETTINGS.add(SHOW_BATTERY_PERCENT);
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_MODE);
+            PRIVATE_SETTINGS.add(NAVIGATION_HANDLE_WIDTH);
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_TIMEOUT);
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED);
             PRIVATE_SETTINGS.add(BUTTON_BRIGHTNESS);
@@ -5333,6 +5343,7 @@ public final class Settings {
             VALIDATORS.put(HEADS_UP_TIMEOUT,HEADS_UP_TIMEOUT_VALIDATOR);
             VALIDATORS.put(PULSE_AMBIENT_LIGHT, PULSE_AMBIENT_LIGHT_VALIDATOR);
             VALIDATORS.put(PULSE_AMBIENT_LIGHT_COLOR, PULSE_AMBIENT_LIGHT_COLOR_VALIDATOR);
+            VALIDATORS.put(NAVIGATION_HANDLE_WIDTH, NAVIGATION_HANDLE_WIDTH_VALIDATOR);
             VALIDATORS.put(BACK_GESTURE_HEIGHT, BACK_GESTURE_HEIGHT_VALIDATOR);
             VALIDATORS.put(HIDE_SMART_REPLIES, HIDE_SMART_REPLIES_VALIDATOR);
             VALIDATORS.put(BATTERY_LIGHT_ENABLED, BATTERY_LIGHT_ENABLED_VALIDATOR);
