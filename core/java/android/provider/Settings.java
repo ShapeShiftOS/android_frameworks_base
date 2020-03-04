@@ -4653,12 +4653,6 @@ public final class Settings {
         public static final String SCREEN_OFF_FOD = "screen_off_fod";
 
         /**
-         * Refreshed screenshot animation
-         * @hide
-         */
-        public static final String NEW_SCREENSHOTUI = "new_screenshotui";
-
-        /**
          * Bottom brightness slider
          * @hide
          */
