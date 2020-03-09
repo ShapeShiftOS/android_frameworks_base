@@ -430,8 +430,11 @@ public class FODCircleView extends ImageView {
             } catch (Exception e) {
                 // Nothing to do
             }
-        } else {
-            this.setColorFilter(null);  
+        } else if (fodicon == 1) {
+            this.setColorFilter(Color.parseColor("#878787"));
+        } 
+        else {
+            this.setColorFilter(null);
         }
     }
 
