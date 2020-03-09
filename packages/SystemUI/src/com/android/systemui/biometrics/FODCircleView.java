@@ -410,8 +410,9 @@ public class FODCircleView extends ImageView {
             this.setImageResource(R.drawable.fod_icon_spiral_blue);
         } else if (fodicon == 20) {
             this.setImageResource(R.drawable.fod_icon_sun_metro);
+        }  else if (fodicon == 21) {
+            this.setImageResource(0);
         }
-
 
         if (useWallpaperColor()) {
             try {
