@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -77,7 +78,7 @@ public class ScreenshotHelper {
      */
     public void takeScreenshot(final int screenshotType, final boolean hasStatus,
             final boolean hasNav, @NonNull Handler handler,
-            @Nullable Consumer<Boolean> completionConsumer) {
+            @Nullable Consumer<Uri> completionConsumer) {
         takeScreenshot(screenshotType, hasStatus, hasNav, SCREENSHOT_TIMEOUT_MS, handler,
                 completionConsumer);
     }
@@ -102,12 +103,12 @@ public class ScreenshotHelper {
      *                           the screenshot attempt will be cancelled and `completionConsumer`
      *                           will be run.
      * @param handler            A handler used in case the screenshot times out
-     * @param completionConsumer Consumes `false` if a screenshot was not taken, and `true` if the
-     *                           screenshot was taken.
+     * @param completionConsumer Consumes `null` if a screenshot was not taken, and the URI of the
+     *                           screenshot if the screenshot was taken.
      */
     public void takeScreenshot(final int screenshotType, final boolean hasStatus,
             final boolean hasNav, long timeoutMs, @NonNull Handler handler,
-            @Nullable Consumer<Boolean> completionConsumer) {
+            @Nullable Consumer<Uri> completionConsumer) {
         synchronized (mScreenshotLock) {
             if (mScreenshotConnection != null) {
                 return;
@@ -127,7 +128,7 @@ public class ScreenshotHelper {
                         }
                     }
                     if (completionConsumer != null) {
-                        completionConsumer.accept(false);
+                        completionConsumer.accept(null);
                     }
                 }
             };
@@ -153,8 +154,9 @@ public class ScreenshotHelper {
                                         handler.removeCallbacks(mScreenshotTimeout);
                                     }
                                 }
+
                                 if (completionConsumer != null) {
-                                    completionConsumer.accept(true);
+                                    completionConsumer.accept((Uri) msg.obj);
                                 }
                             }
                         };
@@ -167,7 +169,7 @@ public class ScreenshotHelper {
                         } catch (RemoteException e) {
                             Log.e(TAG, "Couldn't take screenshot: " + e);
                             if (completionConsumer != null) {
-                                completionConsumer.accept(false);
+                                completionConsumer.accept(null);
                             }
                         }
                     }
@@ -201,13 +203,6 @@ public class ScreenshotHelper {
         // If the service process is killed, then ask it to clean up after itself
         final ComponentName errorComponent = new ComponentName(SYSUI_PACKAGE,
                 SYSUI_SCREENSHOT_ERROR_RECEIVER);
-        // Broadcast needs to have a valid action.  We'll just pick
-        // a generic one, since the receiver here doesn't care.
-        Intent errorIntent = new Intent(Intent.ACTION_USER_PRESENT);
-        errorIntent.setComponent(errorComponent);
-        errorIntent.addFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT |
-                Intent.FLAG_RECEIVER_FOREGROUND);
-        mContext.sendBroadcastAsUser(errorIntent, UserHandle.CURRENT);
     }
 
     /**

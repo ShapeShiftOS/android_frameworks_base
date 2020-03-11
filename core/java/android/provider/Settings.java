@@ -661,6 +661,22 @@ public final class Settings {
             "android.settings.NIGHT_DISPLAY_SETTINGS";
 
     /**
+     * Activity Action: Show settings to allow configuration of Dark theme.
+     * <p>
+     * In some cases, a matching Activity may not exist, so ensure you
+     * safeguard against this.
+     * <p>
+     * Input: Nothing.
+     * <p>
+     * Output: Nothing.
+     *
+     * @hide
+     */
+    @SdkConstant(SdkConstantType.ACTIVITY_INTENT_ACTION)
+    public static final String ACTION_DARK_THEME_SETTINGS =
+            "android.settings.DARK_THEME_SETTINGS";
+
+    /**
      * Activity Action: Show settings to allow configuration of locale.
      * <p>
      * In some cases, a matching Activity may not exist, so ensure you
@@ -8362,6 +8378,19 @@ public final class Settings {
                 NON_NEGATIVE_INTEGER_VALIDATOR;
 
         /**
+         * Number of successful "Motion Sense" tap gestures to pause media.
+         * @hide
+         */
+        public static final String AWARE_TAP_PAUSE_GESTURE_COUNT = "aware_tap_pause_gesture_count";
+
+        /**
+         * Number of touch interactions to pause media when a "Motion Sense" gesture could
+         * have been used.
+         * @hide
+         */
+        public static final String AWARE_TAP_PAUSE_TOUCH_COUNT = "aware_tap_pause_touch_count";
+
+        /**
          * The current night mode that has been selected by the user.  Owned
          * and controlled by UiModeManagerService.  Constants are as per
          * UiModeManager.
@@ -9453,6 +9482,14 @@ public final class Settings {
                 new SettingsValidators.DiscreteValueValidator(new String[] {"0", "1", "2"});
 
         /**
+         * Current provider of proximity-based sharing services.
+         * Default value in @string/config_defaultNearbySharingComponent.
+         * No VALIDATOR as this setting will not be backed up.
+         * @hide
+         */
+        public static final String NEARBY_SHARING_COMPONENT = "nearby_sharing_component";
+
+        /**
          * Controls whether aware is enabled.
          * @hide
          */
@@ -9467,6 +9504,14 @@ public final class Settings {
         public static final String AWARE_LOCK_ENABLED = "aware_lock_enabled";
 
         private static final Validator AWARE_LOCK_ENABLED_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
+         * Controls whether tap gesture is enabled.
+         * @hide
+         */
+        public static final String TAP_GESTURE = "tap_gesture";
+
+        private static final Validator TAP_GESTURE_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
          * Whether to include options in power menu for rebooting into recovery or bootloader
@@ -9630,6 +9675,8 @@ public final class Settings {
             GLOBAL_ACTIONS_PANEL_ENABLED,
             AWARE_LOCK_ENABLED,
             TORCH_POWER_BUTTON_GESTURE,
+            AWARE_TAP_PAUSE_GESTURE_COUNT,
+            AWARE_TAP_PAUSE_TOUCH_COUNT
         };
 
         /**
@@ -9825,6 +9872,9 @@ public final class Settings {
             VALIDATORS.put(GLOBAL_ACTIONS_PANEL_ENABLED, GLOBAL_ACTIONS_PANEL_ENABLED_VALIDATOR);
             VALIDATORS.put(AWARE_LOCK_ENABLED, AWARE_LOCK_ENABLED_VALIDATOR);
             VALIDATORS.put(TORCH_POWER_BUTTON_GESTURE, TORCH_POWER_BUTTON_GESTURE_VALIDATOR);
+            VALIDATORS.put(AWARE_TAP_PAUSE_GESTURE_COUNT, NON_NEGATIVE_INTEGER_VALIDATOR);
+            VALIDATORS.put(AWARE_TAP_PAUSE_TOUCH_COUNT, NON_NEGATIVE_INTEGER_VALIDATOR);
+            VALIDATORS.put(TAP_GESTURE, TAP_GESTURE_VALIDATOR);
         }
 
         /**
@@ -10398,12 +10448,33 @@ public final class Settings {
          * List of ISO country codes in which eUICC UI is shown. Country codes should be separated
          * by comma.
          *
-         * <p>Used to hide eUICC UI from users who are currently in countries no carriers support
-         * eUICC.
+         * Note: if {@link #EUICC_SUPPORTED_COUNTRIES} is empty, then {@link
+         * #EUICC_UNSUPPORTED_COUNTRIES} is used.
+         *
+         * <p>Used to hide eUICC UI from users who are currently in countries where no carriers
+         * support eUICC.
+         *
          * @hide
          */
         //TODO(b/77914569) Changes this to System Api.
         public static final String EUICC_SUPPORTED_COUNTRIES = "euicc_supported_countries";
+
+        /**
+         * List of ISO country codes in which eUICC UI is not shown. Country codes should be
+         * separated by comma.
+         *
+         * Note: if {@link #EUICC_SUPPORTED_COUNTRIES} is empty, then {@link
+         * #EUICC_UNSUPPORTED_COUNTRIES} is used.
+         *
+         * <p>Used to hide eUICC UI from users who are currently in countries where no carriers
+         * support eUICC.
+         *
+         * @hide
+         */
+        //TODO(b/77914569) Changes this to System Api.
+        public static final String EUICC_UNSUPPORTED_COUNTRIES = "euicc_unsupported_countries";
+        private static final Validator EUICC_UNSUPPORTED_COUNTRIES_VALIDATOR =
+                new SettingsValidators.ComponentNameListValidator(",");
 
         /**
          * Whether any activity can be resized. When this is true, any
@@ -14467,6 +14538,7 @@ public final class Settings {
             VALIDATORS.put(DYNAMIC_POWER_SAVINGS_DISABLE_THRESHOLD,
                     DYNAMIC_POWER_SAVINGS_VALIDATOR);
             VALIDATORS.put(BLUETOOTH_ON, BLUETOOTH_ON_VALIDATOR);
+            VALIDATORS.put(EUICC_UNSUPPORTED_COUNTRIES, EUICC_UNSUPPORTED_COUNTRIES_VALIDATOR);
             VALIDATORS.put(PRIVATE_DNS_MODE, PRIVATE_DNS_MODE_VALIDATOR);
             VALIDATORS.put(PRIVATE_DNS_SPECIFIER, PRIVATE_DNS_SPECIFIER_VALIDATOR);
             VALIDATORS.put(SOFT_AP_TIMEOUT_ENABLED, SOFT_AP_TIMEOUT_ENABLED_VALIDATOR);
