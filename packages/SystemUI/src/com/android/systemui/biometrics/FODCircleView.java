@@ -49,6 +49,7 @@ import androidx.palette.graphics.Palette;
 
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
+import com.android.keyguard.KeyguardSecurityModel.SecurityMode;
 import com.android.systemui.R;
 
 import vendor.lineage.biometrics.fingerprint.inscreen.V1_0.IFingerprintInscreen;
@@ -136,10 +137,17 @@ public class FODCircleView extends ImageView {
         public void onKeyguardBouncerChanged(boolean isBouncer) {
             mIsBouncer = isBouncer;
 
-            if (isBouncer) {
+            if (mUpdateMonitor.isFingerprintDetectionRunning()) {
+                final SecurityMode sec = mUpdateMonitor.getSecurityMode();
+                final boolean maybeShow = sec == SecurityMode.Pattern ||
+                        sec == SecurityMode.PIN;
+                if (maybeShow || !mIsBouncer) {
+                    show();
+                } else {
+                    hide();
+                }
+            } else {
                 hide();
-            } else if (mUpdateMonitor.isFingerprintDetectionRunning()) {
-                show();
             }
         }
 
