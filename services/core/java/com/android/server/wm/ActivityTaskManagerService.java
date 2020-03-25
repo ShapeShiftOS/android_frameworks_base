@@ -6518,6 +6518,7 @@ public class ActivityTaskManagerService extends IActivityTaskManager.Stub {
 
                 if (!Build.isBuildConsistent()) {
                     Slog.e(TAG, "Build fingerprint is not consistent, warning user");
+                    /*
                     mUiHandler.post(() -> {
                         boolean mShowVendorMismatch = Resources.getSystem().getBoolean(
                                 R.bool.config_show_vendor_mismatch_message);
@@ -6536,6 +6537,7 @@ public class ActivityTaskManagerService extends IActivityTaskManager.Stub {
                             d.show();
                         }
                     });
+                    */
                 }
             }
         }
