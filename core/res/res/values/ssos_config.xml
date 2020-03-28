@@ -194,7 +194,6 @@
          or FOD Circle hiding after the screen is put to sleep -->
     <bool name="config_hideFodCircleGoingToSleep">false</bool>
 
-
     <!-- Default values for LiveDisplay -->
     <bool name="config_enableLiveDisplay">true</bool>
     <integer name="config_dayColorTemperature">6500</integer>
@@ -227,4 +226,6 @@
     <!-- Should we filter any display modes which are unmapped? -->
     <bool name="config_filterDisplayModes">false</bool>
 
+    <!-- Enable face auth only when swiping security view -->
+    <bool name="config_faceAuthOnlyOnSecurityView">false</bool>
 </resources>

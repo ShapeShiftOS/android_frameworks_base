@@ -210,4 +210,7 @@
     <java-symbol type="bool" name="config_defaultCABC" />
     <java-symbol type="bool" name="config_filterDisplayModes" />
     <java-symbol type="array" name="config_displayModeMappings" />
+
+    <!-- Enable face auth only when swiping security view -->
+    <java-symbol type="bool" name="config_faceAuthOnlyOnSecurityView" />
 </resources>
