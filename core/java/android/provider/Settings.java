@@ -5389,6 +5389,12 @@ public final class Settings {
         public static final String SCREEN_OFF_FOD_ICON = "screen_off_fod_icon";
 
         /**
+         * Screenrecord: video bitrate
+         * @hide
+         */
+        public static final String SCREENRECORD_VIDEO_BITRATE = "screenrecord_video_bitrate";
+
+        /**
          * @hide
          */
         public static final String USE_OLD_MOBILETYPE = "use_old_mobiletype";
