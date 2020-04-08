@@ -149,8 +149,6 @@ public class FODCircleView extends ImageView {
                 }
             } else {
                 hide();
-            } else if (mUpdateMonitor.isFingerprintDetectionRunning()) {
-                show();
             }
         }
 
