@@ -5269,6 +5269,12 @@ public final class Settings {
         public static final String DOZE_TRIGGER_DOUBLETAP = "doze_trigger_doubletap";
 
 
+          /**
+           * Whether show/hide things in volume panel by.tikkiX2
+           * @hide
+           */
+          public static final String SYNTHOS_HIDE_THINGS_VOLUMEPANEL = "synthos_hide_things_volumepanel";
+
         /**
          * Controls whether to center R style notification headers
          * by.tikkiX2
