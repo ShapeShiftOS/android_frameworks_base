@@ -241,6 +241,14 @@ public class Utils {
         return result > Math.round(px);
     }
 
+    // Check if gesture navbar is enabled
+    public static boolean isGestureNavbar() {
+        return ExuiUtils.isThemeEnabled("com.android.internal.systemui.navbar.gestural")
+                || ExuiUtils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_extra_wide_back")
+                || ExuiUtils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_narrow_back")
+                || ExuiUtils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_wide_back");
+    }
+
     // Check if device is connected to Wi-Fi
     public static boolean isWiFiConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
