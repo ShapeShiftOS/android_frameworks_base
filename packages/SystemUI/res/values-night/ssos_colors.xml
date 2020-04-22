@@ -23,6 +23,6 @@
     <color name="dismiss_all_icon_color">@*android:color/accent_device_default_dark</color>
 
     <!-- QS footer drag handle -->
-    <color name="ssos_qs_footer_drag_handle">#0fffffff</color>
+    <color name="ssos_qs_footer_drag_handle">#ff424242</color>
 
 </resources>
