@@ -4104,6 +4104,13 @@ public final class Settings {
         public static final String DC_DIMMING_AUTO_MODE = "dc_dimming_auto_mode";
 
         /**
+         * Indicates whether we should only show the app lock view when the device is woken up
+         * Or always.
+         * @hide
+         */
+        public static final String APP_LOCK_SHOW_ONLY_ON_WAKE = "app_lock_show_only_on_wake";
+
+        /**
          * Indicates the state of DC dimming:
          *   0 - Off
          *   1 - On
