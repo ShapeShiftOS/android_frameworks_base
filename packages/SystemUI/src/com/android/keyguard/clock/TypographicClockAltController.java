@@ -37,7 +37,7 @@ import static android.view.View.TEXT_ALIGNMENT_CENTER;
 /**
  * Plugin for a custom Typographic clock face that displays the time in words.
  */
-public class TypeClockAltController implements ClockPlugin {
+public class TypographicClockAltController implements ClockPlugin {
 
     /**
      * Resources used to get title and thumbnail.
@@ -85,13 +85,13 @@ public class TypeClockAltController implements ClockPlugin {
     private CrossFadeDarkController mDarkController;
 
     /**
-     * Create a TypeClockAltController instance.
+     * Create a TypographicClockAltController instance.
      *
      * @param res Resources contains title and thumbnail.
      * @param inflater Inflater used to inflate custom clock views.
      * @param colorExtractor Extracts accent color from wallpaper.
      */
-    TypeClockAltController(Resources res, LayoutInflater inflater,
+    TypographicClockAltController(Resources res, LayoutInflater inflater,
             SysuiColorExtractor colorExtractor) {
         mResources = res;
         mLayoutInflater = inflater;
@@ -124,12 +124,12 @@ public class TypeClockAltController implements ClockPlugin {
 
     @Override
     public String getName() {
-        return "type_alt";
+        return "typographic_alt";
     }
 
     @Override
     public String getTitle() {
-        return mResources.getString(R.string.clock_title_type_alt);
+        return mResources.getString(R.string.clock_title_typographic_alt);
     }
 
     @Override
