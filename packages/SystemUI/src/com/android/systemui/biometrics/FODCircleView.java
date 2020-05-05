@@ -85,6 +85,7 @@ public class FODCircleView extends ImageView {
 
     private boolean mIsBouncer;
     private boolean mIsDreaming;
+    private boolean mIsPulsing;
     private boolean mIsKeyguard;
     private boolean mIsCircleShowing;
 
@@ -172,6 +173,15 @@ public class FODCircleView extends ImageView {
             } else {
                 hide();
             }
+        }
+
+        @Override
+        public void onPulsing(boolean pulsing) {
+            super.onPulsing(pulsing);
+            mIsPulsing = pulsing;
+	        if (mIsPulsing) {
+               mIsDreaming = false;
+	        }
         }
 
         @Override
@@ -272,7 +282,7 @@ public class FODCircleView extends ImageView {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN && newIsInside) {
             showCircle();
-            if (mIsRecognizingAnimEnabled && !mIsDreaming) {
+            if (mIsRecognizingAnimEnabled && (!mIsDreaming || mIsPulsing) {
                 mFODAnimation.showFODanimation();
             }
             return true;
