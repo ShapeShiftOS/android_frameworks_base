@@ -5556,7 +5556,11 @@ public final class Settings {
         private static final Validator HEADSET_CONNECT_PLAYER_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
-
+        /**
+         * Whether to show icon when Screen off FODis enabled
+         * @hide
+         */
+        public static final String SCREEN_OFF_FOD_ICON = "screen_off_fod_icon";
 
         /**
          * @hide

@@ -101,6 +101,8 @@ public class FODCircleView extends ImageView {
     private FODAnimation mFODAnimation;
     private boolean mIsRecognizingAnimEnabled;
     private boolean mShouldRemoveIconOnAOD;
+    private boolean mScreenOffFodEnabled;
+    private boolean mScreenOffFodIconEnabled;
 
     private IFingerprintInscreenCallback mFingerprintInscreenCallback =
             new IFingerprintInscreenCallback.Stub() {
@@ -401,8 +403,11 @@ public class FODCircleView extends ImageView {
         mIsRecognizingAnimEnabled = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.FOD_RECOGNIZING_ANIMATION, 0) != 0;
 
-        mShouldRemoveIconOnAOD = Settings.System.getInt(mContext.getContentResolver(),
+         mScreenOffFodEnabled = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.SCREEN_OFF_FOD, 0) != 0;
+        mScreenOffFodIconEnabled = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SCREEN_OFF_FOD_ICON, 1) != 0;
+        mShouldRemoveIconOnAOD = mScreenOffFodEnabled && !mScreenOffFodIconEnabled;
 
         if (fodicon == 0) {
             this.setImageResource(R.drawable.fod_icon_default_0);
@@ -511,7 +516,7 @@ public class FODCircleView extends ImageView {
     }
 
     private void updateAlpha() {
-        setAlpha(mIsDreaming ? 0.5f : 1.0f);
+            setAlpha(mIsDreaming ? 0.5f : 1.0f);
     }
 
     private void updatePosition() {
