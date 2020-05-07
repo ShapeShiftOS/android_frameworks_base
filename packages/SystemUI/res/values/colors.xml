@@ -232,6 +232,5 @@
     <color name="brightness_slider_progress">@*android:color/accent_device_default_dark</color>
     <color name="brightness_slider_background">#ffffffff</color>
     <color name="brightness_slider_icons">#00FFFFFF</color>
-
 </resources>
 
