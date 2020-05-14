@@ -4814,13 +4814,6 @@ public final class Settings {
          */
         public static final String ADAPTIVE_PLAYBACK_TIMEOUT = "adaptive_playback_timeout";
 
-	/**
-        * Defines the global heads up notification snooze=
-        * @hide
-        */
-        public static final String HEADS_UP_NOTIFICATION_SNOOZE = "heads_up_notification_snooze";
-
-
         /** @hide */
         private static final Validator HIDE_NOTCH_VALIDATOR =
                 BOOLEAN_VALIDATOR;
