@@ -4948,6 +4948,18 @@ public final class Settings {
         public static final String FOD_NIGHT_LIGHT = "fod_night_light";
 
         /**
+         * Show assistant handles on lockscreen
+         * @hide
+         */
+        public static final String ASSIST_LOCK_HANDLES = "assist_lock_handles";
+
+        /**
+         * Show assistant handles on launcher
+         * @hide
+         */
+        public static final String ASSIST_GLOBAL_HANDLES = "assist_global_handles";
+
+        /**
          * Sets the date string style
          * 0 - Regular style
          * 1 - Lowercase

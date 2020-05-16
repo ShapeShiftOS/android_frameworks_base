@@ -26,6 +26,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
+import android.os.UserHandle;
 import android.os.Handler;
 import android.provider.Settings;
 
@@ -56,6 +58,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import com.android.internal.R;
+
 import dagger.Lazy;
 
 /**
@@ -65,6 +69,9 @@ import dagger.Lazy;
  */
 @Singleton
 final class AssistHandleReminderExpBehavior implements BehaviorController {
+
+    private boolean mDisableAssistHintOnLockscreen;
+    private boolean mDisableAssistHint;
 
     private static final String LEARNING_TIME_ELAPSED_KEY = "reminder_exp_learning_time_elapsed";
     private static final String LEARNING_EVENT_COUNT_KEY = "reminder_exp_learning_event_count";
@@ -256,6 +263,8 @@ final class AssistHandleReminderExpBehavior implements BehaviorController {
         mLastLearningTimestamp = mClock.currentTimeMillis();
 
         callbackForCurrentState(/* justUnlocked = */ false);
+
+        mDisableAssistHintOnLockscreen = context.getResources().getBoolean(R.bool.config_supportsInDisplayFingerprint);
     }
 
     @Override
@@ -336,6 +345,17 @@ final class AssistHandleReminderExpBehavior implements BehaviorController {
         resetConsecutiveTaskSwitches();
         mIsDozing = isDozing;
         callbackForCurrentState(/* justUnlocked = */ false);
+    }
+
+    private boolean isHandlesHidden() {
+        return (Settings.System.getIntForUser(
+                mContext.getContentResolver(), Settings.System.ASSIST_GLOBAL_HANDLES, 1,
+                UserHandle.USER_CURRENT) == 1);
+    }
+
+    private boolean isLockscreenHandlesHidden() {
+       return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.ASSIST_LOCK_HANDLES, mDisableAssistHintOnLockscreen ? 1 : 0) == 1;
     }
 
     private void handleWakefullnessChanged(boolean isAwake) {
@@ -426,9 +446,17 @@ final class AssistHandleReminderExpBehavior implements BehaviorController {
         if (!isFullyAwake() || mIsNavBarHidden || isSuppressed()) {
             mAssistHandleCallbacks.hide();
         } else if (mOnLockscreen) {
-            mAssistHandleCallbacks.showAndStay();
+            if (isLockscreenHandlesHidden()){
+                mAssistHandleCallbacks.hide();
+            } else {
+                mAssistHandleCallbacks.showAndStay();
+            }
         } else if (mIsLauncherShowing) {
-            mAssistHandleCallbacks.showAndGo();
+            if (isHandlesHidden()){
+                mAssistHandleCallbacks.hide();
+            } else {
+                mAssistHandleCallbacks.showAndGo();
+            }
         } else if (mConsecutiveTaskSwitches == 1) {
             mAssistHandleCallbacks.showAndGoDelayed(
                     getShowAndGoDelayedShortDelayMs(), /* hideIfShowing = */ false);
