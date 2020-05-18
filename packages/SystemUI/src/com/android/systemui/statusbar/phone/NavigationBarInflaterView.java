@@ -35,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.Space;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.util.exui.Utils;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.CustomSettingsService;
@@ -165,12 +166,14 @@ public class NavigationBarInflaterView extends FrameLayout
         Dependency.get(TunerService.class).addTunable(this, NAV_BAR_INVERSE);
         Dependency.get(TunerService.class).addTunable(this, NAV_BAR_VIEWS);
         Dependency.get(CustomSettingsService.class).addIntObserver(this, Settings.System.NAVIGATION_BAR_ARROW_KEYS);
+        Dependency.get(CustomSettingsService.class).addIntObserver(this, Settings.System.NAVIGATION_BAR_IME_SPACE);
     }
 
     @Override
     protected void onDetachedFromWindow() {
         Dependency.get(NavigationModeController.class).removeListener(this);
         Dependency.get(TunerService.class).removeTunable(this);
+        Dependency.get(CustomSettingsService.class).removeObserver(this);
         Dependency.get(CustomSettingsService.class).removeObserver(this);
         super.onDetachedFromWindow();
     }
@@ -539,8 +542,12 @@ public class NavigationBarInflaterView extends FrameLayout
     }
 
     private boolean showDpadArrowKeys() {
-        return Settings.System.getIntForUser(getContext().getContentResolver(),
-                Settings.System.NAVIGATION_BAR_ARROW_KEYS, 0, UserHandle.USER_CURRENT) != 0;
+        return ((Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.NAVIGATION_BAR_ARROW_KEYS, 0, UserHandle.USER_CURRENT) != 0)
+                && ((Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.NAVIGATION_BAR_IME_SPACE, 1, UserHandle.USER_CURRENT) != 0)
+                || (Utils.isThemeEnabled("com.android.internal.systemui.navbar.twobutton")
+                || Utils.isThemeEnabled("com.android.internal.systemui.navbar.threebutton"))));
     }
 
     @Override
