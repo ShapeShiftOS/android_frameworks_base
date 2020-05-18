@@ -89,4 +89,8 @@
     <!-- Toast animation -->
     <java-symbol type="style" name="Animation.Toast.Material" />
 
+    <!-- Enable face auth when swiping security view -->
+    <java-symbol type="bool" name="config_faceAuthOnSecurityView" />
+
+
 </resources>
