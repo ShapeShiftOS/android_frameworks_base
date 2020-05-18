@@ -4892,23 +4892,6 @@ public final class Settings {
         private static final Validator VOLUME_BUTTON_MUSIC_CONTROL_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
-        /**
-         * Number of qs columns on landscape orientation
-         * @hide
-         */
-        public static final String QS_LAYOUT_COLUMNS_LANDSCAPE = "qs_layout_columns_landscape";
-         /** @hide */
-        private static final Validator QS_LAYOUT_COLUMNS_LANDSCAPE_VALIDATOR =
-                ANY_INTEGER_VALIDATOR;
-
-         /**
-         * @hide
-         */
-        public static final String QS_LAYOUT_COLUMNS = "qs_layout_columns";
-         /** @hide */
-        private static final Validator QS_LAYOUT_COLUMNS_VALIDATOR =
-                ANY_INTEGER_VALIDATOR;
-
         /** @hide */
         public static final String GESTURE_PILL_TOGGLE = "gesture_pill_toggle";
 
@@ -5153,8 +5136,6 @@ public final class Settings {
             ASPECT_RATIO_APPS_ENABLED,
             ASPECT_RATIO_APPS_LIST,
             VOLUME_BUTTON_MUSIC_CONTROL,
-            QS_LAYOUT_COLUMNS_LANDSCAPE,
-            QS_LAYOUT_COLUMNS,
             GESTURE_PILL_TOGGLE,
             SWIPE_TO_SCREENSHOT,
             QS_PANEL_BG_USE_NEW_TINT,
@@ -5312,8 +5293,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(ASPECT_RATIO_APPS_ENABLED);
             PRIVATE_SETTINGS.add(ASPECT_RATIO_APPS_LIST);
             PRIVATE_SETTINGS.add(VOLUME_BUTTON_MUSIC_CONTROL);
-            PRIVATE_SETTINGS.add(QS_LAYOUT_COLUMNS_LANDSCAPE);
-            PRIVATE_SETTINGS.add(QS_LAYOUT_COLUMNS);
             PRIVATE_SETTINGS.add(GESTURE_PILL_TOGGLE);
             PRIVATE_SETTINGS.add(SWIPE_TO_SCREENSHOT);
             PRIVATE_SETTINGS.add(LOCKSCREEN_MEDIA_METADATA);
@@ -5448,9 +5427,6 @@ public final class Settings {
             VALIDATORS.put(ASPECT_RATIO_APPS_ENABLED, ASPECT_RATIO_APPS_ENABLED_VALIDATOR);
             VALIDATORS.put(ASPECT_RATIO_APPS_LIST, ASPECT_RATIO_APPS_LIST_VALIDATOR);
             VALIDATORS.put(VOLUME_BUTTON_MUSIC_CONTROL, VOLUME_BUTTON_MUSIC_CONTROL_VALIDATOR);
-            VALIDATORS.put(QS_LAYOUT_COLUMNS_LANDSCAPE,
-                    QS_LAYOUT_COLUMNS_LANDSCAPE_VALIDATOR);
-            VALIDATORS.put(QS_LAYOUT_COLUMNS, QS_LAYOUT_COLUMNS_VALIDATOR);
             VALIDATORS.put(GESTURE_PILL_TOGGLE, GESTURE_PILL_TOGGLE_VALIDATOR);
             VALIDATORS.put(SWIPE_TO_SCREENSHOT, SWIPE_TO_SCREENSHOT_VALIDATOR);
             VALIDATORS.put(LOCKSCREEN_MEDIA_METADATA, LOCKSCREEN_MEDIA_METADATA_VALIDATOR);
