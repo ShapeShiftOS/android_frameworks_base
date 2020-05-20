@@ -230,7 +230,7 @@
     <color name="qs_drag_handle_color">#66e5e5e5</color>
 
     <color name="brightness_slider_progress">@*android:color/accent_device_default_dark</color>
-    <color name="brightness_slider_background">#99FFFFFF</color>
+    <color name="brightness_slider_background">#ffffffff</color>
     <color name="brightness_slider_icons">#00FFFFFF</color>
 
 </resources>
