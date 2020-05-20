@@ -488,7 +488,7 @@ public class DisplayPolicy {
                 mContext, new SwipeToScreenshotListener.Callbacks() {
             @Override
             public void onSwipeThreeFinger() {
-                takeScreenshot(TAKE_SCREENSHOT_FULLSCREEN, true);
+                takeScreenshot(TAKE_SCREENSHOT_FULLSCREEN);
             }
         });
 
