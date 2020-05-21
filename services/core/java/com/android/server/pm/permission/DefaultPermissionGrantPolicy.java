@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2020 ExtendedReborn
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -744,6 +745,65 @@ public final class DefaultPermissionGrantPolicy {
             grantPermissionsToSystemPackage(systemCaptionsServicePackageName, userId,
                     MICROPHONE_PERMISSIONS);
         }
+
+        // Google Account
+        grantSystemFixedPermissionsToSystemPackage("com.google.android.gsf.login", userId, CONTACTS_PERMISSIONS,
+                PHONE_PERMISSIONS);
+
+        // Google App
+        grantSystemFixedPermissionsToSystemPackage("com.google.android.googlequicksearchbox", userId,
+                CALENDAR_PERMISSIONS, CAMERA_PERMISSIONS, CONTACTS_PERMISSIONS, ALWAYS_LOCATION_PERMISSIONS,
+                MICROPHONE_PERMISSIONS, PHONE_PERMISSIONS, SMS_PERMISSIONS, STORAGE_PERMISSIONS);
+
+        // Google Play Services
+        grantSystemFixedPermissionsToSystemPackage("com.google.android.gms", userId, SENSORS_PERMISSIONS,
+                CALENDAR_PERMISSIONS, CAMERA_PERMISSIONS, CONTACTS_PERMISSIONS, ALWAYS_LOCATION_PERMISSIONS,
+                MICROPHONE_PERMISSIONS, PHONE_PERMISSIONS, SMS_PERMISSIONS, STORAGE_PERMISSIONS);
+
+        // Persistent Google Play Services
+        grantSystemFixedPermissionsToSystemPackage("com.google.android.gms.persistent", userId, SENSORS_PERMISSIONS,
+                CALENDAR_PERMISSIONS, CAMERA_PERMISSIONS, CONTACTS_PERMISSIONS, ALWAYS_LOCATION_PERMISSIONS,
+                MICROPHONE_PERMISSIONS, PHONE_PERMISSIONS, SMS_PERMISSIONS, STORAGE_PERMISSIONS);
+
+        // Google Connectivity Services
+        grantSystemFixedPermissionsToSystemPackage("com.google.android.apps.gcs", userId, CONTACTS_PERMISSIONS,
+                ALWAYS_LOCATION_PERMISSIONS);
+
+        // Google Contacts Sync
+        grantSystemFixedPermissionsToSystemPackage("com.google.android.syncadapters.contacts", userId,
+                CONTACTS_PERMISSIONS);
+
+        // Google Backup Transport
+        grantSystemFixedPermissionsToSystemPackage("com.google.android.backuptransport", userId, CONTACTS_PERMISSIONS);
+
+        // Google Play Framework
+        grantSystemFixedPermissionsToSystemPackage("com.google.android.gsf", userId, CONTACTS_PERMISSIONS,
+                PHONE_PERMISSIONS);
+
+        // Google Setup Wizard
+        grantSystemFixedPermissionsToSystemPackage("com.google.android.setupwizard", userId, CONTACTS_PERMISSIONS,
+                PHONE_PERMISSIONS, ALWAYS_LOCATION_PERMISSIONS, CAMERA_PERMISSIONS);
+
+        // Google Play Store
+        grantSystemFixedPermissionsToSystemPackage("com.android.vending", userId, CONTACTS_PERMISSIONS,
+                PHONE_PERMISSIONS, ALWAYS_LOCATION_PERMISSIONS, SMS_PERMISSIONS, STORAGE_PERMISSIONS);
+
+        // Project Fi
+        grantSystemFixedPermissionsToSystemPackage("com.google.android.apps.tycho", userId, CONTACTS_PERMISSIONS,
+                PHONE_PERMISSIONS, MICROPHONE_PERMISSIONS, ALWAYS_LOCATION_PERMISSIONS, SMS_PERMISSIONS);
+
+        // ContactsProvider2
+        grantSystemFixedPermissionsToSystemPackage(
+                getDefaultProviderAuthorityPackage("com.android.providers.contacts.ContactsProvider2", userId), userId,
+                CONTACTS_PERMISSIONS, STORAGE_PERMISSIONS);
+
+        // Google Calendar
+        grantSystemFixedPermissionsToSystemPackage("com.google.android.calendar", userId, CALENDAR_PERMISSIONS,
+                CONTACTS_PERMISSIONS, PHONE_PERMISSIONS);
+
+        // Google dialer
+        grantSystemFixedPermissionsToSystemPackage("com.google.android.dialer", userId, PHONE_PERMISSIONS,
+                CONTACTS_PERMISSIONS, SMS_PERMISSIONS);
 
         // Google Markup
         grantSystemFixedPermissionsToSystemPackage("com.google.android.markup", userId, STORAGE_PERMISSIONS);
