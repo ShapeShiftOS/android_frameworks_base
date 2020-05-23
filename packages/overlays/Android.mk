@@ -101,6 +101,7 @@ LOCAL_REQUIRED_MODULES := \
     PrimaryColorBlissOverlay \
     PrimaryColorBlissClearOverlay \
     PrimaryColorEyeSootherOverlay \
+        PrimaryColorOneplusDarkOverlay \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarMode2ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
