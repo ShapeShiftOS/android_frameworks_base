@@ -22,6 +22,7 @@ LOCAL_REQUIRED_MODULES := \
         AccentColorNextbitOverlay \
 	AccentColorOnePlusOverlay \
 	AccentColorParanoidOverlay \
+        AccentColorShapeShifterOverlay \
 	AccentColorPepsiOverlay \
 	AccentColorTealOverlay \
 	AccentColorRedOverlay \
