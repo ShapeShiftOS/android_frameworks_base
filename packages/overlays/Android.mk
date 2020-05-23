@@ -31,11 +31,7 @@ LOCAL_REQUIRED_MODULES := \
 	DisplayCutoutEmulationCornerOverlay \
 	DisplayCutoutEmulationDoubleOverlay \
 	DisplayCutoutEmulationTallOverlay \
-	FontArbutusSourceOverlay \
-	FontArvoLatoOverlay \
 	FontGoogleSansOverlay \
-	FontNotoSerifSourceOverlay \
-	FontRubikRubikOverlay \
 	FontCircularStdOverlay \
 	FontOnePlusSlateOverlay \
 	IconPackCircularAndroidOverlay \
