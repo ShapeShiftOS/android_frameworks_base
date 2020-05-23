@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="false"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_1" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_2" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_3" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_4" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_5" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_6" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_7" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_8" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_9" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_10" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_11" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_12" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_13" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_14" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_15" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_16" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_17" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_18" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_19" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_20" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_21" />
+    <item android:duration="12" android:drawable="@drawable/fod_nebula_recognizing_anim_22" />
+</animation-list>
