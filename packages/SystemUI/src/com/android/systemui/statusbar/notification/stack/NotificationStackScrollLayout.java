@@ -681,7 +681,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements ScrollAd
     public void onThemeChanged() {
         final boolean useDarkText = mColorExtractor.getNeutralColors().supportsDarkText();
         updateDecorViews(useDarkText);
-
+        needsColorRefresh = true;
         updateFooter();
     }
 
@@ -693,6 +693,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements ScrollAd
             mCornerRadius = newRadius;
             invalidate();
         }
+        needsColorRefresh = true;
         reinflateViews();
     }
 
