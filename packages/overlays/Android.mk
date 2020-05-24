@@ -95,12 +95,11 @@ LOCAL_REQUIRED_MODULES := \
 	IconShapeTeardropOverlay \
 	PrimaryColorOceanOverlay \
 	PrimaryColorNatureOverlay \
-    PrimaryColorBlissBlackOverlay \
-    PrimaryColorDarkBlueOverlay \
-    PrimaryColorAlmostBlackOverlay \
-    PrimaryColorBlissOverlay \
-    PrimaryColorBlissClearOverlay \
-    PrimaryColorEyeSootherOverlay \
+        PrimaryColorDarkBlueOverlay \
+        PrimaryColorAlmostBlackOverlay \
+        PrimaryColorBlissOverlay \
+        PrimaryColorBlissClearOverlay \
+        PrimaryColorEyeSootherOverlay \
         PrimaryColorOneplusDarkOverlay \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarMode2ButtonOverlay \
