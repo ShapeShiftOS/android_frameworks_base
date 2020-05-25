@@ -19,6 +19,8 @@
 <resources>
     <color name="primary_device_default_settings">#05050A</color> <!-- colorPrimary -->
     <color name="primary_dark_device_default_settings">#121115</color> <!-- colorPrimaryDark-->
+    <color name="primary_custom_dark_settings">#05050A</color> <!-- Settings-->
+    <color name="primary_custom_dark_settings_dark">#05050A</color> <!-- Settings Dark-->
     <color name="material_grey_800">#29282c</color> <!-- google elgoogleogoelo -->
     <color name="material_grey_900">#05050A</color> <!-- google elgoogleogoelo -->
     <color name="primary_device_default">@color/primary_dark_device_default_settings</color> <!-- only for ThemePicker! -->
