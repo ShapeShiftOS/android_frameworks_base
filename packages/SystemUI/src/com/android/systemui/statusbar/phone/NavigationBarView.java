@@ -39,6 +39,7 @@ import android.annotation.DrawableRes;
 import android.app.StatusBarManager;
 import android.content.Context;
 import android.content.om.IOverlayManager;
+import android.os.UserHandle;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Point;
