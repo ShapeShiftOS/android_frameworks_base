@@ -47,6 +47,13 @@ LOCAL_REQUIRED_MODULES := \
 	AccentColorDorsetGoldOverlay \
 	AccentColorXboxOverlay \
 	AccentColorXiaomiOverlay \
+	AccentColorBlackOverlay \
+	AccentColorCinnamonOverlay \
+	AccentColorOceanOverlay \
+	AccentColorOrchidOverlay \
+	AccentColorSpaceOverlay \
+	AccentColorGreenOverlay \
+	AccentColorPurpleOverlay \
 	DisplayCutoutEmulationCornerOverlay \
 	DisplayCutoutEmulationDoubleOverlay \
 	DisplayCutoutEmulationTallOverlay \
