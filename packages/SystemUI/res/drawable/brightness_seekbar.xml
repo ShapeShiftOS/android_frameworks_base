@@ -20,7 +20,7 @@
     <item android:id="@android:id/background">
         <shape android:shape="rectangle">
             <corners android:radius="?android:attr/dialogCornerRadius"/>
-            <size android:height="21dp" />
+            <size android:height="42dp" />
             <solid android:color="@color/brightness_slider_background" />
         </shape>
     </item>
@@ -33,7 +33,7 @@
                     <shape android:shape="rectangle"
                         android:tint="@color/brightness_slider_progress">
                         <corners android:radius="?android:attr/dialogCornerRadius"/>
-                        <size android:height="21dp" />
+                        <size android:height="42dp" />
                         <solid android:color="@color/brightness_slider_progress" />
                     </shape>
                 </item>
