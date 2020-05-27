@@ -55,7 +55,6 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical|left"
-            android:src="@drawable/ic_min_brightness"
             android:tint="@color/brightness_slider_icons"
             android:layout_marginLeft="30dp"
             android:scaleType="centerInside"/>
@@ -65,7 +64,6 @@
             android:layout_height="20dp"
             android:layout_gravity="center_vertical|right"
             android:tint="@color/brightness_slider_icons"
-            android:src="@drawable/ic_max_brightness"
             android:layout_marginRight="30dp"
             android:scaleType="centerInside"/>
 
