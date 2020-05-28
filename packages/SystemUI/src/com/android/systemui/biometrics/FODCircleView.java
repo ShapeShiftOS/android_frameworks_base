@@ -128,6 +128,7 @@ public class FODCircleView extends ImageView {
                 if (mShouldRemoveIconOnAOD) resetFODIcon(false);
             } else if (mBurnInProtectionTimer != null) {
                 mBurnInProtectionTimer.cancel();
+                updatePosition();
             }
             if (mShouldRemoveIconOnAOD && !dreaming) resetFODIcon(true);
         }
