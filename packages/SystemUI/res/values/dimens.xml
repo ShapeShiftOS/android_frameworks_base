@@ -1197,9 +1197,10 @@
     <!-- Largest size an avatar might need to be drawn in the power menu user picker -->
     <dimen name="global_actions_avatar_size">24dp</dimen>
 
-    <!-- Network traffic monitor -->
-    <dimen name="net_traffic_txt_img_padding">1dp</dimen>
-
     <dimen name="fod_animation_size">270dp</dimen>
-
+    <dimen name="screenshot_ui_width">100dp</dimen>
+    <dimen name="screenshot_ui_height">350dp</dimen>
+    <dimen name="screenshot_preview_height">160dp</dimen>
+    <dimen name="screenshot_ui_corner_radius">10dp</dimen>
+    <dimen name="screenshot_ui_imageview_corner_radius">7dp</dimen>
 </resources>

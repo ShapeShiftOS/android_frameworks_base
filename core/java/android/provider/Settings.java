@@ -4909,24 +4909,6 @@ public final class Settings {
         private static final Validator QS_LAYOUT_COLUMNS_VALIDATOR =
                 ANY_INTEGER_VALIDATOR;
 
-        /**
-         * Wheter to show network traffic indicator in statusbar
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
-
-        /**
-         * Network traffic inactivity threshold (default is 1 kBs)
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD = "network_traffic_autohide_threshold";
-
-        /**
-         * Whether to disable showing arrows in statusbar network traffic indicators
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_HIDEARROW = "network_traffic_hidearrow";
-
         /** @hide */
         public static final String GESTURE_PILL_TOGGLE = "gesture_pill_toggle";
 
