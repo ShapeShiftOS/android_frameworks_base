@@ -1,6 +1,5 @@
 package com.android.systemui.qs;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -87,18 +86,6 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
 
     public boolean updateResources() {
         final Resources res = mContext.getResources();
-        final ContentResolver resolver = mContext.getContentResolver();
-
-        final int columns;
-        if (res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            columns = Settings.System.getIntForUser(resolver,
-                    Settings.System.QS_COLUMNS_PORTRAIT, 4,
-                    UserHandle.USER_CURRENT);
-        } else {
-            columns = Settings.System.getIntForUser(resolver,
-                    Settings.System.QS_COLUMNS_LANDSCAPE, 4,
-                    UserHandle.USER_CURRENT);
-        }
         mCellHeight = mContext.getResources().getDimensionPixelSize(R.dimen.qs_tile_height);
         mCellMarginHorizontal = res.getDimensionPixelSize(R.dimen.qs_tile_margin_horizontal);
         mCellMarginVertical= res.getDimensionPixelSize(R.dimen.qs_tile_margin_vertical);
@@ -152,16 +139,11 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
         final int availableHeight = MeasureSpec.getSize(heightMeasureSpec) - mCellMarginTop
                 + mCellMarginVertical;
         final int previousRows = mRows;
-        // we aren't introducing any delay due to the Settings provider call here, because PagedTileLayout.onMeasure
-        // calls updateMaxRows only if the panel height is changed or if updateResources has been triggered
-        if (mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            mRows = Settings.System.getIntForUser(mContext.getContentResolver(),
-                    Settings.System.QS_ROWS_PORTRAIT, 3,
-                    UserHandle.USER_CURRENT);
-        } else {
-            mRows = Settings.System.getIntForUser(mContext.getContentResolver(),
-                        Settings.System.QS_ROWS_LANDSCAPE, 1,
-                        UserHandle.USER_CURRENT);
+        mRows = availableHeight / (mCellHeight + mCellMarginVertical);
+        if (mRows >= mMaxAllowedRows) {
+            mRows = mMaxAllowedRows;
+        } else if (mRows <= 1) {
+            mRows = 1;
         }
         if (mRows > (tilesCount + mColumns - 1) / mColumns) {
             mRows = (tilesCount + mColumns - 1) / mColumns;
