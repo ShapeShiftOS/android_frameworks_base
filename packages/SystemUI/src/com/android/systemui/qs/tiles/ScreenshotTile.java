@@ -78,9 +78,8 @@ public class ScreenshotTile extends QSTileImpl<BooleanState> {
         final int type = partial
                 ? WindowManager.TAKE_SCREENSHOT_SELECTED_REGION
                 : WindowManager.TAKE_SCREENSHOT_FULLSCREEN;
-
         try {
-            WindowManagerGlobal.getWindowManagerService().mokeeTakeScreenshot(type);
+            WindowManagerGlobal.getWindowManagerService().takeAlternativeScreenshot(type);
         } catch (RemoteException e) {
             // Do nothing
         }
