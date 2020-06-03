@@ -106,6 +106,9 @@
     <!-- Label for current user in power menu options dialog -->
     <string name="global_action_current_user">Current</string>
 
+    <!-- Lineage clock -->
+    <string name="clock_title_lineage" translatable="false">LineageOS</string>
+
     <!-- Sync QS Tile -->
     <string name="quick_settings_sync_label">Sync</string>
     <string name="accessibility_quick_settings_sync_off">Sync off</string>
