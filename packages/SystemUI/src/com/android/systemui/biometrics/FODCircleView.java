@@ -145,7 +145,8 @@ public class FODCircleView extends ImageView {
                 }
             } else if (mBurnInProtectionTimer != null) {
                 mBurnInProtectionTimer.cancel();
-                updatePosition();
+                mDreamingOffsetY = 0;
+                mHandler.post(() -> updatePosition());
             }
             if (mShouldRemoveIconOnAOD && !dreaming) {
                 resetFODIcon(true);
@@ -646,7 +647,6 @@ public class FODCircleView extends ImageView {
 
             mDreamingOffsetX -= mDreamingMaxOffset;
             mDreamingOffsetY -= mDreamingMaxOffset;
-
             mHandler.post(() -> updatePosition());
         }
     };
