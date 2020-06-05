@@ -5296,6 +5296,7 @@ public final class Settings {
          * 2: mm-mm-mm
          * 3: da-da-dzzz
          * 4: da-dzzz-da
+         * 5: custom
          * @hide
          */
         public static final String RINGTONE_VIBRATION_PATTERN = "ringtone_vibration_pattern";
@@ -5318,6 +5319,13 @@ public final class Settings {
          * @hide
          */
         public static final String VIBRATE_ON_DISCONNECT = "vibrate_on_disconnect";
+
+        /**
+         * Custom vibration pattern
+         * format: ms,ms,ms each a range from 0 to 1000 ms
+         * @hide
+         */
+        public static final String CUSTOM_RINGTONE_VIBRATION_PATTERN = "custom_ringtone_vibration_pattern";
 
         /**
          * Keys we no longer back up under the current schema, but want to continue to
