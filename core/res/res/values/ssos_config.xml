@@ -79,4 +79,7 @@
      <string-array name="config_vendorPlatformSignatures">
      </string-array>
 
+    <!-- FOD icon dim-->
+    <bool name="config_targetUsesInKernelDimming">false</bool>
+
 </resources>

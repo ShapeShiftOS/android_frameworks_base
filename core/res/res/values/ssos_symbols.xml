@@ -69,4 +69,7 @@
   <!-- Vendor platform signatures -->
   <java-symbol type="array" name="config_vendorPlatformSignatures" />
 
+  <!-- FOD icon dimming -->
+  <java-symbol type="bool" name="config_targetUsesInKernelDimming" />
+
 </resources>
