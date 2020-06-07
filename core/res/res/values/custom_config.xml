@@ -148,4 +148,7 @@
     <!-- Whether device uses linear screen brightness slider -->
     <bool name="config_linearBrightnessSlider">false</bool>
 
+    <!-- FOD icon dim-->
+    <bool name="config_targetUsesInKernelDimming">false</bool>
+
 </resources>
