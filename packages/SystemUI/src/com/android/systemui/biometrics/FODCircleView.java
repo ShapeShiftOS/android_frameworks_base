@@ -296,7 +296,7 @@ public class FODCircleView extends ImageView implements Handler.Callback {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN && newIsInside) {
             showCircle();
-            if (mIsRecognizingAnimEnabled) {
+            if (mIsRecognizingAnimEnabled && !mIsDreaming) {
                 mFODAnimation.showFODanimation();
             }
             return true;
