@@ -523,7 +523,6 @@ public class NotificationPanelView extends PanelView implements
             }
         });
         mSettingsObserver = new SettingsObserver(mHandler);
-        mLockPatternUtils = new LockPatternUtils(mContext);
     }
     /**
      * Returns if there's a custom clock being presented.
