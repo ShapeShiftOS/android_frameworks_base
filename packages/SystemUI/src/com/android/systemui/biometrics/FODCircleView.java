@@ -421,7 +421,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         setDim(true);
         dispatchPress();
 
-        setImageResource(PRESSED_STYLES[mPressedIcon]);
+        setImageDrawable(null);
         invalidate();
     }
 
