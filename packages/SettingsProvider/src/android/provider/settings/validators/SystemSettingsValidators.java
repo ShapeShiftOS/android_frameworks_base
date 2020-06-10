@@ -227,6 +227,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.NOTIFICATION_PULSE_REPEATS, ANY_INTEGER_VALIDATOR);
         VALIDATORS.put(System.AOD_NOTIFICATION_PULSE_TIMEOUT, ANY_INTEGER_VALIDATOR);
         VALIDATORS.put(System.NOTIFICATION_PULSE_DURATION, ANY_INTEGER_VALIDATOR);
-        VALIDATORS.put(System.FLASHLIGHT_ON_CALL, new InclusiveIntegerRangeValidator(0, 3));
+        VALIDATORS.put(System.FLASHLIGHT_ON_CALL, new InclusiveIntegerRangeValidator(0, 4));
     }
 }
