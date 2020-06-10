@@ -4621,6 +4621,16 @@ public final class Settings {
         public static final String PULSE_ON_NEW_TRACKS = "pulse_on_new_tracks";
 
         /**
+         * The amount of time in milliseconds before the device goes to sleep or begins
+         * to dream after a period of inactivity in the keyguard.
+         * @hide
+         */
+        public static final String LOCKSCREEN_TIMEOUT = "lockscreen_timeout";
+
+        /** @hide */
+        private static Validator LOCKSCREEN_TIMEOUT_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
          * Double tap on lockscreen to sleep
          * @hide
          */
@@ -5581,6 +5591,7 @@ public final class Settings {
             SYNTHOS_CENTER_NOTIFICATION_HEADERS,
             LOCK_HIDE_STATUS_BAR,
             HEADSET_CONNECT_PLAYER,
+            LOCKSCREEN_TIMEOUT,
             USE_OLD_MOBILETYPE,
             FORCE_FULLSCREEN_CUTOUT_APPS,
             ACCENT_COLOR,
@@ -5911,6 +5922,7 @@ public final class Settings {
             VALIDATORS.put(SYNTHOS_CENTER_NOTIFICATION_HEADERS, SYNTHOS_CENTER_NOTIFICATION_HEADERS_VALIDATOR);
             VALIDATORS.put(LOCK_HIDE_STATUS_BAR,LOCK_HIDE_STATUS_BAR_VALIDATOR);
             VALIDATORS.put(HEADSET_CONNECT_PLAYER, HEADSET_CONNECT_PLAYER_VALIDATOR);
+            VALIDATORS.put(LOCKSCREEN_TIMEOUT, LOCKSCREEN_TIMEOUT_VALIDATOR);
             VALIDATORS.put(USE_OLD_MOBILETYPE, USE_OLD_MOBILETYPE_VALIDATOR);
             VALIDATORS.put(FORCE_FULLSCREEN_CUTOUT_APPS, FORCE_FULLSCREEN_CUTOUT_APPS_VALIDATOR);
             VALIDATORS.put(ACCENT_COLOR, ACCENT_COLOR_VALIDATOR);
