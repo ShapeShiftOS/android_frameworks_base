@@ -129,8 +129,6 @@
     <string name="accessibility_quick_settings_sync_changed_off">Sync turned off</string>
     <string name="accessibility_quick_settings_sync_changed_on">Sync turned on</string>
 
-    <string name="usage_data">used</string>
-
     <!-- VPN QS tile -->
     <string name="quick_settings_vpn_label">VPN</string>
     <string name="quick_settings_vpn_connect_dialog_title">Connect to\u2026</string>
