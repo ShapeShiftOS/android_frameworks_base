@@ -96,5 +96,7 @@ public class SystemSettings {
         Settings.System.AOD_NOTIFICATION_PULSE_TIMEOUT,
         Settings.System.NOTIFICATION_PULSE_DURATION,
         Settings.System.FLASHLIGHT_ON_CALL,
+        Settings.System.FLASHLIGHT_ON_CALL_IGNORE_DND,
+        Settings.System.FLASHLIGHT_ON_CALL_RATE,
     };
 }
