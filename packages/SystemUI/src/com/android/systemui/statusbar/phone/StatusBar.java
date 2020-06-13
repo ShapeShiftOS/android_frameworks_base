@@ -83,6 +83,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.media.AudioAttributes;
 import android.metrics.LogMaker;
@@ -2945,6 +2946,14 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         mViewHierarchyManager.updateRowStates();
         mScreenPinningRequest.onConfigurationChanged();
+
+        if(mQSBlurView != null) {
+            int orientation = mContext.getResources().getConfiguration().orientation;
+            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                Drawable emptyDrawable = new ColorDrawable(Color.TRANSPARENT);
+                mQSBlurView.setBackgroundDrawable(emptyDrawable);
+            }
+        }
     }
 
     @Override
