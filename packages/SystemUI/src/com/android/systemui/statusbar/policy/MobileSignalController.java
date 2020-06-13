@@ -475,6 +475,10 @@ public class MobileSignalController extends SignalController<
                 case 5:
                     resId = R.drawable.ic_volte8;
                     break;
+                // Notch Friendly Icon
+                case 6:
+                    resId = R.drawable.ic_voltenotchy;
+                    break;
  	        //Vo
                 case 0:
                 default:
