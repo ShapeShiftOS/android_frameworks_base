@@ -19,6 +19,7 @@ package com.android.internal.util.ssos;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.util.TypedValue;
 import android.content.IntentFilter;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
@@ -160,6 +161,12 @@ public class Utils {
     public static boolean isChineseLanguage() {
        return Resources.getSystem().getConfiguration().locale.getLanguage().startsWith(
                Locale.CHINESE.getLanguage());
+    }
+
+    public static int getThemeAccentColor (final Context context) {
+        final TypedValue value = new TypedValue ();
+        context.getTheme ().resolveAttribute (android.R.attr.colorAccent, value, true);
+        return value.data;
     }
 
     public static int getBlendColorForPercent(int fullColor, int emptyColor, boolean reversed,
