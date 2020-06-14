@@ -71,6 +71,7 @@ LOCAL_REQUIRED_MODULES := \
     FontLeagueMonoNarrow \
     FontLeonSans \
     FontMescla \
+    FontCocon \
     FontMittelschrift \
     FontOdibee \
     FontPanamericana \
