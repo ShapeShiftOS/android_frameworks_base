@@ -201,6 +201,9 @@ import java.util.Timer;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
 
+// LineageHardware
+import com.android.server.custom.LineageHardwareService;
+
 public final class SystemServer {
 
     private static final String TAG = "SystemServer";
@@ -2098,6 +2101,13 @@ public final class SystemServer {
             t.traceBegin("StartPeopleService");
             mSystemServiceManager.startService(PeopleService.class);
             t.traceEnd();
+
+            // LineageHardware
+            if (!mOnlyCore){
+                t.traceBegin("StartLineageHardwareService");
+                mSystemServiceManager.startService(LineageHardwareService.class);
+                t.traceEnd();
+            }
 
             if (!context.getResources().getString(
                     com.android.internal.R.string.config_pocketBridgeSysfsInpocket).isEmpty()) {
