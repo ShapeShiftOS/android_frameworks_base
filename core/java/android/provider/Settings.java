@@ -5216,6 +5216,15 @@ public final class Settings {
         public static final String QS_COLUMNS_LANDSCAPE = "qs_columns_landscape";
 
         /**
+         * Height of the navigation handle.
+         * @hide
+         */
+        public static final String NAVIGATION_HANDLE_HEIGHT = "navigation_handle_height";
+
+        /** @hide */
+        private static final Validator NAVIGATION_HANDLE_HEIGHT_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
          * Settings dashboard icon style
          * @hide
          */
@@ -5666,6 +5675,7 @@ public final class Settings {
             SHOW_MEDIA_HEADS_UP,
             BACK_GESTURE_BLOCK_IME,
             GESTURE_NAVBAR_SHOW,
+            NAVIGATION_HANDLE_HEIGHT,
         };
 
         /**
@@ -5845,6 +5855,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(GESTURE_NAVBAR_SHOW);
             PRIVATE_SETTINGS.add(INCALL_FEEDBACK_VIBRATE);
             PRIVATE_SETTINGS.add(FOD_GESTURE);
+            PRIVATE_SETTINGS.add(NAVIGATION_HANDLE_HEIGHT);
         }
 
         /**
@@ -6004,6 +6015,7 @@ public final class Settings {
             VALIDATORS.put(GESTURE_NAVBAR_SHOW,GESTURE_NAVBAR_SHOW_VALIDATOR);
             VALIDATORS.put(INCALL_FEEDBACK_VIBRATE, INCALL_FEEDBACK_VIBRATE_VALIDATOR);
             VALIDATORS.put(FOD_GESTURE, FOD_GESTURE_VALIDATOR);
+            VALIDATORS.put(NAVIGATION_HANDLE_HEIGHT, NAVIGATION_HANDLE_HEIGHT_VALIDATOR);
         }
 
         /**
