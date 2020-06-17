@@ -70,9 +70,4 @@
         android:key="managed_profile"
         android:title="@string/status_bar_work" />
 
-    <com.android.systemui.tuner.ClockPreference
-        android:title="@string/tuner_time"
-        android:summary="%s"
-        android:entries="@array/clock_options" />
-
 </PreferenceScreen>
