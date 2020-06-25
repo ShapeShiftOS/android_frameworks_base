@@ -58,6 +58,7 @@ import com.android.systemui.R;
 import vendor.lineage.biometrics.fingerprint.inscreen.V1_0.IFingerprintInscreen;
 import vendor.lineage.biometrics.fingerprint.inscreen.V1_0.IFingerprintInscreenCallback;
 
+import java.lang.IllegalStateException;
 import java.util.NoSuchElementException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -735,7 +736,11 @@ class FODAnimation extends ImageView {
     public void showFODanimation() {
         if (mAnimParams != null && !mShowing && mIsKeyguard) {
             mShowing = true;
-            mWindowManager.addView(this, mAnimParams);
+            try {
+                mWindowManager.addView(this, mAnimParams);
+            } catch (IllegalStateException e) {
+                // Do nothing - View already added
+            }
             recognizingAnim.start();
         }
     }
