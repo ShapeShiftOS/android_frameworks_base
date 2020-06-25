@@ -49,6 +49,8 @@ LOCAL_REQUIRED_MODULES := \
 	AccentColorXiaomiOverlay \
 	AccentColorBlackOverlay \
 	AccentColorCinnamonOverlay \
+       AccentColorCoralOverlay \
+	AccentColorFerrariRedOverlay \
 	AccentColorOceanOverlay \
 	AccentColorOrchidOverlay \
 	AccentColorSpaceOverlay \
