@@ -262,10 +262,6 @@ public final class NotificationEntry {
         this.row = row;
     }
 
-    public View getContentView() {
-        return row.getPrivateLayout().getContractedChild();
-    }
-
     @Nullable
     public List<NotificationEntry> getChildren() {
         if (row == null) {

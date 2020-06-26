@@ -1554,14 +1554,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     }
 
-    protected boolean hasActiveVisibleNotifications() {
-        return mEntryManager.getNotificationData().hasActiveVisibleNotifications();
-    }
-
-    protected boolean hasActiveOngoingNotifications() {
-        return mEntryManager.getNotificationData().hasActiveOngoingNotifications();
-    }
-
     public void updateAreThereNotifications() {
         if (mNotificationPanel.hasActiveClearableNotifications()) {
             mClearableNotifications = true;
@@ -4080,9 +4072,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.QS_COLUMNS_LANDSCAPE),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_BLUR_ALPHA),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -4114,9 +4103,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                     uri.equals(Settings.System.getUriFor(Settings.System.QS_COLUMNS_PORTRAIT)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.QS_COLUMNS_LANDSCAPE))) {
                 setQsRowsColumns();
-            } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN))) {
-                setStatusBarWindowViewOptions();
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.QS_BLUR_ALPHA)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.QS_BLUR_INTENSITY))) {
                 updateBlurVisibility();
@@ -4133,7 +4119,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateHideNotchStatus();
             setPulseOnNewTracks();
             setHideArrowForBackGesture();
-            setStatusBarWindowViewOptions();
             updatePocketJudgeFP();
             setUseLessBoringHeadsUp();
      }
@@ -4192,12 +4177,6 @@ public class StatusBar extends SystemUI implements DemoMode,
     private void setStatusDoubleTapToSleep() {
         if (mStatusBarWindow != null) {
             mStatusBarWindow.updateSettings();
-        }
-    }
-
-    private void setStatusBarWindowViewOptions() {
-        if (mStatusBarWindow != null) {
-            mStatusBarWindow.setStatusBarWindowViewOptions();
         }
     }
 

@@ -4682,12 +4682,6 @@ public final class Settings {
         private static final Validator HIDE_SMART_REPLIES_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
-         * Allow users to pull down the status bar quickly
-         * @hide
-         */
-        public static final String STATUS_BAR_QUICK_QS_PULLDOWN = "status_bar_quick_qs_pulldown";
-
-        /**
          * FOD icon picker
          * @hide
          */
@@ -5193,12 +5187,6 @@ public final class Settings {
          * @hide
          */
         public static final String QS_COLUMNS_LANDSCAPE = "qs_columns_landscape";
-
-        /**
-         * Quick Settings Smart Pulldown
-         * @hide
-         */
-        public static final String QS_SMART_PULLDOWN = "qs_smart_pulldown";
 
         /**
          * Settings dashboard icon style
