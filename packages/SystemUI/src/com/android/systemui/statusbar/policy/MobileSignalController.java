@@ -104,6 +104,7 @@ public class MobileSignalController extends SignalController<
 
     private ImsManager mImsManager;
     private ImsManager.Connector mImsManagerConnector;
+    private int mCallState = TelephonyManager.CALL_STATE_IDLE;
     private boolean mShow4gForLte;
 
     // Volte Icon
@@ -878,7 +879,7 @@ public class MobileSignalController extends SignalController<
     }
 
     private boolean isVowifiAvailable() {
-        return mCurrentState.voiceCapable &&  mCurrentState.imsRegistered
+        return mCurrentState.imsRegistered
                 && mServiceState.getDataNetworkType() == TelephonyManager.NETWORK_TYPE_IWLAN;
     }
 
