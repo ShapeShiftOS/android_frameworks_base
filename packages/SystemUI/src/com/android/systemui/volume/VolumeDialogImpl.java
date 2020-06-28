@@ -306,10 +306,10 @@ public class VolumeDialogImpl implements VolumeDialog,
         mMusicText = mDialog.findViewById(R.id.music_container);
         mVolumeDialogID = R.id.volume_dialog;
         if (mMediaManager == null) {
-            mMediaManager = Dependency.get(NotificationMediaManager.class);
-            mMusicText.initDependencies(mMediaManager);
+          mMediaManager = Dependency.get(NotificationMediaManager.class);
+          mMusicText.initDependencies(mMediaManager);
         } else {
-        mMusicText.initDependencies(mMediaManager);
+            mMusicText.initDependencies(mMediaManager);
         }
         mDialogView.setAlpha(0);
         mDialog.setCanceledOnTouchOutside(true);
@@ -449,6 +449,10 @@ public class VolumeDialogImpl implements VolumeDialog,
         mRinger.setVisibility(View.VISIBLE);
         mBackgroundThings.setVisibility(View.VISIBLE);
       }
+    }
+
+    public void initText (NotificationMediaManager mediaManager) {
+        mMediaManager = mediaManager;
     }
 
     protected ViewGroup getDialogView() {
