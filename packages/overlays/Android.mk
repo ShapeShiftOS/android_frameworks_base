@@ -36,9 +36,6 @@ LOCAL_REQUIRED_MODULES := \
         AccentColorCocaColaOverlay \
 	AccentColorDiscordOverlay \
 	AccentColorGoldenShowerOverlay \
-	AccentColorGreenOverlay \
-	AccentColorIndigoOverlay \
-	AccentColorInfernoRedOverlay \
 	AccentColorJollibeeOverlay \
         AccentColorRazerOverlay \
         AccentColorStarbucksOverlay \
@@ -105,11 +102,9 @@ LOCAL_REQUIRED_MODULES := \
 	IconPackRoundedThemePickerOverlay \
         IconShapeCylinderOverlay \
 	IconShapeHexagonOverlay \
-	IconShapePebbleOverlay \
 	IconShapeRoundedHexagonOverlay \
 	IconShapeRoundedRectOverlay \
 	IconShapeSquircleOverlay \
-	IconShapeTaperedRectOverlay \
 	IconShapeTeardropOverlay \
 	PrimaryColorOceanOverlay \
 	PrimaryColorNatureOverlay \
@@ -121,9 +116,7 @@ LOCAL_REQUIRED_MODULES := \
         PrimaryColorOneplusDarkOverlay \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarMode2ButtonOverlay \
-	NavigationBarMode3ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
-	NavigationBarModeGesturalOverlayExtraWideBack \
 	NavigationBarModeGesturalOverlayNarrowBack \
 	NavigationBarModeGesturalOverlayWideBack \
 	NavigationBarModeGesturalOverlayExtraWideBack \
