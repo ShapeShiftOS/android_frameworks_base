@@ -5293,6 +5293,7 @@ public final class Settings {
 
         private static final Validator SYNTHOS_CENTER_NOTIFICATION_HEADERS_VALIDATOR = BOOLEAN_VALIDATOR;
 
+
         /**
          * Whether to show VoWiFi icon or not
          * @hide
@@ -5302,13 +5303,6 @@ public final class Settings {
         /** @hide */
         public static final Validator VOWIFI_ICON_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
-
-        /**
-        * Music Text in VolumePanel
-        * by.tikkiX2
-        * @hide
-        */
-        public static final String SYNTHOS_MUSIC_VOLUME_PANEL_TEXT = "synthos_music_volume_panel_text";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
