@@ -171,7 +171,8 @@ public class VolumeDialogImpl implements VolumeDialog,
     private View mODICaptionsTooltipView = null;
 
     private boolean mLeftVolumeRocker;
-    private boolean mHideThings;
+    private boolean mHideRinger;
+    private boolean mHideExtended;
     private View mBackgroundThings;
 
     private boolean isMediaShowing = true;
@@ -193,7 +194,8 @@ public class VolumeDialogImpl implements VolumeDialog,
             mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.AUDIO_PANEL_VIEW_ALARM), false, this, UserHandle.USER_ALL);
             mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.AUDIO_PANEL_VIEW_VOICE), false, this, UserHandle.USER_ALL);
             mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.AUDIO_PANEL_VIEW_BT_SCO), false, this, UserHandle.USER_ALL);
-            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.SYNTHOS_HIDE_THINGS_VOLUMEPANEL), false, this, UserHandle.USER_ALL);
+            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.SYNTHOS_HIDE_RINGER_VOLUMEPANEL), false, this, UserHandle.USER_ALL);
+            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.SYNTHOS_HIDE_EXTENDED_VOLUMEPANEL), false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -209,7 +211,8 @@ public class VolumeDialogImpl implements VolumeDialog,
              isAlarmShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_ALARM, 0, UserHandle.USER_CURRENT) == 1;
              isVoiceShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_VOICE, 0, UserHandle.USER_CURRENT) == 1;
              isBTSCOShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_BT_SCO, 0, UserHandle.USER_CURRENT) == 1;
-             mHideThings = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.SYNTHOS_HIDE_THINGS_VOLUMEPANEL, 0, UserHandle.USER_CURRENT) == 1;
+             mHideRinger = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.SYNTHOS_HIDE_RINGER_VOLUMEPANEL, 0, UserHandle.USER_CURRENT) == 1;
+             mHideExtended = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.SYNTHOS_HIDE_EXTENDED_VOLUMEPANEL, 1, UserHandle.USER_CURRENT) == 1;
              updateRowsH(getActiveRow());
              hideThings();
         }
@@ -416,12 +419,20 @@ public class VolumeDialogImpl implements VolumeDialog,
     }
 
     private void hideThings() {
-      if (mHideThings){
-        mRinger.setVisibility(View.GONE);
-        mBackgroundThings.setVisibility(View.GONE);
+      if (mHideRinger){
+          mRinger.setVisibility(View.GONE);
       } else {
-        mRinger.setVisibility(View.VISIBLE);
-        mBackgroundThings.setVisibility(View.VISIBLE);
+          mRinger.setVisibility(View.VISIBLE);
+      }
+      if (mHideExtended){
+          mExpandRowsView.setVisibility(View.GONE);
+      } else {
+          mExpandRowsView.setVisibility(View.VISIBLE);
+      }
+      if (mHideRinger && mHideExtended) {
+          mBackgroundThings.setVisibility(View.GONE);
+      } else if ((!mHideRinger || !mHideExtended))  {
+          mBackgroundThings.setVisibility(View.VISIBLE);
       }
     }
 
