@@ -479,9 +479,13 @@ public class MobileSignalController extends SignalController<
                 case 7:
                     resId = R.drawable.ic_volit;
                     break;
-                // VoLit Icon
+                // VoLTE OOS R Icon
                 case 8:
                     resId = R.drawable.ic_volteoosr8;
+                    break;
+                // EMUI icon
+                case 9:
+                    resId = R.drawable.ic_volte_emui;
                     break;
  	        //Vo
                 case 0:
