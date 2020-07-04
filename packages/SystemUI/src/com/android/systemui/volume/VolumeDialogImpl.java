@@ -212,7 +212,7 @@ public class VolumeDialogImpl implements VolumeDialog,
              isVoiceShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_VOICE, 0, UserHandle.USER_CURRENT) == 1;
              isBTSCOShowing = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.AUDIO_PANEL_VIEW_BT_SCO, 0, UserHandle.USER_CURRENT) == 1;
              mHideRinger = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.SYNTHOS_HIDE_RINGER_VOLUMEPANEL, 0, UserHandle.USER_CURRENT) == 1;
-             mHideExtended = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.SYNTHOS_HIDE_EXTENDED_VOLUMEPANEL, 1, UserHandle.USER_CURRENT) == 1;
+             mHideExtended = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.SYNTHOS_HIDE_EXTENDED_VOLUMEPANEL, 0, UserHandle.USER_CURRENT) == 1;
              updateRowsH(getActiveRow());
              hideThings();
         }
