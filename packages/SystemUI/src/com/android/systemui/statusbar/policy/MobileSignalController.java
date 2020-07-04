@@ -487,6 +487,18 @@ public class MobileSignalController extends SignalController<
                 case 9:
                     resId = R.drawable.ic_volte_emui;
                     break;
+                // Sony icon
+                case 10:
+                    resId = R.drawable.ic_volte_sony;
+                    break;
+                // Pill icon
+                case 11:
+                    resId = R.drawable.ic_volte_round;
+                    break;
+                // Square2Tone icon
+                case 12:
+                    resId = R.drawable.ic_volte_toned;
+                    break;
  	        //Vo
                 case 0:
                 default:
