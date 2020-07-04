@@ -48,6 +48,7 @@ LOCAL_REQUIRED_MODULES := \
 	FontSlateForOnePlusOverlay \
 	FontSFProOverlay \
 	FontEvolveSans \
+	FontLinotte \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularLauncherOverlay \
 	IconPackCircularSettingsOverlay \
