@@ -104,18 +104,12 @@ public class MobileSignalController extends SignalController<
 
     private ImsManager mImsManager;
     private ImsManager.Connector mImsManagerConnector;
-    private int mCallState = TelephonyManager.CALL_STATE_IDLE;
     private boolean mShow4gForLte;
 
     // Volte Icon
     private boolean mVoLTEicon;
     // Volte Icon Style
     private int mVoLTEstyle;
-
-    // VoWiFi Icon
-    private int mVoWiFiIcon;
-    // VoWiFi Icon Style
-    private int mVoWiFistyle;
 
     // TODO: Reduce number of vars passed in, if we have the NetworkController, probably don't
     // need listener lists anymore.
@@ -203,13 +197,8 @@ public class MobileSignalController extends SignalController<
            resolver.registerContentObserver(
 	            Settings.System.getUriFor(Settings.System.VOLTE_ICON_STYLE),
                   false,this, UserHandle.USER_ALL);
-           resolver.registerContentObserver(Settings.System.getUriFor(
-                  Settings.System.VOWIFI_ICON),
-                  false,this, UserHandle.USER_ALL);
-           resolver.registerContentObserver(Settings.System.getUriFor(
-                  Settings.System.VOWIFI_ICON_STYLE),
-                  false,this, UserHandle.USER_ALL);
-           updateSettings();
+
+             updateSettings();
         }
 
         /*
@@ -235,14 +224,6 @@ public class MobileSignalController extends SignalController<
         mVoLTEstyle = Settings.System.getIntForUser(resolver,
                 Settings.System.VOLTE_ICON_STYLE, 0,
                 UserHandle.USER_CURRENT);
-
-        mVoWiFiIcon = Settings.System.getIntForUser(resolver,
-                Settings.System.VOWIFI_ICON, 0,
-                UserHandle.USER_CURRENT);
-        mVoWiFistyle = Settings.System.getIntForUser(resolver,
-                Settings.System.VOWIFI_ICON_STYLE, 0,
-                UserHandle.USER_CURRENT);
-
         mapIconSets();
         updateTelephony();
         notifyListeners();
@@ -472,10 +453,6 @@ public class MobileSignalController extends SignalController<
     private int getVolteResId() {
         int resId = 0;
 
-        if (mVoWiFiIcon == 2 && isVowifiAvailable()) {
-            return resId;
-        }
-
         if (mCurrentState.imsRegistered && mVoLTEicon) {
             switch(mVoLTEstyle) {
                 // VoLTE
@@ -560,15 +537,6 @@ public class MobileSignalController extends SignalController<
         int typeIcon = (showDataIcon || mConfig.alwaysShowDataRatIcon) ? icons.mDataType : 0;
         int volteIcon = mConfig.showVolteIcon && isVolteSwitchOn()
                 ? getVolteResId() : 0;
-
-        MobileIconGroup vowifiIconGroup = getVowifiIconGroup();
-        if ( vowifiIconGroup != null && (mVoWiFiIcon >= 1) ) {
-            typeIcon = vowifiIconGroup.mDataType;
-            statusIcon = new IconState(true,
-                    mCurrentState.enabled && !mCurrentState.airplaneMode? statusIcon.icon : 0,
-                    statusIcon.contentDescription);
-        }
-
         callback.setMobileDataIndicators(statusIcon, qsIcon, typeIcon, qsTypeIcon,
                 activityIn, activityOut, volteIcon, dataContentDescription, dataContentDescriptionHtml,
                 description, icons.mIsWide, mSubscriptionInfo.getSubscriptionId(),
@@ -872,40 +840,6 @@ public class MobileSignalController extends SignalController<
         mCurrentState.activityDormant = activity == TelephonyManager.DATA_ACTIVITY_DORMANT;
 
         notifyListenersIfNecessary();
-    }
-
-    private boolean isCallIdle() {
-        return mCallState == TelephonyManager.CALL_STATE_IDLE;
-    }
-
-    private boolean isVowifiAvailable() {
-        return mCurrentState.imsRegistered
-                && mServiceState.getDataNetworkType() == TelephonyManager.NETWORK_TYPE_IWLAN;
-    }
-
-    private MobileIconGroup getVowifiIconGroup() {
-        if ( isVowifiAvailable() && !isCallIdle() ) {
-            return TelephonyIcons.VOWIFI_CALLING;
-        } else if (isVowifiAvailable()) {
-            switch(mVoWiFistyle) {
-                // OOS
-                case 1:
-                    return TelephonyIcons.VOWIFI_ONEPLUS;
-                // Motorola
-                case 2:
-                    return TelephonyIcons.VOWIFI_MOTO;
-                // ASUS
-                case 3:
-                    return TelephonyIcons.VOWIFI_ASUS;
-                // EMUI (Huawei P10)
-                case 4:
-                    return TelephonyIcons.VOWIFI_EMUI;
-                default:
-                    return TelephonyIcons.VOWIFI;
-            }
-        }else {
-            return null;
-        }
     }
 
     @Override

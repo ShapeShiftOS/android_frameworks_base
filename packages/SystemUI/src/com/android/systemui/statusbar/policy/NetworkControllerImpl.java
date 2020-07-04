@@ -1206,7 +1206,6 @@ public class NetworkControllerImpl extends BroadcastReceiver
                         config);
             }
             config.showVolteIcon = res.getBoolean(R.bool.config_display_volte);
-
             return config;
         }
 
