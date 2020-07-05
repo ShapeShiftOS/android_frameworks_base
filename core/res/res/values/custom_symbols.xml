@@ -104,12 +104,15 @@
     <!-- Whether device supports internal audio recording -->
     <java-symbol type="bool" name="config_hasInternalAudioRecordingSupport" />
 
-    <!-- Smart charging battery percentage -->
+    <!-- Smart charging -->
     <java-symbol type="bool" name="config_smartChargingAvailable" />
     <java-symbol type="integer" name="config_smartChargingBatteryLevel" />
     <java-symbol type="string" name="config_SmartChargingSysfsNode" />
     <java-symbol type="string" name="config_SmartChargingSuspendValue" />
     <java-symbol type="string" name="config_SmartChargingResumeValue" />
     <java-symbol type="integer" name="config_smartChargingBatteryResumeLevel" />
+
+    <!-- Clipboard force notify packages -->
+    <java-symbol type="array" name="config_notifyClipboardPackages" />
 
 </resources>
