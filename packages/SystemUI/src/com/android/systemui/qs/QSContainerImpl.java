@@ -19,9 +19,14 @@ package com.android.systemui.qs;
 import static android.app.StatusBarManager.DISABLE2_QUICK_SETTINGS;
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.database.ContentObserver;
 import android.graphics.Point;
+import android.os.Handler;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -74,8 +79,14 @@ public class QSContainerImpl extends FrameLayout {
     private int mContentPaddingEnd = -1;
     private boolean mAnimateBottomOnNextLayout;
 
+    private boolean mLandscape;
+    private boolean mHideQSBlackGradient;
+
     public QSContainerImpl(Context context, AttributeSet attrs) {
         super(context, attrs);
+        Handler mHandler = new Handler();
+        SettingsObserver settingsObserver = new SettingsObserver(mHandler);
+        settingsObserver.observe();
     }
 
     @Override
@@ -85,7 +96,7 @@ public class QSContainerImpl extends FrameLayout {
         mQSPanelContainer = findViewById(R.id.expanded_qs_scroll_view);
         mQSDetail = findViewById(R.id.qs_detail);
         mHeader = findViewById(R.id.header);
-        mQSCustomizer = findViewById(R.id.qs_customize);
+        mQSCustomizer = (QSCustomizer) findViewById(R.id.qs_customize);
         mDragHandle = findViewById(R.id.qs_drag_handle_view);
         mBackground = findViewById(R.id.quick_settings_background);
         mStatusBarBackground = findViewById(R.id.quick_settings_status_bar_background);
@@ -101,7 +112,7 @@ public class QSContainerImpl extends FrameLayout {
                 mAnimateBottomOnNextLayout = true;
             }
         });
-
+        updateSettings();
 
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
     }
@@ -124,8 +135,35 @@ public class QSContainerImpl extends FrameLayout {
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         setBackgroundGradientVisibility(newConfig);
+        mLandscape = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE;
         updateResources();
         mSizePoint.set(0, 0); // Will be retrieved on next measure pass.
+    }
+
+    private class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = getContext().getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_HEADER_BACKGROUND),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            updateSettings();
+        }
+    }
+
+    private void updateSettings() {
+        ContentResolver resolver = getContext().getContentResolver();
+        mHideQSBlackGradient = Settings.System.getIntForUser(resolver,
+                Settings.System.QS_HEADER_BACKGROUND, 0,
+                UserHandle.USER_CURRENT) == 1;
+        updateResources();
     }
 
     @Override
@@ -213,6 +251,7 @@ public class QSContainerImpl extends FrameLayout {
         if (marginsChanged) {
             updatePaddingsAndMargins();
         }
+        setBackgroundGradientVisibility(getResources().getConfiguration());
     }
 
     /**
@@ -262,13 +301,13 @@ public class QSContainerImpl extends FrameLayout {
     }
 
     private void setBackgroundGradientVisibility(Configuration newConfig) {
-        if (newConfig.orientation == ORIENTATION_LANDSCAPE) {
+        boolean shouldHideStatusbar = (mLandscape || mHideQSBlackGradient);
+        if (mLandscape || mHideQSBlackGradient) {
             mBackgroundGradient.setVisibility(View.INVISIBLE);
-            mStatusBarBackground.setVisibility(View.INVISIBLE);
         } else {
-            mBackgroundGradient.setVisibility(mQsDisabled ? View.INVISIBLE : View.VISIBLE);
-            mStatusBarBackground.setVisibility(View.VISIBLE);
+            mBackgroundGradient.setVisibility((mQsDisabled) ? View.INVISIBLE : View.VISIBLE);
         }
+        mStatusBarBackground.setVisibility(shouldHideStatusbar ? View.INVISIBLE : View.VISIBLE);
     }
 
     public void setExpansion(float expansion) {
