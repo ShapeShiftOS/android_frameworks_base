@@ -81,7 +81,6 @@ public class BatteryMeterView extends LinearLayout implements
     public static final int MODE_OFF = 2;
     public static final int MODE_ESTIMATE = 3;
 
-
     private static final int BATTERY_STYLE_PORTRAIT = 0;
     private static final int BATTERY_STYLE_CIRCLE = 1;
     private static final int BATTERY_STYLE_DOTTED_CIRCLE = 2;
@@ -360,13 +359,8 @@ public class BatteryMeterView extends LinearLayout implements
             return;
         }
 
-        final boolean systemSetting = 0 != Settings.System
-                .getIntForUser(getContext().getContentResolver(),
-                SHOW_BATTERY_PERCENT, 0, mUser);
-
         if (mBatteryPercentView != null) {
-            if (systemSetting && mShowPercentAvailable &&
-                    mShowPercentMode == MODE_ESTIMATE && !mCharging && mShowBatteryEstimate) {
+            if (mShowPercentMode == MODE_ESTIMATE && !mCharging && mShowBatteryEstimate) {
                 mBatteryController.getEstimatedTimeRemainingString((String estimate) -> {
                     if (estimate != null) {
                         if (mBatteryPercentView != null) {
