@@ -85,7 +85,7 @@
     <color name="keyguard_affordance_background_preview">#171717</color>
     <color name="keyguard_affordance_background_preview_background">#242426</color>
 
-    <color name="qs_tile_background_color_disabled">#1f1f1f</color>
+    <color name="qs_tile_background_color_disabled">#0fffffff</color>
 
     <color name="recents_dismiss_all_background_color">@*android:color/primary_dark_device_default_settings</color>
     <color name="recents_dismiss_all_background_color_ripple">#555555</color>
