@@ -5525,6 +5525,15 @@ public final class Settings {
         public static final String RINGTONE_VIBRATION_PATTERN = "ringtone_vibration_pattern";
 
         /**
+         * Screen off fod
+         * @hide
+         */
+        public static final String FOD_GESTURE = "fod_gesture";
+
+        /** @hide */
+        public static final Validator FOD_GESTURE_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5823,6 +5832,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BACK_GESTURE_BLOCK_IME);
             PRIVATE_SETTINGS.add(GESTURE_NAVBAR_SHOW);
             PRIVATE_SETTINGS.add(INCALL_FEEDBACK_VIBRATE);
+            PRIVATE_SETTINGS.add(FOD_GESTURE);
         }
 
         /**
@@ -5981,6 +5991,7 @@ public final class Settings {
             VALIDATORS.put(BACK_GESTURE_BLOCK_IME,BACK_GESTURE_BLOCK_IME_VALIDATOR);
             VALIDATORS.put(GESTURE_NAVBAR_SHOW,GESTURE_NAVBAR_SHOW_VALIDATOR);
             VALIDATORS.put(INCALL_FEEDBACK_VIBRATE, INCALL_FEEDBACK_VIBRATE_VALIDATOR);
+            VALIDATORS.put(FOD_GESTURE, FOD_GESTURE_VALIDATOR);
         }
 
         /**
