@@ -18,11 +18,11 @@
      overlaying new theme colors. -->
 <resources>
     <color name="primary_device_default_settings">#262626</color> <!-- colorPrimary -->
-    <color name="primary_dark_device_default_settings">#2d2d2d</color> <!-- colorPrimaryDark-->
+    <color name="primary_dark_device_default_settings">#262626</color> <!-- colorPrimaryDark-->
     <color name="primary_custom_dark_settings">#262626</color> <!-- Settings-->
     <color name="primary_custom_dark_settings_dark">#262626</color> <!-- Settings Dark--> 
-    <color name="material_grey_800">#2d2d2d</color> <!-- google elgoogleogoelo -->
-    <color name="material_grey_900">#151515</color> <!-- google elgoogleogoelo -->
+    <color name="material_grey_800">#262626</color> <!-- google elgoogleogoelo -->
+    <color name="material_grey_900">#262626</color> <!-- google elgoogleogoelo -->
     <color name="primary_device_default">@color/primary_dark_device_default_settings</color> <!-- only for ThemePicker! -->
 </resources>
 
