@@ -103,6 +103,7 @@ public class FODCircleView extends ImageView {
     private final int[] PRESSED_STYLES = {
         R.drawable.fod_icon_pressed_miui_cyan_light,
         R.drawable.fod_icon_pressed_miui_white_light,
+        R.drawable.fod_icon_pressed_realme_green_shadow,
         R.drawable.fod_icon_pressed_vivo_cyan,
         R.drawable.fod_icon_pressed_vivo_cyan_shadow,
         R.drawable.fod_icon_pressed_vivo_cyan_shadow_et713,
