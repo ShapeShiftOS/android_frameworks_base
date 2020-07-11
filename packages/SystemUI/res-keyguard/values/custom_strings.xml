@@ -20,5 +20,6 @@
     <string name="clock_title_mnml_minimal" translatable="false">MNML\'s Minimal</string>
     <string name="clock_title_samsung_accent" translatable="false">Samsung (Colored)</string>
     <string name="clock_title_fluid" translatable="false">Water Bottle</string>
+    <string name="clock_title_sammy" translatable="false">Samsung (404\'d)</string>
 
 </resources>
