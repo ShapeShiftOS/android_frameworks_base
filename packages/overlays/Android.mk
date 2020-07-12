@@ -17,74 +17,35 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := frameworks-base-overlays
 LOCAL_REQUIRED_MODULES := \
-	AccentColorDarkOrangeOverlay \
-	AccentColorMIUIOverlay \
-        AccentColorNextbitOverlay \
-	AccentColorOnePlusOverlay \
-	AccentColorParanoidOverlay \
-        AccentColorShapeShifterOverlay \
-	AccentColorPepsiOverlay \
-	AccentColorTealOverlay \
-	AccentColorRedOverlay \
-	AccentColorQGreenOverlay \
-	AccentColorPinkOverlay \
-	AccentColorLightPurpleOverlay \
-	AccentColorIndigoOverlay \
-	AccentColorFlatPinkOverlay \
-	AccentColorCyanOverlay \
-	AccentColorBlueGrayOverlay \
-        AccentColorCocaColaOverlay \
-	AccentColorDiscordOverlay \
-	AccentColorGoldenShowerOverlay \
-	AccentColorJollibeeOverlay \
-        AccentColorRazerOverlay \
-        AccentColorStarbucksOverlay \
-	AccentColorUbuntuOverlay \
-	AccentColorMatrixOverlay \
-	AccentColorSalmonOverlay \
-	AccentColorMetallicGoldOverlay \
-	AccentColorInfernoRedOverlay \
-	AccentColorDorsetGoldOverlay \
-	AccentColorXboxOverlay \
-	AccentColorXiaomiOverlay \
-	AccentColorBlackOverlay \
-	AccentColorCinnamonOverlay \
-       AccentColorCoralOverlay \
-	AccentColorFerrariRedOverlay \
-	AccentColorOceanOverlay \
-	AccentColorOrchidOverlay \
-	AccentColorSpaceOverlay \
-	AccentColorGreenOverlay \
-	AccentColorPurpleOverlay \
 	DisplayCutoutEmulationCornerOverlay \
 	DisplayCutoutEmulationDoubleOverlay \
 	DisplayCutoutEmulationTallOverlay \
 	FontGoogleSansOverlay \
 	FontCircularStdOverlay \
 	FontOnePlusSlateOverlay \
-    FontBigNoodle \
-    FontBikoHanken \
-    FontComicNeue \
-    FontExo2 \
-    FontFinlandica \
-    FontGoodlight \
-    FontGravity \
-    FontInter \
-    FontLeagueMonoNarrow \
-    FontLeonSans \
-    FontMescla \
-    FontCocon \
-    FontMittelschrift \
-    FontOdibee \
-    FontPanamericana \
-    FontPissel \
-    FontPTSansMono \
-    FontReemKufi \
-    FontRoboto \
-    FontRouterGothicNarrow \
-    FontRoutedGothicRobotoCondensed \
-    FontSofiaSans \
-    FontSofiaSansSemiCondensed \
+        FontBigNoodle \
+        FontBikoHanken \
+        FontComicNeue \
+        FontExo2 \
+        FontFinlandica \
+        FontGoodlight \
+        FontGravity \
+        FontInter \
+        FontLeagueMonoNarrow \
+        FontLeonSans \
+        FontMescla \
+        FontCocon \
+        FontMittelschrift \
+        FontOdibee \
+        FontPanamericana \
+        FontPissel \
+        FontPTSansMono \
+        FontReemKufi \
+        FontRoboto \
+        FontRouterGothicNarrow \
+        FontRoutedGothicRobotoCondensed \
+        FontSofiaSans \
+        FontSofiaSansSemiCondensed \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularLauncherOverlay \
 	IconPackCircularSettingsOverlay \
@@ -100,30 +61,12 @@ LOCAL_REQUIRED_MODULES := \
 	IconPackRoundedSettingsOverlay \
 	IconPackRoundedSystemUIOverlay \
 	IconPackRoundedThemePickerOverlay \
-        IconShapeCylinderOverlay \
-	IconShapeHexagonOverlay \
-	IconShapeRoundedHexagonOverlay \
-	IconShapeRoundedRectOverlay \
-	IconShapeSquircleOverlay \
-	IconShapeTeardropOverlay \
-	PrimaryColorOceanOverlay \
-	PrimaryColorNatureOverlay \
-        PrimaryColorDarkBlueOverlay \
-        PrimaryColorAlmostBlackOverlay \
-        PrimaryColorBlissOverlay \
-        PrimaryColorBlissClearOverlay \
-        PrimaryColorEyeSootherOverlay \
-        PrimaryColorOneplusDarkOverlay \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarMode2ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
 	NavigationBarModeGesturalOverlayNarrowBack \
 	NavigationBarModeGesturalOverlayWideBack \
-	NavigationBarModeGesturalOverlayExtraWideBack \
-	IconShapeVesselOverlay \
-        IconShapeTaperedRectOverlay \
-        IconShapePebbleOverlay \
-	PrimaryColorBlackOverlay
+	NavigationBarModeGesturalOverlayExtraWideBack 
 
 
 include $(BUILD_PHONY_PACKAGE)
