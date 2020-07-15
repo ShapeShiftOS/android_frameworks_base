@@ -178,4 +178,7 @@
     <string name="dlg_cancel">@android:string/cancel</string>
     <string name="guts_force_close_app">Close App</string>
 
+    <!-- Tux clock -->
+    <string name="clock_title_tux" translatable="false">Tux</string>
+
 </resources>
