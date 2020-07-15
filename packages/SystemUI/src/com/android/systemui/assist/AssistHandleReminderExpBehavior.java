@@ -42,7 +42,6 @@ import com.android.systemui.shared.system.PackageManagerWrapper;
 import com.android.systemui.shared.system.QuickStepContract;
 import com.android.systemui.shared.system.TaskStackChangeListener;
 import com.android.systemui.statusbar.StatusBarState;
-
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -74,8 +73,8 @@ final class AssistHandleReminderExpBehavior implements BehaviorController {
             TimeUnit.SECONDS.toMillis(1);
     private static final long DEFAULT_SHOW_AND_GO_DELAY_RESET_TIMEOUT_MS =
             TimeUnit.SECONDS.toMillis(3);
-    private static final boolean DEFAULT_SUPPRESS_ON_LOCKSCREEN = false;
-    private static final boolean DEFAULT_SUPPRESS_ON_LAUNCHER = false;
+    private static final boolean DEFAULT_SUPPRESS_ON_LOCKSCREEN = true;
+    private static final boolean DEFAULT_SUPPRESS_ON_LAUNCHER = true;
     private static final boolean DEFAULT_SUPPRESS_ON_APPS = true;
     private static final boolean DEFAULT_SHOW_WHEN_TAUGHT = false;
 
@@ -495,21 +494,15 @@ final class AssistHandleReminderExpBehavior implements BehaviorController {
     }
 
     private boolean getSuppressOnLockscreen() {
-        return mDeviceConfigHelper.getBoolean(
-                SystemUiDeviceConfigFlags.ASSIST_HANDLES_SUPPRESS_ON_LOCKSCREEN,
-                DEFAULT_SUPPRESS_ON_LOCKSCREEN);
+        return DEFAULT_SUPPRESS_ON_LOCKSCREEN;
     }
 
     private boolean getSuppressOnLauncher() {
-        return mDeviceConfigHelper.getBoolean(
-                SystemUiDeviceConfigFlags.ASSIST_HANDLES_SUPPRESS_ON_LAUNCHER,
-                DEFAULT_SUPPRESS_ON_LAUNCHER);
+        return DEFAULT_SUPPRESS_ON_LAUNCHER;
     }
 
     private boolean getSuppressOnApps() {
-        return mDeviceConfigHelper.getBoolean(
-                SystemUiDeviceConfigFlags.ASSIST_HANDLES_SUPPRESS_ON_APPS,
-                DEFAULT_SUPPRESS_ON_APPS);
+        return DEFAULT_SUPPRESS_ON_APPS;
     }
 
     private boolean getShowWhenTaught() {
