@@ -104,26 +104,4 @@
     <!-- Whether device supports internal audio recording -->
     <java-symbol type="bool" name="config_hasInternalAudioRecordingSupport" />
 
-    <!-- Whether device can force navbar disabling -->
-    <java-symbol type="bool" name="config_canForceDisableNavigationBar" />
-
-    <!-- Whether device supports gestures on fingerprint sensor -->
-    <java-symbol type="bool" name="config_supportsGesturesOnFingerprintSensor" />
-
-    <!-- Device hardware keys -->
-    <java-symbol type="integer" name="config_deviceHardwareKeys" />
-    <java-symbol type="integer" name="config_deviceHardwareWakeKeys" />
-
-    <!-- Device keys user-customisable behavior -->
-    <java-symbol type="integer" name="config_longPressOnHomeBehaviorHwkeys" />
-    <java-symbol type="integer" name="config_doubleTapOnHomeBehaviorHwkeys" />
-    <java-symbol type="integer" name="config_longPressOnMenuBehaviorHwkeys" />
-    <java-symbol type="integer" name="config_pressOnAppSwitchBehaviorHwkeys" />
-    <java-symbol type="integer" name="config_longPressOnAppSwitchBehaviorHwkeys" />
-    <java-symbol type="integer" name="config_pressOnAssistBehaviorHwkeys" />
-    <java-symbol type="integer" name="config_longPressOnAssistBehaviorHwkeys" />
-
-    <!-- Camera key type -->
-    <java-symbol type="bool" name="config_singleStageCameraKey" />
-
 </resources>

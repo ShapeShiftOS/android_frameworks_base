@@ -135,6 +135,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.ArraySet;
@@ -181,8 +182,6 @@ import com.android.server.wallpaper.WallpaperManagerInternal;
 import com.android.server.wm.utils.InsetUtils;
 
 import java.io.PrintWriter;
-
-import com.android.internal.util.custom.NavbarUtils;
 
 /**
  * The policy that provides the basic behaviors and states of a display to show UI.
@@ -444,9 +443,6 @@ public class DisplayPolicy {
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SWIPE_TO_SCREENSHOT), false, this,
                     UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.NAVIGATION_BAR_SHOW), false, this,
-                    UserHandle.USER_ALL);
             updateSettings();
         }
 
@@ -626,27 +622,28 @@ public class DisplayPolicy {
 
         if (mDisplayContent.isDefaultDisplay) {
             mHasStatusBar = true;
+            mHasNavigationBar = mContext.getResources().getBoolean(R.bool.config_showNavigationBar);
+
+            // Allow a system property to override this. Used by the emulator.
+            // See also hasNavigationBar().
+            String navBarOverride = SystemProperties.get("qemu.hw.mainkeys");
+            if ("1".equals(navBarOverride)) {
+                mHasNavigationBar = false;
+            } else if ("0".equals(navBarOverride)) {
+                mHasNavigationBar = true;
+            }
 
             // Register content observer only for main display
             mSettingsObserver = new SettingsObserver(mHandler);
         } else {
             mHasStatusBar = false;
+            mHasNavigationBar = mDisplayContent.supportsSystemDecorations();
         }
-
-        updateNavigationBarState();
 
         mRefreshRatePolicy = new RefreshRatePolicy(mService,
                 mDisplayContent.getDisplayInfo(),
                 mService.mHighRefreshRateBlacklist);
 
-    }
-
-    private void updateNavigationBarState(){
-        if (mDisplayContent.isDefaultDisplay) {
-            mHasNavigationBar = NavbarUtils.isEnabled(mContext);
-        } else {
-            mHasNavigationBar = mDisplayContent.supportsSystemDecorations();
-        }
     }
 
     void systemReady() {
@@ -663,8 +660,6 @@ public class DisplayPolicy {
         final boolean threeFingerGesture = Settings.System.getIntForUser(resolver,
                 Settings.System.SWIPE_TO_SCREENSHOT, 1, UserHandle.USER_CURRENT) == 1;
         enableSwipeThreeFingerGesture(threeFingerGesture);
-
-        updateNavigationBarState();
     }
 
     private int getDisplayId() {
