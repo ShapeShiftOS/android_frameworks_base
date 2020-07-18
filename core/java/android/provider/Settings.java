@@ -5226,24 +5226,6 @@ public final class Settings {
         /** @hide */
         private static final Validator QS_BLUR_INTENSITY_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
-        /** @hide */
-        public static final String AUDIO_PANEL_VIEW_MEDIA = "audio_panel_view_media";
-
-        /** @hide */
-        public static final String AUDIO_PANEL_VIEW_RINGER = "audio_panel_view_ringer";
-
-        /** @hide */
-        public static final String AUDIO_PANEL_VIEW_NOTIFICATION = "audio_panel_view_notification";
-
-        /** @hide */
-        public static final String AUDIO_PANEL_VIEW_ALARM = "audio_panel_view_alarm";
-
-        /** @hide */
-        public static final String AUDIO_PANEL_VIEW_VOICE = "audio_panel_view_voice";
-
-        /** @hide */
-        public static final String AUDIO_PANEL_VIEW_BT_SCO = "audio_panel_view_bt_sco";
-
         /**
          * @hide
          */
@@ -5271,18 +5253,6 @@ public final class Settings {
          */
         public static final String DOZE_TRIGGER_DOUBLETAP = "doze_trigger_doubletap";
 
-
-        /**
-        * Whether show/hide ringer in volume panel by.tikkiX2
-        * @hide
-        */
-        public static final String SYNTHOS_HIDE_RINGER_VOLUMEPANEL = "synthos_hide_ringer_volumepanel";
-
-        /**
-        * Whether show/hide extended in volume panel by.tikkiX2
-        * @hide
-        */
-        public static final String SYNTHOS_HIDE_EXTENDED_VOLUMEPANEL = "synthos_hide_extended_volumepanel";
 
         /**
          * Controls whether to center R style notification headers
