@@ -637,20 +637,6 @@ public class FODCircleView extends ImageView {
         return false;
     }
 
-    private boolean isPinOrPattern(int userId) {
-        int passwordQuality = mLockPatternUtils.getActivePasswordQuality(userId);
-        switch (passwordQuality) {
-            // PIN
-            case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
-            case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
-            // Pattern
-            case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                return true;
-        }
-
-        return false;
-    }
-
     private class BurnInProtectionTask extends TimerTask {
         @Override
         public void run() {
