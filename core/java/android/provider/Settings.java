@@ -5380,13 +5380,6 @@ public final class Settings {
                 BOOLEAN_VALIDATOR;
 
         /**
-         * @hide
-         */
-        public static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
-        /** @hide */
-        private static final Validator STATUS_BAR_BRIGHTNESS_CONTROL_VALIDATOR = BOOLEAN_VALIDATOR;
-
-        /**
          * Force full screen for devices with cutout
          * @hide
          */
@@ -5542,7 +5535,6 @@ public final class Settings {
             LOCK_HIDE_STATUS_BAR,
             HEADSET_CONNECT_PLAYER,
             USE_OLD_MOBILETYPE,
-            STATUS_BAR_BRIGHTNESS_CONTROL,
             FORCE_FULLSCREEN_CUTOUT_APPS,
             ACCENT_COLOR,
         };
@@ -5717,7 +5709,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(LOCK_HIDE_STATUS_BAR);
             PRIVATE_SETTINGS.add(HEADSET_CONNECT_PLAYER);
             PRIVATE_SETTINGS.add(USE_OLD_MOBILETYPE);
-            PRIVATE_SETTINGS.add(STATUS_BAR_BRIGHTNESS_CONTROL);
             PRIVATE_SETTINGS.add(FORCE_FULLSCREEN_CUTOUT_APPS);
             PRIVATE_SETTINGS.add(ACCENT_COLOR);
         }
@@ -5871,7 +5862,6 @@ public final class Settings {
             VALIDATORS.put(LOCK_HIDE_STATUS_BAR,LOCK_HIDE_STATUS_BAR_VALIDATOR);
             VALIDATORS.put(HEADSET_CONNECT_PLAYER, HEADSET_CONNECT_PLAYER_VALIDATOR);
             VALIDATORS.put(USE_OLD_MOBILETYPE, USE_OLD_MOBILETYPE_VALIDATOR);
-            VALIDATORS.put(STATUS_BAR_BRIGHTNESS_CONTROL, STATUS_BAR_BRIGHTNESS_CONTROL_VALIDATOR);
             VALIDATORS.put(FORCE_FULLSCREEN_CUTOUT_APPS, FORCE_FULLSCREEN_CUTOUT_APPS_VALIDATOR);
             VALIDATORS.put(ACCENT_COLOR, ACCENT_COLOR_VALIDATOR);
         }
