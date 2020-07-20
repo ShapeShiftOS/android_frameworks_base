@@ -226,7 +226,7 @@ public class FODCircleView extends ImageView {
             @Override
             protected void onDraw(Canvas canvas) {
                 if (mIsCircleShowing) {
-                    setImageResource(PRESSED_STYLES[mPressedIcon]);
+                     canvas.drawCircle(mSize / 2, mSize / 2, mSize / 2.0f, mPaintFingerprintBackground);
                 }
                 super.onDraw(canvas);
             }
