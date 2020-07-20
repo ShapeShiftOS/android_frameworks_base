@@ -86,16 +86,16 @@
     <!-- Screen recorder -->
     <!-- Screen record -->
     <string name="screenrecord_dialog_title">Start recording?</string>
-    <string name="screenrecord_dialog_summary">While recording, Android system can capture any sensitive information that\'s visible on your screen or played on your device. This includes passwords, payment info, photos, messages, and audio.</string>
+    <string name="screenrecord_dialog_summary">While recording, Android system can capture any sensitive information that\'s visible on your screen or played on your device. This includes passwords, payment info, photos, messages and audio.</string>
     <string name="screenrecord_dialog_start">Start</string>
     <string name="screenrecord_dialog_cancel">Cancel</string>
      <string name="screenrecord_audio_recording_title">Audio source</string>
     <string name="screenrecord_audio_recording_internal">Internal</string>
     <string name="screenrecord_audio_recording_microphone">Microphone</string>
     <string name="screenrecord_audio_recording_off">Disabled</string>
-     <string name="screenrecord_taps_title">Show touches on screen</string>
-    <string name="screenrecord_stopdot_title">Show stop dot</string>
-    <string name="screenrecord_video_bitrate_title">Video Bitrate</string>
+     <string name="screenrecord_taps_title">Show taps on screen</string>
+    <string name="screenrecord_stopdot_title">Show red stop dot</string>
+    <string name="screenrecord_video_bitrate_title">Video bitrate</string>
 
     <!-- Power menu item for taking a screenshot [CHAR LIMIT=20]-->
     <string name="global_action_screenshot_cust">"Screenshot/Rec"</string>
