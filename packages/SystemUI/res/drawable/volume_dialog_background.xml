@@ -18,9 +18,9 @@
        android:shape="rectangle">
     <solid android:color="@color/volume_dialog_background" />
     <corners
-        android:bottomLeftRadius="24dip"
-        android:topLeftRadius="24dip"
-        android:bottomRightRadius="24dip"
-        android:topRightRadius="24dip"
+        android:bottomLeftRadius="28dp"
+        android:topLeftRadius="28dp"
+        android:bottomRightRadius="28dp"
+        android:topRightRadius="28dp"
         />
 </shape>
