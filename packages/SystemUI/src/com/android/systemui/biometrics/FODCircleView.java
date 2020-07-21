@@ -38,7 +38,6 @@ import android.graphics.Point;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.Looper;
-import android.os.PowerManager;
 import android.os.RemoteException;
 import android.provider.Settings;
 import android.view.Display;
@@ -90,9 +89,6 @@ public class FODCircleView extends ImageView {
     private Handler mHandler;
 
     private LockPatternUtils mLockPatternUtils;
-
-    private PowerManager mPowerManager;
-    private PowerManager.WakeLock mWakeLock;
 
     private Timer mBurnInProtectionTimer;
     private int iconcolor = 0xFF3980FF;
@@ -220,10 +216,6 @@ public class FODCircleView extends ImageView {
         mUpdateMonitor = KeyguardUpdateMonitor.getInstance(context);
         mUpdateMonitor.registerCallback(mMonitorCallback);
 
-        mPowerManager = context.getSystemService(PowerManager.class);
-        mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                FODCircleView.class.getSimpleName());
-
         mFODAnimation = new FODAnimation(context, mPositionX, mPositionY);
 
         mShouldRemoveIconOnAOD = Settings.System.getInt(mContext.getContentResolver(),
@@ -261,17 +253,6 @@ public class FODCircleView extends ImageView {
             setImageResource(R.drawable.fod_icon_pressed_white);
         } else if (fodpressed == 2) {
             setImageDrawable(null);
-        }
-    }
-
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-
-        if (mIsCircleShowing) {
-            dispatchPress();
-        } else {
-            dispatchRelease();
         }
     }
 
@@ -362,9 +343,9 @@ public class FODCircleView extends ImageView {
 
         setKeepScreenOn(true);
 
-        if (mIsDreaming) mWakeLock.acquire(500);
         setDim(true);
         updateAlpha();
+        dispatchPress();
 
         setFODPressedState();
         invalidate();
@@ -378,6 +359,8 @@ public class FODCircleView extends ImageView {
             mFODAnimation.setFODAnim();
         }
         invalidate();
+
+        dispatchRelease();
 
         setDim(false);
         updateAlpha();
