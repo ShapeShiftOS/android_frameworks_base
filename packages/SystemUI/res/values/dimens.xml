@@ -395,19 +395,19 @@
     the screen edge, in portrait-->
     <dimen name="volume_dialog_base_margin">8dp</dimen>
 
-    <dimen name="volume_dialog_panel_width">56dip</dimen>
+    <dimen name="volume_dialog_panel_width">42dip</dimen>
 
     <dimen name="volume_dialog_slider_height">116dp</dimen>
 
     <dimen name="volume_dialog_row_height">252dp</dimen>
 
-    <dimen name="volume_dialog_ringer_size">56dip</dimen>
+    <dimen name="volume_dialog_ringer_size">46dip</dimen>
 
-    <dimen name="volume_dialog_ringer_icon_padding">12dp</dimen>
+    <dimen name="volume_dialog_ringer_icon_padding">8dp</dimen>
 
     <dimen name="volume_dialog_caption_size">@dimen/volume_dialog_ringer_size</dimen>
 
-    <dimen name="volume_dialog_tap_target_size">56dip</dimen>
+    <dimen name="volume_dialog_tap_target_size">46dip</dimen>
 
     <dimen name="volume_dialog_spacer">9dip</dimen>
 
@@ -1202,11 +1202,11 @@
     <dimen name="config_rounded_mask_size_top">@*android:dimen/rounded_corner_radius_top</dimen>
     <dimen name="config_rounded_mask_size_bottom">@*android:dimen/rounded_corner_radius_top</dimen>
 
-    <dimen name="custom_volume_dialog_seekbar_width">48dp</dimen>
-    <dimen name="custom_volume_dialog_seekbar_height">220dp</dimen>
+    <dimen name="custom_volume_dialog_seekbar_width">40dip</dimen>
+    <dimen name="custom_volume_dialog_seekbar_height">220dip</dimen>
     <dimen name="volume_dialog_row_icon_margintop">-58dp</dimen>
-    <dimen name="volume_dialog_rows_padding_right">0.5dp</dimen>
-    <dimen name="volume_dialog_ringer_spacing">4dp</dimen>
-    <dimen name="volume_dialog_ringer_height">48dp</dimen>
+    <dimen name="volume_dialog_rows_padding_right">0.5dip</dimen>
+    <dimen name="volume_dialog_ringer_spacing">4dip</dimen>
+    <dimen name="volume_dialog_ringer_height">38dip</dimen>
 
 </resources>
