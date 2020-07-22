@@ -87,9 +87,11 @@
 
     <color name="qs_tile_background_color_disabled">#0fffffff</color>
 
-    <color name="recents_dismiss_all_background_color">@*android:color/primary_dark_device_default_settings</color>
+    <color name="recents_dismiss_all_background_color">@color/system_primary_color</color>
     <color name="recents_dismiss_all_background_color_ripple">#555555</color>
-    <color name="recents_dismiss_all_icon_color">@*android:color/accent_device_default_dark</color>
+    <color name="recents_dismiss_all_icon_color">@android:color/white</color>
+    <color name="system_primary_color">@*android:color/background_floating_device_default_dark</color>
+    <color name="accent_device_default_light">@*android:color/accent_device_default_dark</color>
 
     <color name="brightness_slider_progress">?android:attr/colorAccent</color>
     <color name="brightness_slider_background">@*android:color/primary_dark_device_default_settings</color>
