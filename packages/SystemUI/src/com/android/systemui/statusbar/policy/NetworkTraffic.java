@@ -42,6 +42,7 @@ import android.text.style.RelativeSizeSpan;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -179,6 +180,7 @@ public class NetworkTraffic extends TextView {
                         setMaxLines(2);
                         setLineSpacing(0.75f, 0.75f);
                     }
+                    setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
                     setText(output);
                 }
                 mTrafficVisible = true;
@@ -508,7 +510,8 @@ public class NetworkTraffic extends TextView {
     public void onDensityOrFontScaleChanged() {
         final Resources resources = getResources();
         txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_txt_img_padding);
-        setCompoundDrawablePadding(txtImgPadding);
+        setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
+        setGravity(Gravity.RIGHT);
         updateTextSize();
     }
 
