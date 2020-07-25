@@ -4697,13 +4697,6 @@ public abstract class Context {
 
     /**
      * Long screenshot
-     * @hide
-     */
-    public static final String LONGSCREENSHOT_SERVICE = "longshot";
-
-
-    /**
-     * Long screenshot
      * Use with {@link #getSystemService} to retrieve a
      * {@link android.app.AppLockManager} for accessing and setting locked apps state.
      *
