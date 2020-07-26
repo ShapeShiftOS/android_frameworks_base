@@ -28,13 +28,12 @@
     <clip android:clipOrientation="horizontal" android:gravity="left">
             <selector>
                 <item android:state_enabled="false"
-                    android:drawable="@android:color/transparent" />
+                      android:drawable="@android:color/transparent" />
                 <item>
-                    <shape android:shape="rectangle"
-                        android:tint="@color/brightness_slider_progress">
+                    <shape android:shape="rectangle">
                         <corners android:radius="?android:attr/dialogCornerRadius"/>
                         <size android:height="42dp" />
-                        <solid android:color="@color/brightness_slider_progress" />
+                        <solid android:color="@color/brightness_slider_seekbar" />
                     </shape>
                 </item>
             </selector>

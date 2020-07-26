@@ -99,8 +99,8 @@
     <color name="recents_dismiss_all_background_color_ripple">#555555</color>
     <color name="recents_dismiss_all_icon_color">@*android:color/accent_device_default_dark</color>
 
-    <color name="brightness_slider_progress">@*android:color/accent_device_default_dark</color>
-    <color name="brightness_slider_background">#33000000</color>
-    <color name="brightness_slider_icons">#FFFFFF</color>
+    <color name="brightness_slider_progress">?android:attr/colorAccent</color>
+    <color name="brightness_slider_background">@android:color/black</color>
+    <color name="brightness_slider_icons">?android:attr/colorAccent</color>
 
 </resources>
