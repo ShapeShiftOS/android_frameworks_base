@@ -126,4 +126,7 @@
     <!-- Screen off FOD -->
     <bool name="config_supportScreenOffFod">false</bool>
 
+    <!-- NightLight FOD -->
+    <bool name="disable_fod_night_light">false</bool>
+
 </resources>

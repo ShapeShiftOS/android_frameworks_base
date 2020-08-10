@@ -5116,6 +5116,12 @@ public final class Settings {
         public static final Validator VOLTE_ICON_STYLE_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
+         * FOD night light
+         * @hide
+         */
+        public static final String FOD_NIGHT_LIGHT = "fod_night_light";
+
+        /**
          * Wheter to show network traffic indicator in statusbar
          * @hide
          */

@@ -17,6 +17,7 @@
 package com.android.systemui.biometrics;
 
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.util.Slog;
 import android.hardware.display.ColorDisplayManager;
 import android.os.SystemProperties;
@@ -28,6 +29,8 @@ import com.android.systemui.statusbar.CommandQueue.Callbacks;
 
 import com.android.internal.util.custom.FodUtils;
 
+import android.provider.Settings;
+import com.android.internal.R;
 public class FODCircleViewImpl extends SystemUI implements CommandQueue.Callbacks {
     private static final String TAG = "FODCircleViewImpl";
 
@@ -49,23 +52,28 @@ public class FODCircleViewImpl extends SystemUI implements CommandQueue.Callback
         } catch (RuntimeException e) {
             Slog.e(TAG, "Failed to initialize FODCircleView", e);
         }
-        mDisableNightMode = SystemProperties.getBoolean("persist.fod.night_mode_disabled", false);
+        mDisableNightMode =  mContext.getResources().getBoolean(R.bool.disable_fod_night_light);
     }
 
     @Override
     public void showInDisplayFingerprintView() {
         if (mFodCircleView != null) {
-            if (mDisableNightMode) {
+            if (isNightLightEnabled()) {
                 disableNightMode();
             }
             mFodCircleView.show();
         }
     }
 
+    private boolean isNightLightEnabled() {
+       return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.FOD_NIGHT_LIGHT, mDisableNightMode ? 1 : 0) == 1;
+    }
+
     @Override
     public void hideInDisplayFingerprintView() {
         if (mFodCircleView != null) {
-            if (mDisableNightMode) {
+            if (isNightLightEnabled()) {
                 setNightMode(mNightModeActive, mAutoModeState);
             }
             mFodCircleView.hide();
