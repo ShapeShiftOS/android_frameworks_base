@@ -4942,6 +4942,12 @@ public final class Settings {
         public static final String STATUSBAR_CLOCK_DATE_DISPLAY = "statusbar_clock_date_display";
 
         /**
+         * FOD night light
+         * @hide
+         */
+        public static final String FOD_NIGHT_LIGHT = "fod_night_light";
+
+        /**
          * Sets the date string style
          * 0 - Regular style
          * 1 - Lowercase
