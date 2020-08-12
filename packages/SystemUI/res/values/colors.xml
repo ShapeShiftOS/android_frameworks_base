@@ -207,6 +207,7 @@
     <color name="brightness_slider_progress">?android:attr/colorAccent</color>
     <color name="brightness_slider_icons">?android:attr/colorAccent</color>
 
+
     <color name="volume_dialog_background">@android:color/white</color>
     <color name="volume_background_tint">#f2f2f2</color>
 
