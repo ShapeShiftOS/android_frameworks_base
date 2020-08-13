@@ -5106,10 +5106,4 @@ public class StatusBar extends SystemUI implements DemoMode,
         return mStatusBarMode;
     }
 
-    private void setMediaHeadsup() {
-        if (mMediaManager != null) {
-            mMediaManager.setMediaHeadsup();
-        }
-    }
-
 }

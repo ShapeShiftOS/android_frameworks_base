@@ -45,9 +45,6 @@
     <!-- Allow devices override audio panel location to the left side -->
     <bool name="config_audioPanelOnLeftSide">false</bool>
 
-    <!-- Whether to use the mask for the quicksettings icons-->
-    <bool name="config_useMaskForQs">true</bool>
-
     <!-- Enable face auth only when swiping security view -->
     <bool name="config_faceAuthOnlyOnSecurityView">false</bool>
 
