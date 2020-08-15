@@ -137,7 +137,7 @@ public class VolumeDialogImpl implements VolumeDialog,
     private ViewGroup mDialogRowsView;
     private ViewGroup mRinger;
     private ImageButton mRingerIcon;
-    private FrameLayout mODICaptionsView;
+    private ViewGroup mODICaptionsView;
     private CaptionsToggleImageButton mODICaptionsIcon;
     private View mExpandRowsView;
     private ExpandableIndicator mExpandRows;
@@ -275,14 +275,6 @@ public class VolumeDialogImpl implements VolumeDialog,
             return true;
         });
 
-        if(isLandscape()){
-            FrameLayout layout = mDialog.findViewById(R.id.volume_dialog);
-            setLayoutGravity(layout.getLayoutParams(), panelGravity);
-        }else{
-            LinearLayout layout = mDialog.findViewById(R.id.volume_dialog);
-            setLayoutGravity(layout.getLayoutParams(), panelGravity);
-        }
-
         mDialogRowsView = mDialog.findViewById(R.id.volume_dialog_rows);
         mRinger = mDialog.findViewById(R.id.ringer);
         if (mRinger != null) {
@@ -301,20 +293,13 @@ public class VolumeDialogImpl implements VolumeDialog,
         mODICaptionsView = mDialog.findViewById(R.id.odi_captions);
         if (mODICaptionsView != null) {
             mODICaptionsIcon = mODICaptionsView.findViewById(R.id.odi_captions_icon);
-            if(isLandscape()){
-                setLayoutGravity(mODICaptionsView.getLayoutParams(), panelGravity);
+            if(isLandscape() && mVolumePanelOnLeft){
                 MarginLayoutParams captionsLayoutParams = (MarginLayoutParams) mODICaptionsView.getLayoutParams();
-                if(mVolumePanelOnLeft){
-                    captionsLayoutParams.setMargins(land_margin, 0, 0, 0);
-                }
+                captionsLayoutParams.setMargins(0, 0, 0, 0);
                 mODICaptionsView.setLayoutParams(captionsLayoutParams);
-            }else{
-                setLayoutGravity(mODICaptionsView.getLayoutParams(), panelGravity);
             }
         }
-        mODICaptionsTooltipViewStub = mDialog.findViewById(mVolumePanelOnLeft ?
-                R.id.odi_captions_tooltip_stub_left :
-                R.id.odi_captions_tooltip_stub);
+        mODICaptionsTooltipViewStub = mDialog.findViewById(R.id.odi_captions_tooltip_stub);
         if (mHasSeenODICaptionsTooltip && mODICaptionsTooltipViewStub != null) {
             mDialogView.removeView(mODICaptionsTooltipViewStub);
             mODICaptionsTooltipViewStub = null;
