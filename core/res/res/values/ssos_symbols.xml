@@ -215,5 +215,9 @@
     <!-- Any package that has one of the package names defined here will be prevented
          from using specific sensors in order to stop battery drain -->
     <java-symbol type="array" name="config_blockPackagesSensorDrain" />
- 
+
+    <!-- Clipboard access toast -->
+    <java-symbol type="string" name="app_clipboard_access_denied" />
+    <java-symbol type="string" name="app_clipboard_access_granted" />
+
 </resources>
