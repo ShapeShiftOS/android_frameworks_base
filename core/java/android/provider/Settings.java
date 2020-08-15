@@ -5540,6 +5540,12 @@ public final class Settings {
         public static final Validator FOD_GESTURE_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
+         * Clipboard access info
+         * @hide
+         */
+        public static final String CLIPBOARD_TOAST_INFO = "clipboard_toast_info";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
