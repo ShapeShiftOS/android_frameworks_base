@@ -821,6 +821,10 @@ class FODAnimation extends ImageView {
                 return R.drawable.fod_miui_whirlwind_recognizing_anim;
             case 22:
                 return R.drawable.fod_miui_nebula_recognizing_anim;
+            case 23:
+                return R.drawable.fod_realmecloud_recognizing_anim;
+            case 24:
+                return R.drawable.fod_realmeripple_recognizing_anim;
         }
         return R.drawable.fod_miui_normal_recognizing_anim;
     }
