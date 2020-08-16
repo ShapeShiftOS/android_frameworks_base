@@ -125,8 +125,6 @@ public class BatteryMeterView extends LinearLayout implements
     private int mNonAdaptedForegroundColor;
     private int mNonAdaptedBackgroundColor;
 
-    private boolean mShowBatteryEstimate = false;
-
     public BatteryMeterView(Context context) {
         this(context, null, 0);
     }
@@ -360,7 +358,7 @@ public class BatteryMeterView extends LinearLayout implements
         }
 
         if (mBatteryPercentView != null) {
-            if (mShowPercentMode == MODE_ESTIMATE && !mCharging && mShowBatteryEstimate) {
+            if (mShowPercentMode == MODE_ESTIMATE && !mCharging) {
                 mBatteryController.getEstimatedTimeRemainingString((String estimate) -> {
                     if (estimate != null) {
                         if (mBatteryPercentView != null) {
