@@ -41,6 +41,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
+import android.hardware.biometrics.BiometricSourceType;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.Looper;
@@ -187,15 +188,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         }
 
         @Override
-        public void onPulsing(boolean pulsing) {
-            super.onPulsing(pulsing);
-            mIsPulsing = pulsing;
-	        if (mIsPulsing) {
-               mIsDreaming = false;
-	        }
-        }
-
-        @Override
         public void onScreenTurnedOff() {
             hideCircle();
         }
@@ -203,7 +195,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         @Override
         public void onStrongAuthStateChanged(int userId) {
             mCanUnlockWithFp = canUnlockWithFp();
-            if (mIsShowing && !mCanUnlockWithFp){
+            if (!mCanUnlockWithFp){
                 hide();
             }
         }
@@ -218,6 +210,13 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         }
     };
 
+        public void onPulsing(boolean pulsing) {
+            super.onPulsing(pulsing);
+            mIsPulsing = pulsing;
+	        if (mIsPulsing) {
+                mIsDreaming = false;
+	        }
+        }         
 
     private boolean canUnlockWithFp() {
         int currentUser = ActivityManager.getCurrentUser();
@@ -340,7 +339,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN && newIsInside) {
             showCircle();
-            if (mIsRecognizingAnimEnabled && (!mIsDreaming || mIsPulsing) {
+            if (mIsRecognizingAnimEnabled && (!mIsDreaming || mIsPulsing)) {
                 mFODAnimation.showFODanimation();
             }
             return true;
@@ -727,9 +726,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
                 com.android.internal.R.bool.config_maskMainBuiltInDisplayCutout);
         if (mCutoutMasked != cutoutMasked){
             mCutoutMasked = cutoutMasked;
-            if (mIsViewAdded) {
-                resetPosition();
-            }
+            updatePosition();
         }
     }
 }

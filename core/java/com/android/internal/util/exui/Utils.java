@@ -36,6 +36,8 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.SystemClock;
+import android.os.UserHandle;
+import android.provider.Settings; 
 import android.view.InputDevice;
 import android.view.IWindowManager;
 import android.view.KeyCharacterMap;
@@ -50,11 +52,13 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class Utils {
 
-    private static OverlayManager mOverlayService;
+    private static OverlayManager sOverlayService;
 
     public static final String INTENT_SCREENSHOT = "action_handler_screenshot";
     public static final String INTENT_REGION_SCREENSHOT = "action_handler_region_screenshot";
@@ -255,14 +259,14 @@ public class Utils {
 
     // Method to detect whether an overlay is enabled or not
     public static boolean isThemeEnabled(String packageName) {
-        if (mOverlayService == null) {
-            mOverlayService = new OverlayManager();
+        if (sOverlayService == null) {
+            sOverlayService = new OverlayManager();
         }
         try {
             ArrayList<OverlayInfo> infos = new ArrayList<OverlayInfo>();
-            infos.addAll(mOverlayService.getOverlayInfosForTarget("android",
+            infos.addAll(sOverlayService.getOverlayInfosForTarget("android",
                     UserHandle.myUserId()));
-            infos.addAll(mOverlayService.getOverlayInfosForTarget("com.android.systemui",
+            infos.addAll(sOverlayService.getOverlayInfosForTarget("com.android.systemui",
                     UserHandle.myUserId()));
             for (int i = 0, size = infos.size(); i < size; i++) {
                 if (infos.get(i).packageName.equals(packageName)) {
@@ -296,10 +300,10 @@ public class Utils {
 
     // Check if gesture navbar is enabled
     public static boolean isGestureNavbar() {
-        return Utils.isThemeEnabled("com.android.internal.systemui.navbar.gestural")
-                || Utils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_extra_wide_back")
-                || Utils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_narrow_back")
-                || Utils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_wide_back");
+        return Utils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_narrow_back")
+                || Utils.isThemeEnabled("com.android.internal.systemui.navbar.gestural")
+                || Utils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_wide_back")
+                || Utils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_extra_wide_back");
     }
 
     // Check if device is connected to Wi-Fi
