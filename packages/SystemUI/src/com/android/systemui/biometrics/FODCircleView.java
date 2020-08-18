@@ -188,6 +188,15 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         }
 
         @Override
+        public void onPulsing(boolean pulsing) {
+            super.onPulsing(pulsing);
+            mIsPulsing = pulsing;
+	        if (mIsPulsing) {
+               mIsDreaming = false;
+	        }
+        }
+
+        @Override
         public void onScreenTurnedOff() {
             hideCircle();
         }
@@ -209,14 +218,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
             }
         }
     };
-
-        public void onPulsing(boolean pulsing) {
-            super.onPulsing(pulsing);
-            mIsPulsing = pulsing;
-	        if (mIsPulsing) {
-                mIsDreaming = false;
-	        }
-        }         
 
     private boolean canUnlockWithFp() {
         int currentUser = ActivityManager.getCurrentUser();
