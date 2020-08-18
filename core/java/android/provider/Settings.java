@@ -5436,6 +5436,17 @@ public final class Settings {
          */
         public static final String SCREENRECORD_LOW_QUALITY = "screenrecord_low_quality";
 
+
+        /**
+         * Whether to vibrate on call state change
+         * @hide
+         */
+        public static final String INCALL_FEEDBACK_VIBRATE = "incall_feeedback_vibrate";
+
+        /** @hide */
+        public static final Validator INCALL_FEEDBACK_VIBRATE_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
         /**
          * Accent Color
          * @hide
@@ -5823,6 +5834,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NOTIFICATION_GUTS_KILL_APP_BUTTON);
             PRIVATE_SETTINGS.add(BACK_GESTURE_BLOCK_IME);
             PRIVATE_SETTINGS.add(GESTURE_NAVBAR_SHOW);
+            PRIVATE_SETTINGS.add(INCALL_FEEDBACK_VIBRATE);
         }
 
         /**
@@ -5980,6 +5992,7 @@ public final class Settings {
             VALIDATORS.put(SHOW_MEDIA_HEADS_UP, SHOW_MEDIA_HEADS_UP_VALIDATOR);
             VALIDATORS.put(BACK_GESTURE_BLOCK_IME,BACK_GESTURE_BLOCK_IME_VALIDATOR);
             VALIDATORS.put(GESTURE_NAVBAR_SHOW,GESTURE_NAVBAR_SHOW_VALIDATOR);
+            VALIDATORS.put(INCALL_FEEDBACK_VIBRATE, INCALL_FEEDBACK_VIBRATE_VALIDATOR);
         }
 
         /**
