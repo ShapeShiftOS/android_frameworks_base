@@ -102,7 +102,7 @@ public class QSFragment extends LifecycleFragment implements QS, CommandQueue.Ca
     private SeekBar mBrightnessSlider;
     private FrameLayout mBrightnessSliderParent;
     // aosp brightness slider is not linear, try to replicate values its supposed to set
-    int[] BrightnessValues = {0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, // 0-10
+    int[] BrightnessValues = {1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, // 0-10
                               3, 3, 3, 4, 4, 4, 5, 5, 5, 6, // 11-20
                               6, 6, 7, 7, 7, 8, 8, 8, 9, 9, // 21-30
                               9, 10, 10, 11, 11, 12, 12, 13, 14, 14, // 31-40
