@@ -156,6 +156,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
                 }
             } else if (mBurnInProtectionTimer != null) {
                 mBurnInProtectionTimer.cancel();
+                mDreamingOffsetX = 0;
                 mDreamingOffsetY = 0;
                 mHandler.post(() -> updatePosition());
             }
