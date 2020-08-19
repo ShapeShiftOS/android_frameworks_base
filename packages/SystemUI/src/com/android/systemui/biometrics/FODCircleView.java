@@ -111,9 +111,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
     private FODAnimation mFODAnimation;
     private boolean mIsRecognizingAnimEnabled;
-    private boolean mShouldRemoveIconOnAOD;
-    private boolean mScreenOffFodEnabled;
-    private boolean mScreenOffFodIconEnabled;
 
     private int mPressedIcon;
     private final int[] PRESSED_STYLES = {
@@ -151,17 +148,11 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
             if (dreaming) {
                 mBurnInProtectionTimer = new Timer();
                 mBurnInProtectionTimer.schedule(new BurnInProtectionTask(), 0, 60 * 1000);
-                if (mShouldRemoveIconOnAOD) {
-                    resetFODIcon(false);
-                }
             } else if (mBurnInProtectionTimer != null) {
                 mBurnInProtectionTimer.cancel();
                 mDreamingOffsetX = 0;
                 mDreamingOffsetY = 0;
                 mHandler.post(() -> updatePosition());
-            }
-            if (mShouldRemoveIconOnAOD && !dreaming) {
-                resetFODIcon(true);
             }
         }
 
@@ -313,13 +304,10 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         mFODAnimation = new FODAnimation(context, mPositionX, mPositionY);
 
-
-       updateCutoutFlags();
+        updateCutoutFlags();
 
         Dependency.get(ConfigurationController.class).addCallback(this);
 
-        mShouldRemoveIconOnAOD = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SCREEN_OFF_FOD, 0) != 0;
     }
 
     @Override
@@ -451,20 +439,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
                 Settings.System.FOD_ICON, 0);
     }
 
-    private void resetFODIcon(boolean show) {
-        if (show) {
-            setFODIcon();
-        } else {
-            this.setImageResource(0);
-        }
-    }
-
     private void setFODIcon() {
-
-        if (mIsDreaming && mShouldRemoveIconOnAOD) {
-            return;
-        }
-
         int fodicon = getFODIcon();
 
         mIsRecognizingAnimEnabled = Settings.System.getInt(mContext.getContentResolver(),
@@ -472,12 +447,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         mPressedIcon = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.FOD_PRESSED_STATE, 0);
-
-        mScreenOffFodEnabled = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SCREEN_OFF_FOD, 0) != 0;
-        mScreenOffFodIconEnabled = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SCREEN_OFF_FOD_ICON, 1) != 0;
-        mShouldRemoveIconOnAOD = mScreenOffFodEnabled && !mScreenOffFodIconEnabled;
 
         if (fodicon == 0) {
             this.setImageResource(R.drawable.fod_icon_default_0);

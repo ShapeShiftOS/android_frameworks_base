@@ -4713,12 +4713,6 @@ public final class Settings {
         public static final String FOD_RECOGNIZING_ANIMATION = "fod_recognizing_animation";
 
         /**
-         * Screen off FOD
-         * @hide
-         */
-        public static final String SCREEN_OFF_FOD = "screen_off_fod";
-
-        /**
          * Bottom brightness slider
          * @hide
          */
@@ -5375,12 +5369,6 @@ public final class Settings {
         /** @hide */
         private static final Validator HEADSET_CONNECT_PLAYER_VALIDATOR =
                 BOOLEAN_VALIDATOR;
-
-        /**
-         * Whether to show icon when Screen off FODis enabled
-         * @hide
-         */
-        public static final String SCREEN_OFF_FOD_ICON = "screen_off_fod_icon";
 
         /**
          * Screenrecord: video bitrate

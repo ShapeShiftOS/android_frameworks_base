@@ -33,7 +33,6 @@ import android.metrics.LogMaker;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.os.UserHandle;
-
 import android.text.format.Formatter;
 import android.util.Log;
 
@@ -47,7 +46,7 @@ import com.android.systemui.statusbar.phone.DozeParameters;
 import com.android.systemui.util.Assert;
 import com.android.systemui.util.ProximitySensor;
 import com.android.systemui.util.wakelock.WakeLock;
-import android.provider.Settings;
+
 import java.io.PrintWriter;
 import java.util.function.IntConsumer;
 
@@ -295,10 +294,6 @@ public class DozeTriggers implements DozeMachine.Part {
 
     @Override
     public void transitionTo(DozeMachine.State oldState, DozeMachine.State newState) {
-
-        boolean screenOffFod = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SCREEN_OFF_FOD, 0) != 0;
-
         switch (newState) {
             case INITIALIZED:
                 mBroadcastReceiver.register(mContext);
@@ -316,10 +311,6 @@ public class DozeTriggers implements DozeMachine.Part {
                 mDozeSensors.setPaused(false);
                 if (newState == DozeMachine.State.DOZE_AOD && !sWakeDisplaySensorState) {
                     onWakeScreen(false, newState);
-                }
-                if (screenOffFod) {
-                    mDozeSensors.setProxListening(false);
-                    mDozeSensors.setListening(false);
                 }
                 break;
             case DOZE_AOD_PAUSED:
