@@ -115,9 +115,6 @@
     <!-- Device has OnePlus haptic motor -->
     <java-symbol type="bool" name="config_hasOnePlusHapticMotor" />
 
-    <!-- Screen off FOD -->
-    <java-symbol type="bool" name="config_supportScreenOffFod" />
-
     <!-- NightLight FOD -->
     <java-symbol type="bool" name="disable_fod_night_light"/>
 
