@@ -37,8 +37,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.content.res.TypedValue;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Outline;
@@ -59,7 +57,6 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.MathUtils;
 import android.util.Pair;
-import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.InputDevice;
 import android.view.LayoutInflater;
@@ -716,21 +713,10 @@ public class NotificationStackScrollLayout extends ViewGroup implements ScrollAd
 
         if (needsColorRefresh) {
             mBackgroundColor = mContext.getColor(R.color.recents_dismiss_all_background_color);
-            mIconColor = fetchAccentColor(android.R.attr.colorAccent);
+            mIconColor = mContext.getColor(R.color.recents_dismiss_all_icon_color);
             StatusBar.updateDismissAllButton(mIconColor);
             needsColorRefresh = false;
         }
-    }
-
-    public int fetchAccentColor() {
-        TypedValue typedValue = new TypedValue();
-
-        TypedArray a = mContext.obtainStyledAttributes(typedValue.data, new int[] { R.attr.colorAccent });
-        int color = a.getColor(0, 0);
-
-        a.recycle();
-
-        return color;
     }
 
     private boolean isDismissAllButtonEnabled() {
@@ -815,7 +801,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements ScrollAd
     public void onUiModeChanged() {
         mBgColor = mContext.getColor(R.color.notification_shade_background_color);
         mBackgroundColor = mContext.getColor(R.color.recents_dismiss_all_background_color);
-        mIconColor = fetchAccentColor(android.R.attr.colorAccent);
+        mIconColor = mContext.getColor(R.color.recents_dismiss_all_icon_color);
         updateBackgroundDimming();
         mShelf.onUiModeChanged();
         StatusBar.updateDismissAllButton(mIconColor);
