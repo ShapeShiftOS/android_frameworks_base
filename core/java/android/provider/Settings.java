@@ -5281,30 +5281,6 @@ public final class Settings {
         public static final String POCKET_JUDGE_ALLOW_FP = "pocket_judge_allow_fp";
 
         /**
-         * 
-         * @hide
-         */
-        public static final String NOTIF_DISMISALL_COLOR_MODE = "notif_bg_color_mode";
-
-        /**
-         * 
-         * @hide
-         */
-        public static final String NOTIF_DISMISALL_ICON_COLOR_MODE = "notif_icon_color_mode";
-
-        /**
-         * 
-         * @hide
-         */
-        public static final String NOTIF_CLEAR_ALL_ICON_COLOR = "notif_icon_color";
-
-        /**
-         * 
-         * @hide
-         */
-        public static final String NOTIF_CLEAR_ALL_BG_COLOR = "notif_bg_color";
-
-        /**
          * Whether to show heads up only for dialer and sms apps
          * @hide
          */
