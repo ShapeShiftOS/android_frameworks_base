@@ -20,6 +20,7 @@ public class AccentUtils {
                           "dialer_theme_color_dark",
                           "dialer_theme_color_20pct",
                           "colorAccent",
+                          "recents_dismiss_all_icon_color",
                           "accent_device_default_dark"));
 
     private static final String ACCENT_COLOR_PROP = "persist.sys.theme.accentcolor";
