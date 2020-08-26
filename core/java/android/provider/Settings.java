@@ -5718,6 +5718,7 @@ public final class Settings {
             BACK_GESTURE_BLOCK_IME,
             GESTURE_NAVBAR_SHOW,
             NAVIGATION_HANDLE_HEIGHT,
+            FOD_GESTURE,
         };
 
         /**
@@ -5897,6 +5898,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(GESTURE_NAVBAR_SHOW);
             PRIVATE_SETTINGS.add(INCALL_FEEDBACK_VIBRATE);
             PRIVATE_SETTINGS.add(NAVIGATION_HANDLE_HEIGHT);
+            PRIVATE_SETTINGS.add(FOD_GESTURE);
         }
 
         /**
