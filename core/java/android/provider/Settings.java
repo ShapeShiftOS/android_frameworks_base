@@ -5447,14 +5447,35 @@ public final class Settings {
         public static final String SCREENRECORD_LOW_QUALITY = "screenrecord_low_quality";
 
 
+
         /**
-         * Whether to vibrate on call state change
+         * Whether the phone vibrates on call connect
          * @hide
          */
-        public static final String INCALL_FEEDBACK_VIBRATE = "incall_feeedback_vibrate";
+        public static final String VIBRATE_ON_CONNECT = "vibrate_on_connect";
 
         /** @hide */
-        public static final Validator INCALL_FEEDBACK_VIBRATE_VALIDATOR =
+        private static final Validator VIBRATE_ON_CONNECT_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether the phone vibrates on call waiting
+         * @hide
+         */
+        public static final String VIBRATE_ON_CALLWAITING = "vibrate_on_callwaiting";
+
+        /** @hide */
+        private static final Validator VIBRATE_ON_CALLWAITING_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether the phone vibrates on disconnect
+         * @hide
+         */
+        public static final String VIBRATE_ON_DISCONNECT = "vibrate_on_disconnect";
+
+        /** @hide */
+        private static final Validator VIBRATE_ON_DISCONNECT_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
         /**
@@ -5684,6 +5705,9 @@ public final class Settings {
             LESS_BORING_HEADS_UP,
             SYNTHOS_CENTER_NOTIFICATION_HEADERS,
             LOCK_HIDE_STATUS_BAR,
+            VIBRATE_ON_CONNECT,
+            VIBRATE_ON_CALLWAITING,
+            VIBRATE_ON_DISCONNECT,
             HEADSET_CONNECT_PLAYER,
             LOCKSCREEN_TIMEOUT,
             USE_OLD_MOBILETYPE,
@@ -5871,7 +5895,9 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NOTIFICATION_GUTS_KILL_APP_BUTTON);
             PRIVATE_SETTINGS.add(BACK_GESTURE_BLOCK_IME);
             PRIVATE_SETTINGS.add(GESTURE_NAVBAR_SHOW);
-            PRIVATE_SETTINGS.add(INCALL_FEEDBACK_VIBRATE);
+            PRIVATE_SETTINGS.add(VIBRATE_ON_CONNECT);
+            PRIVATE_SETTINGS.add(VIBRATE_ON_CALLWAITING);
+            PRIVATE_SETTINGS.add(VIBRATE_ON_DISCONNECT);
             PRIVATE_SETTINGS.add(NAVIGATION_HANDLE_HEIGHT);
             PRIVATE_SETTINGS.add(FOD_GESTURE);
         }
@@ -6031,7 +6057,9 @@ public final class Settings {
             VALIDATORS.put(SHOW_MEDIA_HEADS_UP, SHOW_MEDIA_HEADS_UP_VALIDATOR);
             VALIDATORS.put(BACK_GESTURE_BLOCK_IME,BACK_GESTURE_BLOCK_IME_VALIDATOR);
             VALIDATORS.put(GESTURE_NAVBAR_SHOW,GESTURE_NAVBAR_SHOW_VALIDATOR);
-            VALIDATORS.put(INCALL_FEEDBACK_VIBRATE, INCALL_FEEDBACK_VIBRATE_VALIDATOR);
+            VALIDATORS.put(VIBRATE_ON_CONNECT, VIBRATE_ON_CONNECT_VALIDATOR);
+            VALIDATORS.put(VIBRATE_ON_CALLWAITING, VIBRATE_ON_CALLWAITING_VALIDATOR);
+            VALIDATORS.put(VIBRATE_ON_DISCONNECT, VIBRATE_ON_DISCONNECT_VALIDATOR);
             VALIDATORS.put(NAVIGATION_HANDLE_HEIGHT, NAVIGATION_HANDLE_HEIGHT_VALIDATOR);
             VALIDATORS.put(FOD_GESTURE, FOD_GESTURE_VALIDATOR);
         }
