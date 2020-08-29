@@ -50,6 +50,7 @@ import com.android.systemui.qs.tiles.SmartPixelsTile;
 import com.android.systemui.qs.tiles.UiModeNightTile;
 import com.android.systemui.qs.tiles.SyncTile;
 import com.android.systemui.qs.tiles.SoundTile;
+import com.android.systemui.qs.tiles.UsbTetherTile;
 import com.android.systemui.qs.tiles.UserTile;
 import com.android.systemui.qs.tiles.VpnTile;
 import com.android.systemui.qs.tiles.WifiTile;
@@ -221,6 +222,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mSmartPixelsTileProvider.get();
             case "sound":
                 return mSoundTileProvider.get();
+            case "usb_tether":
+                return new UsbTetherTile(mHost);
         }
 
         // Intent tiles.
