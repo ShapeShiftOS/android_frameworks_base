@@ -20,6 +20,9 @@ import android.app.WallpaperColors;
 import android.app.WallpaperManager;
 
 import android.app.ActivityManager;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import static com.android.internal.widget.LockPatternUtils.StrongAuthTracker.STRONG_AUTH_REQUIRED_AFTER_DPM_LOCK_NOW;
@@ -135,6 +138,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener, T
     private boolean mIsCircleShowing;
     private boolean mCanUnlockWithFp;
     private boolean mSupportsFodGesture;
+    private boolean mIsAnimating = false;
 
     private boolean mDozeEnabled;
     private boolean mFodGestureEnable;
@@ -489,7 +493,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener, T
     @Override
     public void onTuningChanged(String key, String newValue) {
         mCurrentBrightness = newValue != null ? Integer.parseInt(newValue) : 0;
-        updateIconDim();
+        updateIconDim(false);
     }
 
     private int interpolate(int i, int i2, int i3, int i4, int i5) {
@@ -518,9 +522,31 @@ public class FODCircleView extends ImageView implements ConfigurationListener, T
         return interpolate(mCurrentBrightness, iArr[i2][0], iArr[i][0], iArr[i2][1], iArr[i][1]);
     }
 
-    public void updateIconDim() {
+    public void updateIconDim(boolean animate) {
         if (!mIsCircleShowing && mTargetUsesInKernelDimming) {
-            setColorFilter(Color.argb(getDimAlpha(), 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
+            if (animate && !mIsAnimating) {
+                ValueAnimator anim = new ValueAnimator();
+                anim.setIntValues(0, getDimAlpha());
+                anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        int progress = (Integer) valueAnimator.getAnimatedValue();
+                        setColorFilter(Color.argb(progress, 0, 0, 0),
+                                PorterDuff.Mode.SRC_ATOP);
+                    }
+                });
+                anim.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mIsAnimating = false;
+                    }
+                });
+                anim.setDuration(1000);
+                mIsAnimating = true;
+                anim.start();
+            } else if (!mIsAnimating) {
+                setColorFilter(Color.argb(getDimAlpha(), 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
+            }
         } else {
             setColorFilter(Color.argb(0, 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
         }
@@ -633,7 +659,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener, T
         });
 
         setImageDrawable(null);
-        updateIconDim();
+        updateIconDim(false);
         invalidate();
     }
 
@@ -882,6 +908,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener, T
             if (mPressedView.getParent() != null) {
                 mWindowManager.removeView(mPressedView);
             }
+            updateIconDim(true);
         }
     }
 
