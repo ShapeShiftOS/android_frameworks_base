@@ -45,6 +45,8 @@ public class QSContainerImpl extends FrameLayout {
     private View mQSFooter;
 
     private View mBackground;
+    private View mBackgroundGradient;
+    private View mStatusBarBackground;
 
     private int mSideMargins;
     private boolean mQsDisabled;
@@ -62,6 +64,8 @@ public class QSContainerImpl extends FrameLayout {
         mQSCustomizer = findViewById(R.id.qs_customize);
         mQSFooter = findViewById(R.id.qs_footer);
         mBackground = findViewById(R.id.quick_settings_background);
+        mStatusBarBackground = findViewById(R.id.quick_settings_status_bar_background);
+        mBackgroundGradient = findViewById(R.id.quick_settings_gradient_view);
         mSideMargins = getResources().getDimensionPixelSize(R.dimen.notification_side_paddings);
 
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
@@ -71,6 +75,7 @@ public class QSContainerImpl extends FrameLayout {
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        setBackgroundGradientVisibility(newConfig);
         updateResources();
         mSizePoint.set(0, 0); // Will be retrieved on next measure pass.
     }
@@ -135,6 +140,7 @@ public class QSContainerImpl extends FrameLayout {
         final boolean disabled = (state2 & DISABLE2_QUICK_SETTINGS) != 0;
         if (disabled == mQsDisabled) return;
         mQsDisabled = disabled;
+        setBackgroundGradientVisibility(getResources().getConfiguration());
         mBackground.setVisibility(mQsDisabled ? View.GONE : View.VISIBLE);
     }
 
@@ -172,6 +178,16 @@ public class QSContainerImpl extends FrameLayout {
         return mQSCustomizer.isCustomizing() ? mQSCustomizer.getHeight()
                 : Math.round(mQsExpansion * (heightOverride - mHeader.getHeight()))
                 + mHeader.getHeight();
+    }
+
+    private void setBackgroundGradientVisibility(Configuration newConfig) {
+        if (newConfig.orientation == ORIENTATION_LANDSCAPE) {
+            mBackgroundGradient.setVisibility(View.INVISIBLE);
+            mStatusBarBackground.setVisibility(View.INVISIBLE);
+        } else {
+            mBackgroundGradient.setVisibility(mQsDisabled ? View.INVISIBLE : View.VISIBLE);
+            mStatusBarBackground.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setExpansion(float expansion) {
