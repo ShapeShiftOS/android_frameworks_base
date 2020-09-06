@@ -920,6 +920,8 @@ class FODAnimation extends ImageView {
                 return R.drawable.fod_miui_star_cas_recognizing_anim;
             case 27:
                 return R.drawable.fod_miui_aurora_cas_recognizing_anim;
+            case 28:
+                return R.drawable.fod_vivoendless_recognizing_anim;
         }
         return R.drawable.fod_miui_normal_recognizing_anim;
     }
