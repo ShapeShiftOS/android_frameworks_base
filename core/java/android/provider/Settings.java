@@ -5259,7 +5259,7 @@ public final class Settings {
         public static final String FOD_ANIM = "fod_anim";
         /** @hide */
         private static final Validator FOD_ANIM_VALIDATOR =
-               new SettingsValidators.InclusiveIntegerRangeValidator(0, 27);
+               new SettingsValidators.InclusiveIntegerRangeValidator(0, 28);
 
         /**
          * QS blur alpha
