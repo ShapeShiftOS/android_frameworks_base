@@ -4161,9 +4161,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.Secure.getUriFor(
                     Settings.Secure.AMBIENT_VISUALIZER_ENABLED))) {
                 setAmbientVis();
-            } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.SWITCH_STYLE))) {
-                updateSwitchStyle();
             }
             update();
         }
@@ -4180,6 +4177,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateKeyguardStatusSettings();
             setMediaHeadsup();
             setAmbientVis();
+            updateSwitchStyle();
      }
    }
 
@@ -4197,12 +4195,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     }
 
     public void updateSwitchStyle() {
-        int switchStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.SWITCH_STYLE, 0, mLockscreenUserManager.getCurrentUserId());
-        ThemesUtils.stockSwitchStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
-        if (switchStyle == 0)
-            return;
-        ThemesUtils.updateSwitchStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), switchStyle);
+         int SwitchStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
+                 Settings.System.SWITCH_STYLE, 0, mLockscreenUserManager.getCurrentUserId());
     }
 
     private void setPulseOnNewTracks() {

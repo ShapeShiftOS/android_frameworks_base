@@ -5952,6 +5952,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NAVIGATION_HANDLE_HEIGHT);
             PRIVATE_SETTINGS.add(FOD_GESTURE);
             PRIVATE_SETTINGS.add(NAVIGATION_BAR_ARROW_KEYS);
+            PRIVATE_SETTINGS.add(SWITCH_STYLE);
         }
 
         /**

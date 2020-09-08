@@ -34,7 +34,7 @@ public class ThemesUtils {
     public static final String TAG = "ThemesUtils";
 
     // Switch themes
-    private static final String[] SWITCH_THEMES = {
+    public static final String[] SWITCH_THEMES = {
         "com.android.system.switch.stock", // 0
         "com.android.system.switch.oneplus", // 1
         "com.android.system.switch.fluid", // 2
