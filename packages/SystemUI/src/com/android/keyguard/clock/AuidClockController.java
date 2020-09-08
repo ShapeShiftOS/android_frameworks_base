@@ -40,7 +40,7 @@ import static com.android.systemui.statusbar.phone
 /**
  * Plugin for the default clock face used only to provide a preview.
  */
-public class FluidClockController implements ClockPlugin {
+public class AuidClockController implements ClockPlugin {
 
     /**
      * Resources used to get title and thumbnail.
@@ -83,7 +83,7 @@ public class FluidClockController implements ClockPlugin {
      * @param inflater Inflater used to inflate custom clock views.
      * @param colorExtractor Extracts accent color from wallpaper.
      */
-    public FluidClockController(Resources res, LayoutInflater inflater,
+    public AuidClockController(Resources res, LayoutInflater inflater,
             SysuiColorExtractor colorExtractor) {
         mResources = res;
         mLayoutInflater = inflater;
@@ -92,7 +92,7 @@ public class FluidClockController implements ClockPlugin {
 
     private void createViews() {
         mView = (ClockLayout) mLayoutInflater
-                .inflate(R.layout.digital_clock_fluid, null);
+                .inflate(R.layout.digital_clock_auid, null);
         mTimeClock = mView.findViewById(R.id.time_clock);
         mSecondsClock = mView.findViewById(R.id.seconds_clock);
         mDay = mView.findViewById(R.id.clock_day);
@@ -112,23 +112,23 @@ public class FluidClockController implements ClockPlugin {
 
     @Override
     public String getName() {
-        return "fluid";
+        return "auid";
     }
 
     @Override
     public String getTitle() {
-        return mResources.getString(R.string.clock_title_fluid);
+        return mResources.getString(R.string.clock_title_auid);
     }
 
     @Override
     public Bitmap getThumbnail() {
-        return BitmapFactory.decodeResource(mResources, R.drawable.fluid_thumbnail);
+        return BitmapFactory.decodeResource(mResources, R.drawable.auid_thumbnail);
     }
 
     @Override
     public Bitmap getPreview(int width, int height) {
 
-        View previewView = mLayoutInflater.inflate(R.layout.digital_fluid_preview, null);
+        View previewView = mLayoutInflater.inflate(R.layout.digital_auid_preview, null);
         TextClock previewTime = previewView.findViewById(R.id.time_clock);
         TextClock previewSeconds = previewView.findViewById(R.id.seconds_clock);
         TextClock previewDay = previewView.findViewById(R.id.clock_day);
