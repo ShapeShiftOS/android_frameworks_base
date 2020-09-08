@@ -37,13 +37,7 @@ public class ThemesUtils {
     private static final String[] SWITCH_THEMES = {
         "com.android.system.switch.stock", // 0
         "com.android.system.switch.oneplus", // 1
-        "com.android.system.switch.narrow", // 2
-        "com.android.system.switch.contained", // 3
-        "com.android.system.switch.telegram", // 4
-        "com.android.system.switch.md2", // 5
-        "com.android.system.switch.retro", // 6
-        "com.android.system.switch.stockish", // 7
-        "com.android.system.switch.fluid", // 8
+        "com.android.system.switch.fluid", // 2
     };
 
     public static void updateSwitchStyle(IOverlayManager om, int userId, int switchStyle) {

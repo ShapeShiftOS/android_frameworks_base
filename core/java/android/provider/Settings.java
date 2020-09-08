@@ -5634,19 +5634,13 @@ public final class Settings {
          * System-wide switch style
          * 0 = Default
          * 1 = OnePlus
-         * 2 = Narrow
-         * 3 = Contained
-         * 4 = Telegram
-         * 5 = Md2
-         * 6 = Retro
-         * 7 = Stockish
-         * 8 = Fluid
+         * 2 = Fluid
          * @hide
          */
         public static final String SWITCH_STYLE = "switch_style";
         /** @hide */
         private static final Validator SWITCH_STYLE_VALIDATOR =
-                new SettingsValidators.InclusiveIntegerRangeValidator(0, 8);
+                new SettingsValidators.InclusiveIntegerRangeValidator(0, 2);
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
