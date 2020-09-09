@@ -349,6 +349,8 @@ public class DisplayPolicy {
     private static final Rect sTmpNavFrame = new Rect();
     private static final Rect sTmpLastParentFrame = new Rect();
 
+    private int sshotType;
+
     private WindowState mTopFullscreenOpaqueWindowState;
     private WindowState mTopFullscreenOpaqueOrDimmingWindowState;
     private WindowState mTopDockedOpaqueWindowState;
@@ -443,6 +445,9 @@ public class DisplayPolicy {
             ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SWIPE_TO_SCREENSHOT), false, this,
+                    UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.SCREENSHOT_TYPE), false, this,
                     UserHandle.USER_ALL);
             updateSettings();
         }
@@ -661,6 +666,9 @@ public class DisplayPolicy {
         final boolean threeFingerGesture = Settings.System.getIntForUser(resolver,
                 Settings.System.SWIPE_TO_SCREENSHOT, 1, UserHandle.USER_CURRENT) == 1;
         enableSwipeThreeFingerGesture(threeFingerGesture);
+
+        sshotType = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.SCREENSHOT_TYPE, 0, UserHandle.USER_CURRENT);
     }
 
     private int getDisplayId() {
