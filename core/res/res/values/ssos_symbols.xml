@@ -29,4 +29,6 @@
 
     <!-- Whether to force enable multi resolution configuration for camera -->
     <java-symbol type="bool" name="config_forceMultiResolution" />
+
+    <java-symbol type="array" name="config_vendorPlatformSignatures" />
 </resources>
