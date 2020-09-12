@@ -50,6 +50,8 @@ import android.os.Looper;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.SystemClock;
+import android.pocket.IPocketCallback;
+import android.pocket.PocketManager;
 import android.provider.Settings;
 import android.net.Uri;
 import android.view.Display;
@@ -195,6 +197,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
             if (mFODAnimation != null) {
                 mFODAnimation.setAnimationKeyguard(mIsKeyguard);
             }
+            handlePocketManagerCallback(showing);
         }
 
         @Override
@@ -261,6 +264,20 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         }
     };
 
+    private void handlePocketManagerCallback(boolean keyguardShowing){
+        if (!keyguardShowing){
+            if (mPocketCallbackAdded){
+                mPocketCallbackAdded = false;
+                mPocketManager.removeCallback(mPocketCallback);
+            }
+        } else {
+            if (!mPocketCallbackAdded){
+                mPocketCallbackAdded = true;
+                mPocketManager.addCallback(mPocketCallback);
+            }
+        }
+    }
+
     private boolean canUnlockWithFp() {
         int currentUser = ActivityManager.getCurrentUser();
         boolean biometrics = mUpdateMonitor.isUnlockingWithBiometricsPossible(currentUser);
@@ -287,6 +304,24 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         return (Settings.System.getInt(getContext().getContentResolver(),
                 Settings.System.FP_UNLOCK_KEYSTORE, 1) == 1);
     }
+
+
+    private PocketManager mPocketManager;
+    private boolean mIsDeviceInPocket;
+    private boolean mPocketCallbackAdded = false;
+    private final IPocketCallback mPocketCallback = new IPocketCallback.Stub() {
+
+        @Override
+        public void onStateChanged(boolean isDeviceInPocket, int reason) {
+            boolean wasDeviceInPocket = mIsDeviceInPocket;
+            if (reason == PocketManager.REASON_SENSOR) {
+                mIsDeviceInPocket = isDeviceInPocket;
+            } else {
+                mIsDeviceInPocket = false;
+            }
+        }
+
+    };
 
     private class FodGestureSettingsObserver extends ContentObserver {
         Context mContext;
@@ -414,6 +449,9 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         if (mSupportsFodGesture){
             mFodGestureSettingsObserver = new FodGestureSettingsObserver(context, mHandler);
             mFodGestureSettingsObserver.registerListener();
+
+        // Pocket
+        mPocketManager = (PocketManager) context.getSystemService(Context.POCKET_SERVICE);
         }
 
         updateCutoutFlags();
@@ -515,6 +553,10 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     }
 
     public void showCircle() {
+        if (mIsKeyguard && mIsDeviceInPocket){
+            return;
+        }
+
         mIsCircleShowing = true;
 
         setKeepScreenOn(true);
