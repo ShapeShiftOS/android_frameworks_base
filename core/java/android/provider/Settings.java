@@ -4748,6 +4748,12 @@ public final class Settings {
         public static final String LOCKSCREEN_PIN_RIPPLE = "lockscreen_pin_ripple";
 
         /**
+         * Whether to enable or disable vibration on fingerprint auth error
+         * @hide
+         */
+        public static final String FP_ERROR_VIBRATE = "fp_error_vibrate";
+
+        /**
          * Show data usage in QS header
          * @hide
          */
