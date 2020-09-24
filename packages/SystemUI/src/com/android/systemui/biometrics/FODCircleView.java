@@ -936,6 +936,14 @@ class FODAnimation extends ImageView {
                 return R.drawable.fod_rogsupernova_recognizing_anim;
             case 32:
                 return R.drawable.fod_xiaomi_minimal_recognizing_anim;
+            case 33:
+                return R.drawable.fod_gxzw_mirage_recognizing_anim;
+            case 34:
+                return R.drawable.fod_zte_linewave_recognizing_anim;
+            case 35:
+                return R.drawable.fod_zte_polar_lights_recognizing_anim;
+            case 36:
+                return R.drawable.fod_oppo_elemental_recognizing_anim;
 
         }
         return R.drawable.fod_miui_normal_recognizing_anim;
