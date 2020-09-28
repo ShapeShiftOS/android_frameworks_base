@@ -15903,13 +15903,18 @@ public final class Settings {
         public static final String ONE_HANDED_KEYGUARD_SIDE = "one_handed_keyguard_side";
 
         /**
-         * Global settings that shouldn't be persisted.
          *
          * @hide
          */
         public static final String[] TRANSIENT_SETTINGS = {
                 CLOCKWORK_HOME_READY,
         };
+
+        /**
+         * Google Hybrid Battery Warnings
+         * @hide
+         */
+        public static final String HYBRID_SYSUI_BATTERY_WARNING_FLAGS = "hybrid_sysui_battery_warning_flags";
 
         /**
          * Keys we no longer back up under the current schema, but want to continue to
