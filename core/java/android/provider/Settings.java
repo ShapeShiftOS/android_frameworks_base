@@ -5376,6 +5376,12 @@ public final class Settings {
         public static final String VOWIFI_ICON_STYLE = "vowifi_icon_style";
 
         /**
+         *  Optional haptic feedback on back gesture
+         *  @hide
+         */
+        public static final String BACK_GESTURE_HAPTIC = "back_gesture_haptic";
+
+        /**
          * Show a fingerprint icon on the keyguard
          * @hide
          */
@@ -5393,7 +5399,6 @@ public final class Settings {
          */
         public static final String DOUBLE_TAP_SLEEP_LOCKSCREEN =
                 "double_tap_sleep_lockscreen";
-
 
         /**
          * @hide
@@ -5557,6 +5562,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(CALL_CONNECTED_TONE_ENABLED);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_GESTURE);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_LOCKSCREEN);
+            PRIVATE_SETTINGS.add(BACK_GESTURE_HAPTIC);
         }
 
         /**
