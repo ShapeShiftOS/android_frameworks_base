@@ -104,5 +104,6 @@ public class SystemSettings {
         Settings.System.VIBRATE_ON_DISCONNECT,
         Settings.System.CUSTOM_RINGTONE_VIBRATION_PATTERN,
         Settings.System.REFRESH_RATE_SETTING,
+        Settings.System.NOTIFICATION_HEADERS,
     };
 }

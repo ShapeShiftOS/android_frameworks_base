@@ -4869,6 +4869,12 @@ public final class Settings {
         public static final String PIXEL_NAV_ANIMATION = "pixel_nav_animation";
 
         /**
+         * Controls whether to show notification headers
+         * @hide
+         */
+        public static final String NOTIFICATION_HEADERS = "notification_headers";
+
+        /**
          * How many rows to show in the qs panel when in portrait
          * @hide
          */
