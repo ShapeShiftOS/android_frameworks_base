@@ -67,6 +67,7 @@ import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.widget.Chronometer;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.provider.Settings;
 import android.widget.RemoteViews;
 
 import com.android.internal.annotations.VisibleForTesting;
