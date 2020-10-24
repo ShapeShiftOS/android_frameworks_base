@@ -4875,6 +4875,12 @@ public final class Settings {
         public static final String NOTIFICATION_HEADERS = "notification_headers";
 
         /**
+         * whether to show center notification headers
+         * @hide
+         */
+        public static final String CENTER_NOTIFICATION_HEADERS = "center_notification_headers";
+
+        /**
          * How many rows to show in the qs panel when in portrait
          * @hide
          */
@@ -5412,7 +5418,7 @@ public final class Settings {
             PUBLIC_SETTINGS.add(HAPTIC_FEEDBACK_ENABLED);
             PUBLIC_SETTINGS.add(SHOW_WEB_SUGGESTIONS);
             PUBLIC_SETTINGS.add(VIBRATE_WHEN_RINGING);
-        }
+	}
 
         /**
          * These are all hidden system settings.
@@ -5491,7 +5497,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(VIBRATE_ON_CALLWAITING);
             PRIVATE_SETTINGS.add(VIBRATE_ON_DISCONNECT);
             PRIVATE_SETTINGS.add(REFRESH_RATE_SETTING);
-        }
+            PRIVATE_SETTINGS.add(CENTER_NOTIFICATION_HEADERS);
+	}
 
         /**
          * These entries are considered common between the personal and the managed profile,

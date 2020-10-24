@@ -105,5 +105,6 @@ public class SystemSettings {
         Settings.System.CUSTOM_RINGTONE_VIBRATION_PATTERN,
         Settings.System.REFRESH_RATE_SETTING,
         Settings.System.NOTIFICATION_HEADERS,
+        Settings.System.CENTER_NOTIFICATION_HEADERS,
     };
 }
