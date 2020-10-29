@@ -7430,7 +7430,7 @@ message MetricsEvent {
     // END OF AOSP CONSTANTS
 
     // Custom Settings constant
-    CUSTOM_SETTIGNS = 1999;
+    CUSTOM_SETTINGS = 1999;
     CUSTOM_QS = 2000;
 
   }
