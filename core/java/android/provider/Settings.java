@@ -5385,8 +5385,15 @@ public final class Settings {
         public static final String LESS_BORING_HEADS_UP = "less_boring_heads_up";
 
         /**
+         * Swipe to screenshot gesture
+         * Also known as Three Fingers Screenshot.
+         * @hide
+         */
+        public static final String SWIPE_TO_SCREENSHOT = "swipe_to_screenshot";
+
+        /**
          * Style of battery to show.
-         * 0 = protrait (default)
+         * 0 = portrait (default)
          * 1 = circle
          * 2 = text
          * @hide
