@@ -55,6 +55,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.IBatteryStats;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.ssos.SsosConstants;
+import com.android.internal.util.custom.FodUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.ViewClippingUtil;
 import com.android.keyguard.KeyguardUpdateMonitor;
@@ -537,8 +538,7 @@ public class KeyguardIndicationController implements StateListener,
     }
 
     private boolean hasActiveInDisplayFp() {
-        PackageManager packageManager = mContext.getPackageManager();
-        boolean hasInDisplayFingerprint = packageManager.hasSystemFeature(SsosConstants.Features.FOD);
+        boolean hasInDisplayFingerprint = FodUtils.hasFodSupport(mContext);
         int userId = KeyguardUpdateMonitor.getCurrentUser();
         FingerprintManager fpm = (FingerprintManager) mContext.getSystemService(Context.FINGERPRINT_SERVICE);
         return hasInDisplayFingerprint && fpm.getEnrolledFingerprints(userId).size() > 0;
