@@ -310,9 +310,14 @@ public abstract class ClientMonitor extends LoggableMonitor implements IBinder.D
     }
 
     public final void vibrateError() {
-        Vibrator vibrator = mContext.getSystemService(Vibrator.class);
-        if (vibrator != null) {
-            vibrator.vibrate(mErrorVibrationEffect, FINGERPRINT_SONFICATION_ATTRIBUTES);
+        final boolean isHapticAvailable = Settings.System.getIntForUser(
+                mContext.getContentResolver(), Settings.System.HAPTIC_FEEDBACK_ENABLED, 1,
+                UserHandle.USER_CURRENT) != 0;
+        if (isHapticAvailable) {
+            Vibrator vibrator = mContext.getSystemService(Vibrator.class);
+            if (vibrator != null) {
+                vibrator.vibrate(mSuccessVibrationEffect, FINGERPRINT_SONFICATION_ATTRIBUTES);
+            }
         }
     }
 }
