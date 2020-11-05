@@ -167,7 +167,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         }
 
         @Override
-        public void onScreenTurnedOff() {
+        public void onStartedGoingToSleep(int why) {
             hide();
         }
 
