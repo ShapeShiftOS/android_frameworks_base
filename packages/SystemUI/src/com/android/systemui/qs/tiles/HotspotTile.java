@@ -19,6 +19,7 @@ package com.android.systemui.qs.tiles;
 import android.annotation.Nullable;
 import android.content.Intent;
 import android.os.UserManager;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.util.Log;
@@ -110,9 +111,15 @@ public class HotspotTile extends QSTileImpl<BooleanState> {
         mHotspotController.setHotspotEnabled(!isEnabled);
     }
 
+    private boolean isUnlockingRequired() {
+        return (Settings.Secure.getIntForUser(
+                mContext.getContentResolver(), Settings.Secure.QSTILE_REQUIRES_UNLOCKING, 1,
+                UserHandle.USER_CURRENT) == 1);
+    }
+
     @Override
     protected void handleClick() {
-        if (mKeyguard.isMethodSecure() && mKeyguard.isShowing()) {
+        if (mKeyguard.isMethodSecure() && mKeyguard.isShowing() && isUnlockingRequired()) {
             mActivityStarter.postQSRunnableDismissingKeyguard(() -> {
                 mHost.openPanels();
                 handleClickInner();
