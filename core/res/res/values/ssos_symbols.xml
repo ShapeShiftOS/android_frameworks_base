@@ -85,4 +85,6 @@
     <java-symbol type="bool" name="config_hasAlertSlider" />
     <java-symbol type="integer" name="config_alertSliderLocation" />
 
+    <java-symbol type="bool" name="config_has_Soli" />
+
 </resources>
