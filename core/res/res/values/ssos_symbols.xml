@@ -90,7 +90,4 @@
     <!-- Hide FOD while Going to sleep from lockscreen to avoid HBM flicker -->
     <java-symbol type="bool" name="config_inDisplayFingerprintFlickersGoingToSleep" />
 
-    <!-- Ambient notification light color -->
-    <java-symbol type="integer" name="config_ambientNotificationDefaultColor" />
-
 </resources>

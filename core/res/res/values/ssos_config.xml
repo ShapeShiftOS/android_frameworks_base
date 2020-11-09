@@ -102,7 +102,4 @@
     <!-- Hide FOD while Going to sleep from lockscreen to avoid HBM flicker -->
     <bool name="config_inDisplayFingerprintFlickersGoingToSleep">false</bool>
 
-    <!-- Default value for Ambiant Pulse light color -->
-    <integer name="config_ambientNotificationDefaultColor">0xFF3980FF</integer>
-
 </resources>
