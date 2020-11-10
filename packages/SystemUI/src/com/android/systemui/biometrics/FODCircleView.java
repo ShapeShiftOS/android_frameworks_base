@@ -113,7 +113,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     private boolean mIsBouncer;
     private boolean mIsDreaming;
     private boolean mIsCircleShowing;
-    private boolean mIsScreenTurnedOn;
     private boolean mIsAnimating = false;
 
     private Handler mHandler;
@@ -169,22 +168,12 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         @Override
         public void onScreenTurnedOff() {
-            mIsScreenTurnedOn = false;
             hide();
         }
 
         @Override
         public void onScreenTurnedOn() {
-            mIsScreenTurnedOn = true;
             if (mUpdateMonitor.isFingerprintDetectionRunning()) {
-                show();
-            }
-        }
-
-        @Override
-        public void onStartedWakingUp() {
-            if (!mIsScreenTurnedOn &&
-                    mUpdateMonitor.isFingerprintDetectionRunning()) {
                 show();
             }
         }
