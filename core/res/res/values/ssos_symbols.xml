@@ -136,4 +136,7 @@
      <!-- Cycle through ringer modes -->
      <java-symbol type="string" name="volume_dialog_ringer_guidance_normal" />
 
+     <!-- Aerr -->
+     <java-symbol type="id" name="aerr_disable" />
+
 </resources>
