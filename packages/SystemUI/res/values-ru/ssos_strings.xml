@@ -17,73 +17,61 @@
  */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
     <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
-    <string name="keyguard_indication_dash_charging_time" formatted="false"><xliff:g id="percentage">%2$s</xliff:g> • Dash зарядка (<xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> до полного)</string>
-    <string name="keyguard_plugged_in_dash_charging">Dash зарядка</string>
-
+    <string name="keyguard_indication_dash_charging_time" formatted="false"><xliff:g id="percentage">%2$s</xliff:g> • Быстрая зарядка (<xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> до полной зарядки)</string>
+    <string name="keyguard_plugged_in_dash_charging">Быстрая зарядка</string>
     <!-- Heads up QS tile -->
     <string name="quick_settings_heads_up_label">Всплывающие уведомления</string>
-    <string name="accessibility_quick_settings_heads_up_off">Всплывающие уведомления отключены.</string> 
-    <string name="accessibility_quick_settings_heads_up_on">Всплывающие уведомления включены.</string>
-    <string name="accessibility_quick_settings_heads_up_changed_off">Всплывающие уведомления отключены.</string>
+    <string name="accessibility_quick_settings_heads_up_off">Всплывающие уведомления выкл.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Всплывающие уведомления вкл.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Всплывающие уведомления выключены.</string>
     <string name="accessibility_quick_settings_heads_up_changed_on">Всплывающие уведомления включены.</string>
-
     <!-- DataSwitch Tile -->
-    <string name="qs_data_switch_label">Сменить SIM-карту для передачи данных</string>
+    <string name="qs_data_switch_label">Переключить SIM-карту для передачи данных</string>
     <string name="qs_data_switch_changed_1">Используется SIM-карта 1 для передачи данных</string>
     <string name="qs_data_switch_changed_2">Используется SIM-карта 2 для передачи данных</string>
     <string name="qs_data_switch_toast_0">В настоящее время SIM-карта не вставлена</string>
     <string name="qs_data_switch_toast_1">В настоящее время вставлена только одна SIM-карта</string>
-
     <!-- Caffeine QS Tile -->
-    <string name="quick_settings_caffeine_label">Кофеин</string>
-    <string name="quick_settings_caffeine_label_off">Отключен</string>
-    <string name="accessibility_quick_settings_caffeine_off">Переход в спящий режим разрешен</string>
-    <string name="accessibility_quick_settings_caffeine_on">Переход в спящий режим запрещен</string>
-
+    <string name="quick_settings_caffeine_label">Запрет сна</string>
+    <string name="quick_settings_caffeine_label_off">Выкл.</string>
+    <string name="accessibility_quick_settings_caffeine_off">Запрет сна выкл.</string>
+    <string name="accessibility_quick_settings_caffeine_on">Запрет сна вкл.</string>
     <!-- Compass QS Tile -->
     <string name="quick_settings_compass_label">Компас</string>
     <string name="quick_settings_compass_value"><xliff:g id="degrees">%1$.0f</xliff:g>\u00b0 <xliff:g id="direction">%2$s</xliff:g></string>
     <string name="quick_settings_compass_init">Инициализация\u2026</string>
-    <string name="accessibility_quick_settings_compass_off">Компас выключен</string>
-    <string name="accessibility_quick_settings_compass_on">Компас включен</string>
+    <string name="accessibility_quick_settings_compass_off">Компас выкл.</string>
+    <string name="accessibility_quick_settings_compass_on">Компас вкл.</string>
     <string name="accessibility_quick_settings_compass_changed_off">Компас выключен</string>
     <string name="accessibility_quick_settings_compass_changed_on">Компас включен</string>
-    <string name="quick_settings_compass_N">Север</string>
-    <string name="quick_settings_compass_NE">Северо-восток</string>
-    <string name="quick_settings_compass_E">Восток</string>
-    <string name="quick_settings_compass_SE">Юго-восток</string>
-    <string name="quick_settings_compass_S">Юг</string>
-    <string name="quick_settings_compass_SW">Юго-запад</string>
-    <string name="quick_settings_compass_W">Запад</string>
-    <string name="quick_settings_compass_NW">Северо-запад</string>
-
-
+    <string name="quick_settings_compass_N">С</string>
+    <string name="quick_settings_compass_NE">СВ</string>
+    <string name="quick_settings_compass_E">В</string>
+    <string name="quick_settings_compass_SE">ЮВ</string>
+    <string name="quick_settings_compass_S">Ю</string>
+    <string name="quick_settings_compass_SW">ЮВ</string>
+    <string name="quick_settings_compass_W">З</string>
+    <string name="quick_settings_compass_NW">СЗ</string>
     <!-- Sound QS Tile -->
     <string name="quick_settings_sound_label">Звук</string>
     <string name="quick_settings_sound_ring">Рингтон</string>
     <string name="quick_settings_sound_vibrate">Вибрация</string>
-    <string name="quick_settings_sound_silent">Не беспокоить</string>
-
+    <string name="quick_settings_sound_silent">Без звука</string>
     <!-- USB tethering QS tile -->
     <string name="quick_settings_usb_tether_label">USB-модем</string>
-
     <!-- AOD QS tile -->
-    <string name="quick_settings_aod_label">Всегда включенный экран</string>
-    <string name="quick_settings_aod_on_charge_label">Всегда включенный экран при зарядке</string>
-    <string name="quick_settings_aod_off_label">Всегда вклчюенный экран отключен</string>
-    <string name="quick_settings_aod_off_powersave_label">Всегда включенный экран отключен\nЭконолмия батареи</string>
-
+    <string name="quick_settings_aod_label">AOD</string>
+    <string name="quick_settings_aod_on_charge_label">AOD при зарядке</string>
+    <string name="quick_settings_aod_off_label">AOD выкл.</string>
+    <string name="quick_settings_aod_off_powersave_label">AOD выкл.\nЭкономия заряда батареи</string>
     <!-- Tuner items -->
     <string name="status_bar_data_saver">Экономия трафика</string>
+    <string name="status_bar_vpn">VPN</string>
     <string name="status_bar_roaming">Роуминг</string>
-
     <!-- Screenshot Delete Toast -->
-    <string name="delete_screenshot_toast">Снимок экрана удален</string>
-
+    <string name="delete_screenshot_toast">Скриншот удален</string>
     <!-- Heads up snooze toast -->
-    <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s</xliff:g> - Отключение всплывающих уведомлений на 1 минуту</string>
-    <string name="heads_up_snooze_message"><xliff:g id="string">%1$s</xliff:g> - Отключение всплывающих уведомлений н <xliff:g id="number">%1$d</xliff:g> минуту(ы)</string>
-
+    <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s</xliff:g> - Всплывающие уведомления выключены на 1 минуту.</string>
+    <string name="heads_up_snooze_message"><xliff:g id="string">%1$s</xliff:g> - Всплывающие уведомления выключены на <xliff:g id="number">%1$d</xliff:g> минут(ы).</string>
 </resources>
