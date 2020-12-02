@@ -99,5 +99,8 @@ public class SystemSettings {
         Settings.System.FLASHLIGHT_ON_CALL_IGNORE_DND,
         Settings.System.FLASHLIGHT_ON_CALL_RATE,
         Settings.System.RINGTONE_VIBRATION_PATTERN,
+        Settings.System.VIBRATE_ON_CONNECT,
+        Settings.System.VIBRATE_ON_CALLWAITING,
+        Settings.System.VIBRATE_ON_DISCONNECT,
     };
 }
