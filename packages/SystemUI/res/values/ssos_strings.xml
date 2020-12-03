@@ -105,4 +105,7 @@
     <!-- Tux clock -->
     <string name="clock_title_tux" translatable="false">Tux</string>
 
+    <!-- Reading mode tile -->
+    <string name="quick_settings_reading_mode">Reading mode</string>
+
 </resources>
