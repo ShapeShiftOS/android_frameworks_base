@@ -121,4 +121,7 @@
     <!-- Whether device supports variable refresh rate -->
     <bool name="config_hasVariableRefreshRate">false</bool>
 
+    <!-- Maximum refresh rate 90 or 120 -->
+    <integer name="config_maxRefreshRate">120</integer>
+
 </resources>
