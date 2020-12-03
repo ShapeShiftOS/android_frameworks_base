@@ -187,4 +187,7 @@
      <java-symbol type="array" name="config_rebootActionsList" />
      <java-symbol type="array" name="values_globalActionsList" />
 
+     <!-- Whether device supports variable refresh rate -->
+     <java-symbol type="bool" name="config_hasVariableRefreshRate" />
+
 </resources>
