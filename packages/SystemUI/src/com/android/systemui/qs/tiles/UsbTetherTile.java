@@ -23,15 +23,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.net.ConnectivityManager;
 import android.service.quicksettings.Tile;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.qs.QSTile.BooleanState;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 import com.android.systemui.R;
+import com.android.systemui.statusbar.policy.KeyguardStateController;
 
 import javax.inject.Inject;
 
@@ -46,6 +49,8 @@ public class UsbTetherTile extends QSTileImpl<BooleanState> {
             "com.android.settings", "com.android.settings.TetherSettings"));
 
     private final ConnectivityManager mConnectivityManager;
+    private final ActivityStarter mActivityStarter;
+    private final KeyguardStateController mKeyguard;
 
     private boolean mListening;
 
@@ -53,9 +58,13 @@ public class UsbTetherTile extends QSTileImpl<BooleanState> {
     private boolean mUsbTetherEnabled = false;
 
     @Inject
-    public UsbTetherTile(QSHost host) {
+    public UsbTetherTile(QSHost host,
+            KeyguardStateController keyguardStateController,
+            ActivityStarter activityStarter) {
         super(host);
         mConnectivityManager = mContext.getSystemService(ConnectivityManager.class);
+        mKeyguard = keyguardStateController;
+        mActivityStarter = activityStarter;
     }
 
     public BooleanState newTileState() {
@@ -79,9 +88,25 @@ public class UsbTetherTile extends QSTileImpl<BooleanState> {
 
     @Override
     protected void handleClick() {
+        if (mKeyguard.isMethodSecure() && mKeyguard.isShowing() && isUnlockingRequired()) {
+            mActivityStarter.postQSRunnableDismissingKeyguard(() -> {
+                setEnabled();
+            });
+            return;
+        }
+        setEnabled();
+    }
+
+    private void setEnabled() {
         if (mUsbConnected) {
             mConnectivityManager.setUsbTethering(!mUsbTetherEnabled);
         }
+    }
+
+    private boolean isUnlockingRequired() {
+        return (Settings.Secure.getIntForUser(
+                mContext.getContentResolver(), Settings.Secure.QSTILE_REQUIRES_UNLOCKING, 1,
+                UserHandle.USER_CURRENT) == 1);
     }
 
     @Override
