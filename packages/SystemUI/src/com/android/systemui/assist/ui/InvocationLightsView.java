@@ -117,9 +117,11 @@ public class InvocationLightsView extends View
         }
 
         Resources res = mContext.getResources();
-        int colorDark = res.getColor(R.color.edge_light_dark);
-        int colorDim = res.getColor(R.color.edge_light_dim);
-        setColors(colorDark, colorDim, colorDark, colorDim);
+        int colorRed = res.getColor(R.color.edge_light_red);
+        int colorYellow = res.getColor(R.color.edge_light_yellow);
+        int colorBlue = res.getColor(R.color.edge_light_blue);
+        int colorGreen = res.getColor(R.color.edge_light_green);
+        setColors(colorBlue, colorRed, colorYellow, colorGreen);
     }
 
     /**
