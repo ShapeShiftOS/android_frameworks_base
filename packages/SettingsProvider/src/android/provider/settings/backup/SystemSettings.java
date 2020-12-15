@@ -106,5 +106,6 @@ public class SystemSettings {
         Settings.System.REFRESH_RATE_SETTING,
         Settings.System.NOTIFICATION_HEADERS,
         Settings.System.CENTER_NOTIFICATION_HEADERS,
+        Settings.System.LOCK_FP_ICON,
     };
 }
