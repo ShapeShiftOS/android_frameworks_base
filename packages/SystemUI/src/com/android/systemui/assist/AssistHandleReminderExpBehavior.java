@@ -91,7 +91,7 @@ final class AssistHandleReminderExpBehavior implements BehaviorController {
     private static final boolean DEFAULT_SUPPRESS_ON_LOCKSCREEN = false;
     private static final boolean DEFAULT_SUPPRESS_ON_LAUNCHER = false;
     private static final boolean DEFAULT_SUPPRESS_ON_APPS = true;
-    private static final boolean DEFAULT_SHOW_WHEN_TAUGHT = false;
+    private static final boolean DEFAULT_SHOW_WHEN_TAUGHT = true;
 
     private static final String[] DEFAULT_HOME_CHANGE_ACTIONS = new String[] {
             PackageManagerWrapper.ACTION_PREFERRED_ACTIVITY_CHANGED,
