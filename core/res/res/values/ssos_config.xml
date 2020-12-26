@@ -183,4 +183,7 @@
          Used to decide if we show pulse settings -->
     <bool name="config_ledCanPulse">true</bool>
 
+    <!-- Default fod pressed color -->
+    <integer name="config_fod_pressed_color">1</integer>
+
 </resources>
