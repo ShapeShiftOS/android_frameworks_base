@@ -28,4 +28,7 @@
 
     <!-- System icon area layout weight -->
     <item name="system_icon_area_weight" format="float" type="integer">1</item>
+
+    <!-- Color of the FOD view -->
+    <color name="config_fodColorBackground">#20000000</color>
 </resources>
