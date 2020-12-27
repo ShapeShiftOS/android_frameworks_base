@@ -5421,6 +5421,36 @@ public final class Settings {
         public static final String LESS_BORING_HEADS_UP = "less_boring_heads_up";
 
         /**
+         * VolumePanel Top padding
+         * @author tikkiX2
+         * @hide
+         */
+        public static final String SYNTHOS_VOLUME_PANEL_PADDING_TOP = "synthos_volume_panel_padding_top";
+
+        /**
+         * VolumePanel Bottom padding
+         * @author tikkiX2
+         * @hide
+         */
+        public static final String SYNTHOS_VOLUME_PANEL_PADDING_BOTTOM = "synthos_volume_panel_padding_bottom";
+
+        /**
+         * Volume Panel alignment
+         *   0 - TOP
+         *   1 - CENTER_VERTICAL
+         *   2 - BOTTOM
+         * @hide
+         */
+        public static final String VOLUME_PANEL_ALIGNMENT = "volume_panel_alignment";
+
+        /**
+         * Music Text in VolumePanel
+         * @author tikkiX2
+         * @hide
+         */
+        public static final String SYNTHOS_MUSIC_VOLUME_PANEL_TEXT = "synthos_music_volume_panel_text";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *

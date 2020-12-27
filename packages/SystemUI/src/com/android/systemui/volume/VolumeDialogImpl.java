@@ -31,9 +31,12 @@ import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 import static com.android.systemui.volume.Events.DISMISS_REASON_SETTINGS_CLICKED;
 
+import android.database.ContentObserver;
+import android.os.UserHandle;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
@@ -101,7 +104,10 @@ import com.android.systemui.plugins.VolumeDialogController.State;
 import com.android.systemui.plugins.VolumeDialogController.StreamState;
 import com.android.systemui.statusbar.policy.AccessibilityManagerWrapper;
 import com.android.systemui.statusbar.policy.ConfigurationController;
+import com.android.systemui.statusbar.NotificationMediaManager;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
+
+import com.android.systemui.ssos.MusicText;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -170,7 +176,39 @@ public class VolumeDialogImpl implements VolumeDialog,
     private ViewStub mODICaptionsTooltipViewStub;
     private View mODICaptionsTooltipView = null;
 
+    private MusicText mMusicText;
+    private int mVolumeDialogID;
+    private NotificationMediaManager mMediaManager;
+
     private boolean mLeftVolumeRocker;
+    private int mVolumeAlignment;
+
+
+    private class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.SYNTHOS_VOLUME_PANEL_PADDING_TOP), false, this, UserHandle.USER_ALL);
+            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.SYNTHOS_VOLUME_PANEL_PADDING_BOTTOM), false, this, UserHandle.USER_ALL);
+            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(Settings.System.VOLUME_PANEL_ALIGNMENT), false, this, UserHandle.USER_ALL);
+            update();
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            update();
+        }
+
+        public void update() {
+            mVolumeAlignment = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.VOLUME_PANEL_ALIGNMENT, 1, UserHandle.USER_CURRENT);
+            setPaddingLocation();
+            updateRowsH(getActiveRow());
+        }
+    }
+
+    private SettingsObserver settingsObserver;
 
     public VolumeDialogImpl(Context context) {
         mContext =
@@ -180,6 +218,7 @@ public class VolumeDialogImpl implements VolumeDialog,
         mActivityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
         mAccessibilityMgr = Dependency.get(AccessibilityManagerWrapper.class);
         mDeviceProvisionedController = Dependency.get(DeviceProvisionedController.class);
+        mMediaManager = Dependency.get(NotificationMediaManager.class);
         mShowActiveStreamOnly = showActiveStreamOnly();
         mHasSeenODICaptionsTooltip =
                 Prefs.getBoolean(context, Prefs.Key.HAS_SEEN_ODI_CAPTIONS_TOOLTIP, false);
@@ -240,10 +279,18 @@ public class VolumeDialogImpl implements VolumeDialog,
             lp.gravity = Gravity.LEFT | Gravity.CENTER_VERTICAL;
         }
         mWindow.setAttributes(lp);
-        mWindow.setLayout(WRAP_CONTENT, WRAP_CONTENT);
+        mWindow.setLayout(WRAP_CONTENT, MATCH_PARENT);
 
-        mDialog.setContentView(R.layout.volume_dialog);
-        mDialogView = mDialog.findViewById(R.id.volume_dialog);
+                mDialog.setContentView(R.layout.volume_dialog);
+                mDialogView = mDialog.findViewById(R.id.volume_dialog);
+                mMusicText = mDialog.findViewById(R.id.music_container);
+                mVolumeDialogID = R.id.volume_dialog;
+                if (mMediaManager == null) {
+                    mMediaManager = Dependency.get(NotificationMediaManager.class);
+                    mMusicText.initDependencies(mMediaManager);
+                } else {
+                    mMusicText.initDependencies(mMediaManager);
+                }
         mDialogView.setAlpha(0);
         mDialog.setCanceledOnTouchOutside(true);
         mDialog.setOnShowListener(dialog -> {
@@ -262,6 +309,14 @@ public class VolumeDialogImpl implements VolumeDialog,
                             }
                         }
                     })
+                    .start();
+            if (!isLandscape()) mMusicText.setTranslationX((mMusicText.getWidth() / 2.0f)*(isAudioPanelOnLeftSide() ? -1 : 1));
+            mMusicText.setAlpha(0);
+            mMusicText.animate()
+                    .alpha(1)
+                    .translationX(0)
+                    .setDuration(DIALOG_SHOW_ANIMATION_DURATION)
+                    .setInterpolator(new SystemUIInterpolators.LogDecelerateInterpolator())
                     .start();
         });
 
@@ -347,10 +402,490 @@ public class VolumeDialogImpl implements VolumeDialog,
             addExistingRows();
         }
 
+        setPaddingLocation();
+
         updateRowsH(getActiveRow());
         initRingerH();
         initSettingsH();
         initODICaptionsH();
+        settingsObserver = new SettingsObserver(mHandler);
+        settingsObserver.observe();
+    }
+
+    private int updateVolumePanelPaddingBottom() {
+        final ContentResolver resolver = mContext.getContentResolver();
+        int mPaddingBottom = Settings.System.getIntForUser(resolver,
+                Settings.System.SYNTHOS_VOLUME_PANEL_PADDING_BOTTOM, 20, UserHandle.USER_CURRENT);
+
+        switch (mPaddingBottom) {
+            case 0:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_0);
+            case 1:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_1);
+            case 2:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_2);
+            case 3:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_3);
+            case 4:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_4);
+            case 5:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_5);
+            case 6:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_6);
+            case 7:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_7);
+            case 8:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_8);
+            case 9:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_9);
+            case 10:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_10);
+            case 11:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_11);
+            case 12:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_12);
+            case 13:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_13);
+            case 14:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_14);
+            case 15:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_15);
+            case 16:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_16);
+            case 17:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_17);
+            case 18:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_18);
+            case 19:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_19);
+            case 20:
+            default:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_20);
+            case 21:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_21);
+            case 22:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_22);
+            case 23:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_23);
+            case 24:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_24);
+            case 25:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_25);
+            case 26:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_26);
+            case 27:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_27);
+            case 28:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_28);
+            case 29:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_29);
+            case 30:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_30);
+            case 31:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_31);
+            case 32:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_32);
+            case 33:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_33);
+            case 34:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_34);
+            case 35:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_35);
+            case 36:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_36);
+            case 37:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_37);
+            case 38:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_38);
+            case 39:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_39);
+            case 40:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_40);
+            case 41:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_41);
+            case 42:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_42);
+            case 43:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_43);
+            case 44:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_44);
+            case 45:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_45);
+            case 46:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_46);
+            case 47:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_47);
+            case 48:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_48);
+            case 49:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_49);
+            case 50:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_50);
+            case 51:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_51);
+            case 52:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_52);
+            case 53:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_53);
+            case 54:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_54);
+            case 55:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_55);
+            case 56:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_56);
+            case 57:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_57);
+            case 58:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_58);
+            case 59:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_59);
+            case 60:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_60);
+            case 61:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_61);
+            case 62:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_62);
+            case 63:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_63);
+            case 64:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_64);
+            case 65:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_65);
+            case 66:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_66);
+            case 67:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_67);
+            case 68:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_68);
+            case 69:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_69);
+            case 70:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_70);
+            case 71:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_71);
+            case 72:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_72);
+            case 73:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_73);
+            case 74:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_74);
+            case 75:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_75);
+            case 76:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_76);
+            case 77:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_77);
+            case 78:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_78);
+            case 79:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_79);
+            case 80:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_80);
+            case 81:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_81);
+            case 82:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_82);
+            case 83:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_83);
+            case 84:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_84);
+            case 85:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_85);
+            case 86:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_86);
+            case 87:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_87);
+            case 88:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_88);
+            case 89:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_89);
+            case 90:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_90);
+            case 91:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_91);
+            case 92:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_92);
+            case 93:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_93);
+            case 94:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_94);
+            case 95:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_95);
+            case 96:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_96);
+            case 97:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_97);
+            case 98:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_98);
+            case 99:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_99);
+            case 100:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_100);
+        }
+    }
+
+    private int updateVolumePanelPaddingTop() {
+        final ContentResolver resolver = mContext.getContentResolver();
+        int mPaddingTop = Settings.System.getIntForUser(resolver,
+                Settings.System.SYNTHOS_VOLUME_PANEL_PADDING_TOP, 20, UserHandle.USER_CURRENT);
+
+        switch (mPaddingTop) {
+            case 0:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_0);
+            case 1:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_1);
+            case 2:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_2);
+            case 3:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_3);
+            case 4:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_4);
+            case 5:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_5);
+            case 6:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_6);
+            case 7:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_7);
+            case 8:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_8);
+            case 9:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_9);
+            case 10:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_10);
+            case 11:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_11);
+            case 12:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_12);
+            case 13:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_13);
+            case 14:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_14);
+            case 15:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_15);
+            case 16:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_16);
+            case 17:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_17);
+            case 18:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_18);
+            case 19:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_19);
+            case 20:
+            default:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_20);
+            case 21:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_21);
+            case 22:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_22);
+            case 23:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_23);
+            case 24:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_24);
+            case 25:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_25);
+            case 26:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_26);
+            case 27:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_27);
+            case 28:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_28);
+            case 29:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_29);
+            case 30:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_30);
+            case 31:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_31);
+            case 32:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_32);
+            case 33:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_33);
+            case 34:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_34);
+            case 35:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_35);
+            case 36:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_36);
+            case 37:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_37);
+            case 38:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_38);
+            case 39:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_39);
+            case 40:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_40);
+            case 41:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_41);
+            case 42:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_42);
+            case 43:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_43);
+            case 44:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_44);
+            case 45:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_45);
+            case 46:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_46);
+            case 47:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_47);
+            case 48:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_48);
+            case 49:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_49);
+            case 50:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_50);
+            case 51:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_51);
+            case 52:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_52);
+            case 53:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_53);
+            case 54:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_54);
+            case 55:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_55);
+            case 56:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_56);
+            case 57:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_57);
+            case 58:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_58);
+            case 59:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_59);
+            case 60:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_60);
+            case 61:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_61);
+            case 62:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_62);
+            case 63:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_63);
+            case 64:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_64);
+            case 65:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_65);
+            case 66:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_66);
+            case 67:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_67);
+            case 68:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_68);
+            case 69:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_69);
+            case 70:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_70);
+            case 71:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_71);
+            case 72:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_72);
+            case 73:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_73);
+            case 74:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_74);
+            case 75:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_75);
+            case 76:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_76);
+            case 77:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_77);
+            case 78:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_78);
+            case 79:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_79);
+            case 80:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_80);
+            case 81:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_81);
+            case 82:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_82);
+            case 83:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_83);
+            case 84:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_84);
+            case 85:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_85);
+            case 86:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_86);
+            case 87:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_87);
+            case 88:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_88);
+            case 89:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_89);
+            case 90:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_90);
+            case 91:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_91);
+            case 92:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_92);
+            case 93:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_93);
+            case 94:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_94);
+            case 95:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_95);
+            case 96:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_96);
+            case 97:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_97);
+            case 98:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_98);
+            case 99:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_99);
+            case 100:
+                return (int) mContext.getResources().getDimension(R.dimen.volume_panel_padding_100);
+        }
+    }
+
+    private void setPaddingLocation() {
+
+      WindowManager.LayoutParams lp = mWindow.getAttributes();
+      RelativeLayout.LayoutParams mlp = (RelativeLayout.LayoutParams) mMusicText.getLayoutParams();
+
+      if(!isAudioPanelOnLeftSide()){
+        switch (mVolumeAlignment) {
+            case 0:
+                lp.gravity = Gravity.RIGHT | Gravity.TOP;
+                break;
+            case 1:
+            default:
+                lp.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
+                break;
+            case 2:
+                lp.gravity = Gravity.RIGHT | Gravity.BOTTOM;
+                break;
+        }
+        mlp.addRule(RelativeLayout.START_OF, mVolumeDialogID);
+        mlp.removeRule(RelativeLayout.END_OF);
+      } else {
+        switch (mVolumeAlignment) {
+            case 0:
+                lp.gravity = Gravity.LEFT | Gravity.TOP;
+                break;
+            case 1:
+            default:
+                lp.gravity = Gravity.LEFT | Gravity.CENTER_VERTICAL;
+                break;
+            case 2:
+                lp.gravity = Gravity.LEFT | Gravity.BOTTOM;
+                break;
+        }
+        mlp.addRule(RelativeLayout.END_OF, mVolumeDialogID);
+        mlp.removeRule(RelativeLayout.START_OF);
+      }
+
+      mDialogView.setPaddingRelative( ((int) mContext.getResources().getDimension(R.dimen.volume_dialog_panel_transparent_padding_right)),
+                                      (updateVolumePanelPaddingTop() * 3),
+                                      ((int) mContext.getResources().getDimension(R.dimen.volume_dialog_panel_transparent_padding_left)),
+                                      (updateVolumePanelPaddingBottom() * 3));
+
+      mMusicText.setPaddingRelative(0 ,(updateVolumePanelPaddingTop() * 3),0,(updateVolumePanelPaddingBottom() * 3));
+      mMusicText.setLayoutParams(mlp);
+      mWindow.setAttributes(lp);
+
+    }
+
+    public void initText (NotificationMediaManager mediaManager) {
+        mMediaManager = mediaManager;
     }
 
     protected ViewGroup getDialogView() {
@@ -807,6 +1342,12 @@ public class VolumeDialogImpl implements VolumeDialog,
         }
         mDialogView.setTranslationX(0);
         mDialogView.setAlpha(1);
+        mMusicText.setTranslationX(0);
+        mMusicText.setAlpha(1);
+        ViewPropertyAnimator musicAnimator = mMusicText.animate()
+                .alpha(0)
+                .setDuration(DIALOG_HIDE_ANIMATION_DURATION)
+                .setInterpolator(new SystemUIInterpolators.LogAccelerateInterpolator());
         ViewPropertyAnimator animator = mDialogView.animate()
                 .alpha(0)
                 .setDuration(DIALOG_HIDE_ANIMATION_DURATION)
@@ -817,7 +1358,9 @@ public class VolumeDialogImpl implements VolumeDialog,
                     mIsAnimatingDismiss = false;
                 }, 50));
         if (!isLandscape()) animator.translationX((mDialogView.getWidth() / 2.0f)*(isAudioPanelOnLeftSide() ? -1 : 1));
+        if (!isLandscape()) musicAnimator.translationX((mMusicText.getWidth() / 2.0f)*(isAudioPanelOnLeftSide() ? -1 : 1));
         animator.start();
+        musicAnimator.start();
         checkODICaptionsTooltip(true);
         mController.notifyVisible(false);
         synchronized (mSafetyWarningLock) {
