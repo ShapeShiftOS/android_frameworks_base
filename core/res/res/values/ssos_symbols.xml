@@ -22,6 +22,10 @@
      <!-- Whether device supports an alt. ambient display -->
      <java-symbol type="bool" name="config_alt_ambient_display"/>
 
+     <!-- Whether to notify fingerprint client of successful cancelled authentication
+          (needed for some older vendor fingerprint HAL implementations) -->
+     <java-symbol type="bool" name="config_fingerprintPostResetRunnableForAllClients" />
+
      <!-- Whether to cleanup fingerprints upon connection to the daemon and when user switches -->
      <java-symbol type="bool" name="config_cleanupUnusedFingerprints" />
 
