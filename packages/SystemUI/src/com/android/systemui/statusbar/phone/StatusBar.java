@@ -1180,6 +1180,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             backdrop.setScaleY(scale);
         });
 
+        mVolumeComponent.initDependencies(mMediaManager);
+
         mNotificationPanelViewController.setUserSetupComplete(mUserSetup);
         if (UserManager.get(mContext).isUserSwitcherEnabled()) {
             createUserSwitcher();

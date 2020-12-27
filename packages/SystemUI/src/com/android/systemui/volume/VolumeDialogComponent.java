@@ -34,6 +34,7 @@ import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.PluginDependencyProvider;
 import com.android.systemui.plugins.VolumeDialog;
 import com.android.systemui.plugins.VolumeDialogController;
+import com.android.systemui.statusbar.NotificationMediaManager;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.statusbar.policy.ExtensionController;
 import com.android.systemui.tuner.TunerService;
@@ -67,6 +68,7 @@ public class VolumeDialogComponent implements VolumeComponent, TunerService.Tuna
             | ActivityInfo.CONFIG_ASSETS_PATHS | ActivityInfo.CONFIG_UI_MODE);
     private final KeyguardViewMediator mKeyguardViewMediator;
     private VolumeDialog mDialog;
+    private NotificationMediaManager mMediaManager;
     private VolumePolicy mVolumePolicy = new VolumePolicy(
             DEFAULT_VOLUME_DOWN_TO_ENTER_SILENT,  // volumeDownToEnterSilent
             DEFAULT_VOLUME_UP_TO_EXIT_SILENT,  // volumeUpToExitSilent
@@ -113,6 +115,7 @@ public class VolumeDialogComponent implements VolumeComponent, TunerService.Tuna
         impl.setStreamImportant(AudioManager.STREAM_SYSTEM, false);
         impl.setAutomute(true);
         impl.setSilentMode(false);
+        impl.initText(mMediaManager);
         return impl;
     }
 
@@ -179,6 +182,11 @@ public class VolumeDialogComponent implements VolumeComponent, TunerService.Tuna
     public void register() {
         mController.register();
         DndTile.setCombinedIcon(mContext, true);
+    }
+
+    @Override
+    public void initDependencies(NotificationMediaManager mediaManager) {
+        mMediaManager = mediaManager;
     }
 
     @Override
