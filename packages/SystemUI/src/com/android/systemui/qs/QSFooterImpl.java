@@ -20,7 +20,9 @@ import static android.app.StatusBarManager.DISABLE2_QUICK_SETTINGS;
 
 import static com.android.systemui.util.InjectionInflationController.VIEW_CONTEXT;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
@@ -34,6 +36,8 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -102,6 +106,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
 
     private View mActionsContainer;
 
+    private final Vibrator mVibrator;
     private OnClickListener mExpandClickListener;
 
     /*private final ContentObserver mDeveloperSettingsObserver = new ContentObserver(
@@ -121,6 +126,8 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         mActivityStarter = activityStarter;
         mUserInfoController = userInfoController;
         mDeviceProvisionedController = deviceProvisionedController;
+        ContentResolver resolver = context.getContentResolver();
+        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     @VisibleForTesting
@@ -381,6 +388,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     public boolean onLongClick(View v) {
         if (v == mSettingsButton) {
             startShapeShifter();
+            mVibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
         }
         return false;
     }
