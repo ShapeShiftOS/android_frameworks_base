@@ -121,4 +121,11 @@
     <!-- Name of the additional status bar icons also exposed with SystemUI Tuner -->
     <string name="status_bar_battery_prefs">Battery</string>
 
+    <!-- Headphones Buddy -->
+    <string name="hp_buddy">Headphones Buddy</string>
+    <string name="hp_buddy_left">Left only</string>
+    <string name="hp_buddy_right">Right only</string>
+    <string name="hp_buddy_center">Both</string>
+    <string name="hp_buddy_not_connected">Connect your headphones</string>
+
 </resources>
