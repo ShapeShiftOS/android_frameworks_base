@@ -20,20 +20,19 @@ import javax.inject.Singleton;
 public class EnhancedEstimatesImpl implements EnhancedEstimates {
 
     private Context mContext;
-    private final KeyValueListParser mParser;
+    private final KeyValueListParser mParser = new KeyValueListParser(',');
 
     @Inject
     public EnhancedEstimatesImpl(Context context) {
         mContext = context;
-        mParser = new KeyValueListParser(',');
     }
 
     @Override
     public boolean isHybridNotificationEnabled() {
         try {
-            if (!mContext.getPackageManager().getPackageInfo("com.google.android.apps.turbo", 512).applicationInfo.enabled) {
+            if (!mContext.getPackageManager().getPackageInfo("com.google.android.apps.turbo",
+                    PackageManager.MATCH_DISABLED_COMPONENTS).applicationInfo.enabled)
                 return false;
-            }
             updateFlags();
             return mParser.getBoolean("hybrid_enabled", true);
         } catch (PackageManager.NameNotFoundException ex) {
@@ -43,66 +42,60 @@ public class EnhancedEstimatesImpl implements EnhancedEstimates {
 
     @Override
     public Estimate getEstimate() {
-        Uri build = new Uri.Builder().scheme("content").authority("com.google.android.apps.turbo.estimated_time_remaining").appendPath("time_remaining").build();
         try {
-            Cursor query = mContext.getContentResolver().query(build, (String[])null, (String)null, (String[])null, (String)null);
-            if (query != null) {
-                try {
-                    if (query.moveToFirst()) {
-                        int columnIndex = query.getColumnIndex("is_based_on_usage");
-                        boolean b = true;
-                        if (columnIndex != -1) {
-                            b = (query.getInt(query.getColumnIndex("is_based_on_usage")) != 0 && b);
-                        }
-                        int columnIndex2 = query.getColumnIndex("average_battery_life");
-                        long roundTimeToNearestThreshold = -1L;
-                        if (columnIndex2 != -1) {
-                            long long1 = query.getLong(columnIndex2);
-                            roundTimeToNearestThreshold = roundTimeToNearestThreshold;
-                            if (long1 != -1L) {
-                                long n = Duration.ofMinutes(15L).toMillis();
-                                if (Duration.ofMillis(long1).compareTo(Duration.ofDays(1L)) >= 0) {
-                                    n = Duration.ofHours(1L).toMillis();
-                                }
-                                roundTimeToNearestThreshold = PowerUtil.roundTimeToNearestThreshold(long1, n);
-                            }
-                        }
-                        Estimate estimate = new Estimate(query.getLong(query.getColumnIndex("battery_estimate")), b, roundTimeToNearestThreshold);
-                        if (query != null) {
-                            query.close();
-                        }
-                        return estimate;
-                    }
-                }
-                finally {
-                    if (query != null) {
-                        try {
-                            query.close();
-                        } finally {
-                            query = null;
-                        }
-                    }
+            Cursor cursor = mContext.getContentResolver().query(new Uri.Builder()
+                                .scheme("content")
+                                .authority("com.google.android.apps.turbo.estimated_time_remaining")
+                                .appendPath("time_remaining")
+                                .build(), null, null, null, null);
+            if (cursor == null || !cursor.moveToFirst()) {
+                if (cursor != null) cursor.close();
+                Log.e("EnhancedEstimates", "Cannot get an estimate from Turbo: Cursor is null");
+                return new Estimate(-1, false, -1);
+            }
+
+            boolean basedOnUsage = true;
+            if (cursor.getColumnIndex("is_based_on_usage") != -1) {
+                if (cursor.getInt(cursor.getColumnIndex("is_based_on_usage")) == 0) {
+                    basedOnUsage = false;
                 }
             }
-            if (query != null) {
-                query.close();
+
+            int columnIndex = cursor.getColumnIndex("average_battery_life");
+            long avgDischargeTime = -1;
+            if (columnIndex != -1) {
+                long estimateMillis = cursor.getLong(columnIndex);
+                if (estimateMillis != -1) {
+                    long millis = Duration.ofMinutes(15).toMillis();
+                    if (Duration.ofMillis(estimateMillis).compareTo(Duration.ofDays(1)) >= 0) {
+                        millis = Duration.ofHours(1).toMillis();
+                    }
+                    avgDischargeTime = PowerUtil.roundTimeToNearestThreshold(estimateMillis, millis);
+                }
             }
+            Estimate estimate = new Estimate(cursor.getLong(
+                                             cursor.getColumnIndex("battery_estimate")),
+                                             basedOnUsage, avgDischargeTime);
+            if (cursor != null) {
+                cursor.close();
+            }
+            return estimate;
         } catch (Exception exception) {
             Log.d("EnhancedEstimates", "Something went wrong when getting an estimate from Turbo", exception);
         }
-        return new Estimate(-1L, false, -1L);
+        return new Estimate(-1, false, -1);
     }
 
     @Override
     public long getLowWarningThreshold() {
         updateFlags();
-        return mParser.getLong("low_threshold", Duration.ofHours(3L).toMillis());
+        return mParser.getLong("low_threshold", Duration.ofHours(3).toMillis());
     }
 
     @Override
     public long getSevereWarningThreshold() {
         updateFlags();
-        return mParser.getLong("severe_threshold", Duration.ofHours(1L).toMillis());
+        return mParser.getLong("severe_threshold", Duration.ofHours(1).toMillis());
     }
 
     @Override
@@ -112,9 +105,8 @@ public class EnhancedEstimatesImpl implements EnhancedEstimates {
     }
 
     protected void updateFlags() {
-        String string = Settings.Global.getString(mContext.getContentResolver(), "hybrid_sysui_battery_warning_flags");
         try {
-            mParser.setString(string);
+            mParser.setString(Settings.Global.getString(mContext.getContentResolver(), "hybrid_sysui_battery_warning_flags"));
         } catch (IllegalArgumentException ex) {
             Log.e("EnhancedEstimates", "Bad hybrid sysui warning flags");
         }
