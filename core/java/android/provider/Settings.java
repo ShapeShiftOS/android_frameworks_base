@@ -5208,39 +5208,6 @@ public final class Settings {
         public static final String ANIM_TILE_INTERPOLATOR = "anim_tile_interpolator";
 
         /**
-         * Where to display the network traffic indicator
-         * 	0: None/disabled
-         * 	1: Statusbar
-         * 	2: Expanded statusbar
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
-
-        /**
-         * Network traffic inactivity threshold (default is 1 kBs)
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD = "network_traffic_autohide_threshold";
-
-        /**
-         * Type of speed indicator to display for network traffic
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_TYPE = "network_traffic_type";
-
-        /**
-         * Whether to disable showing arrows in statusbar network traffic indicators
-         * @hide
-         */
-        public static final String NETWORK_TRAFFIC_ARROW = "network_traffic_arrow";
-
-        /**
-         * What size to show for network traffic indicator in statusbar
-         * @hide
-         */
-         public static final String NETWORK_TRAFFIC_FONT_SIZE = "network_traffic_font_size";
-
-        /**
          * Wheter to play notification sound and vibration if screen is ON
          * 0 - never
          * 1 - always
@@ -5575,10 +5542,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(ANIM_TILE_STYLE);
             PRIVATE_SETTINGS.add(ANIM_TILE_DURATION);
             PRIVATE_SETTINGS.add(ANIM_TILE_INTERPOLATOR);
-            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_STATE);
-            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_TYPE);
-            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD);
-            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_FONT_SIZE);
             PRIVATE_SETTINGS.add(FLASHLIGHT_ON_CALL);
             PRIVATE_SETTINGS.add(FLASHLIGHT_ON_CALL_IGNORE_DND);
             PRIVATE_SETTINGS.add(FLASHLIGHT_ON_CALL_RATE);
