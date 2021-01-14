@@ -47,15 +47,18 @@ public class FODCircleViewImpl extends SystemUI implements CommandQueue.Callback
     private boolean mDisableNightMode;
     private boolean mNightModeActive;
     private int mAutoModeState;
+    private final boolean mIsEnabled;
 
     @Inject
     public FODCircleViewImpl(Context context, CommandQueue commandQueue) {
         super(context);
         mCommandQueue = commandQueue;
+        mIsEnabled = context.getResources().getBoolean(com.android.internal.R.bool.config_supportsInDisplayFingerprint);
     }
 
     @Override
     public void start() {
+        if (!mIsEnabled) return;
         PackageManager packageManager = mContext.getPackageManager();
         if (!packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT) ||
                 !FodUtils.hasFodSupport(mContext)) {
