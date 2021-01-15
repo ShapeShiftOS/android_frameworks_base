@@ -18,10 +18,16 @@ package com.android.systemui.biometrics;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.android.systemui.R;
 
@@ -77,8 +83,14 @@ public class AuthBiometricFingerprintView extends AuthBiometricView {
     }
 
     private void showTouchSensorString() {
-        mIndicatorView.setText("");
-        mIndicatorView.setTextColor(R.color.biometric_dialog_gray);
+        mIndicatorView.setText(R.string.fingerprint_dialog_touch_sensor);
+        mIndicatorView.setTextColor(getThemeAccentColor(mContext));
+    }
+
+    public static int getThemeAccentColor (final Context context) {
+        final TypedValue value = new TypedValue ();
+        context.getTheme ().resolveAttribute (android.R.attr.colorAccent, value, true);
+        return value.data;
     }
 
     private void updateIcon(int lastState, int newState) {
