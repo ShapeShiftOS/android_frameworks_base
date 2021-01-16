@@ -149,4 +149,8 @@
 
     <string name="lockscreen_default">Default</string>
     <string name="lockscreen_hidden">None</string>
+
+    <!-- Ambient Music Ticker -->
+    <string name="ambientmusic_songinfo" formatted="false">%s by %s</string>
+
 </resources>
