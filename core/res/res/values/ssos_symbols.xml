@@ -98,10 +98,6 @@
      <!-- NightLight FOD -->
      <java-symbol type="bool" name="disable_fod_night_light"/>
 
-     <!-- Whether device supports variable refresh rate -->
-     <java-symbol type="bool" name="config_hasVariableRefreshRate" />
-     <java-symbol type="integer" name="config_maxRefreshRate" />
-
      <java-symbol type="string" name="reboot_to_recovery_title" />
      <java-symbol type="string" name="reboot_to_recovery_message" />
      <java-symbol type="string" name="reboot_to_bootloader_title" />

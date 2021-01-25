@@ -117,12 +117,6 @@
     <!-- NightLight FOD -->
     <bool name="disable_fod_night_light">false</bool>
 
-    <!-- Whether device supports variable refresh rate -->
-    <bool name="config_hasVariableRefreshRate">false</bool>
-
-    <!-- Maximum refresh rate 90 or 120 -->
-    <integer name="config_maxRefreshRate">120</integer>
-
     <string-array translatable="false" name="custom_config_globalActionsList">
         <item>emergency</item>
         <item>lockdown</item>
