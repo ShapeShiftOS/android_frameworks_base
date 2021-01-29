@@ -5023,12 +5023,6 @@ public final class Settings {
         public static final String LOCKSCREEN_MEDIA_METADATA = "lockscreen_media_metadata";
 
         /**
-         * Volume rocker wake
-         * @hide
-         */
-        public static final String VOLUME_ROCKER_WAKE = "volume_rocker_wake";
-
-        /**
          * Whether to pulse ambient on new music tracks
          *
          * @hide
@@ -5592,7 +5586,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_FORMAT);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_POSITION);
             PRIVATE_SETTINGS.add(LOCKSCREEN_MEDIA_METADATA);
-            PRIVATE_SETTINGS.add(VOLUME_ROCKER_WAKE);
             PRIVATE_SETTINGS.add(HEADS_UP_STOPLIST_VALUES);
             PRIVATE_SETTINGS.add(HEADS_UP_BLACKLIST_VALUES);
             PRIVATE_SETTINGS.add(VOLUME_KEY_CURSOR_CONTROL);

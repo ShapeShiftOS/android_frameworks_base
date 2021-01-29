@@ -86,7 +86,6 @@ public class SystemSettings {
         Settings.System.NOTIFICATION_LIGHT_PULSE,
         Settings.System.DOZE_ON_CHARGE,
         Settings.System.LOCKSCREEN_MEDIA_METADATA,
-        Settings.System.VOLUME_ROCKER_WAKE,
         Settings.System.NOTIFICATION_PULSE,
         Settings.System.AOD_NOTIFICATION_PULSE,
         Settings.System.AOD_NOTIFICATION_PULSE_CLEAR,
