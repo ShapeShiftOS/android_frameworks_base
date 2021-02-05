@@ -30,14 +30,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.internal.util.custom.FodUtils;
 import com.android.systemui.AutoReinflateContainer;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.ambientmusic.AmbientIndicationInflateListener;
-import com.android.systemui.statusbar.phone.DozeParameters;
+import com.android.systemui.statusbar.KeyguardIndicationController;
 import com.android.systemui.statusbar.NotificationLockscreenUserManager;
 import com.android.systemui.statusbar.NotificationMediaManager;
+import com.android.systemui.statusbar.phone.DozeParameters;
 import com.android.systemui.statusbar.phone.StatusBar;
 import com.android.systemui.util.wakelock.SettableWakeLock;
 import com.android.systemui.util.wakelock.WakeLock;
@@ -46,9 +46,12 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
         NotificationMediaManager.MediaListener {
 
     private final int mFODmargin;
+    private final int mKGmargin;
     private View mAmbientIndication;
     private boolean mDozing;
     private boolean mKeyguard;
+    private boolean mChargingIndicationChecked;
+    private boolean mVisible;
     private StatusBar mStatusBar;
     private TextView mText;
     private Context mContext;
@@ -73,6 +76,8 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
     private boolean mMediaIsVisible;
     private SettableWakeLock mMediaWakeLock;
 
+    private KeyguardIndicationController mKeyguardIndicationController;
+
     public AmbientIndicationContainer(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         mContext = context;
@@ -82,6 +87,8 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
         mAmbientMusicTicker = getAmbientMusicTickerStyle();
         mFODmargin = mContext.getResources().getDimensionPixelSize(
                 R.dimen.keyguard_security_fod_view_margin);
+        mKGmargin = mContext.getResources().getDimensionPixelSize(
+                R.dimen.keyguard_charging_animation_margin);
     }
 
     private class CustomSettingsObserver extends ContentObserver {
@@ -119,11 +126,12 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
         mInfoAvailable = false;
         mNpInfoAvailable = false;
         mText.setText(null);
-        mAmbientIndication.setVisibility(View.INVISIBLE);
+    setVisibility(false, true);
     }
 
-    public void initializeView(StatusBar statusBar, Handler handler) {
+    public void initializeView(StatusBar statusBar, Handler handler, KeyguardIndicationController keyguardIndicationController) {
         mStatusBar = statusBar;
+        mKeyguardIndicationController = keyguardIndicationController;
         addInflateListener(new AmbientIndicationInflateListener(this));
         mHandler = handler;
         mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
@@ -155,38 +163,67 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
 
     private void updatePosition() {
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) this.getLayoutParams();
-        if (hasActiveInDisplayFp()) {
+        if (hasInDisplayFingerprint()) {
             lp.setMargins(0, 0, 0, mFODmargin);
+        } else if (isChargingIndicationVisible()) {
+            if (!mChargingIndicationChecked) {
+                mChargingIndicationChecked = true;
+                lp.setMargins(0, 0, 0, mKGmargin);
+            }
+        } else {
+            if (mChargingIndicationChecked) {
+                mChargingIndicationChecked = false;
+                lp.setMargins(0, 0, 0, 0);
+            }
         }
         this.setLayoutParams(lp);
     }
 
-    private boolean hasActiveInDisplayFp() {
-        boolean hasInDisplayFingerprint = FodUtils.hasFodSupport(mContext);
-        return hasInDisplayFingerprint;
+    private boolean hasInDisplayFingerprint() {
+        return mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_supportsInDisplayFingerprint);
     }
+
+    private boolean isChargingIndicationVisible() {
+        return mKeyguardIndicationController.isChargingIndicationVisible();
+        }
 
     public View getTitleView() {
         return mText;
     }
 
     public void updateKeyguardState(boolean keyguard) {
-        if (keyguard && (mInfoAvailable || mNpInfoAvailable)) {
-            mText.setText(mInfoToSet);
-            mLastInfo = mInfoToSet;
-        } else {
-            mText.setText(null);
-            mAmbientIndication.setVisibility(View.INVISIBLE);
+        if (keyguard != mKeyguard) {
+            mKeyguard = keyguard;
+            if (keyguard && (mInfoAvailable || mNpInfoAvailable)) {
+                mText.setText(mInfoToSet);
+                mLastInfo = mInfoToSet;
+            } else {
+                mText.setText(null);
+            }
+        setVisibility(shouldShow(), true);
         }
-        mKeyguard = keyguard;
+        if (shouldShow()) {
+            updatePosition();
+        }
     }
 
     public void updateDozingState(boolean dozing) {
         if (mDozing != dozing) {
             mDozing = dozing;
+            setVisibility(shouldShow(), true);
         }
-        mAmbientIndication.setVisibility(shouldShow() ? View.VISIBLE : View.INVISIBLE);
-        if (hasActiveInDisplayFp() && shouldShow()) {
+        if (shouldShow()) {
+            updatePosition();
+        }
+    }
+
+    private void setVisibility(boolean shouldShow, boolean skipPosition) {
+        if (mVisible != shouldShow) {
+            mVisible = shouldShow;
+            mAmbientIndication.setVisibility(shouldShow ? View.VISIBLE : View.INVISIBLE);
+        }
+        if (!skipPosition && shouldShow) {
             updatePosition();
         }
     }
@@ -203,6 +240,7 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
         boolean filtered = lockscreenManager.shouldHideNotifications(
                 lockscreenManager.getCurrentUserId()) || lockscreenManager.shouldHideNotifications(
                         mMediaManager.getMediaNotificationKey());
+
         return (mKeyguard || isAod() || mDozing)
                 && ((mDozing && (mInfoAvailable || mNpInfoAvailable))
                 || (!mDozing && mNpInfoAvailable && !mInfoAvailable)
@@ -248,13 +286,11 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
         }
         if (mInfoToSet != null) {
             mText.setText(mInfoToSet);
-            mAmbientIndication.setVisibility(shouldShow() ? View.VISIBLE : View.INVISIBLE);
-            if (hasActiveInDisplayFp() && shouldShow()) {
-                updatePosition();
-            }
+        setVisibility(shouldShow(), false);
         } else {
             hideIndication();
         }
+
     }
 
     private String shortenMediaTitle(String input) {

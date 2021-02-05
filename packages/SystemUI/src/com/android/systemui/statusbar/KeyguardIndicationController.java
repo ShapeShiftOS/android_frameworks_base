@@ -555,6 +555,10 @@ public class KeyguardIndicationController implements StateListener,
         return hasInDisplayFingerprint && fpm.getEnrolledFingerprints(userId).size() > 0;
     }
 
+    public boolean isChargingIndicationVisible() {
+        return mChargingIndication && mPowerPluggedIn;
+    }
+
     // animates textView - textView moves up and bounces down
     private void animateText(KeyguardIndicationTextView textView, String indication) {
         int yTranslation = mContext.getResources().getInteger(
