@@ -53,6 +53,7 @@ import com.android.systemui.qs.tiles.NightDisplayTile;
 import com.android.systemui.qs.tiles.PowerShareTile;
 import com.android.systemui.qs.tiles.ReadingModeTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
+import com.android.systemui.qs.tiles.SensorPrivacyTile;
 import com.android.systemui.qs.tiles.ScreenRecordTile;
 import com.android.systemui.qs.tiles.SoundSearchTile;
 import com.android.systemui.qs.tiles.SmartPixelsTile;
@@ -93,6 +94,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<DataSaverTile> mDataSaverTileProvider;
     private final Provider<NightDisplayTile> mNightDisplayTileProvider;
     private final Provider<NfcTile> mNfcTileProvider;
+    private final Provider<SensorPrivacyTile> mSensorPrivacyTileProvider;
     private final Provider<GarbageMonitor.MemoryTile> mMemoryTileProvider;
     private final Provider<UiModeNightTile> mUiModeNightTileProvider;
     private final Provider<HeadsUpTile> mHeadsUpTileProvider;
@@ -136,6 +138,7 @@ public class QSFactoryImpl implements QSFactory {
             Provider<DataSaverTile> dataSaverTileProvider,
             Provider<NightDisplayTile> nightDisplayTileProvider,
             Provider<NfcTile> nfcTileProvider,
+            Provider<SensorPrivacyTile> sensorPrivacyTileProvider,
             Provider<GarbageMonitor.MemoryTile> memoryTileProvider,
             Provider<UiModeNightTile> uiModeNightTileProvider,
             Provider<HeadsUpTile> headsUpTileProvider,
@@ -175,6 +178,7 @@ public class QSFactoryImpl implements QSFactory {
         mDataSaverTileProvider = dataSaverTileProvider;
         mNightDisplayTileProvider = nightDisplayTileProvider;
         mNfcTileProvider = nfcTileProvider;
+        mSensorPrivacyTileProvider = sensorPrivacyTileProvider;
         mMemoryTileProvider = memoryTileProvider;
         mUiModeNightTileProvider = uiModeNightTileProvider;
         mHeadsUpTileProvider = headsUpTileProvider;
@@ -243,6 +247,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mNightDisplayTileProvider.get();
             case "nfc":
                 return mNfcTileProvider.get();
+            case "sensorprivacy":
+                return mSensorPrivacyTileProvider.get();
             case "dark":
                 return mUiModeNightTileProvider.get();
             case "heads_up":
