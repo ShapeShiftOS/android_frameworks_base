@@ -83,9 +83,6 @@
      <string-array name="config_vendorPlatformSignatures">
      </string-array>
 
-    <!-- FOD icon dim-->
-    <bool name="config_targetUsesInKernelDimming">false</bool>
-
     <!-- Max visible notification icons -->
     <integer name="config_maxVisibleNotificationIcons">4</integer>
     <integer name="config_maxVisibleNotificationIconsOnLock">5</integer>
@@ -94,9 +91,6 @@
     <bool name="config_faceAuthOnSecurityView">false</bool>
 
     <bool name="config_has_Soli">false</bool>
-
-    <!-- Hide FOD while Going to sleep from lockscreen to avoid HBM flicker -->
-    <bool name="config_inDisplayFingerprintFlickersGoingToSleep">false</bool>
 
     <!-- The list of components which should be automatically disabled for a specific device.
          Note: this MUST not be used to randomly disable components, ask for approval first! -->
@@ -110,9 +104,6 @@
     <!-- The list of components which should be forced to be enabled. -->
     <string-array name="config_forceEnabledComponents" translatable="false">
     </string-array>
-
-    <!-- Whether device supports in-display fingerprint when screen is turned off -->
-    <bool name="config_supportScreenOffFod">false</bool>
 
     <!-- NightLight FOD -->
     <bool name="disable_fod_night_light">false</bool>
