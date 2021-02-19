@@ -5054,23 +5054,11 @@ public final class Settings {
         public static final String LOCKSCREEN_CHARGING_ANIMATION = "lockscreen_charging_animation";
 
         /**
-         * Lockscreen media art
-         * @hide
-         */
-        public static final String LOCKSCREEN_MEDIA_METADATA = "lockscreen_media_metadata";
-
-        /**
          * Whether to pulse ambient on new music tracks
          *
          * @hide
          */
         public static final String PULSE_ON_NEW_TRACKS = "pulse_on_new_tracks";
-
-        /**
-         * Switch between filters for lockscreen album art
-         * @hide
-         */
-        public static final String LOCKSCREEN_ALBUMART_FILTER = "lockscreen_albumart_filter";
 
         /** Whether to skip music track with volume rocker
         /**
@@ -5793,7 +5781,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_STYLE);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_FORMAT);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_POSITION);
-            PRIVATE_SETTINGS.add(LOCKSCREEN_MEDIA_METADATA);
             PRIVATE_SETTINGS.add(HEADS_UP_STOPLIST_VALUES);
             PRIVATE_SETTINGS.add(HEADS_UP_BLACKLIST_VALUES);
             PRIVATE_SETTINGS.add(VOLUME_KEY_CURSOR_CONTROL);
