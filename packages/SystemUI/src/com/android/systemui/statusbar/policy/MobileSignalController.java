@@ -104,9 +104,6 @@ public class MobileSignalController extends SignalController<
     private FeatureConnector<ImsManager> mFeatureConnector;
     private int mCallState = TelephonyManager.CALL_STATE_IDLE;
 
-    // 4G instead of LTE
-    private int mShow4GUserConfig;
-
     // Volte Icon
     private boolean mVoLTEicon;
     // Volte Icon Style
@@ -194,9 +191,6 @@ public class MobileSignalController extends SignalController<
         void observe() {
            ContentResolver resolver = mContext.getContentResolver();
            resolver.registerContentObserver(Settings.System.getUriFor(
-                  Settings.System.SHOW_FOURG),
-                  false, this, UserHandle.USER_ALL);
-           resolver.registerContentObserver(Settings.System.getUriFor(
                   Settings.System.SHOW_VOLTE_ICON),
                   false,this, UserHandle.USER_ALL);
            resolver.registerContentObserver(Settings.System.getUriFor(
@@ -225,9 +219,6 @@ public class MobileSignalController extends SignalController<
 
     private void updateSettings() {
         ContentResolver resolver = mContext.getContentResolver();
-        mShow4GUserConfig = Settings.System.getIntForUser(resolver,
-                Settings.System.SHOW_FOURG, -1,
-                UserHandle.USER_CURRENT);
         mVoLTEicon = Settings.System.getIntForUser(resolver,
                 Settings.System.SHOW_VOLTE_ICON, 0,
                 UserHandle.USER_CURRENT) == 1;
@@ -377,9 +368,7 @@ public class MobileSignalController extends SignalController<
         mNetworkToIconLookup.put(toIconKey(TelephonyManager.NETWORK_TYPE_HSPA), hGroup);
         mNetworkToIconLookup.put(toIconKey(TelephonyManager.NETWORK_TYPE_HSPAP), hPlusGroup);
 
-        boolean shouldShow4G = mShow4GUserConfig == -1 ? 
-                mConfig.show4gForLte : (mShow4GUserConfig == 1);
-        if (shouldShow4G) {
+        if (mConfig.show4gForLte) {
             mNetworkToIconLookup.put(toIconKey(
                       TelephonyManager.NETWORK_TYPE_LTE),
                       TelephonyIcons.FOUR_G);
