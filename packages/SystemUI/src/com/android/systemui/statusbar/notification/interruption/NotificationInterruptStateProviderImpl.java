@@ -83,6 +83,8 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
     @VisibleForTesting
     protected boolean mUseHeadsUp = false;
 
+    private boolean mSkipHeadsUp = false;
+
     @Inject
     public NotificationInterruptStateProviderImpl(
             Context context,
@@ -199,6 +201,13 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
 
     private boolean shouldHeadsUpWhenAwake(NotificationEntry entry) {
         StatusBarNotification sbn = entry.getSbn();
+
+        if (shouldSkipHeadsUp(sbn)) {
+            if (DEBUG_HEADS_UP) {
+                Log.d(TAG, "No alerting: gaming mode");
+            }
+            return false;
+        }
 
         // get the info from the currently running task
         List<ActivityManager.RunningTaskInfo> taskInfo = mAm.getRunningTasks(1);
@@ -330,13 +339,25 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
         mLessBoringHeadsUp = lessBoring;
     }
 
+    @Override
+    public void setGamingPeekMode(boolean skipHeadsUp) {
+        mSkipHeadsUp = skipHeadsUp;
+    }
+
     private boolean shouldSkipHeadsUp(StatusBarNotification sbn) {
-        boolean isImportantHeadsUp = false;
         String notificationPackageName = sbn.getPackageName().toLowerCase();
-        isImportantHeadsUp = notificationPackageName.contains("dialer") ||
-                notificationPackageName.contains("messaging") ||
+
+        // Gaming mode takes precedence since messaging headsup is intrusive
+        if (mSkipHeadsUp) {
+            boolean isNonInstrusive = notificationPackageName.contains("dialer") ||
                 notificationPackageName.contains("clock");
-        return mLessBoringHeadsUp && !isImportantHeadsUp;
+            return !mStatusBarStateController.isDozing() && mSkipHeadsUp && !isNonInstrusive;
+        }
+
+        boolean isImportantHeadsUp = false;
+        isImportantHeadsUp = notificationPackageName.contains("dialer") ||
+                notificationPackageName.contains("messaging");
+        return !mStatusBarStateController.isDozing() && mLessBoringHeadsUp && !isImportantHeadsUp;
     }
 
     /**

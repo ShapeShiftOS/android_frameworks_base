@@ -39,6 +39,7 @@ import com.android.systemui.qs.tiles.DataSaverTile;
 import com.android.systemui.qs.tiles.DataSwitchTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
+import com.android.systemui.qs.tiles.GamingModeTile;
 import com.android.systemui.qs.tiles.HeadphonesBuddyTile;
 import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
@@ -105,6 +106,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<MusicTile> mMusicTileProvider;
     private final Provider<SoundSearchTile> mSoundSearchTileProvider;
     private final Provider<HeadphonesBuddyTile> mHeadphonesBuddyTile;
+    private final Provider<GamingModeTile> mGamingModeTileProvider;
     private final Provider<SyncTile> mSyncTileProvider;
 
     private final Lazy<QSHost> mQsHostLazy;
@@ -144,6 +146,7 @@ public class QSFactoryImpl implements QSFactory {
             Provider<SoundSearchTile> soundSearchTileProvider,
             Provider<MusicTile> musicTileProvider,
 	    Provider<HeadphonesBuddyTile> headphonesBuddyTile,
+            Provider<GamingModeTile> gamingModeTileProvider,
             Provider<SyncTile> syncTileProvider) {
         mQsHostLazy = qsHostLazy;
         mWifiTileProvider = wifiTileProvider;
@@ -179,6 +182,7 @@ public class QSFactoryImpl implements QSFactory {
         mMusicTileProvider = musicTileProvider;
         mSoundSearchTileProvider = soundSearchTileProvider;
 	mHeadphonesBuddyTile = headphonesBuddyTile;
+        mGamingModeTileProvider = gamingModeTileProvider;
 	mSyncTileProvider = syncTileProvider;
     }
 
@@ -257,6 +261,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mMusicTileProvider.get();
 	    case "headphonesbuddy":
                 return mHeadphonesBuddyTile.get();
+            case "gaming":
+                return mGamingModeTileProvider.get();
             case "sync":
                 return mSyncTileProvider.get();
         }
