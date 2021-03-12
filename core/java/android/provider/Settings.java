@@ -10189,12 +10189,6 @@ public final class Settings {
                 "accessibility_magnification_mode";
 
         /**
-         * Whether face unlock is allowed only on security view.
-         * @hide
-         */
-        public static final String FACE_UNLOCK_ALWAYS_REQUIRE_SWIPE = "face_unlock_always_require_swipe";
-
-        /**
          * Magnification mode value that magnifies whole display.
          * @hide
          */
