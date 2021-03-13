@@ -72,9 +72,6 @@ import dagger.Lazy;
 @Singleton
 final class AssistHandleReminderExpBehavior implements BehaviorController {
 
-    private boolean mDisableAssistHintOnLockscreen;
-    private boolean mDisableAssistHint;
-
     private static final Uri LEARNING_TIME_ELAPSED_URI =
             Settings.Secure.getUriFor(Settings.Secure.ASSIST_HANDLES_LEARNING_TIME_ELAPSED_MILLIS);
     private static final Uri LEARNING_EVENT_COUNT_URI =
@@ -91,7 +88,7 @@ final class AssistHandleReminderExpBehavior implements BehaviorController {
     private static final boolean DEFAULT_SUPPRESS_ON_LOCKSCREEN = false;
     private static final boolean DEFAULT_SUPPRESS_ON_LAUNCHER = false;
     private static final boolean DEFAULT_SUPPRESS_ON_APPS = true;
-    private static final boolean DEFAULT_SHOW_WHEN_TAUGHT = true;
+    private static final boolean DEFAULT_SHOW_WHEN_TAUGHT = false;
 
     private static final String[] DEFAULT_HOME_CHANGE_ACTIONS = new String[] {
             PackageManagerWrapper.ACTION_PREFERRED_ACTIVITY_CHANGED,
@@ -282,7 +279,6 @@ final class AssistHandleReminderExpBehavior implements BehaviorController {
 
         callbackForCurrentState(/* justUnlocked = */ false);
 
-        mDisableAssistHintOnLockscreen = context.getResources().getBoolean(R.bool.config_supportsInDisplayFingerprint);
     }
 
     @Override
@@ -383,17 +379,6 @@ final class AssistHandleReminderExpBehavior implements BehaviorController {
         callbackForCurrentState(/* justUnlocked = */ false);
     }
 
-    private boolean isHandlesHidden() {
-        return (Settings.Secure.getIntForUser(
-                mContext.getContentResolver(), Settings.Secure.ASSIST_GLOBAL_HANDLES, 1,
-                UserHandle.USER_CURRENT) == 1);
-    }
-
-    private boolean isLockscreenHandlesHidden() {
-       return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ASSIST_LOCK_HANDLES, mDisableAssistHintOnLockscreen ? 1 : 0) == 1;
-    }
-
     private void handleWakefullnessChanged(boolean isAwake) {
         if (mIsAwake == isAwake) {
             return;
@@ -482,17 +467,9 @@ final class AssistHandleReminderExpBehavior implements BehaviorController {
         if (!isFullyAwake() || mIsNavBarHidden || isSuppressed()) {
             mAssistHandleCallbacks.hide();
         } else if (mOnLockscreen) {
-            if (isLockscreenHandlesHidden()){
-                mAssistHandleCallbacks.hide();
-            } else {
-                mAssistHandleCallbacks.showAndStay();
-            }
+             mAssistHandleCallbacks.showAndStay();
         } else if (mIsLauncherShowing) {
-            if (isHandlesHidden()){
-                mAssistHandleCallbacks.hide();
-            } else {
-                mAssistHandleCallbacks.showAndGo();
-            }
+             mAssistHandleCallbacks.showAndGo();
         } else if (mConsecutiveTaskSwitches == 1) {
             mAssistHandleCallbacks.showAndGoDelayed(
                     getShowAndGoDelayedShortDelayMs(), /* hideIfShowing = */ false);

@@ -9419,18 +9419,6 @@ public final class Settings {
         public static final String TETHERING_ALLOW_VPN_UPSTREAMS = "tethering_allow_vpn_upstreams";
 
         /**
-         * Show assistant handles on lockscreen
-         * @hide
-         */
-        public static final String ASSIST_LOCK_HANDLES = "assist_lock_handles";
-
-        /**
-         * Show assistant handles on launcher
-         * @hide
-         */
-        public static final String ASSIST_GLOBAL_HANDLES = "assist_global_handles";
-
-        /**
          * Whether the camera double twist gesture to flip between front and back mode should be
          * enabled.
          *
