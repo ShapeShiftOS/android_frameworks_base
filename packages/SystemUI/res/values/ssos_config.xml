@@ -31,4 +31,7 @@
 
     <!-- Color of the FOD view -->
     <color name="config_fodColorBackground">#20000000</color>
+
+    <!-- Asus stitch editor component name -->
+    <string name="config_stitchEditor">com.asus.stitchimage/com.asus.stitchimage.editor.ScreenshotEditorActivity</string>
 </resources>
