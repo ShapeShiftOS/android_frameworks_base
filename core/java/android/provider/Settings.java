@@ -5403,30 +5403,6 @@ public final class Settings {
         public static final String BATTERY_SAVER_VIB = "battery_saver_vib";
 
         /**
-         * Whether to show VoLTE icon or not
-         * @hide
-         */
-        public static final String SHOW_VOLTE_ICON = "show_volte_icon";
-
-        /**
-         * VoLTE icon style
-         * @hide
-         */
-        public static final String VOLTE_ICON_STYLE = "volte_icon_style";
-
-        /**
-         * Whether to show VoWiFi icon or not
-         * @hide
-         */
-        public static final String VOWIFI_ICON = "vowifi_icon";
-
-        /**
-         * VoWiFi icon style
-         * @hide
-         */
-        public static final String VOWIFI_ICON_STYLE = "vowifi_icon_style";
-
-        /**
          *  Optional haptic feedback on back gesture
          *  @hide
          */
@@ -5984,8 +5960,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(VIBRATE_ON_CALLWAITING);
             PRIVATE_SETTINGS.add(VIBRATE_ON_DISCONNECT);
             PRIVATE_SETTINGS.add(CENTER_NOTIFICATION_HEADERS);
-            PRIVATE_SETTINGS.add(SHOW_VOLTE_ICON);
-            PRIVATE_SETTINGS.add(VOLTE_ICON_STYLE);
             PRIVATE_SETTINGS.add(CALL_CONNECTED_TONE_ENABLED);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_GESTURE);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_LOCKSCREEN);
