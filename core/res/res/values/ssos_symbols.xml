@@ -16,6 +16,10 @@
 -->
 <resources>
 
+     <!-- Should we vibrate on an icon animation of the shelf. This should only be active if the
+      vibrator is capable of subtle vibrations -->
+     <java-symbol type="bool" name="config_vibrateOnIconAnimation" />
+
      <!-- Rotation sensor -->
      <java-symbol type="bool" name="config_useSystemClockforRotationSensor" />
 
