@@ -110,7 +110,6 @@ public class NotificationShadeWindowViewController {
     private boolean mIsTrackingBarGesture = false;
 
     private boolean mIsMusicTickerTap;
-    private boolean mDoubleTapEnabledNative;
 
     @Inject
     public NotificationShadeWindowViewController(
@@ -169,22 +168,16 @@ public class NotificationShadeWindowViewController {
         TunerService.Tunable tunable = (key, newValue) -> {
             switch (key) {
                 case Settings.Secure.DOZE_DOUBLE_TAP_GESTURE:
-                    mDoubleTapEnabled = Settings.Secure.getIntForUser(mView.getContext().getContentResolver(),
-                            Settings.Secure.DOZE_DOUBLE_TAP_GESTURE, 1, UserHandle.USER_CURRENT) == 1;
+                    mDoubleTapEnabled = mAmbientConfig.doubleTapGestureEnabled(
+                            UserHandle.USER_CURRENT);
                     break;
                 case Settings.Secure.DOZE_TAP_SCREEN_GESTURE:
                     mSingleTapEnabled = mAmbientConfig.tapGestureEnabled(UserHandle.USER_CURRENT);
-                    break;
-                case Settings.Secure.DOUBLE_TAP_TO_WAKE:
-                    mDoubleTapEnabledNative = Settings.Secure.getIntForUser(mView.getContext().getContentResolver(),
-                            Settings.Secure.DOUBLE_TAP_TO_WAKE, 0, UserHandle.USER_CURRENT) == 1;
-                    break;
             }
         };
         mTunerService.addTunable(tunable,
                 Settings.Secure.DOZE_DOUBLE_TAP_GESTURE,
-                Settings.Secure.DOZE_TAP_SCREEN_GESTURE,
-                Settings.Secure.DOUBLE_TAP_TO_WAKE);
+                Settings.Secure.DOZE_TAP_SCREEN_GESTURE);
 
         GestureDetector.SimpleOnGestureListener gestureListener =
                 new GestureDetector.SimpleOnGestureListener() {
@@ -206,7 +199,7 @@ public class NotificationShadeWindowViewController {
                             LineageButtons.getAttachedInstance(mView.getContext()).skipTrack();
                             return true;
                         }
-                        if (mDoubleTapEnabled || mSingleTapEnabled || mDoubleTapEnabledNative) {
+                        if (mDoubleTapEnabled || mSingleTapEnabled) {
                             mService.wakeUpIfDozing(
                                     SystemClock.uptimeMillis(), mView, "DOUBLE_TAP");
                             return true;
