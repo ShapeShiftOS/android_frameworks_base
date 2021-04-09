@@ -45,13 +45,11 @@ import com.android.systemui.qs.tiles.HeadphonesBuddyTile;
 import com.android.systemui.qs.tiles.FPSInfoTile;
 import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
-import com.android.systemui.qs.tiles.LiveDisplayTile;
 import com.android.systemui.qs.tiles.LocationTile;
 import com.android.systemui.qs.tiles.MusicTile;
 import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.NightDisplayTile;
 import com.android.systemui.qs.tiles.PowerShareTile;
-import com.android.systemui.qs.tiles.ReadingModeTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.SensorPrivacyTile;
 import com.android.systemui.qs.tiles.ScreenRecordTile;
@@ -113,8 +111,6 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<GamingModeTile> mGamingModeTileProvider;
     private final Provider<SyncTile> mSyncTileProvider;
     private final Provider<DcDimmingTile> mDcDimmingTileProvider;
-    private final Provider<LiveDisplayTile> mLiveDisplayTileProvider;
-    private final Provider<ReadingModeTile> mReadingModeTileProvider;
     private final Provider<FPSInfoTile> mFPSInfoTileProvider;
 
     private final Lazy<QSHost> mQsHostLazy;
@@ -157,8 +153,6 @@ public class QSFactoryImpl implements QSFactory {
             Provider<GamingModeTile> gamingModeTileProvider,
             Provider<SyncTile> syncTileProvider,
             Provider<DcDimmingTile> dcDimTileProvider,
-            Provider<LiveDisplayTile> liveDisplayTileProvider,
-            Provider<ReadingModeTile> readingModeTileProvider,
             Provider<FPSInfoTile> fpsInfoTileProvider) {
         mQsHostLazy = qsHostLazy;
         mWifiTileProvider = wifiTileProvider;
@@ -197,8 +191,6 @@ public class QSFactoryImpl implements QSFactory {
         mGamingModeTileProvider = gamingModeTileProvider;
         mSyncTileProvider = syncTileProvider;
         mDcDimmingTileProvider = dcDimTileProvider;
-        mLiveDisplayTileProvider = liveDisplayTileProvider;
-        mReadingModeTileProvider = readingModeTileProvider;
         mFPSInfoTileProvider = fpsInfoTileProvider;
     }
 
@@ -283,10 +275,6 @@ public class QSFactoryImpl implements QSFactory {
                 return mSyncTileProvider.get();
             case "dc_dimming":
                 return mDcDimmingTileProvider.get();
-            case "livedisplay":
-                return mLiveDisplayTileProvider.get();
-            case "reading_mode":
-                return mReadingModeTileProvider.get();
             case "fpsinfo":
                 return mFPSInfoTileProvider.get();
         }

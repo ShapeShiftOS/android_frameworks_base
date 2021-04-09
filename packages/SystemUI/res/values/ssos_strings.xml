@@ -164,13 +164,6 @@
     <!-- Data usage info -->
     <string name="usage_data">used</string>
 
-    <!-- Reader mode QS tile -->
-    <string name="quick_settings_reading_mode">Reading mode</string>
-    <string name="accessibility_quick_settings_reading_mode_on">Reading mode on.</string>
-    <string name="accessibility_quick_settings_reading_mode_off">Reading mode off.</string>
-    <string name="accessibility_quick_settings_reading_mode_changed_on">Reading mode turned on.</string>
-    <string name="accessibility_quick_settings_reading_mode_changed_off">Reading mode turned off.</string>
-
     <!-- App Lock -->
     <string name="applock_unlock">Unlock app</string>
 

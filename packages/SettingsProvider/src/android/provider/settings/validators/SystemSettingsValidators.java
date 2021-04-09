@@ -265,46 +265,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.BATTERY_LIGHT_MEDIUM_COLOR, ANY_STRING_VALIDATOR);
         VALIDATORS.put(System.BATTERY_LIGHT_FULL_COLOR, ANY_STRING_VALIDATOR);
         VALIDATORS.put(System.BATTERY_LIGHT_REALLYFULL_COLOR, ANY_STRING_VALIDATOR);
-        VALIDATORS.put(System.DISPLAY_TEMPERATURE_DAY, new InclusiveIntegerRangeValidator(0, 100000));
-        VALIDATORS.put(System.DISPLAY_TEMPERATURE_NIGHT, new InclusiveIntegerRangeValidator(0, 100000));
-        VALIDATORS.put(System.DISPLAY_TEMPERATURE_MODE, new InclusiveIntegerRangeValidator(0, 4));
-        VALIDATORS.put(System.DISPLAY_AUTO_OUTDOOR_MODE, BOOLEAN_VALIDATOR);
-        VALIDATORS.put(System.DISPLAY_READING_MODE, BOOLEAN_VALIDATOR);
-        VALIDATORS.put(System.DISPLAY_CABC, BOOLEAN_VALIDATOR);
-        VALIDATORS.put(System.DISPLAY_COLOR_ENHANCE, BOOLEAN_VALIDATOR);
-        VALIDATORS.put(System.DISPLAY_AUTO_CONTRAST, BOOLEAN_VALIDATOR);
-        VALIDATORS.put(System.DISPLAY_COLOR_ADJUSTMENT, new Validator() {
-            @Override
-            public boolean validate(String value) {
-                String[] colorAdjustment = value == null ?
-                        null : value.split(" ");
-                if (colorAdjustment != null && colorAdjustment.length != 3) {
-                    return false;
-                }
-                Validator floatValidator = new InclusiveFloatRangeValidator(0, 1);
-                return colorAdjustment == null ||
-                        floatValidator.validate(colorAdjustment[0]) &&
-                        floatValidator.validate(colorAdjustment[1]) &&
-                        floatValidator.validate(colorAdjustment[2]);
-            }
-        });
-        VALIDATORS.put(System.DISPLAY_PICTURE_ADJUSTMENT, new Validator() {
-            @Override
-            public boolean validate(String value) {
-                if (TextUtils.isEmpty(value)) {
-                    return true;
-                }
-                final String[] sp = TextUtils.split(value, ",");
-                for (String s : sp) {
-                    final String[] sp2 = TextUtils.split(s, ":");
-                    if (sp2.length != 2) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-        });
-        VALIDATORS.put(System.LIVE_DISPLAY_HINTED, new InclusiveIntegerRangeValidator(-3, 1));
         VALIDATORS.put(System.INCREASING_RING, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.INCREASING_RING_START_VOLUME, new InclusiveFloatRangeValidator(0, 1));
         VALIDATORS.put(System.INCREASING_RING_RAMP_UP_TIME, new InclusiveFloatRangeValidator(5, 60));
