@@ -74,6 +74,7 @@ public class SystemSettings {
         Settings.System.POINTER_SPEED,
         Settings.System.VIBRATE_WHEN_RINGING,
         Settings.System.RINGTONE,
+        Settings.System.RINGTONE2,
         Settings.System.LOCK_TO_APP_ENABLED,
         Settings.System.NOTIFICATION_SOUND,
         Settings.System.ACCELEROMETER_ROTATION,
