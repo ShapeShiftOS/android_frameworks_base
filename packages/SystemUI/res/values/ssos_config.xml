@@ -30,7 +30,7 @@
     <item name="system_icon_area_weight" format="float" type="integer">1</item>
 
     <!-- Color of the FOD view -->
-    <color name="config_fodColorBackground">#20000000</color>
+    <color name="config_fodColorBackground">#00000000</color>
 
     <!-- Asus stitch editor component name -->
     <string name="config_stitchEditor">com.asus.stitchimage/com.asus.stitchimage.editor.ScreenshotEditorActivity</string>
