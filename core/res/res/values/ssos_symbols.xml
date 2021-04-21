@@ -60,9 +60,6 @@
      <java-symbol type="string" name="config_lightFontFamily" />
      <java-symbol type="string" name="config_regularFontFamily" />
 
-     <!-- Device has OnePlus haptic motor -->
-     <java-symbol type="bool" name="config_hasOnePlusHapticMotor" />
-
      <!-- Whether device has dash charging support -->
      <java-symbol type="bool" name="config_hasDashCharger" />
 
@@ -218,5 +215,5 @@
     <!-- Any package that has one of the package names defined here will be prevented
          from using specific sensors in order to stop battery drain -->
     <java-symbol type="array" name="config_blockPackagesSensorDrain" />
- 
+
 </resources>
