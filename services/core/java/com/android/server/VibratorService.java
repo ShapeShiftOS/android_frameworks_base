@@ -189,7 +189,6 @@ public class VibratorService extends IVibratorService.Stub
     private int mNotificationIntensity;
     private int mRingIntensity;
     private SparseArray<Vibration> mAlwaysOnEffects = new SparseArray<>();
-    private boolean mBatterySaverVib;
 
     static native boolean vibratorExists();
     static native void vibratorInit();
@@ -506,10 +505,6 @@ public class VibratorService extends IVibratorService.Stub
 
             mContext.getContentResolver().registerContentObserver(
                     Settings.Global.getUriFor(Settings.Global.ZEN_MODE),
-                    true, mSettingObserver, UserHandle.USER_ALL);
-
-            mContext.getContentResolver().registerContentObserver(
-                    Settings.System.getUriFor(Settings.System.BATTERY_SAVER_VIB),
                     true, mSettingObserver, UserHandle.USER_ALL);
 
             mContext.registerReceiver(new BroadcastReceiver() {
@@ -1038,10 +1033,6 @@ public class VibratorService extends IVibratorService.Stub
             return true;
         }
 
-        if (mLowPowerMode && mBatterySaverVib) {
-            return true;
-        }
-
         int usage = vib.attrs.getUsage();
         return usage == VibrationAttributes.USAGE_RINGTONE
                 || usage == VibrationAttributes.USAGE_ALARM
@@ -1227,7 +1218,7 @@ public class VibratorService extends IVibratorService.Stub
             boolean lowPowerModeUpdated = updateLowPowerModeLocked();
             updateVibrationIntensityLocked();
 
-            if (devicesUpdated || (lowPowerModeUpdated)) {
+            if (devicesUpdated || lowPowerModeUpdated) {
                 // If the state changes out from under us then just reset.
                 doCancelVibrateLocked();
             }
@@ -1297,8 +1288,6 @@ public class VibratorService extends IVibratorService.Stub
         mRingIntensity = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.RING_VIBRATION_INTENSITY,
                 mVibrator.getDefaultRingVibrationIntensity(), UserHandle.USER_CURRENT);
-        mBatterySaverVib = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.BATTERY_SAVER_VIB, 0, UserHandle.USER_CURRENT) == 1;
     }
 
     private void updateAlwaysOnLocked(int id, Vibration vib) {
