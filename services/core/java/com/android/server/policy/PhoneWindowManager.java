@@ -314,7 +314,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     static final int PENDING_KEY_NULL = -1;
 
-    static final int TORCH_DOUBLE_TAP_DELAY = 170;
+    static final int TORCH_DOUBLE_TAP_DELAY = 130;
 
     static public final String SYSTEM_DIALOG_REASON_KEY = "reason";
     static public final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
