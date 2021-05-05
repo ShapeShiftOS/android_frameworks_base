@@ -62,7 +62,6 @@ import android.os.VibrationEffect;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.text.InputFilter;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseBooleanArray;
@@ -171,7 +170,6 @@ public class VolumeDialogImpl implements VolumeDialog,
     private boolean mHasSeenODICaptionsTooltip;
     private ViewStub mODICaptionsTooltipViewStub;
     private View mODICaptionsTooltipView = null;
-    private boolean mHasAlertSlider;
 
     private boolean mLeftVolumeRocker;
 
@@ -187,7 +185,6 @@ public class VolumeDialogImpl implements VolumeDialog,
         mHasSeenODICaptionsTooltip =
                 Prefs.getBoolean(context, Prefs.Key.HAS_SEEN_ODI_CAPTIONS_TOOLTIP, false);
         mLeftVolumeRocker = mContext.getResources().getBoolean(R.bool.config_audioPanelOnLeftSide);
-        mHasAlertSlider = mContext.getResources().getBoolean(com.android.internal.R.bool.config_hasAlertSlider);
     }
 
     @Override
@@ -321,9 +318,6 @@ public class VolumeDialogImpl implements VolumeDialog,
             MarginLayoutParams mainLayoutParams = (MarginLayoutParams) mainView.getLayoutParams();
             mainLayoutParams.setMargins(0, land_margin, land_margin, 0);
             mainView.setLayoutParams(mainLayoutParams);
-        }
-        if (mHasAlertSlider) {
-            mRinger.setVisibility(View.GONE);
         }
 
         mSettingsView = mDialog.findViewById(R.id.settings_container);
