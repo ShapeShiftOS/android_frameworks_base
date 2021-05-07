@@ -302,7 +302,7 @@ class CircleBatteryDrawable(private val context: Context, frameColor: Int) : Dra
         boltPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         boltPaint.color = Utils.getColorStateListDefaultColor(
             context,
-            R.color.batterymeter_bolt_color
+            R.color.batterymeter_bolt_color_custom
         )
         boltPoints =
             loadPoints(res, R.array.batterymeter_bolt_points)

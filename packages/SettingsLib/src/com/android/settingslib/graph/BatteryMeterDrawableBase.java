@@ -391,7 +391,7 @@ public class BatteryMeterDrawableBase extends Drawable {
                 c.drawPath(mBoltPath, mBoltPaint);
             } else {
                 // otherwise cut the bolt out of the overall shape
-                mShapePath.op(mBoltPath, Path.Op.DIFFERENCE);
+                // mShapePath.op(mBoltPath, Path.Op.DIFFERENCE);
             }
         } else if (mPowerSaveEnabled) {
             // define the plus shape
