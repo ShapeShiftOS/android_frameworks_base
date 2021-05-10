@@ -64,9 +64,6 @@
          timing(the duration which the vibrator is expected to vibrate for). -->
     <bool name="config_hasOnePlusHapticMotor">false</bool>
 
-    <!-- Whether device has VOOC charging support -->
-    <bool name="config_hasVoocCharger">false</bool>
-
     <string-array translatable="false" name="config_customPermissionsList">
         <item>com.google.android.apps.wellbeing</item>
         <item>com.android.wallpaper.livepicker</item>

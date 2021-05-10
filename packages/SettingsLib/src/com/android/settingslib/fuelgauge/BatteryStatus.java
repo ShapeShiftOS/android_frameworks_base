@@ -26,8 +26,6 @@ import static android.os.BatteryManager.EXTRA_MAX_CHARGING_CURRENT;
 import static android.os.BatteryManager.EXTRA_MAX_CHARGING_VOLTAGE;
 import static android.os.BatteryManager.EXTRA_PLUGGED;
 import static android.os.BatteryManager.EXTRA_STATUS;
-import static android.os.BatteryManager.EXTRA_DASH_CHARGER;
-import static android.os.BatteryManager.EXTRA_VOOC_CHARGER;
 
 import android.content.Context;
 import android.content.Intent;
@@ -46,26 +44,20 @@ public class BatteryStatus {
     public static final int CHARGING_SLOWLY = 0;
     public static final int CHARGING_REGULAR = 1;
     public static final int CHARGING_FAST = 2;
-    public static final int CHARGING_DASH = 3;
-    public static final int CHARGING_VOOC = 4;
 
     public final int status;
     public final int level;
     public final int plugged;
     public final int health;
     public final int maxChargingWattage;
-    public final boolean dashChargeStatus;
-    public final boolean voocChargeStatus;
 
     public BatteryStatus(int status, int level, int plugged, int health,
-            int maxChargingWattage, boolean dashChargeStatus, boolean voocChargeStatus) {
+            int maxChargingWattage) {
         this.status = status;
         this.level = level;
         this.plugged = plugged;
         this.health = health;
         this.maxChargingWattage = maxChargingWattage;
-        this.dashChargeStatus = dashChargeStatus;
-        this.voocChargeStatus = voocChargeStatus;
     }
 
     public BatteryStatus(Intent batteryChangedIntent) {
@@ -73,8 +65,6 @@ public class BatteryStatus {
         plugged = batteryChangedIntent.getIntExtra(EXTRA_PLUGGED, 0);
         level = batteryChangedIntent.getIntExtra(EXTRA_LEVEL, 0);
         health = batteryChangedIntent.getIntExtra(EXTRA_HEALTH, BATTERY_HEALTH_UNKNOWN);
-        dashChargeStatus = batteryChangedIntent.getBooleanExtra(EXTRA_DASH_CHARGER, false);
-        voocChargeStatus = batteryChangedIntent.getBooleanExtra(EXTRA_VOOC_CHARGER, false);
 
         final int maxChargingMicroAmp = batteryChangedIntent.getIntExtra(EXTRA_MAX_CHARGING_CURRENT,
                 -1);
@@ -153,9 +143,7 @@ public class BatteryStatus {
                 R.integer.config_chargingSlowlyThreshold);
         final int fastThreshold = context.getResources().getInteger(
                 R.integer.config_chargingFastThreshold);
-        return dashChargeStatus ? CHARGING_DASH :
-               voocChargeStatus ? CHARGING_VOOC :
-                maxChargingWattage <= 0 ? CHARGING_UNKNOWN :
+        return maxChargingWattage <= 0 ? CHARGING_UNKNOWN :
                 maxChargingWattage < slowThreshold ? CHARGING_SLOWLY :
                         maxChargingWattage > fastThreshold ? CHARGING_FAST :
                                 CHARGING_REGULAR;
