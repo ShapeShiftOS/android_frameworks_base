@@ -191,7 +191,6 @@ public final class BatteryService extends SystemService {
     private boolean mLastWarpCharger;
 
     private boolean mVoocCharger;
-    private boolean mHasVoocCharger;
     private boolean mLastVoocCharger;
 
     private long mDischargeStartTime;
@@ -253,8 +252,6 @@ public final class BatteryService extends SystemService {
                 com.android.internal.R.bool.config_hasDashCharger);
         mHasWarpCharger = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_hasWarpCharger);
-        mHasVoocCharger = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_hasVoocCharger);
 
         mCriticalBatteryLevel = mContext.getResources().getInteger(
                 com.android.internal.R.integer.config_criticalBatteryWarningLevel);
@@ -660,8 +657,8 @@ public final class BatteryService extends SystemService {
         shutdownIfOverTempLocked();
 
         mDashCharger = mHasDashCharger && isDashCharger();
-        mWarpCharger = mHasWarpCharger && isWarpCharger();
-        mVoocCharger = mHasVoocCharger && isVoocCharger();
+        mWarpCharger = mHasWarpCharger && isDashCharger();
+        mVoocCharger = isVoocCharger();
 
         if (force || (mHealthInfo.batteryStatus != mLastBatteryStatus ||
                 mHealthInfo.batteryHealth != mLastBatteryHealth ||
@@ -951,20 +948,6 @@ public final class BatteryService extends SystemService {
     }
 
     private boolean isDashCharger() {
-        try {
-            FileReader file = new FileReader("/sys/class/power_supply/battery/fastchg_status");
-            BufferedReader br = new BufferedReader(file);
-            String state = br.readLine();
-            br.close();
-            file.close();
-            return "1".equals(state);
-        } catch (FileNotFoundException e) {
-        } catch (IOException e) {
-        }
-        return false;
-    }
-
-    private boolean isWarpCharger() {
         try {
             FileReader file = new FileReader("/sys/class/power_supply/battery/fastchg_status");
             BufferedReader br = new BufferedReader(file);
