@@ -25,7 +25,15 @@ public class AccentUtils {
                           "accent_device_default_dark",
                           "settingsHeaderColor",
                           "settings_accent_color",
-                          "oneplus_accent_color"));
+                          "oneplus_accent_color",
+                          "user_icon_1",
+                          "user_icon_2",
+                          "user_icon_3",
+                          "user_icon_4",
+                          "user_icon_5",
+                          "user_icon_6",
+                          "user_icon_7",
+                          "user_icon_8"));
 
     private static final String ACCENT_COLOR_PROP = "persist.sys.theme.accentcolor";
 
