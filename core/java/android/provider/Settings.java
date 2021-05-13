@@ -5734,12 +5734,6 @@ public final class Settings {
         public static final String FOD_GESTURE = "fod_gesture";
 
         /**
-         * FOD icon picker
-         * @hide
-         */
-        public static final String FOD_ICON = "fod_icon";
-
-        /**
          * FOD pressed color
          * @hide
          */
