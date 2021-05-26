@@ -22,7 +22,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
-import androidx.preference.SwitchPreference;
+import com.ssos.support.preferences.SwitchPreference;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;

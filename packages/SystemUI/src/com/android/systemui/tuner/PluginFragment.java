@@ -32,7 +32,7 @@ import android.view.View;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreference;
+import com.ssos.support.preferences.SwitchPreference;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.systemui.Dependency;
