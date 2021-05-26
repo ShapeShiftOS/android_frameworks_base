@@ -811,7 +811,6 @@ public class AudioService extends IAudioService.Stub
 
         mVoiceCapable = context.getResources().getBoolean(
                 com.android.internal.R.bool.config_voice_capable);
-
         createAudioSystemThread();
 
         AudioSystem.setErrorCallback(mAudioSystemCallback);
@@ -6757,7 +6756,6 @@ public class AudioService extends IAudioService.Stub
                     Settings.System.MASTER_BALANCE), false, this);
             mContentResolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.VOLUME_LINK_NOTIFICATION), false, this);
-
             mEncodedSurroundMode = Settings.Global.getInt(
                     mContentResolver, Settings.Global.ENCODED_SURROUND_OUTPUT,
                     Settings.Global.ENCODED_SURROUND_OUTPUT_AUTO);

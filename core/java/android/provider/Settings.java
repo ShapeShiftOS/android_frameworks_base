@@ -3113,7 +3113,6 @@ public final class Settings {
 
             // At one time in System, then Global, but now back in Secure
             MOVED_TO_SECURE.add(Secure.INSTALL_NON_MARKET_APPS);
-
             MOVED_TO_SECURE.add(Secure.VOLUME_LINK_NOTIFICATION);
         }
 
@@ -7062,6 +7061,13 @@ public final class Settings {
             return putStringForUser(cr, name, Float.toString(value), userHandle);
         }
 
+        /** ArrowOS Secure Settings **/
+        /**
+         * Boolean value whether to link ringtone and notification volume
+         * @hide
+         */
+        public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
+
         /**
          * Control whether to enable adaptive sleep mode.
          * @hide
@@ -10308,12 +10314,6 @@ public final class Settings {
          * @hide
          */
         public static final String SHOW_BACK_ARROW_GESTURE = "show_back_arrow_gesture";
-
-        /**
-         * Boolean value whether to link ringtone and notification volume
-         * @hide
-         */
-        public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
 
         /**
          * Pulse navbar music visualizer

@@ -16,9 +16,6 @@
     <!-- Whether to use the mask for the quicksettings icons-->
     <bool name="config_useMaskForQs">true</bool>
 
-    <!-- Allow devices override audio panel location to the left side -->
-    <bool name="config_audioPanelOnLeftSide">false</bool>
-
     <!-- Burn in protection -->
     <bool name="config_statusBarBurnInProtection">false</bool>
     <integer name="config_shift_interval">60</integer>
@@ -40,5 +37,8 @@
 
     <!-- FPSInfoService FPS node file path -->
     <string name="config_fpsInfoSysNode" translatable="false"></string>
+
+    <!-- Allow devices override audio panel location to the left side -->
+    <bool name="config_audioPanelOnLeftSide">false</bool>
 
 </resources>
