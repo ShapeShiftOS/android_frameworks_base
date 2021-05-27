@@ -55,7 +55,7 @@
     <string name="live_display_night_summary">Тільки нічні налаштування</string>
     <string name="live_display_outdoor">На вулиці (яскраве сонце)</string>
     <string name="live_display_outdoor_summary">Тільки вуличний режим</string>
-    <string name="live_display_hint">LiveDisplay може допомогти зменшити напругу очей та покращити Вам користування пристроєм уночі. Натисність сюди, щоб спробувати!</string>
+    <string name="live_display_hint">LiveDisplay може допомогти зменшити напругу очей та покращити Вам сон уночі. Натисність сюди, щоб спробувати!</string>
     <string name="accessibility_quick_settings_live_display_off">LiveDisplay вимкнений.</string>
     <string name="accessibility_quick_settings_live_display_auto">LiveDisplay працює в автоматичному режимі.</string>
     <string name="accessibility_quick_settings_live_display_day">LiveDisplay працює в денному режимі.</string>
