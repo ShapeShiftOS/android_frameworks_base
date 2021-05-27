@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2020 Project-Awaken
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Aerr strings -->
+    <string name="aerr_disable">Вимкнути додаток</string>
+
+    <!-- Button that copies the url to the log of a crashed application -->
+    <string name="aerr_copy">Скопіювати URL журнала збоїів</string>
+    <string name="url_copy_success">Посилання успішно скопійовано</string>
+    <string name="url_copy_failed">Виникла помилка при завантаженні журнала на dogbin</string>
+
+    <!-- Advanced reboot -->
+    <string name="reboot_title">Перезавантаження</string>
+    <string name="reboot_message">Перезавантаження системи</string>
+
+    <!-- Pocket Lock -->
+    <string name="pocket_lock_message_long_press">Натисність і утримуйте кнопку живлення, щоб розблокувати</string>
+
+    <!-- Cycle through ringer modes -->
+   <string name="volume_dialog_ringer_guidance_normal">Для дзвінків і повідомлень увімкнений звуковий сигнал</string>
+
+    <!-- Vendor mismatch fingerprint warning [CHAR LIMIT=NONE] -->
+    <string name="system_error_vendorprint">Ваш образ вендора не відповідає системі. Будь ласка, прошийте <xliff:g id="string">%s</xliff:g> образ вендора для вашого пристрою</string>
+
+    <!-- Gaming mode -->
+    <string name="notification_channel_gaming">Ігровий режим</string>
+    <string name="gaming_mode_notification_title">Ігровий режим увімкнений</string>
+    <string name="gaming_mode_notification_content">Натисність, щоб вимкнути ігровий режим</string>
+    <string name="gaming_mode_enabled_toast">Ігровой режим увімкнений</string>
+    <string name="gaming_mode_disabled_toast">Ігровой режим вимкнений</string>
+
+    <!-- LiveDisplay strings -->
+    <string name="live_display_auto">Автоматично</string>
+    <string name="live_display_auto_summary">Автоматичне підналаштування кольорової температури экрана після заходу і сходу сонця</string>
+    <string name="live_display_off">Вимкнути</string>
+    <string name="live_display_off_summary">Вимкнути автопідналаштування</string>
+    <string name="live_display_day">День</string>
+    <string name="live_display_day_summary">Тільки денні налаштування</string>
+    <string name="live_display_night">Ночь</string>
+    <string name="live_display_night_summary">Тільки нічні налаштування</string>
+    <string name="live_display_outdoor">На вулиці (яскраве сонце)</string>
+    <string name="live_display_outdoor_summary">Тільки вуличний режим</string>
+    <string name="live_display_hint">LiveDisplay може допомогти зменшити напругу очей та покращити Вам користування пристроєм уночі. Натисність сюди, щоб спробувати!</string>
+    <string name="accessibility_quick_settings_live_display_off">LiveDisplay вимкнений.</string>
+    <string name="accessibility_quick_settings_live_display_auto">LiveDisplay працює в автоматичному режимі.</string>
+    <string name="accessibility_quick_settings_live_display_day">LiveDisplay працює в денному режимі.</string>
+    <string name="accessibility_quick_settings_live_display_night">LiveDisplay працює в ночному режимі.</string>
+    <string name="accessibility_quick_settings_live_display_outdoor">LiveDisplay працює в режимі «На вулиці».</string>
+    <string name="accessibility_quick_settings_live_display_changed_off">LiveDisplay вимкнений.</string>
+    <string name="accessibility_quick_settings_live_display_changed_auto">LiveDisplay змінений в автоматичний режим.</string>
+    <string name="accessibility_quick_settings_live_display_changed_day">LiveDisplay змінений в денний режим.</string>
+    <string name="accessibility_quick_settings_live_display_changed_night">LiveDisplay змінений в нічний режим.</string>
+    <string name="accessibility_quick_settings_live_display_changed_outdoor">LiveDisplay змінений в режим «На вулиці».</string>
+    <!-- Clipboard access toast -->
+    <string name="app_clipboard_access_denied">%1$s було відмовлено в доступі до буферу обміну</string>
+    <string name="app_clipboard_access_granted">%1$s отримав доступ в буфері обміну</string>
+</resources>
