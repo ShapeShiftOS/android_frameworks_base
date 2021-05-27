@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (c) 2009, The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    
+    <!-- Heads up QS tile -->
+    <string name="quick_settings_heads_up_label">Спливаюче повідомлення</string>
+    <string name="accessibility_quick_settings_heads_up_off">Спливаюче повідомлення вимк.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Спливаюче повідомлення увімк.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Спливаючі повідомлення вимкнуті.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Спливаючі повідомлення увімкнені.</string>
+
+    <!-- Sync QS Tile -->
+    <string name="quick_settings_sync_label">Синхронізація</string>
+    <string name="accessibility_quick_settings_sync_off">Вимкнути синхронізацію</string>
+    <string name="accessibility_quick_settings_sync_on">Увімкнути синхронізацію</string>
+    <string name="accessibility_quick_settings_sync_changed_off">Синхронізація вимкнена</string>
+    <string name="accessibility_quick_settings_sync_changed_on">Синхронизация увімкнена</string>
+    
+    <!-- DataSwitch Tile -->
+    <string name="qs_data_switch_label">Змінити SIM-карту для передачі даних</string>
+    <string name="qs_data_switch_changed_1">Використовується SIM-карта 1 для передачі даних</string>
+    <string name="qs_data_switch_changed_2">Використовується SIM-карта 2 для передачі даних</string>
+    <string name="qs_data_switch_toast_0">В справжній час SIM-карта не вставлена</string>
+    <string name="qs_data_switch_toast_1">В справжній час вставлена тільки одна SIM-карта</string>
+    
+    <!-- Caffeine QS Tile -->
+    <string name="quick_settings_caffeine_label">Заборона сну</string>
+    <string name="quick_settings_caffeine_label_off">Вимк.</string>
+    <string name="accessibility_quick_settings_caffeine_off">Заборона сна вимк.</string>
+    <string name="accessibility_quick_settings_caffeine_on">Заборона сна увімк.</string>
+    
+    <!-- Compass QS Tile -->
+    <string name="quick_settings_compass_label">Компас</string>
+    <string name="quick_settings_compass_value"><xliff:g id="degrees">%1$.0f</xliff:g>\u00b0 <xliff:g id="direction">%2$s</xliff:g></string>
+    <string name="quick_settings_compass_init">Ініцілізація\u2026</string>
+    <string name="accessibility_quick_settings_compass_off">Компас вимк.</string>
+    <string name="accessibility_quick_settings_compass_on">Компас увімк.</string>
+    <string name="accessibility_quick_settings_compass_changed_off">Компас вимк.</string>
+    <string name="accessibility_quick_settings_compass_changed_on">Компас увімк.</string>
+    <string name="quick_settings_compass_N">С</string>
+    <string name="quick_settings_compass_NE">СВ</string>
+    <string name="quick_settings_compass_E">В</string>
+    <string name="quick_settings_compass_SE">ЮВ</string>
+    <string name="quick_settings_compass_S">Ю</string>
+    <string name="quick_settings_compass_SW">ЮВ</string>
+    <string name="quick_settings_compass_W">З</string>
+    <string name="quick_settings_compass_NW">СЗ</string>
+    
+     <!-- Sound QS Tile -->
+    <string name="quick_settings_sound_label">Звук</string>
+    <string name="quick_settings_sound_ring">Рингтон</string>
+    <string name="quick_settings_sound_vibrate">Вібрація</string>
+    <string name="quick_settings_sound_silent">Без звуку</string>
+    
+    <!-- USB tethering QS tile -->
+    <string name="quick_settings_usb_tether_label">USB-модем</string>
+    
+    <!-- AOD QS tile -->
+    <string name="quick_settings_aod_label">Завжди увімкнений екран</string>
+    <string name="quick_settings_aod_on_charge_label">Завжди увімкнений экран при зарядці</string>
+    <string name="quick_settings_aod_off_label">Завжди увімкнений экран вимк.</string>
+    <string name="quick_settings_aod_off_powersave_label">Завжди увімкнений экран вимк.\nЕкономія заряду батареї</string>
+    
+    <!-- Tuner items -->
+    <string name="status_bar_data_saver">Економія трафіку</string>
+    <string name="status_bar_vpn">VPN</string>
+    <string name="status_bar_roaming">Роумінг</string>
+    
+     <!-- PowerShare QS tile -->
+    <string name="quick_settings_powershare_label">Бездротовий PowerShare</string>
+    <string name="quick_settings_powershare_off_powersave_label">Економія заряду батареї</string>
+    <string name="quick_settings_powershare_off_low_battery_label">Низький заряд батареї</string>
+    <string name="quick_settings_powershare_enabled_label">Бездротовий PowerShare увімкнен</string>
+    
+    <!-- Label for area where tiles can be added to the qs panel -->
+    <string name="drag_or_tap_to_add_tiles">Утримуйте та перетягніть або доторкніться, щоб додати плитки</string>
+    <!-- Label for header of customize QS -->
+    <string name="drag_or_tap_to_rearrange_tiles">Утримуйте та перетягніть, щоб змінити положення, або доторкніться, щоб видалити</string>
+    
+     <string name="screenrecord_stopdot_label">Покажіть кнопку зупинки\nУтримуйте для перемеміщення</string>
+    <string name="screenrecord_lowquality_label">Менша якість для меншого розміру файлу</string>
+    <string name="screenrecord_longer_timeout_switch_label">Максимальний розмір файлу\nВстановіть розмір запису до 15 ГБ</string>
+    
+    <!-- Powermenu items -->
+    <string name="global_action_restart_advanced">Розширене перезавантаження</string>
+    <string name="global_action_restart_recovery">Рекавері</string>
+    <string name="global_action_restart_bootloader">Завантажувач</string>
+    <string name="global_action_restart_ui">SystemUI</string>
+    
+     <!-- Sound Search tile -->
+    <string name="quick_settings_sound_search">Пошук музики</string>
+    <string name="quick_settings_sound_search_no_app">Вибачте, але пошук музики не працює, якщо у вас немає додатка для цього</string>
+    
+     <!-- Music tile -->
+    <string name="quick_settings_music_label">Музика</string>
+    <string name="quick_settings_music_play">Відтворити</string>
+    <string name="quick_settings_music_pause">Пауза</string>
+    
+     <!-- Name of the additional status bar icons also exposed with SystemUI Tuner -->
+    <string name="status_bar_battery_prefs">Батарея</string>
+    
+    <!-- Headphones Buddy -->
+    <string name="hp_buddy">Баланс звука в навушниках</string>
+    <string name="hp_buddy_left">Лівий канал</string>
+    <string name="hp_buddy_right">Правий канал</string>
+    <string name="hp_buddy_center">Обоє канала</string>
+    <string name="hp_buddy_not_connected">Під'єднайте навушники</string>
+    
+    <!-- Status bar network traffic monitor strings -->
+    <string name="kilobitspersecond_short">кбіт/с</string>
+    <string name="megabitspersecond_short">Мбіт/с</string>
+    <string name="gigabitspersecond_short">Гб/с</string>
+    <string name="kilobytespersecond_short">кБ/с</string>
+    <string name="megabytespersecond_short">МБ/с</string>
+    <string name="gigabytespersecond_short">ГБ/с</string>
+    
+    <string name="lockscreen_default">За замовчуванням</string>
+    <string name="lockscreen_hidden">Ні</string>
+    
+    <!-- Ambient Music Ticker -->
+    <string name="ambientmusic_songinfo" formatted="false">%s від %s</string>
+    
+    <!-- Smart Pixels QS Tile -->
+    <string name="quick_settings_smart_pixels">Розумні пікселі</string>
+    <string name="quick_settings_smart_pixels_on_power_save">Автоматичне увімкнення розумних пікселей</string>
+    
+    <!-- Gaming mode -->
+    <string name="gaming_mode_not_enabled">Ігровий режим вимкнений в налаштуваннях</string>
+    <string name="quick_settings_gaming_mode_label">Ігровий режим</string>
+    
+    <!-- DC Dimming -->
+    <string name="quick_settings_dc_dimming_label">DC Dimming</string>
+    <string name="quick_settings_dc_brightness_mode">Режим яскравості</string>
+    <string name="quick_settings_dc_full_auto">Автоматичний режим</string>
+    
+    <!-- Data usage info -->
+    <string name="usage_data">використано</string>
+    
+    <!-- Reader mode QS tile -->
+    <string name="quick_settings_reading_mode">Режим читання</string>
+    <string name="accessibility_quick_settings_reading_mode_on">Режим читання увімк.</string>
+    <string name="accessibility_quick_settings_reading_mode_off">Режим читання вимк.</string>
+    <string name="accessibility_quick_settings_reading_mode_changed_on">Режим читання активований.</string>
+    <string name="accessibility_quick_settings_reading_mode_changed_off">Режим читання деактивован.</string>
+    
+    <!-- App Lock -->
+    <string name="applock_locked">&#160;Заблоковано</string>
+    <string name="applock_fingerprint_face">, відбиток пальца чи ваше лице, щоб розблокувати</string>
+    <string name="applock_face">&#160;або ваше лице, щоб розблокувати</string>
+    <string name="applock_fingerprint">&#160;або ваш відбиток пальца, щоб розблокувати</string>
+    <string name="applock_credential">&#160;розблокувати</string>
+    <string name="applock_unlock">Розблоковано</string>
+    
+    <!-- Biometric Dialog - Use Face -->
+    <string name="biometric_dialog_button_use_face">Використати лице</string>
+    
+    <!-- FPS Info tile -->
+    <string name="quick_settings_fpsinfo_label">Інформація про FPS</string>
+    
+    <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_dash_charging_time" formatted="false"><xliff:g id="percentage">%2$s</xliff:g> • Dash Зарядка (<xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> до повного)</string>
+    <string name="keyguard_plugged_in_dash_charging">Dash Зарядка</string>
+
+    <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_warp_charging_time" formatted="false"><xliff:g id="percentage">%2$s</xliff:g> • Warp Зарядка (<xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> до повного)</string>
+    <string name="keyguard_plugged_in_warp_charging">Warp Зарядка</string>
+
+    <!-- Indication on the keyguard that is shown when the device is charging with a VOOC charger. Should match keyguard_plugged_in_vooc_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_vooc_charging_time" formatted="false"><xliff:g id="percentage">%2$s</xliff:g> • VOOC Зарядка (<xliff:g id="charging_time_left" example="4 hours and 2 minutes">%1$s</xliff:g> до повного)</string>
+    <string name="keyguard_plugged_in_vooc_charging">VOOC Зарядка</string>
+    
+</resources>
