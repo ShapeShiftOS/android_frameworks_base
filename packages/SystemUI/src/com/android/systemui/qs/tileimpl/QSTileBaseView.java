@@ -140,9 +140,18 @@ public class QSTileBaseView extends com.android.systemui.plugins.qs.QSTileView {
         if (setQsUseNewTint == 1) {
             mColorActive = mColorActiveAlpha;
             mColorDisabled = context.getResources().getColor(R.color.qs_tile_background_color_disabled);
-        } else if (setQsUseNewTint == 2) {
+        } else if (setQsUseNewTint == 2 &&
+                   !com.android.internal.util.ssos.Utils.isThemeEnabled("com.android.dark.style") &&
+                   !com.android.internal.util.ssos.Utils.isThemeEnabled("com.android.dark.solarizeddark") &&
+                   !com.android.internal.util.ssos.Utils.isThemeEnabled("com.android.dark.night")) {
             mColorActive = context.getResources().getColor(R.color.qs_tile_oos_background);
             mColorDisabled = context.getResources().getColor(R.color.op_qs_tile_background_color_disabled);
+        } else if (setQsUseNewTint == 2 && (
+                   com.android.internal.util.ssos.Utils.isThemeEnabled("com.android.dark.style") ||
+                   com.android.internal.util.ssos.Utils.isThemeEnabled("com.android.dark.solarizeddark") ||
+                   com.android.internal.util.ssos.Utils.isThemeEnabled("com.android.dark.night"))) {
+            mColorActive = context.getResources().getColor(R.color.qs_tile_oos_background);
+            mColorDisabled = context.getResources().getColor(R.color.qs_tile_background_color_disabled);
         } else if (setQsUseNewTint == 3) {
             mColorActive = Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent);
             mColorDisabled = mColorTwelveAlpha;
