@@ -45,4 +45,10 @@
     <!-- Battery use screen. Battery status shown in chart label when charging from a VOOC source.  -->
     <string name="battery_info_status_vooc_charging">VOOC charging</string>
 
+    <!-- Label for estimated remaining duration of smart battery charging -->
+    <string name="power_remaining_smart_charging_duration_only">Smart charging (<xliff:g id="time">%1$s</xliff:g> left until full)</string>
+
+    <!-- Battery use screen. Battery status shown in chart label when smart charging -->
+    <string name="battery_info_status_smart_charging">Smart charging</string>
+
 </resources>

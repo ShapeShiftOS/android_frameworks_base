@@ -164,6 +164,7 @@ public final class BatteryService extends SystemService {
     private int mLastBatteryVoltage;
     private int mLastBatteryTemperature;
     private boolean mLastBatteryLevelCritical;
+    private boolean mSmartChargingEnabled;
     private int mLastMaxChargingCurrent;
     private int mLastMaxChargingVoltage;
     private int mLastChargeCounter;
@@ -192,6 +193,9 @@ public final class BatteryService extends SystemService {
 
     private boolean mVoocCharger;
     private boolean mLastVoocCharger;
+
+    private boolean mSmartCharger;
+    private boolean mLastSmartCharger;
 
     private long mDischargeStartTime;
     private int mDischargeStartLevel;
@@ -656,9 +660,10 @@ public final class BatteryService extends SystemService {
         shutdownIfNoPowerLocked();
         shutdownIfOverTempLocked();
 
-        mDashCharger = mHasDashCharger && isDashCharger();
-        mWarpCharger = mHasWarpCharger && isDashCharger();
-        mVoocCharger = isVoocCharger();
+        mDashCharger = mHasDashCharger && isDashCharger() && !isSmartCharger();
+        mWarpCharger = mHasWarpCharger && isDashCharger() && !isSmartCharger();
+        mVoocCharger = isVoocCharger() && !isSmartCharger();
+        mSmartCharger = isSmartCharger();
 
         if (force || (mHealthInfo.batteryStatus != mLastBatteryStatus ||
                 mHealthInfo.batteryHealth != mLastBatteryHealth ||
@@ -678,7 +683,8 @@ public final class BatteryService extends SystemService {
                 mBatteryModProps.modPowerSource != mLastModPowerSource ||
                 mDashCharger != mLastDashCharger ||
                 mWarpCharger != mLastWarpCharger ||
-                mVoocCharger != mLastVoocCharger)) {
+                mVoocCharger != mLastVoocCharger ||
+                mSmartCharger != mLastSmartCharger)) {
 
             if (mPlugType != mLastPlugType) {
                 if (mLastPlugType == BATTERY_PLUGGED_NONE) {
@@ -857,6 +863,7 @@ public final class BatteryService extends SystemService {
             mLastDashCharger = mDashCharger;
             mLastWarpCharger = mWarpCharger;
             mLastVoocCharger = mVoocCharger;
+            mLastSmartCharger = mSmartCharger;
         }
     }
 
@@ -893,6 +900,7 @@ public final class BatteryService extends SystemService {
         intent.putExtra(BatteryManager.EXTRA_DASH_CHARGER, mDashCharger);
         intent.putExtra(BatteryManager.EXTRA_WARP_CHARGER, mWarpCharger);
         intent.putExtra(BatteryManager.EXTRA_VOOC_CHARGER, mVoocCharger);
+        intent.putExtra(BatteryManager.EXTRA_SMART_CHARGER, mSmartCharger);
         if (DEBUG) {
             Slog.d(TAG, "Sending ACTION_BATTERY_CHANGED. scale:" + BATTERY_SCALE
                     + ", info:" + mHealthInfo.toString());
@@ -959,6 +967,18 @@ public final class BatteryService extends SystemService {
         } catch (IOException e) {
         }
         return false;
+    }
+
+    private boolean isSmartCharger() {
+        final ContentResolver resolver = mContext.getContentResolver();
+        mSmartChargingEnabled = Settings.System.getInt(resolver,
+                Settings.System.SMART_CHARGING, 0) == 1;
+
+        if (mSmartChargingEnabled) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private boolean isVoocCharger() {

@@ -653,6 +653,11 @@ public class KeyguardIndicationController implements StateListener,
                             ? R.string.keyguard_indication_vooc_charging_time
                             : R.string.keyguard_plugged_in_vooc_charging;
                     break;
+                case BatteryStatus.CHARGING_SMART:
+                    chargingId = hasChargingTime
+                            ? R.string.keyguard_indication_smart_charging_time
+                            : R.string.keyguard_plugged_in_smart_charging;
+                    break;
                 case BatteryStatus.CHARGING_SLOWLY:
                     chargingId = hasChargingTime
                             ? R.string.keyguard_indication_charging_time_slowly

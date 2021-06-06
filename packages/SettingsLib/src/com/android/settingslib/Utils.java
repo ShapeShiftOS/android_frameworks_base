@@ -209,6 +209,9 @@ public class Utils {
                     case BatteryStatus.CHARGING_WARP:
                         statusString = res.getString(R.string.battery_info_status_warp_charging);
                         break;
+                    case BatteryStatus.CHARGING_SMART:
+                        statusString = res.getString(R.string.battery_info_status_smart_charging);
+                        break;
                     case BatteryStatus.CHARGING_FAST:
                         statusString = res.getString(R.string.battery_info_status_charging_fast);
                         break;
