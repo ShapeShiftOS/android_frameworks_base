@@ -969,16 +969,21 @@ public final class BatteryService extends SystemService {
         return false;
     }
 
+    private boolean isSmartChargeIndicationShown() {
+        return (Settings.System.getIntForUser(
+                mContext.getContentResolver(), Settings.System.SMART_CHARGE_INDICATION, 0,
+                UserHandle.USER_CURRENT) == 1);
+    }
+
     private boolean isSmartCharger() {
         final ContentResolver resolver = mContext.getContentResolver();
         mSmartChargingEnabled = Settings.System.getInt(resolver,
                 Settings.System.SMART_CHARGING, 0) == 1;
 
-        if (mSmartChargingEnabled) {
-            return true;
-        } else {
-            return false;
+        if (isSmartChargeIndicationShown()) {
+            return mSmartChargingEnabled;
         }
+        return false;
     }
 
     private boolean isVoocCharger() {

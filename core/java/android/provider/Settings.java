@@ -5946,6 +5946,13 @@ public final class Settings {
          */
         public static final String STYLE_OVERLAY_SETTINGS_CARDS = "style_overlay_settings_cards";
 
+
+        /**
+         * Whether to indicate the device is smart charging
+         * @hide
+         */
+        public static final String SMART_CHARGE_INDICATION = "smart_charge_indication";
+
         /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
