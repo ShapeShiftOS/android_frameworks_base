@@ -220,10 +220,10 @@ public class PulseControllerImpl
                     Settings.Secure.NAVBAR_PULSE_ENABLED, 0,
                     UserHandle.USER_CURRENT) == 1 && navBar;
             mLsPulseEnabled = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                    Settings.Secure.LOCKSCREEN_PULSE_ENABLED, 1, 
+                    Settings.Secure.LOCKSCREEN_PULSE_ENABLED, 0,
                     UserHandle.USER_CURRENT) == 1 && navBar;
             mAmbPulseEnabled = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                    Settings.Secure.AMBIENT_PULSE_ENABLED, 0, 
+                    Settings.Secure.AMBIENT_PULSE_ENABLED, 0,
                     UserHandle.USER_CURRENT) == 1 && navBar;
 
         }
