@@ -31,6 +31,7 @@ public class PixelPropsUtils {
     private static final Map<String, Object> propsToChange;
     private static final Map<String, Object> propsToChangePixelXL;
     private static final Map<String, Object> propsToChangePixel3XL;
+    private static final Map<String, Object> propsToChangeOnePlus9Pro;
 
     private static final String[] packagesToChange = {
             "com.google.android.as",
@@ -50,6 +51,10 @@ public class PixelPropsUtils {
 
     private static final String[] packagesToChangePixel3XL = {
             "com.google.android.googlequicksearchbox"
+    };
+
+    private static final String[] packagesToChangeOnePlus9Pro = {
+            "com.google.android.apps.wearables.maestro.companion"
     };
 
     static {
@@ -74,6 +79,13 @@ public class PixelPropsUtils {
         propsToChangePixel3XL.put("PRODUCT", "crosshatch");
         propsToChangePixel3XL.put("MODEL", "Pixel 3 XL");
         propsToChangePixel3XL.put("FINGERPRINT", "google/crosshatch/crosshatch:11/RQ3A.210605.005/7349499:user/release-keys");
+        propsToChangeOnePlus9Pro = new HashMap<>();
+        propsToChangeOnePlus9Pro.put("BRAND", "OnePlus");
+        propsToChangeOnePlus9Pro.put("MANUFACTURER", "OnePlus");
+        propsToChangeOnePlus9Pro.put("DEVICE", "OnePlus9Pro");
+        propsToChangeOnePlus9Pro.put("PRODUCT", "OnePlus9Pro_EEA");
+        propsToChangeOnePlus9Pro.put("MODEL", "LE2123");
+        propsToChangeOnePlus9Pro.put("FINGERPRINT", "OnePlus/OnePlus9Pro_EEA/OnePlus9Pro:11/RKQ1.201105.002/2105252217:user/release-keys");
     }
 
     public static void setProps(String packageName) {
@@ -105,6 +117,16 @@ public class PixelPropsUtils {
                 Log.d(TAG, "Defining props for: " + packageName);
             }
             for (Map.Entry<String, Object> prop : propsToChangePixel3XL.entrySet()) {
+                String key = prop.getKey();
+                Object value = prop.getValue();
+                setPropValue(key, value);
+            }
+        }
+        if (Arrays.asList(packagesToChangeOnePlus9Pro).contains(packageName)){
+            if (DEBUG){
+                Log.d(TAG, "Defining props for: " + packageName);
+            }
+            for (Map.Entry<String, Object> prop : propsToChangeOnePlus9Pro.entrySet()) {
                 String key = prop.getKey();
                 Object value = prop.getValue();
                 setPropValue(key, value);
