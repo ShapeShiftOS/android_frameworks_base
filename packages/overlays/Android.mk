@@ -17,33 +17,33 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := frameworks-base-overlays
 LOCAL_REQUIRED_MODULES := \
-	AccentColorBlackOverlay \
-	AccentColorCinnamonOverlay \
-	AccentColorOceanOverlay \
-	AccentColorOrchidOverlay \
-	AccentColorSpaceOverlay \
-	AccentColorGreenOverlay \
-	AccentColorPurpleOverlay \
-	AccentColorPaletteOverlay \
-	AccentColorCarbonOverlay \
-	AccentColorSandOverlay \
-	AccentColorAmethystOverlay \
-	AccentColorAquamarineOverlay \
-	AccentColorTangerineOverlay \
-        AccentColorAsusOverlay \
-	AccentColorMIUIOverlay \
-	DisplayCutoutEmulationCornerOverlay \
-	DisplayCutoutEmulationDoubleOverlay \
+    AccentColorBlackOverlay \
+    AccentColorCinnamonOverlay \
+    AccentColorOceanOverlay \
+    AccentColorOrchidOverlay \
+    AccentColorSpaceOverlay \
+    AccentColorGreenOverlay \
+    AccentColorPurpleOverlay \
+    AccentColorPaletteOverlay \
+    AccentColorCarbonOverlay \
+    AccentColorSandOverlay \
+    AccentColorAmethystOverlay \
+    AccentColorAquamarineOverlay \
+    AccentColorTangerineOverlay \
+    AccentColorAsusOverlay \
+    AccentColorMIUIOverlay \
+    DisplayCutoutEmulationCornerOverlay \
+    DisplayCutoutEmulationDoubleOverlay \
     DisplayCutoutEmulationHoleOverlay \
-	DisplayCutoutEmulationTallOverlay \
-	DisplayCutoutEmulationWaterfallOverlay \
-	FontNotoSerifSourceOverlay \
-	IconPackCircularAndroidOverlay \
-	IconPackCircularLauncherOverlay \
-	IconPackCircularSettingsOverlay \
-	IconPackCircularSystemUIOverlay \
-	IconPackCircularThemePickerOverlay \
-	IconPackVictorAndroidOverlay \
+    DisplayCutoutEmulationTallOverlay \
+    DisplayCutoutEmulationWaterfallOverlay \
+    FontNotoSerifSourceOverlay \
+    IconPackCircularAndroidOverlay \
+    IconPackCircularLauncherOverlay \
+    IconPackCircularSettingsOverlay \
+    IconPackCircularSystemUIOverlay \
+    IconPackCircularThemePickerOverlay \
+    IconPackVictorAndroidOverlay \
     IconPackVictorLauncherOverlay \
     IconPackVictorSettingsOverlay \
     IconPackVictorSystemUIOverlay \
@@ -58,35 +58,34 @@ LOCAL_REQUIRED_MODULES := \
     IconPackKaiSettingsOverlay \
     IconPackKaiSystemUIOverlay \
     IconPackKaiThemePickerOverlay \
-	IconPackFilledAndroidOverlay \
-	IconPackFilledLauncherOverlay \
-	IconPackFilledSettingsOverlay \
-	IconPackFilledSystemUIOverlay \
-	IconPackFilledThemePickerOverlay \
-	IconPackRoundedAndroidOverlay \
-	IconPackRoundedLauncherOverlay \
-	IconPackRoundedSettingsOverlay \
-	IconPackRoundedSystemUIOverlay \
-	IconPackRoundedThemePickerOverlay \
-        IconShapeHeartOverlay \
-	IconShapePebbleOverlay \
-	IconShapeRoundedRectOverlay \
-	IconShapeSquareOverlay \
-	IconShapeSquircleOverlay \
-	IconShapeTaperedRectOverlay \
-	IconShapeTeardropOverlay \
-	IconShapeVesselOverlay \
-	IconShapeMallowOverlay \
-	NavigationBarMode3ButtonOverlay \
-	NavigationBarModeGesturalOverlay \
-	NavigationBarModeGesturalOverlayNarrowBack \
-	NavigationBarModeGesturalOverlayWideBack \
-	NavigationBarModeGesturalOverlayExtraWideBack \
-        SettingsCardInvisible \
-        SettingsCardElevation \
-        SettingsIntellCardElevation \
-        SettingsDashAOSP \
-	preinstalled-packages-platform-overlays.xml
+    IconPackFilledAndroidOverlay \
+    IconPackFilledLauncherOverlay \
+    IconPackFilledSettingsOverlay \
+    IconPackFilledSystemUIOverlay \
+    IconPackFilledThemePickerOverlay \
+    IconPackRoundedAndroidOverlay \
+    IconPackRoundedLauncherOverlay \
+    IconPackRoundedSettingsOverlay \
+    IconPackRoundedSystemUIOverlay \
+    IconPackRoundedThemePickerOverlay \
+    IconShapeHeartOverlay \
+    IconShapePebbleOverlay \
+    IconShapeRoundedRectOverlay \
+    IconShapeSquareOverlay \
+    IconShapeSquircleOverlay \
+    IconShapeTaperedRectOverlay \
+    IconShapeTeardropOverlay \
+    IconShapeVesselOverlay \
+    IconShapeMallowOverlay \
+    NavigationBarMode3ButtonOverlay \
+    NavigationBarModeGesturalOverlay \
+    NavigationBarModeGesturalOverlayNarrowBack \
+    NavigationBarModeGesturalOverlayWideBack \
+    NavigationBarModeGesturalOverlayExtraWideBack \
+    SettingsCardElevation \
+    SettingsIntellCardElevation \
+    SettingsDashAOSP \
+    preinstalled-packages-platform-overlays.xml
 
 include $(BUILD_PHONY_PACKAGE)
 include $(CLEAR_VARS)
