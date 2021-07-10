@@ -85,6 +85,8 @@ LOCAL_REQUIRED_MODULES := \
     SettingsCardElevation \
     SettingsIntellCardElevation \
     SettingsDashAOSP \
+    SettingsDashOOS10 \
+    WavePurifier \
     preinstalled-packages-platform-overlays.xml
 
 include $(BUILD_PHONY_PACKAGE)

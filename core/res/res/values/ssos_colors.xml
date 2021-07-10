@@ -16,4 +16,6 @@
     <color name="toast_bg">@color/white</color>
     <color name="toast_text">@color/black</color>
 
+    <color name="wave_homepage_icon_background">#0f000000</color>
+
 </resources>

@@ -16,4 +16,6 @@
     <color name="toast_bg">@*android:color/primary_dark_device_default_settings</color>
     <color name="toast_text">@color/white</color>
 
+    <color name="wave_homepage_icon_background">#0fffffff</color>
+
 </resources>
