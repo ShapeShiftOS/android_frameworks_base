@@ -25,4 +25,6 @@
     <!-- QS footer drag handle -->
     <color name="ssos_qs_footer_drag_handle">#ff424242</color>
 
+    <color name="qs_auto_off_color">#b8b8b8</color>
+
 </resources>

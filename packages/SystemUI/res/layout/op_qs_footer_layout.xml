@@ -124,7 +124,7 @@
                 android:contentDescription="@string/accessibility_quick_settings_edit"
                 android:focusable="true"
                 android:padding="@dimen/qs_footer_icon_padding"
-                android:src="@drawable/op_ic_mode_edit"
+                android:src="@*android:drawable/ic_mode_edit"
                 android:tint="?android:attr/colorForeground" />
 
 
@@ -138,7 +138,7 @@
                 android:contentDescription="@string/accessibility_quick_settings_settings"
                 android:padding="@dimen/qs_footer_icon_padding"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_op_settings"
+                android:src="@drawable/ic_settings"
                 android:tint="?android:attr/colorForeground" />
 
         </com.android.systemui.statusbar.AlphaOptimizedFrameLayout>

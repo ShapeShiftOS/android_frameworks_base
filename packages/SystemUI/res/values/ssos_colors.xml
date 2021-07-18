@@ -24,4 +24,6 @@
     <!-- QS Drag handle -->
     <color name="ssos_qs_footer_drag_handle">#ffc8c8c8</color>
 
+    <color name="qs_auto_off_color">#909090</color>
+
 </resources>
