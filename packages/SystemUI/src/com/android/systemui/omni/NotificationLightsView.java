@@ -43,10 +43,10 @@ import android.widget.ImageView;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import androidx.palette.graphics.Palette;
-
 import com.android.settingslib.Utils;
 import com.android.systemui.R;
+
+import androidx.palette.graphics.Palette;
 
 public class NotificationLightsView extends RelativeLayout {
     private static final boolean DEBUG = false;
