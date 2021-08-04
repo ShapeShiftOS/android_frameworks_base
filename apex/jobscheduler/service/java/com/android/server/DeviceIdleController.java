@@ -611,7 +611,7 @@ public class DeviceIdleController extends SystemService
                 } break;
                 case PowerManager.ACTION_POWER_SAVE_MODE_CHANGED: {
                     if (Settings.Global.getInt(getContext().getContentResolver(),
-                                Settings.Global.AGGRESSIVE_BATTERY_SAVER, 0) != 0) {
+                                Settings.Global.AGGRESSIVE_BATTERY_SAVER, 1) != 0) {
                         int isPowerSave = mPowerManager.isPowerSaveMode() ? 1 : 0;
 
                         Settings.Global.putInt(getContext().getContentResolver(),
