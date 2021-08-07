@@ -33,7 +33,7 @@ public class DataUsageView extends TextView {
         mNetworkController = Dependency.get(NetworkController.class);
     }
 
-    public static void updateUsage() {
+    public void updateUsage() {
         shouldUpdateData = true;
     }
 
@@ -60,6 +60,7 @@ public class DataUsageView extends TextView {
         formatedinfo = getSlotCarrierName() + ": " + formatDataUsage(info.usageLevel) + " "
                 + mContext.getResources().getString(R.string.usage_data);
         shouldUpdateDataTextView = true;
+        invalidate();
     }
 
     private CharSequence formatDataUsage(long byteValue) {

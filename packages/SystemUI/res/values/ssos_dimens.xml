@@ -68,6 +68,8 @@
     <dimen name="qs_media_action_button_margin_top">18dp</dimen>
     <dimen name="qs_media_action_button_size">40dp</dimen>
     <dimen name="op_brightness_margin">37dp</dimen>
+    <dimen name="brightness_slider_height">48dp</dimen>
+    <dimen name="media_spacer_height">28dp</dimen>
 
     <!-- Margin on the left side of the heads up notification -->
     <dimen name="heads_up_status_bar_padding_start">0dp</dimen>
@@ -116,4 +118,5 @@
     <dimen name="ticker_top_padding">2dp</dimen>
     <dimen name="ticker_icon_end_margin">4dp</dimen>
     <dimen name="ticker_text_end_padding">10dp</dimen>
+
 </resources>
