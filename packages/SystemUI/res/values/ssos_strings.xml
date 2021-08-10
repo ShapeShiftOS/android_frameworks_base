@@ -198,4 +198,7 @@
     <!-- Screenshot Delete Toast -->
     <string name="delete_screenshot_toast">Screenshot deleted</string>
 
+    <!-- Content description of the no sim [CHAR LIMIT=NONE] -->
+    <string name="no_sim_card_available">No SIM card</string>
+
 </resources>
