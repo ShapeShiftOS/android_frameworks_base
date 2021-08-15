@@ -5152,6 +5152,12 @@ public final class Settings {
         public static final String VOLUME_BUTTON_MUSIC_CONTROL = "volume_button_music_control";
 
         /**
+         * Whether to disable ADB in gaming mode
+         * @hide
+         */
+        public static final String GAMING_MODE_ADB_TOGGLE = "gaming_mode_adb_toggle";
+
+        /**
          * Change volume up and down handlign based on rotation
          * @hide
          */
