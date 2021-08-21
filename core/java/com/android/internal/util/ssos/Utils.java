@@ -63,6 +63,7 @@ import com.android.internal.statusbar.IStatusBarService;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 public class Utils {
     private static OverlayManager mOverlayService;
@@ -195,6 +196,11 @@ public class Utils {
             }
         }
     }
+
+    public void generateRandomColor(int ColorGenerated) {
+        int[] colorsList = getResources().getIntArray(R.array.colorslist);
+        int ColorGenerated = colorsList[new Random().nextInt(colorsList.length)];
+    };    
 
     // Check to see if device not only supports the Fingerprint scanner but also if is enrolled
     public static boolean hasFingerprintEnrolled(Context context) {
