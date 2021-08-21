@@ -229,4 +229,10 @@
     <!-- Expected value from fast charging status file -->
     <java-symbol type="string" name="config_oemFastChargerStatusValue" />
 
+    <!-- Random colors list -->
+    <java-symbol type="array" name="list_of_colors" />
+
+    <!-- Material grey 800 -->
+    <java-symbol type="color" name="material_grey_800" />
+
 </resources>

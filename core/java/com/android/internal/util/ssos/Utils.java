@@ -17,6 +17,7 @@
 package com.android.internal.util.ssos;
 
 import android.Manifest;
+import android.annotation.ColorInt;
 import android.content.Context;
 import android.content.Intent;
 import android.util.TypedValue;
@@ -63,6 +64,7 @@ import com.android.internal.statusbar.IStatusBarService;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 public class Utils {
     private static OverlayManager mOverlayService;
@@ -194,6 +196,23 @@ public class Utils {
                 }
             }
         }
+    }
+
+    public static int[] generateRandomColorTinted(Context context) {
+        int[] colorsList = context.getResources().getIntArray(R.array.list_of_colors);
+        int ColorGeneratedNormal = colorsList[new Random().nextInt(colorsList.length)];
+        int ColorGeneratedTinted = adjustAlpha(ColorGeneratedNormal, 0.2f);
+
+        return new int[] {ColorGeneratedNormal, ColorGeneratedTinted};
+    };
+
+    @ColorInt
+    private static int adjustAlpha(@ColorInt int color, float factor) {
+        int alpha = Math.round(Color.alpha(color) * factor);
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+        return Color.argb(alpha, red, green, blue);
     }
 
     // Check to see if device not only supports the Fingerprint scanner but also if is enrolled

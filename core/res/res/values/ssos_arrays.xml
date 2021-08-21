@@ -50,4 +50,39 @@
         <item>@string/accessibility_quick_settings_live_display_changed_night</item>
         <item>@string/accessibility_quick_settings_live_display_changed_outdoor</item>
     </string-array>
+
+    <!-- Random color picker -->
+    <integer-array name="list_of_colors">
+        <item>@color/custom_tile_1</item>
+        <item>@color/custom_tile_2</item>
+        <item>@color/custom_tile_3</item>
+        <item>@color/custom_tile_4</item>
+        <item>@color/custom_tile_5</item>
+        <item>@color/custom_tile_6</item>
+        <item>@color/custom_tile_7</item>
+        <item>@color/custom_tile_8</item>
+        <item>@color/custom_tile_9</item>
+        <item>@color/custom_tile_10</item>
+        <item>@color/custom_tile_11</item>
+        <item>@color/custom_tile_12</item>
+        <item>@color/custom_tile_13</item>
+        <item>@color/custom_tile_14</item>
+        <item>@color/custom_tile_15</item>
+        <item>@color/custom_tile_16</item>
+        <item>@color/custom_tile_17</item>
+        <item>@color/custom_tile_18</item>
+        <item>@color/custom_tile_19</item>
+        <item>@color/custom_tile_20</item>
+        <item>@color/custom_tile_21</item>
+        <item>@color/custom_tile_22</item>
+        <item>@color/custom_tile_23</item>
+        <item>@color/custom_tile_24</item>
+        <item>@color/custom_tile_25</item>
+        <item>@color/custom_tile_26</item>
+        <item>@color/custom_tile_27</item>
+        <item>@color/custom_tile_28</item>
+        <item>@color/custom_tile_29</item>
+        <item>@color/custom_tile_30</item>
+    </integer-array>
+
 </resources>

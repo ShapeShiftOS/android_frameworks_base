@@ -18,4 +18,35 @@
 
     <color name="wave_homepage_icon_background">#0f000000</color>
 
+    <color name="custom_tile_1">#FF4285F4</color>
+    <color name="custom_tile_2">#B71C1C</color>
+    <color name="custom_tile_3">#FFFBBC04</color>
+    <color name="custom_tile_4">#FF34A853</color>
+    <color name="custom_tile_5">#2196f3</color>
+    <color name="custom_tile_6">#110a8c</color>
+    <color name="custom_tile_7">#6d9f54</color>
+    <color name="custom_tile_8">#ffd20082</color>
+    <color name="custom_tile_9">#ff1a73e8</color>
+    <color name="custom_tile_10">#6f24d6</color>
+    <color name="custom_tile_11">#ffeb0028</color>
+    <color name="custom_tile_12">#ff1b70</color>
+    <color name="custom_tile_13">#24b7d6</color>
+    <color name="custom_tile_14">#565e71</color>
+    <color name="custom_tile_15">#ffc90f</color>
+    <color name="custom_tile_16">#ff008577</color>
+    <color name="custom_tile_17">#f90028</color>
+    <color name="custom_tile_18">#ffc700</color>
+    <color name="custom_tile_19">#ffa69eff</color>
+    <color name="custom_tile_20">#34c759</color>
+    <color name="custom_tile_21">#fff78dc9</color>
+    <color name="custom_tile_22">#ff1DB954</color>
+    <color name="custom_tile_23">#007aff</color>
+    <color name="custom_tile_24">#5856d6</color>
+    <color name="custom_tile_25">#ff9500</color>
+    <color name="custom_tile_26">#ff2d55</color>
+    <color name="custom_tile_27">#af52de</color>
+    <color name="custom_tile_28">#32CCE3</color>
+    <color name="custom_tile_29">#036635</color>
+    <color name="custom_tile_30">#00FF41</color>
+
 </resources>

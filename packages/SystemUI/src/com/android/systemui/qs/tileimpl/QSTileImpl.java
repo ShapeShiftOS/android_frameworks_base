@@ -70,6 +70,7 @@ import com.android.systemui.plugins.qs.QSTile.State;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.qs.PagedTileLayout.TilePage;
 import com.android.systemui.qs.QSEvent;
+import com.android.systemui.qs.tileimpl.QSTileBaseView;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.QuickStatusBarHeader;
 import com.android.systemui.qs.logging.QSLogger;
@@ -543,11 +544,11 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
             case Tile.STATE_ACTIVE:
                 if (setQsUseNewTint == 1) {
                     return Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent);
-		} else if (setQsUseNewTint == 2){
+                } else if (setQsUseNewTint == 2) {
                     return context.getResources().getColor(R.color.qs_tile_oos);
-                } else if (setQsUseNewTint == 3){
+                } else if (setQsUseNewTint == 3) {
                     return Utils.getColorAttrDefaultColor(context, android.R.attr.textColorPrimaryInverse);
-		} else {
+                } else {
                     return Utils.getColorAttrDefaultColor(context, android.R.attr.colorPrimary);
                 }
             default:
