@@ -24,13 +24,22 @@ import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.NetworkController;
 
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkTemplate;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+
 import java.util.List;
 
 public class DataUsageView extends TextView {
 
     private static boolean shouldUpdateData;
     private static boolean shouldUpdateDataTextView;
+    private ConnectivityManager mConnectivityManager;
     private NetworkController mNetworkController;
+    private WifiManager mWifiManager;
     private Context mContext;
     private String formattedinfo;
     private int mSimCount = 0;
@@ -41,6 +50,8 @@ public class DataUsageView extends TextView {
         super(context, attrs);
         mContext = context;
         mNetworkController = Dependency.get(NetworkController.class);
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
     public void updateUsage() {
@@ -80,16 +91,33 @@ public class DataUsageView extends TextView {
         boolean showDailyDataUsage = Settings.System.getInt(getContext().getContentResolver(),
                 Settings.System.DATA_USAGE_PERIOD, 1) == 0;
         DataUsageController mobileDataController = new DataUsageController(mContext);
-        mobileDataController.setSubscriptionId(
-                SubscriptionManager.getDefaultDataSubscriptionId());
-        final DataUsageController.DataUsageInfo info = showDailyDataUsage ? mobileDataController.getDailyDataUsageInfo()
-                : mobileDataController.getDataUsageInfo();
-        updateSimCount();
-        if (mSimCount != 0) {
-            formattedinfo = getSlotCarrierName() + ": " + formatDataUsage(info.usageLevel) + " "
-                 + mContext.getResources().getString(R.string.usage_data);
+        DataUsageController.DataUsageInfo info;
+        String prefix;
+        if (isWifiConnected()) {
+            final NetworkTemplate template;
+            final WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
+            if (wifiInfo.getHiddenSSID() || wifiInfo.getSSID() == WifiManager.UNKNOWN_SSID) {
+                template = NetworkTemplate.buildTemplateWifiWildcard();
+            } else {
+                template = NetworkTemplate.buildTemplateWifi(wifiInfo.getSSID());
+            }
+            info = mobileDataController.getDataUsageInfo(template);
+            prefix = mContext.getResources().getString(R.string.usage_wifi_prefix);
+            formattedinfo = prefix + ": " + formatDataUsage(info.usageLevel) + " "
+                + mContext.getResources().getString(R.string.usage_data);
         } else {
+           mobileDataController.setSubscriptionId(
+                SubscriptionManager.getDefaultDataSubscriptionId());
+           info = showDailyDataUsage ? mobileDataController.getDailyDataUsageInfo()
+                : mobileDataController.getDataUsageInfo();
+           prefix = getSlotCarrierName();
+           updateSimCount();
+           if (mSimCount != 0) {
+            formattedinfo = prefix + ": " + formatDataUsage(info.usageLevel) + " "
+                 + mContext.getResources().getString(R.string.usage_data);
+           } else {
             formattedinfo = mContext.getResources().getString(R.string.no_sim_card_available);
+          }
         }
         shouldUpdateDataTextView = true;
         invalidate();
@@ -117,5 +145,15 @@ public class DataUsageView extends TextView {
             }
         }
         return result.toString();
+    }
+
+    private boolean isWifiConnected() {
+        Network network = mConnectivityManager.getActiveNetwork();
+        if (network != null) {
+            NetworkCapabilities capabilities = mConnectivityManager.getNetworkCapabilities(network);
+            return capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
+        } else {
+            return false;
+        }
     }
 }
