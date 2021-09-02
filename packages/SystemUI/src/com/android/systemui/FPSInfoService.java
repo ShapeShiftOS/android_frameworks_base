@@ -68,20 +68,10 @@ public class FPSInfoService extends Service {
 
         private Handler mCurFPSHandler = new Handler() {
             public void handleMessage(Message msg) {
-                if (msg.obj == null || msg.what != 1) {
+                if(msg.obj == null || msg.what != 1)
                     return;
-                }
 
-                boolean mNewFps = getResources().getBoolean(R.bool.config_usesNewFPS);
-
-                if (mNewFps) {
-                    mFps = parseMeasuredFps((String) msg.obj);
-                } else {
-                    String msgData = (String) msg.obj;
-                    msgData = msgData.substring(0, Math.min(msgData.length(), 9));
-                    mFps = msgData;
-                }
-
+                mFps = parseMeasuredFps((String) msg.obj);
                 mDataAvail = true;
                 updateDisplay();
             }
@@ -104,15 +94,10 @@ public class FPSInfoService extends Service {
 
             mAscent = mOnlinePaint.ascent();
             float descent = mOnlinePaint.descent();
-            boolean mNewFps = c.getResources().getBoolean(R.bool.config_usesNewFPS);
             mFH = (int)(descent - mAscent + .5f);
-            String maxWidthStr;
-            if (mNewFps) {
-                maxWidthStr = "FPS: XYZ";
-            } else {
-                maxWidthStr = "fps: 60.1";
-            }
-            mMaxWidth = (int) mOnlinePaint.measureText(maxWidthStr);
+
+            final String maxWidthStr = "FPS: XYZ";
+            mMaxWidth = (int)mOnlinePaint.measureText(maxWidthStr);
 
             updateDisplay();
         }
