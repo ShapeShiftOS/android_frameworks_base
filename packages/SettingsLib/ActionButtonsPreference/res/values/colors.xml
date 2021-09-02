@@ -17,6 +17,6 @@
 
 <resources>
 
-    <color name="action_buttons_bg_color">#0A000000</color>
+    <color name="action_buttons_bg_color">#f1f1f1</color>
 
 </resources>
