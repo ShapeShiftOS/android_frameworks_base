@@ -42,7 +42,11 @@ public class PixelPropsUtils {
             "com.google.android.apps.turboadapter",
             "com.google.android.apps.wallpaper",
             "com.google.android.apps.maps",
-            "com.google.android.apps.nexuslauncher"
+            "com.google.android.apps.nexuslauncher",
+            "com.amazon.avod.thirdpartyclient",
+            "com.disney.disneyplus",
+            "com.netflix.mediaclient",
+            "in.startv.hotstar"
     };
 
     private static final String[] packagesToChangePixelXL = {
