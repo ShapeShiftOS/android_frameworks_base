@@ -246,6 +246,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     private boolean mIsWaitingForEcmExit = false;
     private boolean mHasTelephony;
     private boolean mHasVibrator;
+    private static boolean mPowerMenuSecure = false;
     private final boolean mShowSilentToggle;
     private final EmergencyAffordanceManager mEmergencyAffordanceManager;
     private final ScreenshotHelper mScreenshotHelper;
@@ -819,6 +820,9 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         dialog.setOnDismissListener(this);
         dialog.setOnShowListener(this);
 
+        mPowerMenuSecure = Settings.System.getIntForUser(mContext.getContentResolver(),
+                        Settings.System.SECURE_REBOOT_ENABLED, 0, UserHandle.USER_CURRENT) == 1;
+
         return dialog;
     }
 
@@ -885,8 +889,14 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         return mWalletPlugin.onPanelShown(this, !mKeyguardStateController.isUnlocked());
     }
 
+    private boolean secureRebootEnabled(Context context) {
+        boolean secureRebootEnabled = Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.SECURE_REBOOT_ENABLED, 0, UserHandle.USER_CURRENT) == 1;
+        return secureRebootEnabled;
+    }
+
     private boolean rebootAction(boolean safeMode) {
-        if (mKeyguardStateController.isMethodSecure() && mKeyguardStateController.isShowing()) {
+        if (secureRebootEnabled(mContext) && mKeyguardStateController.isMethodSecure() && mKeyguardStateController.isShowing()) {
               mActivityStarter.postQSRunnableDismissingKeyguard(() -> {
                 mWindowManagerFuncs.reboot(safeMode);
             });
@@ -970,7 +980,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         @Override
         public void onPress() {
             // shutdown by making sure radio and power are handled accordingly.
-            if (mKeyguardStateController.isMethodSecure() && mKeyguardStateController.isShowing()) {
+            if (secureRebootEnabled(mContext) && mKeyguardStateController.isMethodSecure() && mKeyguardStateController.isShowing()) {
                   mActivityStarter.postQSRunnableDismissingKeyguard(() -> {
                     mWindowManagerFuncs.shutdown();
                 });
@@ -2054,7 +2064,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         @Override
         public final void onPress() {
-            if (mKeyguardStateController.isMethodSecure() && mKeyguardStateController.isShowing()) {
+            if (mPowerMenuSecure && mKeyguardStateController.isMethodSecure() && mKeyguardStateController.isShowing()) {
                   mActivityStarter.postQSRunnableDismissingKeyguard(() -> {
                     triggerAction(mActionType, mRefresh, mWmFuncs, mContext);
                 });

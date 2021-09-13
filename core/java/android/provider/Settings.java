@@ -5450,6 +5450,11 @@ public final class Settings {
         public static final String ADVANCED_REBOOT = "advanced_reboot";
 
         /**
+         * @hide
+         */
+        public static final String SECURE_REBOOT_ENABLED = "secure_reboot_enabled";
+
+        /**
          * Whether allowing pocket service to register sensors and dispatch informations.
          *   0 = disabled
          *   1 = enabled
@@ -5457,7 +5462,6 @@ public final class Settings {
          * @hide
          */
         public static final String POCKET_JUDGE = "pocket_judge";
-
 
         /**
          * The time in ms to keep the button backlight on after pressing a button.
