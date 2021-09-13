@@ -255,7 +255,7 @@
     <color name="control_primary_text">#E6FFFFFF</color>
     <color name="control_secondary_text">#99FFFFFF</color>
     <color name="control_default_foreground">@color/GM2_grey_500</color>
-    <color name="control_default_background">#7f000000</color> <!-- 50% black -->
+    <color name="control_default_background">#19ffffff</color> <!-- 10% white -->
     <color name="control_dialog_background">@color/GM2_grey_900</color>
     <color name="control_list_popup_background">@*android:color/background_floating_material_dark</color>
     <color name="control_spinner_dropdown">@*android:color/foreground_material_dark</color>
