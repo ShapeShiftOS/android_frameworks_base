@@ -49,6 +49,7 @@ import com.android.systemui.qs.tiles.NightDisplayTile;
 import com.android.systemui.qs.tiles.QRCodeTile;
 import com.android.systemui.qs.tiles.QuickAccessWalletTile;
 import com.android.systemui.qs.tiles.ReduceBrightColorsTile;
+import com.android.systemui.qs.tiles.RefreshRateTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.ScreenRecordTile;
 import com.android.systemui.qs.tiles.UiModeNightTile;
@@ -98,6 +99,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<CaffeineTile> mCaffeineTileProvider;
     private final Provider<CompassTile> mCompassTileProvider;
     private final Provider<QRCodeTile> mQRCodeTileProvider;
+    private final Provider<RefreshRateTile> mRefreshRateTileProvider;
 
     private final Lazy<QSHost> mQsHostLazy;
     private final Provider<CustomTile.Builder> mCustomTileBuilderProvider;
@@ -136,7 +138,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<DataSwitchTile> dataSwitchTileProvider,
             Provider<CaffeineTile> caffeineTileProvider,
             Provider<CompassTile> compassTileProvider,
-            Provider<QRCodeTile> qrCodeTileProvider) {
+            Provider<QRCodeTile> qrCodeTileProvider,
+            Provider<RefreshRateTile> refreshRateTileProvider) {
         mQsHostLazy = qsHostLazy;
         mCustomTileBuilderProvider = customTileBuilderProvider;
 
@@ -171,6 +174,7 @@ public class QSFactoryImpl implements QSFactory {
         mCaffeineTileProvider = caffeineTileProvider;
         mCompassTileProvider = compassTileProvider;
         mQRCodeTileProvider = qrCodeTileProvider;
+        mRefreshRateTileProvider = refreshRateTileProvider;
     }
 
     public QSTile createTile(String tileSpec) {
@@ -246,6 +250,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mCompassTileProvider.get();
             case "qr_code":
                 return mQRCodeTileProvider.get();
+            case "refresh_rate":
+                return mRefreshRateTileProvider.get();
         }
 
         // Custom tiles
