@@ -17,4 +17,8 @@
     <color name="system_text_color_ssos">@android:color/system_accent1_900</color>
     <color name="ssos_foreground_secondary">@android:color/system_accent1_0</color>
 
+    <!-- StatusBar burn-in protection -->
+    <dimen name="horizontal_max_shift">3.0dp</dimen>
+    <dimen name="vertical_max_shift">2.0dp</dimen>
+
 </resources>
