@@ -37,7 +37,6 @@ import android.hardware.input.InputManager;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 
-import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import android.os.BatteryManager;
@@ -71,9 +70,7 @@ public class Utils {
 
     // Check to see if device is WiFi only
     public static boolean isWifiOnly(Context context) {
-        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(
-                Context.CONNECTIVITY_SERVICE);
-        return (cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE) == false);
+        return !context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY);
     }
 
     public static String batteryTemperature(Context context, Boolean ForC) {
