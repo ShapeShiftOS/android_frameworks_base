@@ -17,9 +17,9 @@
 package com.android.internal.util.ssos;
 
 import android.Manifest;
+
 import android.content.Context;
 import android.content.Intent;
-import android.util.TypedValue;
 import android.content.IntentFilter;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
@@ -27,23 +27,35 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+
 import android.graphics.Color;
+
+import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.hardware.input.InputManager;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
 import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.Vibrator;
+
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
+import android.util.TypedValue;
+
 import android.view.InputDevice;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
@@ -238,6 +250,13 @@ public class Utils {
                         InputManager.INJECT_INPUT_EVENT_MODE_ASYNC);
             }
         }, 20);
+    }
+
+    // Method to detect whether a device supports Udfps fingerprint implementation
+    public static boolean hasUdfps(Context ctx) {
+        FingerprintManager fingerprintManager = (FingerprintManager) ctx.getSystemService(Context.FINGERPRINT_SERVICE);
+        List<FingerprintSensorPropertiesInternal> props = fingerprintManager.getSensorPropertiesInternal();
+        return props.size() == 1 && props.get(0).isAnyUdfpsType();
     }
 
     // Method to detect whether an overlay is enabled or not
