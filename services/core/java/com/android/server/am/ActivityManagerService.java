@@ -6445,7 +6445,7 @@ public class ActivityManagerService extends IActivityManager.Stub
     }
 
     void setTrackAllocationApp(ApplicationInfo app, String processName) {
-        if (!Build.IS_DEBUGGABLE) {
+        if (!Build.IS_ENG) {
             if ((app.flags & ApplicationInfo.FLAG_DEBUGGABLE) == 0) {
                 throw new SecurityException("Process not debuggable: " + app.packageName);
             }
@@ -6458,7 +6458,7 @@ public class ActivityManagerService extends IActivityManager.Stub
 
     void setProfileApp(ApplicationInfo app, String processName, ProfilerInfo profilerInfo) {
         synchronized (mAppProfiler.mProfilerLock) {
-            if (!Build.IS_DEBUGGABLE) {
+            if (!Build.IS_ENG) {
                 boolean isAppDebuggable = (app.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
                 boolean isAppProfileable = app.isProfileableByShell();
                 if (!isAppDebuggable && !isAppProfileable) {
@@ -6471,7 +6471,7 @@ public class ActivityManagerService extends IActivityManager.Stub
     }
 
     void setNativeDebuggingAppLocked(ApplicationInfo app, String processName) {
-        if (!Build.IS_DEBUGGABLE) {
+        if (!Build.IS_ENG) {
             if ((app.flags & ApplicationInfo.FLAG_DEBUGGABLE) == 0) {
                 throw new SecurityException("Process not debuggable: " + app.packageName);
             }
@@ -6535,7 +6535,7 @@ public class ActivityManagerService extends IActivityManager.Stub
 
     @Override
     public void requestSystemServerHeapDump() {
-        if (!Build.IS_DEBUGGABLE) {
+        if (!Build.IS_ENG) {
             Slog.wtf(TAG, "requestSystemServerHeapDump called on a user build");
             return;
         }
@@ -13763,7 +13763,7 @@ public class ActivityManagerService extends IActivityManager.Stub
                 return false;
             }
 
-            if (!Build.IS_DEBUGGABLE) {
+            if (!Build.IS_ENG) {
                 int match = mContext.getPackageManager().checkSignatures(
                         ii.targetPackage, ii.packageName);
                 if (match < 0 && match != PackageManager.SIGNATURE_FIRST_NOT_SIGNED) {
@@ -14953,7 +14953,7 @@ public class ActivityManagerService extends IActivityManager.Stub
                     throw new IllegalArgumentException("Unknown process: " + process);
                 }
 
-                boolean isDebuggable = Build.IS_DEBUGGABLE;
+                boolean isDebuggable = Build.IS_ENG;
                 if (!isDebuggable) {
                     if ((proc.info.flags&ApplicationInfo.FLAG_DEBUGGABLE) == 0) {
                         throw new SecurityException("Process not debuggable: " + proc);
@@ -15000,7 +15000,7 @@ public class ActivityManagerService extends IActivityManager.Stub
                     throw new SecurityException("No process found for calling pid "
                             + Binder.getCallingPid());
                 }
-                if (!Build.IS_DEBUGGABLE
+                if (!Build.IS_ENG
                         && (proc.info.flags&ApplicationInfo.FLAG_DEBUGGABLE) == 0) {
                     throw new SecurityException("Not running a debuggable build");
                 }
@@ -15185,7 +15185,7 @@ public class ActivityManagerService extends IActivityManager.Stub
             return false;
         }
 
-        if (!Build.IS_DEBUGGABLE) {
+        if (!Build.IS_ENG) {
             if ((process.info.flags&ApplicationInfo.FLAG_DEBUGGABLE) == 0) {
                 return false;
             }
@@ -16761,7 +16761,7 @@ public class ActivityManagerService extends IActivityManager.Stub
                     throw new IllegalArgumentException("Unknown process: " + process);
                 }
 
-                if (!Build.IS_DEBUGGABLE) {
+                if (!Build.IS_ENG) {
                     if ((proc.info.flags & ApplicationInfo.FLAG_DEBUGGABLE) == 0) {
                         throw new SecurityException("Process not debuggable: " + proc);
                     }
@@ -17170,7 +17170,7 @@ public class ActivityManagerService extends IActivityManager.Stub
         int callerUid = Binder.getCallingUid();
 
         // Only system can toggle the freezer state
-        if (callerUid == SYSTEM_UID || Build.IS_DEBUGGABLE) {
+        if (callerUid == SYSTEM_UID || Build.IS_ENG) {
             return mOomAdjuster.mCachedAppOptimizer.enableFreezer(enable);
         } else {
             throw new SecurityException("Caller uid " + callerUid + " cannot set freezer state ");
