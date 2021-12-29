@@ -60,4 +60,7 @@
         <item>com.google.android.settings.intelligence</item>
         <item>org.pixelexperience.faceunlock</item>
     </string-array>
+
+    <!-- Whether to cancel fingerprint operation if not idle -->
+    <bool name="config_fpCancelIfNotIdle">false</bool>
 </resources>
