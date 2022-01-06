@@ -25,4 +25,4 @@
     android:paddingTop="24dp"
     android:paddingBottom="24dp"
     android:textAppearance="@style/TextAppearance.QSEdit"
-    android:text="@string/drag_to_add_tiles" />
+    android:text="@string/drag_to_add_tiles_custom" />
