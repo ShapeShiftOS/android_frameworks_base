@@ -27,4 +27,7 @@
     <!-- Label for area where tiles can be dragged out of [CHAR LIMIT=60] -->
     <string name="drag_to_add_tiles_custom">Press tile quickly or drag to add/remove</string>
 
+    <!-- Google Lens Screenshot string -->
+    <string name="lensss">Lens</string>
+
 </resources>
