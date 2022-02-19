@@ -22,5 +22,5 @@
     <color name="config_udfpsColor">#ffffffff</color>
 
     <!-- StatusBar burn-in protection -->
-    <bool name="config_statusBarBurnInProtection">false</bool>
+    <bool name="config_disableStatusBarBurnInProtection">false</bool>
 </resources>
