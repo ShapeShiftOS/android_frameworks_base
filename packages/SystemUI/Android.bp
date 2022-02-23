@@ -125,6 +125,7 @@ android_library {
         "jsr330",
         "lottie",
         "LowLightDreamLib",
+        "VendorSupport-preference",
     ],
     manifest: "AndroidManifest.xml",
 
