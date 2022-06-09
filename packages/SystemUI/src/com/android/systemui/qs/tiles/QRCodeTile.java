@@ -91,7 +91,7 @@ public class QRCodeTile extends QSTileImpl<BooleanState> {
         state.contentDescription = mContext.getString(R.string.quick_settings_qr_label);
         state.secondaryLabel = mContext.getString(R.string.quick_settings_qr_description);
         state.icon = ResourceIcon.get(R.drawable.ic_qs_qr_code);
-        state.state = Tile.STATE_ACTIVE;
+        state.state = Tile.STATE_INACTIVE;
     }
 
     @Override
