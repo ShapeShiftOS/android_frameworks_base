@@ -106,8 +106,7 @@
     <string name="tristate_rotation_270">Landscape (270°)</string>
 
     <!-- AOD QS tile -->
-    <string name="quick_settings_aod_label">AOD</string>
-    <string name="quick_settings_aod_on_charge_label">AOD on charge</string>
-    <string name="quick_settings_aod_off_label">AOD off</string>
+    <string name="quick_settings_aod">Always on display</string>
+    <string name="aod_on_charging">On charge</string>
 
 </resources>

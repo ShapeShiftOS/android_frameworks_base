@@ -122,21 +122,22 @@ public class AODTile extends QSTileImpl<State> {
 
     @Override
     public CharSequence getTileLabel() {
-        switch (getAodState()) {
-            case 1:
-                return mContext.getString(R.string.quick_settings_aod_label);
-            case 2:
-                return mContext.getString(R.string.quick_settings_aod_on_charge_label);
-            default:
-                return mContext.getString(R.string.quick_settings_aod_off_label);
-        }
+        return mContext.getString(R.string.quick_settings_aod);
     }
 
     @Override
     protected void handleUpdateState(State state, Object arg) {
         state.icon = mIcon;
         state.label = getTileLabel();
-        state.state = getAodState() == 0 ? Tile.STATE_INACTIVE : Tile.STATE_ACTIVE;
+        int aodState = getAodState();
+        if (aodState == 1) {
+            state.secondaryLabel = mContext.getString(R.string.switch_bar_on);
+        } else if (aodState == 2) {
+            state.secondaryLabel = mContext.getString(R.string.aod_on_charging);
+        } else {
+            state.secondaryLabel = mContext.getString(R.string.switch_bar_off);
+        }
+        state.state = aodState == 0 ? Tile.STATE_INACTIVE : Tile.STATE_ACTIVE;
     }
 
     @Override
