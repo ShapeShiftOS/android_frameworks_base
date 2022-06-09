@@ -92,7 +92,7 @@
     <!-- Alert slide extras -->
     <string name="volume_ringer_priority_only">Priority</string>
     <string name="volume_ringer_alarms_only">Alarms</string>
-    <string name="volume_ringer_dnd">DnD</string>
+    <string name="volume_ringer_dnd">@string/quick_settings_dnd_label</string>
     <string name="tristate_flashlight">Torch</string>
     <string name="tristate_flashlight_on">Torch on</string>
     <string name="tristate_flashlight_off">Torch off</string>
