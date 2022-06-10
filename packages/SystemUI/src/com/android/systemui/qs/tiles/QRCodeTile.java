@@ -98,6 +98,7 @@ public class QRCodeTile extends QSTileImpl<BooleanState> {
     public BooleanState newTileState() {
         BooleanState state = new BooleanState();
         state.handlesLongClick = false;
+        state.forceExpandIcon = true;
         return state;
     }
 
