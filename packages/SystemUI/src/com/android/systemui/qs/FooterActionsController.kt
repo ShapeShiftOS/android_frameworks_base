@@ -16,6 +16,7 @@
 
 package com.android.systemui.qs
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.UserManager
@@ -181,7 +182,11 @@ class FooterActionsController @Inject constructor(
                     it,
                     InteractionJankMonitor.CUJ_SHADE_APP_LAUNCH_FROM_SETTINGS_BUTTON)
             }
-        activityStarter.startActivity(Intent("com.android.settings.SHAPE_SHIFTER"),
+        val intent = Intent()
+        var shapeShifterClass : String = "com.android.settings.Settings${'$'}ShapeShifterSettingsActivity"
+        var settingsPackage : String = "com.android.settings"
+        intent.component = ComponentName(settingsPackage, shapeShifterClass)
+        activityStarter.startActivity(intent,
                 true /* dismissShade */, animationController)
         vibrator.vibrate(VibrationEffect.createPredefined(EFFECT_CLICK))
     }

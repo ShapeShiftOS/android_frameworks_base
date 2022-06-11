@@ -18,6 +18,9 @@ package com.android.internal.util.ssos;
 
 import android.Manifest;
 
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -295,6 +298,14 @@ public class Utils {
                 throws RemoteException {
             return mService.getOverlayInfosForTarget(target, userId);
         }
+    }
+
+    public static void startShapeShifter(Context context) {
+        Intent intent = new Intent();
+        intent.setComponent(new ComponentName("com.android.settings",
+            "com.android.settings.Settings$ShapeShifterSettingsActivity"));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
     }
 
     public static void takeScreenshot(boolean full) {
