@@ -160,7 +160,7 @@ public class PixelPropsUtils {
         }
         // Set proper indexing fingerprint
         if (packageName.equals("com.google.android.settings.intelligence")) {
-            setPropValue("FINGERPRINT", Build.VERSION.INCREMENTAL);
+            setPropValue("FINGERPRINT", String.valueOf(Build.TIME));
         }
     }
 
